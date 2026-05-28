@@ -1,0 +1,25 @@
+.piano {
+  position: relative;
+  top: 100px;
+  left:100px;
+  display: flex;
+  width: 420px;
+  height: 150px;
+  border: 2px solid #333;
+}
+
+.white-key {
+  flex: 1;
+  background: white;
+  border: 1px solid #333;
+  height: 100%;
+}
+
+.black-key {
+  position: absolute;
+  width: 40px;
+  height: 90px;
+  background: black;
+  top: 0;
+  z-index: 1;
+}

@@ -1,3 +1,26 @@
+body {
+    margin: 0;
+}
+
+#root {
+    width: 100vw;
+    height: 100vh;
+}
+
+.app-container {
+    width: 100%;
+    height: 100%;
+
+    display: flex;
+
+    justify-content: center;
+    align-items: flex-end;
+
+    padding-bottom: 40px;
+
+    box-sizing: border-box;
+}
+
 :root {
     --white-key-height:180px;
     --white-key-width:44px;

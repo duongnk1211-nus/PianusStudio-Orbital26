@@ -6,6 +6,8 @@ import Piano from './components/PianoKeyBoard.jsx'
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <Piano />
-  </StrictMode>,
+    <div className="app-container">
+      <Piano />
+    </div>
+  </StrictMode>
 )

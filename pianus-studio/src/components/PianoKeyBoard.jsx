@@ -1,4 +1,4 @@
-//import {useState, useRef, useCallback} from "react";
+import { useEffect, useState } from "react";
 import '../styles/Piano.css'
 
 const NOTES = [
@@ -26,7 +26,38 @@ const BLACK_KEY_LEFT_OFFSETS = {
   "C#5": 7, "D#5": 8,
 };
 
+//Handling key press
 export default function PianoKeyBoard(){
+  const [activeKeys, setActiveKeys] = useState(new Set());
+
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      console.log(`Key pressed: ${e.key}`);
+      setActiveKeys(prev => {
+        const newSet = new Set(prev);
+        newSet.add(e.key);
+        return newSet;
+      });
+    }
+
+    const handleKeyUp = (e) => {
+      console.log(`Key released: ${e.key}`);
+      setActiveKeys(prev => {
+        const newSet = new Set(prev);
+        newSet.delete(e.key);
+        return newSet;
+      });
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    }
+  }, []);
+
   const WHITE_KEY_WIDTH = parseFloat(getComputedStyle(document.documentElement)
               .getPropertyValue('--white-key-width'));
   const WHITE_KEY_GAP = parseFloat(getComputedStyle(document.documentElement)
@@ -36,7 +67,20 @@ export default function PianoKeyBoard(){
     <div className="key-rows">
         {/* White keys */}
         {NOTES.filter(n => n.type === "white").map((n) => (
-            <div key={n.note} className="white-key">
+            <div 
+              key={n.note} 
+              onMouseDown={() => setActiveKeys(prev => {
+                const newSet = new Set(prev);
+                newSet.add(n.key);
+                return newSet;
+              })}
+              onMouseUp={() => setActiveKeys(prev => {
+                const newSet = new Set(prev);
+                newSet.delete(n.key);
+                return newSet;
+              })}
+              className={`white-key ${activeKeys.has(n.key) ? 'active' : ''}`}
+            >
                 <span className="white-key-letter-label">
                     {n.key.toUpperCase()}
                 </span>
@@ -50,13 +94,27 @@ export default function PianoKeyBoard(){
             if (offset === undefined) return null;
             const left = offset * (WHITE_KEY_WIDTH + WHITE_KEY_GAP)
                        + WHITE_KEY_WIDTH - 14 + WHITE_KEY_GAP;
-            console.log(`Black key ${n.note} left offset: ${left}px`);
+            //console.log(`Black key ${n.note} left offset: ${left}px`);
             return (
               <div
                 key={n.note}
-                className="black-key"
+                className={`black-key ${activeKeys.has(n.key) ? 'active' : ''}`}
                 style ={{ left: `${left}px` }}
-              />
+                onMouseDown={() => setActiveKeys(prev => {
+                  const newSet = new Set(prev);
+                  newSet.add(n.key);
+                  return newSet;
+                })}
+                onMouseUp={() => setActiveKeys(prev => {
+                  const newSet = new Set(prev);
+                  newSet.delete(n.key);
+                  return newSet;
+                })}
+              >
+                <span className="black-key-letter-label">
+                    {n.key.toUpperCase()}
+                </span>
+              </div>
             );
         })}
     </div>

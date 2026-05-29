@@ -33,7 +33,7 @@
     border-color: #85b7eb;
 }
 
-.white-key:active {
+.white-key.active {
     background: linear-gradient(180deg,#f3f5cb 0%,#f3f5cb 100%);
     border-color: #d5d6a5;
 }
@@ -43,6 +43,7 @@
     font-weight: 600;
     color: #aaa;
     letter-spacing: 0.05em;
+    pointer-events: none;
 }
 
 .black-key {
@@ -51,6 +52,10 @@
     background: linear-gradient(180deg,#2a2a2a 0%,#111 70%,#1a1a1a 100%);
     border-radius: 0 0 4px 4px;
     cursor: pointer;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    padding-bottom: 6px;
     position: absolute;
     z-index: 2;
     top: 0;
@@ -58,6 +63,14 @@
     transition: background 0.05s;
 }
 
-.black-key:active {
+.black-key.active {
     background: linear-gradient(180deg,#5e6412 0%,#0d2040 100%);
+}
+
+.black-key-letter-label {
+    font-size: 8px;
+    font-weight: 600;
+    color: #b5adad;
+    letter-spacing: 0.05em;
+    pointer-events: none;
 }

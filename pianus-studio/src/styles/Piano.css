@@ -2,6 +2,9 @@
     --white-key-height:180px;
     --white-key-width:44px;
     --white-key-gap:2px;
+
+    --black-key-height:110px;
+    --black-key-width:28px;
 }
 
 .key-rows {
@@ -26,6 +29,7 @@
     flex-shrink: 0;
     box-shadow: inset 0 -4px 0 rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.2);
     transition: background 0.05s;
+    box-sizing: border-box;
 }
 
 .white-key:hover {
@@ -47,8 +51,8 @@
 }
 
 .black-key {
-    width: 28px;
-    height: 110px;
+    width: var(--black-key-width);
+    height: var(--black-key-height);
     background: linear-gradient(180deg,#2a2a2a 0%,#111 70%,#1a1a1a 100%);
     border-radius: 0 0 4px 4px;
     cursor: pointer;
@@ -61,6 +65,7 @@
     top: 0;
     box-shadow: inset 0 -3px 0 rgba(255,255,255,0.05), 2px 4px 8px rgba(0,0,0,0.5);
     transition: background 0.05s;
+    box-sizing: border-box;
 }
 
 .black-key.active {

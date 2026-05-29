@@ -62,6 +62,8 @@ export default function PianoKeyBoard(){
               .getPropertyValue('--white-key-width'));
   const WHITE_KEY_GAP = parseFloat(getComputedStyle(document.documentElement)
               .getPropertyValue('--white-key-gap'));
+  const BLACK_KEY_WIDTH = parseFloat(getComputedStyle(document.documentElement)
+              .getPropertyValue('--black-key-width'));
 
   return (
     <div className="key-rows">
@@ -92,8 +94,8 @@ export default function PianoKeyBoard(){
             .map((n) => {
             const offset = BLACK_KEY_LEFT_OFFSETS[n.note];
             if (offset === undefined) return null;
-            const left = offset * (WHITE_KEY_WIDTH + WHITE_KEY_GAP)
-                       + WHITE_KEY_WIDTH - 14 + WHITE_KEY_GAP;
+            const left = (offset + 1) * (WHITE_KEY_WIDTH + WHITE_KEY_GAP)
+                      - WHITE_KEY_GAP / 2 - BLACK_KEY_WIDTH / 2;
             //console.log(`Black key ${n.note} left offset: ${left}px`);
             return (
               <div

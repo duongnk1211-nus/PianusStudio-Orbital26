@@ -31,11 +31,11 @@
     transition: background 0.05s;
     box-sizing: border-box;
 }
-
+/* 
 .white-key:hover {
     background: linear-gradient(180deg,#d4e8ff 0%,#e8f4ff 100%);
     border-color: #85b7eb;
-}
+} */
 
 .white-key.active {
     background: linear-gradient(180deg,#f3f5cb 0%,#f3f5cb 100%);

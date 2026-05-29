@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import '../styles/Piano.css'
+import { useEffect, useRef, useState } from "react";
+import "../styles/Piano.css";
+import * as Tone from "tone";
 
 const NOTES = [
   { note: "C4",  freq: 261.63, type: "white", key: "a" },
@@ -30,9 +31,33 @@ const BLACK_KEY_LEFT_OFFSETS = {
 export default function PianoKeyBoard(){
   const [activeKeys, setActiveKeys] = useState(new Set());
 
+  const synthRef = useRef(null);
+
+  const getNote = (e) => {
+    for (let i = 0; i < NOTES.length; i++) {
+      if (NOTES[i].key == e.key) return NOTES[i];
+    }
+    return null;
+  }
+
+  const attack = async (n) => {
+    await Tone.start();
+    synthRef.current.triggerAttack(n.note);
+  }
+
+  const release = async (n) => {
+    synthRef.current.triggerRelease(n.note);
+  }
+
   useEffect(() => {
-    const handleKeyDown = (e) => {
-      console.log(`Key pressed: ${e.key}`);
+    synthRef.current = new Tone.PolySynth(
+      Tone.Synth
+    ).toDestination();
+    const handleKeyDown = async (e) => {
+      // console.log("Key pressed: ${e.key}");
+      if (e.repeat) return;
+      const n = getNote(e);
+      if (n != null) attack(n);
       setActiveKeys(prev => {
         const newSet = new Set(prev);
         newSet.add(e.key);
@@ -40,8 +65,10 @@ export default function PianoKeyBoard(){
       });
     }
 
-    const handleKeyUp = (e) => {
-      console.log(`Key released: ${e.key}`);
+    const handleKeyUp = async (e) => {
+      // console.log("Key released: ${e.key}");
+      const n = getNote(e);
+      if (n != null) release(n);
       setActiveKeys(prev => {
         const newSet = new Set(prev);
         newSet.delete(e.key);
@@ -69,24 +96,30 @@ export default function PianoKeyBoard(){
     <div className="key-rows">
         {/* White keys */}
         {NOTES.filter(n => n.type === "white").map((n) => (
-            <div 
-              key={n.note} 
-              onMouseDown={() => setActiveKeys(prev => {
+          <div 
+            key={n.note} 
+            onMouseDown={async () => {
+              setActiveKeys(prev => {
                 const newSet = new Set(prev);
                 newSet.add(n.key);
                 return newSet;
-              })}
-              onMouseUp={() => setActiveKeys(prev => {
+              })
+              attack(n);
+            }}
+            onMouseUp={async () => {
+              setActiveKeys(prev => {
                 const newSet = new Set(prev);
-                newSet.delete(n.key);
-                return newSet;
-              })}
-              className={`white-key ${activeKeys.has(n.key) ? 'active' : ''}`}
-            >
-                <span className="white-key-letter-label">
-                    {n.key.toUpperCase()}
-                </span>
-            </div>
+                  newSet.delete(n.key);
+                  return newSet;
+              })
+              release(n);
+            }}
+            className={`white-key ${activeKeys.has(n.key) ? 'active' : ''}`}
+          >
+            <span className="white-key-letter-label">
+                {n.key.toUpperCase()}
+            </span>
+          </div>
         ))}
 
         {/* Black keys */}
@@ -102,16 +135,22 @@ export default function PianoKeyBoard(){
                 key={n.note}
                 className={`black-key ${activeKeys.has(n.key) ? 'active' : ''}`}
                 style ={{ left: `${left}px` }}
-                onMouseDown={() => setActiveKeys(prev => {
-                  const newSet = new Set(prev);
-                  newSet.add(n.key);
-                  return newSet;
-                })}
-                onMouseUp={() => setActiveKeys(prev => {
-                  const newSet = new Set(prev);
-                  newSet.delete(n.key);
-                  return newSet;
-                })}
+                onMouseDown={async () => {
+                  setActiveKeys(prev => {
+                    const newSet = new Set(prev);
+                    newSet.add(n.key);
+                    return newSet;
+                  })
+                  attack(n);
+                }}
+                onMouseUp={async () => {
+                  setActiveKeys(prev => {
+                    const newSet = new Set(prev);
+                    newSet.delete(n.key);
+                    return newSet;
+                  })
+                  release(n);
+                }}
               >
                 <span className="black-key-letter-label">
                     {n.key.toUpperCase()}

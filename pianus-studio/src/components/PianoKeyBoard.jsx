@@ -21,8 +21,18 @@ const NOTES = [
   { note: "E5",  freq: 659.25, type: "white", key: ";" },
 ];
 
+const BLACK_KEY_LEFT_OFFSETS = {
+  "C#4": 0, "D#4": 1, "F#4": 3, "G#4": 4, "A#4": 5,
+  "C#5": 7, "D#5": 8,
+};
+
 export default function PianoKeyBoard(){
-    return (
+  const WHITE_KEY_WIDTH = parseFloat(getComputedStyle(document.documentElement)
+              .getPropertyValue('--white-key-width'));
+  const WHITE_KEY_GAP = parseFloat(getComputedStyle(document.documentElement)
+              .getPropertyValue('--white-key-gap'));
+
+  return (
     <div className="key-rows">
         {/* White keys */}
         {NOTES.filter(n => n.type === "white").map((n) => (
@@ -32,6 +42,23 @@ export default function PianoKeyBoard(){
                 </span>
             </div>
         ))}
+
+        {/* Black keys */}
+        {NOTES.filter(n => n.type === "black")
+            .map((n) => {
+            const offset = BLACK_KEY_LEFT_OFFSETS[n.note];
+            if (offset === undefined) return null;
+            const left = offset * (WHITE_KEY_WIDTH + WHITE_KEY_GAP)
+                       + WHITE_KEY_WIDTH - 14 + WHITE_KEY_GAP;
+            console.log(`Black key ${n.note} left offset: ${left}px`);
+            return (
+              <div
+                key={n.note}
+                className="black-key"
+                style ={{ left: `${left}px` }}
+              />
+            );
+        })}
     </div>
     )
 }

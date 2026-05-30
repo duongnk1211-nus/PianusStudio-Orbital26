@@ -149,71 +149,73 @@ export default function PianoKeyBoard(){
               .getPropertyValue('--black-key-width'));
 
   return (
-    <div className="key-rows">
-        {/* White keys */}
-        {NOTES.filter(n => n.type === "white").map((n) => (
-          <div 
-            key={n.note} 
-            onMouseDown={async () => {
-              setActiveKeys(prev => {
-                const newSet = new Set(prev);
-                newSet.add(n.key);
-                return newSet;
-              })
-              attack(n);
-            }}
-            onMouseUp={async () => {
-              setActiveKeys(prev => {
-                const newSet = new Set(prev);
-                  newSet.delete(n.key);
+    <div className="app-container">
+      <div className="key-rows">
+          {/* White keys */}
+          {NOTES.filter(n => n.type === "white").map((n) => (
+            <div 
+              key={n.note} 
+              onMouseDown={async () => {
+                setActiveKeys(prev => {
+                  const newSet = new Set(prev);
+                  newSet.add(n.key);
                   return newSet;
-              })
-              release(n);
-            }}
-            className={`white-key ${activeKeys.has(n.key) ? 'active' : ''}`}
-          >
-            <span className="white-key-letter-label">
-                {n.key.toUpperCase()}
-            </span>
-          </div>
-        ))}
-
-        {/* Black keys */}
-        {NOTES.filter(n => n.type === "black")
-            .map((n) => {
-            const offset = BLACK_KEY_LEFT_OFFSETS[n.note];
-            if (offset === undefined) return null;
-            const left = (offset + 1) * (WHITE_KEY_WIDTH + WHITE_KEY_GAP)
-                      - WHITE_KEY_GAP / 2 - BLACK_KEY_WIDTH / 2;
-            //console.log(`Black key ${n.note} left offset: ${left}px`);
-            return (
-              <div
-                key={n.note}
-                className={`black-key ${activeKeys.has(n.key) ? 'active' : ''}`}
-                style ={{ left: `${left}px` }}
-                onMouseDown={async () => {
-                  setActiveKeys(prev => {
-                    const newSet = new Set(prev);
-                    newSet.add(n.key);
-                    return newSet;
-                  })
-                  attack(n);
-                }}
-                onMouseUp={async () => {
-                  setActiveKeys(prev => {
-                    const newSet = new Set(prev);
+                })
+                attack(n);
+              }}
+              onMouseUp={async () => {
+                setActiveKeys(prev => {
+                  const newSet = new Set(prev);
                     newSet.delete(n.key);
                     return newSet;
-                  })
-                  release(n);
-                }}
-              >
-                <span className="black-key-letter-label">
-                    {n.key.toUpperCase()}
-                </span>
-              </div>
-            );
-        })}
+                })
+                release(n);
+              }}
+              className={`white-key ${activeKeys.has(n.key) ? 'active' : ''}`}
+            >
+              <span className="white-key-letter-label">
+                  {n.key.toUpperCase()}
+              </span>
+            </div>
+          ))}
+
+          {/* Black keys */}
+          {NOTES.filter(n => n.type === "black")
+              .map((n) => {
+              const offset = BLACK_KEY_LEFT_OFFSETS[n.note];
+              if (offset === undefined) return null;
+              const left = (offset + 1) * (WHITE_KEY_WIDTH + WHITE_KEY_GAP)
+                        - WHITE_KEY_GAP / 2 - BLACK_KEY_WIDTH / 2;
+              //console.log(`Black key ${n.note} left offset: ${left}px`);
+              return (
+                <div
+                  key={n.note}
+                  className={`black-key ${activeKeys.has(n.key) ? 'active' : ''}`}
+                  style ={{ left: `${left}px` }}
+                  onMouseDown={async () => {
+                    setActiveKeys(prev => {
+                      const newSet = new Set(prev);
+                      newSet.add(n.key);
+                      return newSet;
+                    })
+                    attack(n);
+                  }}
+                  onMouseUp={async () => {
+                    setActiveKeys(prev => {
+                      const newSet = new Set(prev);
+                      newSet.delete(n.key);
+                      return newSet;
+                    })
+                    release(n);
+                  }}
+                >
+                  <span className="black-key-letter-label">
+                      {n.key.toUpperCase()}
+                  </span>
+                </div>
+              );
+          })}
+      </div>
     </div>
-    )
+  );
 }

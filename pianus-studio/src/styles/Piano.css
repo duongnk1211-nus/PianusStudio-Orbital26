@@ -102,3 +102,9 @@ body {
     letter-spacing: 0.05em;
     pointer-events: none;
 }
+
+.piano-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}

@@ -24,8 +24,8 @@ export default function PianoKeyBoard() {
   useEffect(() => {
     setTone(synthRef);
 
-    const GROW_SPEED = 1;    // px per frame while held
-    const FLY_SPEED = 1;    // px per frame after release
+    const GROW_SPEED = 3;    // px per frame while held
+    const FLY_SPEED = 3;    // px per frame after release
 
     const tick = () => {
       barsRef.current = barsRef.current

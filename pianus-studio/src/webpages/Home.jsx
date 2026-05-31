@@ -17,7 +17,7 @@ export default function HomePage() {
                 <Link to="/sheet-music">Sheet Music</Link>
                 <Link to="/practice-tools">Practice Tools</Link>
                 <Link to="/community">Community</Link>
-                <Link to="/contact">Contact</Link>
+                <Link to="/contact">Contact Us</Link>
             </nav>
 
             <main>

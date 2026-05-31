@@ -1,0 +1,105 @@
+#root-for-ContactUs {
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+}
+
+.wrapper-for-ContactUs {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background-image: url('../assets/BackgroundForContactUs.jpg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    height: 100vh;
+}
+
+.return-for-ContactUs {
+    display: flex;
+    position: absolute;
+    left: 10px;
+    top: 5px;
+    flex-direction: row;
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    margin-left: 20px;
+    margin-right:20px;
+    margin-top: 15px;
+    padding: 3px 5px;
+    background: #e7a53c;
+    border-radius: 4px;
+    justify-content: left;
+    background-color: #df9e12;
+    font-size: 16px;
+}
+
+.return-for-ContactUs:hover {
+    background: #ef8d05d6;
+}
+
+.button-for-ContactUs a {
+    color: #ebeaf1;
+    text-decoration: none;
+    font-family: 'Amadeus', cursive;
+    font-size: 14px;
+}
+
+.header-for-ContactUs {
+    height: 60px;
+    font-family: 'Dancing Script', cursive;
+    font-size: 30px;
+    font-weight: 700; 
+    background-color: transparent;
+    color: #ffffff;
+    margin-bottom: 20px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}   
+
+.header-for-ContactUs h1 {
+    font-family: 'Dancing Script', cursive;
+    color: #ef9d19;
+    background-color: transparent;
+}
+
+.content-for-ContactUs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: #3d1f1f45;
+}
+
+.feature-card-for-ContactUs {
+    background: rgba(255, 255, 255, 0.352);
+    border-radius: 10px;
+    padding: 0px;
+    margin: 30px;
+    display: inline-block;
+    width: 800px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    justify-content: top;
+    align-items: top;
+}
+
+.main-for-ContactUs {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: transparent;
+    padding: 100px;
+    text-align: center;
+}
+
+.main-for-ContactUs p{
+    font-family: 'Amadeus', cursive;
+    align-items: top;
+    font-size: 1em;
+    padding: 1px 20px 20px 1px;
+    color: #000000e5;
+}
+

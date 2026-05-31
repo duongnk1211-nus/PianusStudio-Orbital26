@@ -8,7 +8,7 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    background-image: url('/BackgroundForContactUs.jpg');
+    background-image: url('/BackGroundForContactUs.jpg');
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;

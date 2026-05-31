@@ -1,12 +1,7 @@
 import '../styles/Home.css';
-import { Link, Routes, Route } from 'react-router-dom';
-import Piano from '../components/PianoKeyBoard.jsx';
+import { Link } from 'react-router-dom';
 
 export default function HomePage() {
-    <Routes>
-        <Route path="/piano-simulator" element={<Piano />} />
-    </Routes>
-
     return (
         <div className= "body">
             <header>

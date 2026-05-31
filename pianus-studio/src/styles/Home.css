@@ -17,7 +17,7 @@ html {
     margin: 0;
     background: #f4f4f4;
     color: #0d0c0c;
-    background-image: url('../src/assets/BackGround.jpg');
+    background-image: url('/BackGround.jpg');
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;
@@ -79,7 +79,7 @@ nav a:hover {
 }
 
 main {
-    background-image: url('../src/assets/BackGround.jpg');
+    background-image: url('/BackGround.jpg');
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;

@@ -63,7 +63,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url('../src/assets/BackGround.jpg');
+    background-image: url('/BackGround.jpg');
     background-size: cover;
     background-position: top;
     background-repeat: no-repeat;

@@ -4,11 +4,14 @@ import { Link } from 'react-router-dom';
 export default function HomePage() {
     return (
         <div className= "body">
-            <header>
+            <div className="header">
+                <button>
+                    <Link to="/login">Login</Link>
+                </button>
                 <h1>Welcome to PianusStudio</h1>
                 <img src="/PianusStudio.png" alt="PianusStudio Logo" className="logo" />
                 <p>Your gateway to piano music, lessons, and more...</p>
-            </header>
+            </div>
 
             <nav>
                 <Link to="/about">About Us</Link>
@@ -22,28 +25,28 @@ export default function HomePage() {
 
             <main>
                 <h2>Explore Our Features</h2>
-                <div class="features">
-                    <div class="feature-card">
+                <div className="features">
+                    <div className="feature-card">
                         <h3>Piano Simulator</h3>
                         <p>Experience playing the piano in a virtual environment.</p>
                         <Link to="/piano-simulator">Try Now</Link>
                     </div>
-                    <div class="feature-card">
+                    <div className="feature-card">
                         <h3>Online Lessons</h3>
                         <p>Interactive tutorials to improve your piano skills.</p>
                         <Link to="/lessons">Go to Lessons</Link>
                     </div>
-                    <div class="feature-card">
+                    <div className="feature-card">
                         <h3>Sheet Music Library</h3>
                         <p>Access classical and modern sheet music.</p>
                         <Link to="/sheet-music">Browse Library</Link>
                     </div>
-                    <div class="feature-card">
+                    <div className="feature-card">
                         <h3>Practice Tools</h3>
                         <p>Metronome, chord finder, and more.</p>
                         <Link to="/practice-tools">Try Tools</Link>
                     </div>
-                    <div class="feature-card">
+                    <div className="feature-card">
                         <h3>Community Forum</h3>
                         <p>Connect with other piano enthusiasts.</p>
                         <Link to="/community">Join Forum</Link>

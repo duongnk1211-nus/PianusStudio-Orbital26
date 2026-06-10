@@ -26,16 +26,36 @@ html {
     /* text color for contrast */
 }
 
-header {
+.header {
     height: 120px;
     position: relative;
     background: hsla(0, 0%, 100%, 0.822);
-    color: #210be3;
+    color: #000000;
     padding: 20px;
     text-align: center;
 }
 
-header h1 {
+.header button {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    padding: 10px 15px;
+    background: #e7a53c;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+}
+
+.header button:hover {
+    background: #ef8d05d6;
+}
+
+.header a {
+    color: #fff;
+    text-decoration: none;
+}
+
+.header h1 {
     margin: 0;
     position: absolute;
     top: 40px;
@@ -44,7 +64,7 @@ header h1 {
     font-size: 3em;
 }
 
-header p {
+.header p {
     position: absolute;
     top: 80px;
     left: 160px;
@@ -68,7 +88,7 @@ nav {
 }
 
 nav a {
-    color: #210be3;
+    color: #000000;
     font-family: 'Amadeus', cursive;
     padding: 14px 20px;
     text-decoration: none;
@@ -93,12 +113,12 @@ main h2 {
     background: #f6f1f1e1;
     padding: 10px 20px;
     border-radius: 4px;
-    color: #200be3be;
+    color: #000000;
     font-family: 'Amadeus', cursive;
 }
 
 main h3 {
-    color: #200be3be;
+    color: #000000;
     font-family: 'Amadeus', cursive;
 }
 
@@ -117,7 +137,7 @@ main a:hover {
 }
 
 main p {
-    color: #200be3be;
+    color: #000000;
     font-family: 'Amadeus', cursive;
 }
 

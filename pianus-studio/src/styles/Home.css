@@ -36,14 +36,15 @@ html {
 }
 
 .header button {
+    display: flex;
     position: absolute;
     top: 20px;
     right: 30px;
-    padding: 10px 15px;
     background: #e7a53c;
     color: #fff;
     border: none;
     border-radius: 4px;
+    cursor: pointer;
 }
 
 .header button:hover {
@@ -51,9 +52,9 @@ html {
 }
 
 .header a {
-    color: #fff;
+    color: #f8f8f8;
     text-decoration: none;
-}
+}   
 
 .header h1 {
     margin: 0;

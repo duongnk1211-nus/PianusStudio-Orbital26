@@ -5,9 +5,12 @@ export default function HomePage() {
     return (
         <div className= "body">
             <div className="header">
-                <button>
-                    <Link to="/login">Login</Link>
-                </button>
+                <Link to="/login">
+                    <button style={{ right: '110px', padding: '10px 15px' }}>Login</button>
+                </Link>
+                <Link to="/signup">
+                    <button style={{ right: '30px', padding: '10px 10px' }}>Sign Up</button>
+                </Link>
                 <h1>Welcome to PianusStudio</h1>
                 <img src="/PianusStudio.png" alt="PianusStudio Logo" className="logo" />
                 <p>Your gateway to piano music, lessons, and more...</p>

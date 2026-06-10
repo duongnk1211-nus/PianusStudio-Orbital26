@@ -1,50 +1,63 @@
 import { useState } from "react"
 import { supabase } from "../components/supabaseClient"
+import { Link, useNavigate } from 'react-router-dom';
+import '../styles/LoginSignup.css';
 
 export default function LoginPage() {
-  const [email, setEmail] = useState("")
-  const [password, setPassword] = useState("")
-  const [isLogin, setIsLogin] = useState(true)
-  const [message, setMessage] = useState("")
-  const [loading, setLoading] = useState(false)
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+    const [message, setMessage] = useState("")
+    const [loading, setLoading] = useState(false)
+    const navigate = useNavigate();
 
-  const handleAuth = async () => {
-    setLoading(true)
-    if (isLogin) {
-      const { error } = await supabase.auth.signInWithPassword({ email, password })
-      setMessage(error ? error.message : "Logged in successfully!")
-    } else {
-      const { error } = await supabase.auth.signUp({ email, password })
-      setMessage(error ? error.message : "Sign‑up successful! Check your email.")
+    const handleAuth = async () => {
+        setLoading(true)
+        const { error } = await supabase.auth.signInWithPassword({ email, password })
+        if (error) {
+            setMessage("Error: " + error.message)
+            setLoading(false)
+        } else {
+            setMessage("Logged in successfully! Redirecting...")
+            setTimeout(() => {
+                setLoading(false)
+                navigate("/") // Redirect to dashboard or home page after successful login
+            }, 3000) // 3-second delay before redirecting
+        }
     }
-    setLoading(false)
-  }
 
-  return (
-    <div style={{ maxWidth: "400px", margin: "auto", padding: "2rem" }}>
-      <h2>{isLogin ? "Log In" : "Sign Up"}</h2>
-      <input
-        type="email"
-        placeholder="Email"
-        value={email}
-        onChange={e => setEmail(e.target.value)}
-        style={{ width: "100%", marginBottom: "1rem" }}
-      />
-      <input
-        type="password"
-        placeholder="Password"
-        value={password}
-        onChange={e => setPassword(e.target.value)}
-        style={{ width: "100%", marginBottom: "1rem" }}
-      />
-      <button onClick={handleAuth} disabled={loading} style={{ width: "100%", padding: "0.5rem" }}>
-        {loading ? "Processing..." : isLogin ? "Log In" : "Sign Up"}
-      </button>
-      <p style={{ marginTop: "1rem", cursor: "pointer", color: "blue" }}
-         onClick={() => setIsLogin(!isLogin)}>
-        {isLogin ? "Need an account? Sign up" : "Already have an account? Log in"}
-      </p>
-      {message && <p>{message}</p>}
-    </div>
-  )
+    return (
+        <div className="body-login">
+            <div className="login-container">
+                <div className="go-back">
+                    &larr;
+                    <Link to="/">
+                        {" Back to Home"}
+                    </Link>
+                </div>
+                <h2>Log In</h2>
+                <h3 style={{ fontFamily: 'Amadeus', fontSize: "1.0rem", marginBottom: "1rem", color: "#070505c8" }}>Please log in to continue!</h3>
+                <input
+                    type="email"
+                    placeholder="Email"
+                    value={email}
+                    onChange={e => setEmail(e.target.value)}
+                    style={{ width: "95%", marginBottom: "1rem", marginTop: "10px" }}
+                />
+                <input
+                    type="password"
+                    placeholder="Password"
+                    value={password}
+                    onChange={e => setPassword(e.target.value)}
+                    style={{ width: "95%", marginBottom: "50px" }}
+                />
+                <button onClick={handleAuth} disabled={loading} style={{ width: "40%", padding: "0.5rem", borderRadius: "5px" }}>
+                    {loading ? "Processing..." : "Sign In"}
+                </button>
+                <p style={{ marginTop: "10px", cursor: "pointer", color: "#1a1717" }}>
+                    Need an account? <Link to="/signup" style={{ color: "#1a1717e7" }}>Sign up</Link>
+                </p>
+                {message && <p style={{ color: message.includes("Error") ? "red" : "green" }}>{message}</p>}
+            </div>
+        </div>
+    )
 }

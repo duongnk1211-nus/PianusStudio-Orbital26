@@ -24,9 +24,9 @@ export default function SignupPage() {
         <div className="body-signup">
             <div className="signup-container">
                 <div className="go-back">
-                    &larr;
-                    <Link to="/">
-                        {" Back to Home"}
+                    &larr; {" "}
+                    <Link to="/" style={{ color: "#030303e7" }}>
+                        {"Back to Home"}
                     </Link>
                 </div>
                 <h2>Registration</h2>

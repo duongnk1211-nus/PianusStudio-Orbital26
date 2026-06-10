@@ -29,9 +29,9 @@ export default function LoginPage() {
         <div className="body-login">
             <div className="login-container">
                 <div className="go-back">
-                    &larr;
-                    <Link to="/">
-                        {" Back to Home"}
+                    &larr; {""}
+                    <Link to="/" style={{ color: "#030303e7" }}>
+                        {"Back to Home"}
                     </Link>
                 </div>
                 <h2>Log In</h2>

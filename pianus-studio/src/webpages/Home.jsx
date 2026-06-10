@@ -1,16 +1,95 @@
 import '../styles/Home.css';
 import { Link } from 'react-router-dom';
+import { useState, useEffect, useRef } from "react";
+import { supabase } from "../components/supabaseClient";
+
+function IsLoggedIn() {
+    const [user, setUser] = useState(null)
+    const [menuOpen, setMenuOpen] = useState(false)
+    const [loading, setLoading] = useState(false)
+    const menuRef = useRef(null)
+
+    useEffect(() => {
+        function handleClickOutside(event) {
+            // If click is outside the menu element, close it
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
+                setMenuOpen(false)
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside)
+
+        supabase.auth.getUser().then(({ data }) => {
+            setUser(data.user)
+        })
+
+        const { data: listener } = supabase.auth.onAuthStateChange((_event, session) => {
+            setUser(session?.user ?? null)
+        })
+
+        return () => {
+            listener.subscription.unsubscribe()
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [])
+
+    const displayName = user?.user_metadata?.full_name || user?.user_metadata?.name || user?.email || ''
+    const avatarUrl = user?.user_metadata?.avatar_url || "/avatar.png"
+
+    const handleSignOut = async () => {
+        setLoading(true)
+        await supabase.auth.signOut()
+        setMenuOpen(false)
+        setLoading(false)
+    }
+
+    return (
+        <div>
+            {user ? (
+                <div className="user-avatar" ref={menuRef}>
+                    <button
+                        className="avatar-button"
+                        onClick={() => setMenuOpen(v => !v)}
+                        aria-haspopup="true"
+                        aria-expanded={menuOpen}
+                    >
+                        <div className="avatar">
+                            <img src={avatarUrl} alt="avatar" />
+                        </div>
+                        <span className="user-name">{displayName.length > 18 ? ' ' + displayName.slice(0, 15) + '...' : ' ' + displayName}</span>
+                    </button>
+
+                    {menuOpen && (
+                        <div className="avatar-menu" role="menu">
+                            <Link to="/profile" onClick={() => setMenuOpen(false)}>Profile</Link>
+                            <Link to="/settings" onClick={() => setMenuOpen(false)}>Settings</Link>
+                            <a href="#" onClick={(e) => {
+                                e.preventDefault();
+                                handleSignOut();
+                            }}>{loading ? 'Processing...' : 'Log out'}</a>
+                        </div>
+                    )}
+                </div>
+            ) : (
+                <div className="auth-links">
+                    <Link to="/login">
+                        <button className="auth-button login">Login</button>
+                    </Link>
+                    <Link to="/signup">
+                        <button className="auth-button signup">Sign Up</button>
+                    </Link>
+                </div>
+            )}
+        </div>
+    )
+}
+
+
 
 export default function HomePage() {
     return (
-        <div className= "body">
+        <div className="body">
             <div className="header">
-                <Link to="/login">
-                    <button style={{ right: '110px', padding: '10px 15px' }}>Login</button>
-                </Link>
-                <Link to="/signup">
-                    <button style={{ right: '30px', padding: '10px 10px' }}>Sign Up</button>
-                </Link>
+                <IsLoggedIn />
                 <h1>Welcome to PianusStudio</h1>
                 <img src="/PianusStudio.png" alt="PianusStudio Logo" className="logo" />
                 <p>Your gateway to piano music, lessons, and more...</p>

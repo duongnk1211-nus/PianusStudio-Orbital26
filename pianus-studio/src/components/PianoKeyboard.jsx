@@ -52,8 +52,6 @@ for (let i = 0; i < Notes.length; i++) {
 }
 
 export default function PianoKeyboard() {
-  const [activeKeys, setActiveKeys] = useState(new Set());
-
   const synthRef = useRef(null);
   const barsRef = useRef([]);
   const rafRef = useRef(null);
@@ -120,13 +118,13 @@ export default function PianoKeyboard() {
       if (e.repeat) return;  // ignore auto-repeats
       const note = KeyMap[e.key];
       if (note) {
-        note.attack(synthRef, barsRef, setActiveKeys)();
+        note.attack(synthRef, barsRef)();
       }
     };
     const handleKeyUp = async (e) => {
       const note = KeyMap[e.key];
       if (note) {
-        note.release(synthRef, barsRef, setActiveKeys)();
+        note.release(synthRef, barsRef)();
       }
     }
 
@@ -160,7 +158,7 @@ export default function PianoKeyboard() {
           ))}
         </div>
         <div className="key-rows">
-          {Notes.map(n => n.toHTML(synthRef, barsRef, activeKeys, setActiveKeys))}
+          {Notes.map(n => n.toHTML(synthRef, barsRef))}
         </div>
       </div>
     </div>

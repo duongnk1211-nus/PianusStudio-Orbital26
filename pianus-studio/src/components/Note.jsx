@@ -28,14 +28,6 @@ export class Note {
     return this.#key;
   }
 
-  get active() {
-    return this.#active;
-  }
-
-  get type() {
-    return this.#type;
-  }
-
   #computedLeftForNote = () => {
     if (this.#type === "white") {
       return this.#offset * (WHITE_KEY_WIDTH + WHITE_KEY_GAP);
@@ -45,15 +37,10 @@ export class Note {
     }
   }
 
-  attack = (synthRef, barsRef, setActiveKeys) => async () => {
+  attack = (synthRef, barsRef) => async () => {
+    this.#active = true;
     await Tone.start();
     synthRef.current.triggerAttack(this.#sym);
-
-    setActiveKeys(prev => {
-      const newSet = new Set(prev);
-      newSet.add(this.#key);
-      return newSet;
-    });
 
     barsRef.current.push({
       id: Date.now() + Math.random(),
@@ -68,26 +55,22 @@ export class Note {
     });
   }
 
-  release = (synthRef, barsRef, setActiveKeys) => async() => {
+  release = (synthRef, barsRef) => async() => {
+    this.#active = false;
     synthRef.current.triggerRelease(this.#sym);
-    setActiveKeys(prev => {
-      const newSet = new Set(prev);
-      newSet.delete(this.#key);
-        return newSet;
-    });
     barsRef.current = barsRef.current.map(b =>
       b.note === this.#sym && !b.released ? { ...b, released: true } : b
     );
   }
 
-  toHTML = (synthRef, barsRef, activeKeys,setActiveKeys) => {
+  toHTML = (synthRef, barsRef) => {
     if (this.#type == "white") {
       return (
         <div
           key={this.#sym}
-          onMouseDown={this.attack(synthRef, barsRef, setActiveKeys)}
-          onMouseUp={this.release(synthRef, barsRef, setActiveKeys)}
-          className={`white-key ${activeKeys.has(this.#key) ? 'active' : ''}`}
+          onMouseDown={this.attack(synthRef, barsRef)}
+          onMouseUp={this.release(synthRef, barsRef)}
+          className={`white-key ${this.#active ? 'active' : ''}`}
         >
           <span className="white-key-letter-label">
             {this.#key.toUpperCase()}
@@ -100,10 +83,10 @@ export class Note {
       return (
         <div
           key={this.#sym}
-          className={`black-key ${activeKeys.has(this.#key) ? 'active' : ''}`}
+          className={`black-key ${this.#active ? 'active' : ''}`}
           style={{ left: `${left}px` }}
-          onMouseDown={this.attack(synthRef, barsRef, setActiveKeys)}
-          onMouseUp={this.release(synthRef, barsRef, setActiveKeys)}
+          onMouseDown={this.attack(synthRef, barsRef)}
+          onMouseUp={this.release(synthRef, barsRef)}
         >
           <span className="black-key-letter-label">
             {this.#key.toUpperCase()}

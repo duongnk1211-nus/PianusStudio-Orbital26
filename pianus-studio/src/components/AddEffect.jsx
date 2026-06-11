@@ -1,62 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import "../styles/Piano.css";
-import "../styles/Synthesia.css";
 import * as Tone from "tone";
-import { Note } from "./Note.jsx";
-import { Link } from "react-router-dom";
 
-const Notes = [
-  new Note("C3", "z", 0),
-  new Note("D3", "x", 1),
-  new Note("E3", "c", 2),
-  new Note("F3", "v", 3),
-  new Note("G3", "b", 4),
-  new Note("A3", "n", 5),
-  new Note("B3", "m", 6),
-  new Note("C4", "q", 7),
-  new Note("D4", "w", 8),
-  new Note("E4", "e", 9),
-  new Note("F4", "r", 10),
-  new Note("G4", "t", 11),
-  new Note("A4", "y", 12),
-  new Note("B4", "u", 13),
-  new Note("C5", "i", 14),
-  new Note("D5", "o", 15),
-  new Note("E5", "p", 16),
-  new Note("F5", "[", 17),
-  new Note("G5", "]", 18),
-  new Note("A5", "\\", 19),
-  new Note("B5", "     ", 20),
-  new Note("C6", "      ", 21),
-
-  new Note("C#3", "s", 0),
-  new Note("D#3", "d", 1),
-  new Note("F#3", "g", 3),
-  new Note("G#3", "h", 4),
-  new Note("A#3", "j", 5),
-  new Note("C#4", "2", 7),
-  new Note("D#4", "3", 8),
-  new Note("F#4", "5", 10),
-  new Note("G#4", "6", 11),
-  new Note("A#4", "7", 12),
-  new Note("C#5", "9", 14),
-  new Note("D#5", "0", 15),
-  new Note("F#5", "=", 17),
-  new Note("G#5", "  ", 18),
-  new Note("A#5", "    ", 19),
-];
-
-const KeyMap = {};
-for (let i = 0; i < Notes.length; i++) {
-  if (Notes[i].key.length === 1) KeyMap[Notes[i].key] = Notes[i];
-}
-
-export default function PianoKeyboard() {
-  const synthRef = useRef(null);
-  const barsRef = useRef([]);
-  const rafRef = useRef(null);
-  const [displayBars, setDisplayBars] = useState([]);
-
+export function AddEffect(synthRef, barsRef, rafRef, setDisplayBars) {
   useEffect(() => {
     synthRef.current = new Tone.Sampler({
       urls: {
@@ -136,31 +81,4 @@ export default function PianoKeyboard() {
       window.removeEventListener("keyup", handleKeyUp);
     }
   }, []);
-
-  return (
-    <div className="piano-container">
-      <div className="return-button">
-        <Link to="/">Return</Link>
-      </div>
-      <div className="piano-wrapper">
-        <div className="synthesia-container">
-          {displayBars.map(b => (
-            <div
-              key={b.id}
-              className={`synthesia-bar ${b.type}`}
-              style={{
-                left: `${b.left}px`,
-                width: `${b.width - 2}px`,
-                height: `${b.height}px`,
-                top: `${b.top}px`,
-              }}
-            />
-          ))}
-        </div>
-        <div className="key-rows">
-          {Notes.map(n => n.toHTML(synthRef, barsRef))}
-        </div>
-      </div>
-    </div>
-  );
 }

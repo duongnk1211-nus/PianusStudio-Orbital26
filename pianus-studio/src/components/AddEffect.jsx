@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import * as Tone from "tone";
 
-export function AddEffect(synthRef, barsRef, rafRef, setDisplayBars) {
+export function addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars) {
   useEffect(() => {
     synthRef.current = new Tone.Sampler({
       urls: {

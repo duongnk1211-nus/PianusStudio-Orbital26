@@ -4,7 +4,7 @@ import "../styles/Piano.css";
 import "../styles/Synthesia.css";
 import { Link } from "react-router-dom";
 import { Note, Notes } from "../components/Note.jsx";
-import { AddEffect } from "../components/AddEffect.jsx";
+import { addEffect } from "../components/addEffect.jsx";
 
 export default function PianoSimulator() {
   const KeyMap = {};
@@ -16,7 +16,7 @@ export default function PianoSimulator() {
   const rafRef = useRef(null);
   const [displayBars, setDisplayBars] = useState([]);
 
-  AddEffect(synthRef, barsRef, rafRef, setDisplayBars);
+  addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars);
 
   return (
     <div className="piano-container">

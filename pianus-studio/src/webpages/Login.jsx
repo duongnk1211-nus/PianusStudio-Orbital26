@@ -25,6 +25,19 @@ export default function LoginPage() {
         }
     }
 
+    const handleForgotPassword = async (e) => {
+        e.preventDefault()
+        const { error } = await supabase.auth.resetPasswordForEmail(email, {
+            redirectTo: 'https://pianus-studio-orbital26.vercel.app/update-password',
+        })
+
+        if (error) {
+            setMessage('Error: ' + error.message)
+        } else {
+            setMessage('Password reset email sent! Check your inbox.')
+        }
+    }
+
     return (
         <div className="body-login">
             <div className="login-container">
@@ -48,8 +61,9 @@ export default function LoginPage() {
                     placeholder="Password"
                     value={password}
                     onChange={e => setPassword(e.target.value)}
-                    style={{ width: "95%", marginBottom: "50px" }}
+                    style={{ width: "95%", marginBottom: "10px" }}
                 />
+                <p style={{ marginLeft: "10px", marginBottom: "50px", color: "#1a1717", textAlign: 'left', fontSize: '14px' }}>Forgot Password ? Click <a href="#" onClick={handleForgotPassword} style={{cursor: "pointer", color: '#000000a5'}}>here</a> to reset!</p>
                 <button onClick={handleAuth} disabled={loading} style={{ width: "40%", padding: "0.5rem", borderRadius: "5px" }}>
                     {loading ? "Processing..." : "Sign In"}
                 </button>

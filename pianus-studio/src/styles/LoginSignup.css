@@ -133,3 +133,88 @@
 .signup-container button:hover, .login-container button:hover {
     background: #3c3737;
 }
+
+.body-updatepassword {
+    position: relative;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background: #f4f4f4;
+    color: #0d0c0c;
+    background-image: url('/BackGroundForContactUs.jpg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+    color: #3d1f1f45;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.updatepassword-container {
+    position: relative;
+    width: 500px;
+    height: auto;
+    background: #ffffffb3;
+    border-radius: 10px;
+    padding: 30px;
+    margin: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.updatepassword-container h2 {
+    margin-top: 40px;
+    text-align: center;
+    font-family: 'Amadeus', cursive;
+    font-weight: bold;
+}
+
+.updatepassword-container h3 {
+    text-align: center;
+    font-family: 'Dancing Script', cursive;
+    margin-top: 0px;
+    margin-bottom: 30px;
+    font-weight: bold;
+    color: #070505c4;
+}
+
+.updatepassword-container input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    margin-right: 10px;
+    background: transparent;
+    border: none;             
+    border-bottom: 2px solid #33333379;
+}
+
+.updatepassword-container input::placeholder {
+    color: #33333379;
+    font-family: 'Amadeus', cursive;
+    font-style: bold;
+}
+
+.updatepassword-container input:focus {
+    outline: none;
+    border-bottom-color: #000000;
+}
+
+.updatepassword-container p {
+    text-align: center;
+    font-family: 'Amadeus', cursive;
+}
+
+.updatepassword-container button {
+    width: 100%;
+    padding: 10px;
+    background: #000000d6;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.updatepassword-container button:hover {
+    background: #3c3737;
+}

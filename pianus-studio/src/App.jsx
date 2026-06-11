@@ -5,10 +5,12 @@ import AboutUsPage from "./webpages/AboutUs.jsx";
 import ContactUsPage from "./webpages/ContactUs.jsx";
 import LoginPage from "./webpages/Login.jsx";
 import SignupPage from "./webpages/Signup.jsx";
+import UpdatePassword from "./webpages/UpdatePassword.jsx";
 
 export default function App() {
   return (
     <Routes>
+      <Route path="/update-password" element={<UpdatePassword />} />
       <Route path="/signup"            element={<SignupPage />} />
       <Route path="/about"              element={<AboutUsPage />} />
       <Route path="/contact"            element={<ContactUsPage />} />

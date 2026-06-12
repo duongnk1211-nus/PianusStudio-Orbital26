@@ -1,29 +1,29 @@
-import { useState } from "react"
-import { supabase } from "../components/supabaseClient"
-import { Link, useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { supabase } from "../components/supabaseClient";
+import { Link, useNavigate } from "react-router-dom";
 import '../styles/LoginSignup.css';
 
 export default function LoginPage() {
-    const [email, setEmail] = useState("")
-    const [password, setPassword] = useState("")
-    const [message, setMessage] = useState("")
-    const [loading, setLoading] = useState(false)
-    const navigate = useNavigate();
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigate = useNavigate();
 
-    const handleAuth = async () => {
-        setLoading(true)
-        const { error } = await supabase.auth.signInWithPassword({ email, password })
-        if (error) {
-            setMessage("Error: " + error.message)
-            setLoading(false)
-        } else {
-            setMessage("Logged in successfully! Redirecting...")
-            setTimeout(() => {
-                setLoading(false)
-                navigate("/") // Redirect to dashboard or home page after successful login
-            }, 3000) // 3-second delay before redirecting
-        }
+  const handleAuth = async () => {
+    setLoading(true);
+    const { error } = await supabase.auth.signInWithPassword({ email, password });
+    if (error) {
+      setMessage("Error: " + error.message);
+      setLoading(false);
+    } else {
+      setMessage("Logged in successfully! Redirecting...");
+      setTimeout(() => {
+        setLoading(false);
+        navigate("/"); // Redirect to dashboard or home page after successful login
+      }, 3000); // 3-second delay before redirecting
     }
+  }
 
     const handleForgotPassword = async (e) => {
         e.preventDefault()

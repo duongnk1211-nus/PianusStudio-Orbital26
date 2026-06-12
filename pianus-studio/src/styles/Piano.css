@@ -148,3 +148,31 @@ body {
     font-weight: 600;
     font-size: 14px;
 }
+
+.play-button {
+    display: flex;
+    display: inline-block;
+    width: 50px;
+    height: 30px;
+    margin-left: 20px;
+    margin-right:70px;
+    margin-top: 15px;
+    padding: 3px 5px;
+    background: #e7a53c;
+    border-radius: 4px;
+    justify-content: center;
+    background-color: #df9e12;
+    font-size: 16px;
+}
+
+.play-button:hover {
+    background: #ef8d05d6;
+}
+
+.play-button a {
+    color: #100b4d;
+    text-decoration: none;
+    font-family: 'Amadeus', cursive;
+    font-weight: 600;
+    font-size: 14px;
+}

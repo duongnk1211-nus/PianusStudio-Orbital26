@@ -1,6 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./webpages/Home.jsx";
-import Piano    from "./components/PianoKeyBoard.jsx";
+import PianoSimulator from "./webpages/PianoSimulator.jsx";
+import Lessons from "./webpages/Lessons.jsx";
 import AboutUsPage from "./webpages/AboutUs.jsx";
 import ContactUsPage from "./webpages/ContactUs.jsx";
 import LoginPage from "./webpages/Login.jsx";
@@ -18,5 +19,5 @@ export default function App() {
       <Route path="/login"             element={<LoginPage />} />
       <Route path="/"                element={<HomePage />} />
     </Routes>
-  )
+  );
 }

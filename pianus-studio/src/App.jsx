@@ -12,11 +12,12 @@ export default function App() {
   return (
     <Routes>
       <Route path="/update-password" element={<UpdatePassword />} />
-      <Route path="/signup"            element={<SignupPage />} />
-      <Route path="/about"              element={<AboutUsPage />} />
-      <Route path="/contact"            element={<ContactUsPage />} />
-      <Route path="/piano-simulator" element={<Piano />}    />
-      <Route path="/login"             element={<LoginPage />} />
+      <Route path="/signup"          element={<SignupPage />} />
+      <Route path="/about"           element={<AboutUsPage />} />
+      <Route path="/contact"         element={<ContactUsPage />} />
+      <Route path="/piano-simulator" element={<PianoSimulator />}    />
+      <Route path="/lessons"         element={<Lessons />}    />
+      <Route path="/login"           element={<LoginPage />} />
       <Route path="/"                element={<HomePage />} />
     </Routes>
   );

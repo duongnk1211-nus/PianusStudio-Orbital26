@@ -4,7 +4,7 @@ import "../styles/Piano.css";
 import "../styles/Synthesia.css";
 import { Link, useNavigate } from "react-router-dom";
 import { Note, Notes } from "../components/Note.jsx";
-import { addEffect } from "../components/addEffect.jsx";
+import { addEffect } from "../components/AddEffect.jsx";
 import { P1 } from "../components/PianoPieces/P1.jsx";
 
 export default function PianoSimulator() {

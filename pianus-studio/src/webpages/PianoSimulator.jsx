@@ -4,7 +4,7 @@ import "../styles/Piano.css";
 import "../styles/Synthesia.css";
 import { Link } from "react-router-dom";
 import { Note, Notes } from "../components/Note.jsx";
-import { addEffect } from "../components/addEffect.jsx";
+import { addEffect } from "../components/AddEffect.jsx";
 
 export default function PianoSimulator() {
   const KeyMap = {};

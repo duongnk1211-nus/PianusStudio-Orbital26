@@ -1,6 +1,6 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./webpages/Home.jsx";
-import Piano from "./webpages/PianoSimulator.jsx";
+import PianoSimulator from "./webpages/PianoSimulator.jsx";
 import Lessons from "./webpages/Lessons.jsx";
 import Library from "./webpages/Library.jsx";
 import AboutUsPage from "./webpages/AboutUs.jsx";

@@ -99,7 +99,7 @@ export default function HomePage() {
         <Link to="/about">About Us</Link>
         <Link to="/piano-simulator">Piano Simulator</Link>
         <Link to="/lessons">Lessons</Link>
-        <Link to="/sheet-music">Sheet Music</Link>
+        <Link to="/library">Music Library</Link>
         <Link to="/practice-tools">Practice Tools</Link>
         <Link to="/community">Community</Link>
         <Link to="/contact">Contact Us</Link>
@@ -119,9 +119,9 @@ export default function HomePage() {
                 <Link to="/lessons">Go to Lessons</Link>
             </div>
             <div className="feature-card">
-              <h3>Sheet Music Library</h3>
-              <p>Access classical and modern sheet music.</p>
-              <Link to="/sheet-music">Browse Library</Link>
+              <h3>Music Library</h3>
+              <p>Access classical and modern music pieces.</p>
+              <Link to="/library">Browse Library</Link>
             </div>
             <div className="feature-card">
               <h3>Practice Tools</h3>

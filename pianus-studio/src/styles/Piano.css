@@ -111,30 +111,58 @@ body {
     background-position: top;
     background-repeat: no-repeat;
     background-attachment: fixed; 
-    height: 100vh;
+    height: 150vh;
 }
 
 .piano-wrapper {
-    display: flex;
-    flex-direction: column;
+    display: block;
     align-items: center;
     justify-content: center;
+}
+
+.title-wrapper {
+    position: relative;
+}
+
+.piano-wrapper h1 {
+    position: relative;
+    color: #ecb80c;
+    font-family: 'Amadeus', cursive;
+    top: 0px;
+    padding-bottom: 0px;
+}
+
+.piano-wrapper img { 
+    top: 10px;
+    left: 380px; 
+    max-height: 120px;
+    padding-bottom: 0px;
+    background-color: #a7ad4ea2;
+    width: 120px;
+    height: 120px;
+    overflow: hidden;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 10px;
 }
 
 .return-button {
     display: flex;
     display: inline-block;
-    width: 50px;
+    width: 60px;
     height: 30px;
     margin-left: 20px;
     margin-right:70px;
     margin-top: 15px;
-    padding: 3px 5px;
     background: #e7a53c;
     border-radius: 4px;
     justify-content: center;
     background-color: #df9e12;
-    font-size: 16px;
+    color: #100b4d;
+    font-family: 'Amadeus', cursive;
+    font-weight: 600;
+    font-size: 14px;
+    cursor: pointer;
 }
 
 .return-button:hover {
@@ -150,6 +178,9 @@ body {
 }
 
 .play-button {
+    position: relative;
+    top: 230px;
+    right: 10px;
     display: flex;
     display: inline-block;
     width: 50px;
@@ -163,6 +194,7 @@ body {
     justify-content: center;
     background-color: #df9e12;
     font-size: 16px;
+    cursor: pointer;
 }
 
 .play-button:hover {

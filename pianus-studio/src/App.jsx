@@ -1,7 +1,8 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./webpages/Home.jsx";
-import PianoSimulator from "./webpages/PianoSimulator.jsx";
+import Piano from "./webpages/PianoSimulator.jsx";
 import Lessons from "./webpages/Lessons.jsx";
+import Library from "./webpages/Library.jsx";
 import AboutUsPage from "./webpages/AboutUs.jsx";
 import ContactUsPage from "./webpages/ContactUs.jsx";
 import LoginPage from "./webpages/Login.jsx";
@@ -11,6 +12,8 @@ import UpdatePassword from "./webpages/UpdatePassword.jsx";
 export default function App() {
   return (
     <Routes>
+      <Route path="/library"        element={<Library />} />
+      <Route path="/lessons"        element={<Lessons />} />
       <Route path="/update-password" element={<UpdatePassword />} />
       <Route path="/signup"            element={<SignupPage />} />
       <Route path="/about"              element={<AboutUsPage />} />

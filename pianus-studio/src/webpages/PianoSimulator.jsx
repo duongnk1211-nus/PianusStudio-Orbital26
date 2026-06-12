@@ -24,6 +24,10 @@ export default function PianoSimulator() {
         <Link to="/">Return</Link>
       </div>
       <div className="piano-wrapper">
+        <div>
+        <img src="/PianusStudio.png"/>
+        <h1>Piano Simulator</h1>
+        </div>
         <div className="synthesia-container">
           {displayBars.map(b => (
             <div

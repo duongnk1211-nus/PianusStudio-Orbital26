@@ -1,0 +1,8 @@
+.library-wrapper {
+    height: 150vh;
+    background-image: url('/LibraryBackGround.jpg');
+    background-size: cover;
+    background-position: top;
+    background-repeat: no-repeat;
+    background-attachment: fixed; 
+}

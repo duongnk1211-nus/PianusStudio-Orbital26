@@ -7,7 +7,7 @@ import { Note, Notes } from "../components/Note.jsx";
 import { addEffect } from "../components/AddEffect.jsx";
 import { P1 } from "../components/PianoPieces/P1.jsx";
 
-export default function PianoSimulator() {
+export default function Piece() {
   const navigate = useNavigate();
   const goBack = () => {
     navigate(-1);

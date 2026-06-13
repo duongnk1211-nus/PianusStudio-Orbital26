@@ -1,7 +1,7 @@
 import { Routes, Route } from "react-router-dom";
 import HomePage from "./webpages/Home.jsx";
 import PianoSimulator from "./webpages/PianoSimulator.jsx";
-import Lessons from "./webpages/Lessons.jsx";
+import P1 from "./webpages/Pieces.jsx";
 import Library from "./webpages/Library.jsx";
 import AboutUsPage from "./webpages/AboutUs.jsx";
 import ContactUsPage from "./webpages/ContactUs.jsx";
@@ -13,13 +13,12 @@ export default function App() {
   return (
     <Routes>
       <Route path="/library"        element={<Library />} />
-      <Route path="/lessons"        element={<Lessons />} />
+      <Route path="/p1"              element={<P1 />} />
       <Route path="/update-password" element={<UpdatePassword />} />
       <Route path="/signup"          element={<SignupPage />} />
       <Route path="/about"           element={<AboutUsPage />} />
       <Route path="/contact"         element={<ContactUsPage />} />
       <Route path="/piano-simulator" element={<PianoSimulator />}    />
-      <Route path="/lessons"         element={<Lessons />}    />
       <Route path="/login"           element={<LoginPage />} />
       <Route path="/"                element={<HomePage />} />
     </Routes>

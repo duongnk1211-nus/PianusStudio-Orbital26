@@ -201,6 +201,11 @@ body {
     background: #ef8d05d6;
 }
 
+.play-button:active {
+    background-color: #1c5980;
+    transform: scale(0.95); 
+}
+
 .play-button a {
     color: #100b4d;
     text-decoration: none;

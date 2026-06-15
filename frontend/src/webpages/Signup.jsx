@@ -13,6 +13,8 @@ export default function SignupPage() {
 
   const isMatch = password === confirmPassword;
 
+  const hasSpace = /\s/.test(username);
+
   const handleSignup = async () => {
     setLoading(true);
     const { error } = await supabase.auth.signUp({ email, password });
@@ -61,15 +63,17 @@ export default function SignupPage() {
             style={{ width: "95%", marginBottom: "1rem" }}
           />
           <p style={{
-            color: isMatch ? "green" : "red",
+            color: isMatch && !hasSpace ? "green" : "red",
             fontSize: "0.9rem",
             fontWeight: "bold",
           }}>
-          {confirmPassword.length > 0
+          { hasSpace 
+            ? "Username cannot have space ❌"
+            : (confirmPassword.length > 0
             ? isMatch
             ? "Passwords match ✅"
             : "Passwords do not match ❌"
-          : ""}
+            : "")}
           </p>
         </div>
         <button onClick={handleSignup} disabled={loading} style={{ borderRadius: "10px" }}>

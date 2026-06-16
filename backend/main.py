@@ -1,57 +1,65 @@
-from fastapi import FastAPI, HTTPException
+from fastapi import FastAPI, Depends, HTTPException, UploadFile, File
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from database import supabase
-from schemas import RegisterRequest, LoginRequest, RegisterResponseModel, LoginResponseModel
+from schemas import UserResponse
 
 app = FastAPI()
+bearer = HTTPBearer()
 
-@app.post("/register", response_model=RegisterResponseModel)
-async def register_user(register_request: RegisterRequest):
-    try:
-        response = supabase.table("users_data").insert({
-            "username": register_request.username,
-            "password": register_request.password
-        }).execute()
-        return RegisterResponseModel(
-            message="User registered successfully",
-            id=response.data[0]["id"],
-            username=response.data[0]["username"],
-            password=response.data[0]["password"],
-            created_at=response.data[0]["created_at"]
-        )
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+origins = [
+    "http://localhost:5173",
+    "http://127.0.0.1:5173"
+]
 
-@app.post("/login", response_model=LoginResponseModel)
-async def login_user(login_request: LoginRequest):
-    try:
-        response = supabase.table("users_data").select("*").eq("username", login_request.username).execute()
-        if not response.data:
-            raise HTTPException(status_code=404, detail="User not found")
-        user = response.data[0]
-        if user["password"] != login_request.password:
-            raise HTTPException(status_code=401, detail="Invalid credentials")
-        return LoginResponseModel(
-            message="Login successful",
-            id=user["id"],
-            username=user["username"],
-            password=user["password"],
-            created_at=user["created_at"]
-        )
-    except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
-@app.get("/users/{user_id}", response_model=RegisterResponseModel)
-async def get_user_by_id(user_id: int):
+# Verify Supabase JWT and return user id:
+def get_current_user(creds: HTTPAuthorizationCredentials = Depends(bearer)):
     try:
-        response = supabase.table("users_data").select("*").eq("id", user_id).execute()
-        if not response.data:
-            raise HTTPException(status_code=404, detail="User not found")
-        return RegisterResponseModel(
-            message="User retrieved successfully",
-            id=response.data[0]["id"],
-            username=response.data[0]["username"],
-            password=response.data[0]["password"],
-            created_at=response.data[0]["created_at"]
-        )
+        user = supabase.auth.get_user(creds.credentials)
+        return user.user
+    except Exception:
+        raise HTTPException(status_code=401, detail="Invalid token")
+
+
+@app.get("/user", response_model = UserResponse)
+def get_user(user= Depends(get_current_user)):
+    try:
+        res = supabase.table("users_data").select("*").eq("id", user.id).single().execute()
     except Exception as e:
-        raise HTTPException(status_code=400, detail=str(e))
+        raise HTTPException(status_code=502, detail=f"Error finding user: {str(e)}")
+    return res.data
+
+@app.put("/user")
+def update_user(body: dict, user=Depends(get_current_user)):
+    allowed = {k: body[k] for k in ("username","bio", "avatar_url",) if k in body}
+    try:
+        res = supabase.table("profiles").update(allowed).eq("id", user.id).execute()
+    except Exception as e:
+        raise HTTPException(status_code=501, detail=f"Error saving user: {str(e)}")
+    return res.data
+
+@app.post("/user/avatar")
+async def upload_avatar(file: UploadFile = File(...), user=Depends(get_current_user)):
+    allowed_exts = {"jpg", "jpeg", "png"}
+    ext = file.filename.split(".")[-1]
+    if ext not in allowed_exts:
+        raise HTTPException(status_code=400, detail="Unsupported file type")
+    path = f"{user.id}/avatar.{ext}"
+    contents = await file.read()
+    try: 
+        supabase.storage.from_("avatars").upload(path, contents, {"upsert": "true"})
+        url = supabase.storage.from_("avatars").get_public_url(path)
+        supabase.table("users_data").update({"avatar_url": url}).eq("id", user.id).execute()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error saving avatar: {str(e)}")
+    return {"avatar_url": url}
+
+

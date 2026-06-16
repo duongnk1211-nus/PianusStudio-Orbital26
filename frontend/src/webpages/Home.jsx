@@ -2,12 +2,18 @@ import "../styles/Home.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "../components/supabaseClient";
+import { apiFetch } from '../components/API'
 
 function IsLoggedIn() {
   const [user, setUser] = useState(null);
   const [menuOpen, setMenuOpen] = useState(false);
   const [loading, setLoading] = useState(false);
   const menuRef = useRef(null);
+  const [profile, setProfile] = useState(null)
+  
+  useEffect(() => {
+    apiFetch('/user').then(setProfile)
+  }, [])
 
   useEffect(() => {
     function handleClickOutside(event) {
@@ -32,8 +38,8 @@ function IsLoggedIn() {
     }
   }, []);
 
-  const displayName = user?.user_metadata?.full_name || user?.user_metadata?.name || user?.email || '';
-  const avatarUrl = user?.user_metadata?.avatar_url || "/avatar.png";
+  const displayName = profile?.username || user?.email || '';
+  const avatarUrl = profile?.avatar_url || user?.user_metadata?.avatar_url || "/avatar.png";
 
   const handleSignOut = async () => {
     setLoading(true);
@@ -55,7 +61,7 @@ function IsLoggedIn() {
             <div className="avatar">
               <img src={avatarUrl} alt="avatar" />
             </div>
-            <span className="user-name">{displayName.length > 18 ? ' ' + displayName.slice(0, 15) + '...' : ' ' + displayName}</span>
+            <span className="user-name">{displayName.length > 30 ? '   ' + displayName.slice(0, 20) + '...' : '  ' + displayName}</span>
           </button>
 
           {menuOpen && (

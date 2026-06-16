@@ -1,0 +1,83 @@
+.profile-page {
+  height: 150vh;
+  margin: 0;
+  background-image: url('/BackGroundForContactUs.jpg');
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+.profile-page button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: #e7a53c;
+  color: #fefefe;
+  font-family: 'Amadeus', cursive;
+  font-weight: bold;
+  padding: 4px 7px 6px;
+  cursor: pointer;
+  border-radius: 8px;
+  border: 2px solid rgb(110, 74, 20);
+  align-items: center;
+}
+
+.profile-page button:hover {
+  background: #ef8d05d6;
+}
+
+.avatar-preview {
+  position: relative;
+}
+
+.avatar-profile {
+  position: absolute;
+  top: 80px;
+  left: 50px;
+  width: 28vh;
+  height: 28vh;
+}
+
+.avatar-profile img {
+  width: 25vh;
+  height: 25vh;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 10px solid #563407;
+  background: #f8f8f8c0;
+}
+
+.overlay-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  font-size: 20px;
+  font-family: 'Amadeus', cursive;
+  font-weight: bold;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  /* so clicks go through to the image */
+}
+
+.avatar-profile:hover .overlay-text {
+  opacity: 1;
+  /* show text on hover */
+  background-color: transparent;
+  /* optional semi-transparent background */
+  padding: 4px 8px;
+  border-radius: 4px;
+}
+
+.avatar-profile:hover img {
+  filter: brightness(0.8);
+}
+
+.avatar-profile p {
+  font-family: 'Amadeus', cursive;
+  font-size: 0.8rem;
+  font-weight: bold;
+}

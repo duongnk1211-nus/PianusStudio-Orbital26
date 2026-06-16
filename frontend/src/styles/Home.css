@@ -36,6 +36,7 @@ html {
 }
 
 .header button {
+    width: 35vh;
     display: flex;
     position: absolute;
     top: 20px;
@@ -102,11 +103,15 @@ html {
     height: 100%;
     object-fit: cover;
     display: block;
+    background:#ededee84;
+    border: 3px solid #563407;
+    border-radius: 50%;
 }
 
 
 .user-name {
-    font-size: 0.9rem;
+    margin-left: 7px;
+    font-size: 1rem;
     color: #222;
     max-width: 140px;
     font-family: 'Amadeus', cursive;
@@ -160,6 +165,7 @@ html {
     cursor:pointer;
 }
 .auth-button.login { 
+    width: 55px;
     background: #e7a53c; 
     color:#f8f8f8;
     position: absolute;

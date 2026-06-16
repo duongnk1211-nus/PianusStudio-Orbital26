@@ -8,10 +8,12 @@ import ContactUsPage from "./webpages/ContactUs.jsx";
 import LoginPage from "./webpages/Login.jsx";
 import SignupPage from "./webpages/Signup.jsx";
 import UpdatePassword from "./webpages/UpdatePassword.jsx";
+import ProfilePage from "./webpages/Profile.jsx";
 
 export default function App() {
   return (
     <Routes>
+      <Route path="/profile"        element={<ProfilePage />} />
       <Route path="/library"        element={<Library />} />
       <Route path="/p1"              element={<P1 />} />
       <Route path="/update-password" element={<UpdatePassword />} />

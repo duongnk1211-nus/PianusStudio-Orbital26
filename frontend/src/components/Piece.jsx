@@ -17,11 +17,11 @@ export class Piece {
     this.#LH = LH;
     this.#RH = RH;
   }
-
+  
   get title() {
     return this.#title;
   }
-
+  
   #displayOneHand = (arr, synthRef, barsRef) => {
     async function timeline() {
       let currentTime = Tone.now();
@@ -29,17 +29,17 @@ export class Piece {
         Tone.Transport.schedule(time => {
           symMap[arr[i].note].attack(synthRef, barsRef)();
         }, currentTime);
-
+        
         Tone.Transport.schedule(time => {
           symMap[arr[i].note].release(synthRef, barsRef)();
         }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
-
+        
         currentTime += arr[i].duration;
       }
     }
     return timeline;
   }
-
+  
   display = (synthRef, barsRef) => () => {
     this.#displayOneHand(this.#LH, synthRef, barsRef)();
     this.#displayOneHand(this.#RH, synthRef, barsRef)();

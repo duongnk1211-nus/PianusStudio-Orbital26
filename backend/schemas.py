@@ -2,6 +2,7 @@ from pydantic import BaseModel
 from datetime import datetime
 
 class RegisterRequest(BaseModel):
+    email: str
     username: str
     password: str
 
@@ -9,16 +10,24 @@ class LoginRequest(BaseModel):
     username: str
     password: str
 
-class RegisterResponseModel(BaseModel):
+class RegisterResponse(BaseModel):
     message: str
     id: int
+    email: str
     username: str
     password: str
     created_at: datetime
 
-class LoginResponseModel(BaseModel):
+class LoginResponse(BaseModel):
     message: str
-    id: int
+    email: str
+    access_token: str
+
+class LogoutResponse(BaseModel):
+    message: str
+
+class UserInfo(BaseModel):
+    message: str
+    email: str
     username: str
-    password: str
     created_at: datetime

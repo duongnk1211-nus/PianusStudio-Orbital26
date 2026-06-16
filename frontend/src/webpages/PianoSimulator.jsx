@@ -15,37 +15,37 @@ export default function PianoSimulator() {
   const barsRef = useRef([]);
   const rafRef = useRef(null);
   const [displayBars, setDisplayBars] = useState([]);
-
+  
   addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars);
-
+  
   return (
     <div className="piano-container">
-      <div className="return-button">
-        <Link to="/">Return</Link>
-      </div>
-      <div className="piano-wrapper">
-        <div>
-        <img src="/PianusStudio.png"/>
-        <h1>Piano Simulator</h1>
-        </div>
-        <div className="synthesia-container">
-          {displayBars.map(b => (
-            <div
-              key={b.id}
-              className={`synthesia-bar ${b.type}`}
-              style={{
-                left: `${b.left}px`,
-                width: `${b.width - 2}px`,
-                height: `${b.height}px`,
-                top: `${b.top}px`,
-              }}
-            />
-          ))}
-        </div>
-        <div className="key-rows">
-          {Notes.map(n => n.toHTML(synthRef, barsRef))}
-        </div>
-      </div>
+    <div className="return-button">
+    <Link to="/">Return</Link>
+    </div>
+    <div className="piano-wrapper">
+    <div>
+    <img src="/PianusStudio.png"/>
+    <h1>Piano Simulator</h1>
+    </div>
+    <div className="synthesia-container">
+    {displayBars.map(b => (
+      <div
+      key={b.id}
+      className={`synthesia-bar ${b.type}`}
+      style={{
+        left: `${b.left}px`,
+        width: `${b.width - 2}px`,
+        height: `${b.height}px`,
+        top: `${b.top}px`,
+      }}
+      />
+    ))}
+    </div>
+    <div className="key-rows">
+    {Notes.map(n => n.toHTML(synthRef, barsRef))}
+    </div>
+    </div>
     </div>
   );
 }

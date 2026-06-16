@@ -12,37 +12,37 @@ export class Note {
   #key;
   #offset;
   #active = false;
-
+  
   constructor(sym, key, offset) {
     this.#sym = sym;
     this.#type = (sym.includes("#") ? "black" : "white");
     this.#key = key;
     this.#offset = offset;
   }
-
+  
   get sym() {
     return this.#sym;
   }
-
+  
   get key() {
     return this.#key;
   }
-
+  
   #computedLeftForNote = () => {
     if (this.#type === "white") {
       return this.#offset * (WHITE_KEY_WIDTH + WHITE_KEY_GAP);
     } else {
       return (this.#offset + 1) * (WHITE_KEY_WIDTH + WHITE_KEY_GAP) 
-              - WHITE_KEY_GAP / 2 - BLACK_KEY_WIDTH / 2;
+      - WHITE_KEY_GAP / 2 - BLACK_KEY_WIDTH / 2;
     }
   }
-
+  
   attack = (synthRef, barsRef) => async () => {
     await Tone.start();
     
     this.#active = true;
     synthRef.current.triggerAttack(this.#sym);
-
+    
     barsRef.current.push({
       id: Date.now() + Math.random(),
       note: this.#sym,
@@ -55,7 +55,7 @@ export class Note {
       height: 0,
     });
   }
-
+  
   release = (synthRef, barsRef) => async() => {
     this.#active = false;
     synthRef.current.triggerRelease(this.#sym);
@@ -63,19 +63,19 @@ export class Note {
       b.note === this.#sym && !b.released ? { ...b, released: true } : b
     );
   }
-
+  
   toHTML = (synthRef, barsRef) => {
     if (this.#type == "white") {
       return (
         <div
-          key={this.#sym}
-          onMouseDown={this.attack(synthRef, barsRef)}
-          onMouseUp={this.release(synthRef, barsRef)}
-          className={`white-key ${this.#active ? 'active' : ''}`}
+        key={this.#sym}
+        onMouseDown={this.attack(synthRef, barsRef)}
+        onMouseUp={this.release(synthRef, barsRef)}
+        className={`white-key ${this.#active ? 'active' : ''}`}
         >
-          <span className="white-key-letter-label">
-            {this.#key.toUpperCase()}
-          </span>
+        <span className="white-key-letter-label">
+        {this.#key.toUpperCase()}
+        </span>
         </div>
       );
     }
@@ -83,15 +83,15 @@ export class Note {
       const left = this.#computedLeftForNote();
       return (
         <div
-          key={this.#sym}
-          className={`black-key ${this.#active ? 'active' : ''}`}
-          style={{ left: `${left}px` }}
-          onMouseDown={this.attack(synthRef, barsRef)}
-          onMouseUp={this.release(synthRef, barsRef)}
+        key={this.#sym}
+        className={`black-key ${this.#active ? 'active' : ''}`}
+        style={{ left: `${left}px` }}
+        onMouseDown={this.attack(synthRef, barsRef)}
+        onMouseUp={this.release(synthRef, barsRef)}
         >
-          <span className="black-key-letter-label">
-            {this.#key.toUpperCase()}
-          </span>
+        <span className="black-key-letter-label">
+        {this.#key.toUpperCase()}
+        </span>
         </div>
       );
     }
@@ -121,7 +121,7 @@ export const Notes = [
   new Note("A5", "\\", 19),
   new Note("B5", "     ", 20),
   new Note("C6", "      ", 21),
-
+  
   new Note("C#3", "s", 0),
   new Note("D#3", "d", 1),
   new Note("F#3", "g", 3),

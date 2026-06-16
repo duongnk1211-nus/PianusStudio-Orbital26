@@ -1,28 +1,28 @@
 .synthesia-container {
-    position: relative;
-    width: calc(22 * (var(--white-key-width) + var(--white-key-gap)) - var(--white-key-gap));
-    height: 400px;
-    overflow: hidden;
-    background: #0d0a04;
-    border-bottom: 2px solid #2a1560;
-    z-index: 1;
+  position: relative;
+  width: calc(22 * (var(--white-key-width) + var(--white-key-gap)) - var(--white-key-gap));
+  height: 400px;
+  overflow: hidden;
+  background: #0d0a04;
+  border-bottom: 2px solid #2a1560;
+  z-index: 1;
 }
 
 .synthesia-bar {
-    position: absolute;
-    border-radius: 3px 3px 0 0;
-    box-sizing: border-box;
+  position: absolute;
+  border-radius: 3px 3px 0 0;
+  box-sizing: border-box;
 }
 
 .synthesia-bar.white {
-    background: #a78bfa;
-    border: 1px solid #7c3aed;
-    opacity: 0.9;
+  background: #a78bfa;
+  border: 1px solid #7c3aed;
+  opacity: 0.9;
 }
 
 .synthesia-bar.black {
-    background: #7c3aed;
-    border: 1px solid #5b21b6;
-    opacity: 0.95;
-    z-index: 2;
+  background: #7c3aed;
+  border: 1px solid #5b21b6;
+  opacity: 0.95;
+  z-index: 2;
 }

@@ -39,26 +39,26 @@ export function addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars) {
       release: 1,
       baseUrl: "https://tonejs.github.io/audio/salamander/",
     }).toDestination();
-
+    
     const GROW_SPEED = 1;    // px per frame while held
     const FLY_SPEED = 1;    // px per frame after release
-
+    
     const tick = () => {
       barsRef.current = barsRef.current
-        .map(b => {
-          if (!b.released) {
-            return { ...b, height: b.height + GROW_SPEED, top: b.top - GROW_SPEED };
-          } else {
-            return { ...b, top: b.top - FLY_SPEED };
-          }
-        })
-        .filter(b => b.top + b.height > -600);  // remove bars fully off screen
-
+      .map(b => {
+        if (!b.released) {
+          return { ...b, height: b.height + GROW_SPEED, top: b.top - GROW_SPEED };
+        } else {
+          return { ...b, top: b.top - FLY_SPEED };
+        }
+      })
+      .filter(b => b.top + b.height > -600);  // remove bars fully off screen
+      
       setDisplayBars([...barsRef.current]);  // trigger re-render
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
-
+    
     const handleKeyDown = async (e) => {
       if (e.repeat) return;  // ignore auto-repeats
       const note = KeyMap[e.key];
@@ -72,10 +72,10 @@ export function addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars) {
         note.release(synthRef, barsRef)();
       }
     }
-
+    
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
-
+    
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);

@@ -49,13 +49,13 @@ export default function AvatarUpload({ currentUrl, onUploadComplete }) {
     } catch (err) {
       setLocalPreview(null)
       setError(err.message)
-      setTimeout(() => setError(""), 200000);
+      setTimeout(() => setError(""), 2000);
     } finally {
       setUploading(false)
       setShowMessage(true)
       setTimeout(() => {
         setShowMessage(false);
-      }, 200000);
+      }, 2000);
     }
   }
 

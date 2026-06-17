@@ -9,7 +9,7 @@ bearer = HTTPBearer()
 
 origins = [
     "http://localhost:5173",
-    "http://127.0.0.1:5173"
+    "https://pianus-studio-orbital26.vercel.app/"
 ]
 
 app.add_middleware(
@@ -41,7 +41,7 @@ def get_user(user= Depends(get_current_user)):
 def update_user(body: dict, user=Depends(get_current_user)):
     allowed = {k: body[k] for k in ("username","bio", "avatar_url",) if k in body}
     try:
-        res = supabase.table("profiles").update(allowed).eq("id", user.id).execute()
+        res = supabase.table("users_data").update(allowed).eq("id", user.id).execute()
     except Exception as e:
         raise HTTPException(status_code=501, detail=f"Error saving user: {str(e)}")
     return res.data

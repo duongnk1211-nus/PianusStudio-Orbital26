@@ -97,7 +97,7 @@ export function Username({ currentName, onChangeComplete }) {
         />
       ) : (
         <p onClick={() => setEditing(true)}>
-          {name + " (" + role + ")"} 
+          {name + (role === '' ? '' : " (" + role + ")")} 
         </p>
       )}
       {uploading && <p style={{ color: '#0000008c',  top: '110px' }}>Uploading...</p>}

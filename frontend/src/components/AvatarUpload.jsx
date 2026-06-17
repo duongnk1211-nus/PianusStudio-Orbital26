@@ -49,13 +49,13 @@ export default function AvatarUpload({ currentUrl, onUploadComplete }) {
     } catch (err) {
       setLocalPreview(null)
       setError(err.message)
-      setTimeout(() => setError(""), 2000);
+      setTimeout(() => setError(""), 200000);
     } finally {
       setUploading(false)
       setShowMessage(true)
       setTimeout(() => {
         setShowMessage(false);
-      }, 2000);
+      }, 200000);
     }
   }
 
@@ -66,9 +66,9 @@ export default function AvatarUpload({ currentUrl, onUploadComplete }) {
         <div className='avatar-profile'>
           <img src={displayUrl || './avatar.png'} alt="Avatar" onClick={() => inputRef.current.click()} />
           <span className="overlay-text">Change Image</span>
-          {uploading && <p>Uploading...</p>}
-          {error ? (<p style={{ color: 'red' }}>{error}</p>) 
-          : showMessage && <p style={{color: 'green', width: '230px', textAlign: 'left'}}>Successful! Please wait a while to sync with system!</p>}
+          {uploading && <p style={{ width: '400px', top: '110px' }}>Uploading...</p>}
+          {error ? (<p style={{ color: 'red', width: '400px', top: '110px' }}>{error}</p>) 
+          : showMessage && <p style={{color: 'green', width: '400px', textAlign: 'left', top: '110px'}}>Successful! Please wait a while to sync with system!</p>}
         </div>
       </div>
 

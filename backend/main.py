@@ -9,7 +9,7 @@ bearer = HTTPBearer()
 
 origins = [
     "http://localhost:5173",
-    "https://pianus-studio-orbital26.vercel.app/"
+    "https://pianus-studio-orbital26.vercel.app"
 ]
 
 app.add_middleware(

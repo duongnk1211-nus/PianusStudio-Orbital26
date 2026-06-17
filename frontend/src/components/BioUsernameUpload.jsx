@@ -82,7 +82,9 @@ export function Username({ currentName, onChangeComplete }) {
     }
   }
 
-  const role =  profile?.role || ''
+  const rawRole = profile?.role
+  const role = (typeof rawRole === 'string' ? rawRole.trim() : rawRole)
+  const displayRole = role && role !== 'null' && role !== 'undefined' ? role : ''
 
   return (
     <div className='profileName-container'>
@@ -97,7 +99,7 @@ export function Username({ currentName, onChangeComplete }) {
         />
       ) : (
         <p onClick={() => setEditing(true)}>
-          {name + (role === '' ? '' : " (" + role + ")")} 
+          {name + (displayRole === '' ? '' : " (" + displayRole + ")")}
         </p>
       )}
       {uploading && <p style={{ color: '#0000008c',  top: '110px' }}>Uploading...</p>}

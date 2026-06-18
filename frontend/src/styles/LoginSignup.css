@@ -1,4 +1,5 @@
-.body-login {
+.LoginSignup {
+  & .body-login {
     position: relative;
     height: 100%;
     font-family: Arial, sans-serif;
@@ -14,9 +15,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.go-back {
+  }
+  
+  & .go-back {
     position: absolute;
     top: 0px;
     left: 10px;
@@ -24,22 +25,22 @@
     border: none;
     border-radius: 4px;
     padding: 10px 15px;
-}
-
-.go-back a {
+  }
+  
+  & .go-back a {
     font-family: 'Amadeus', cursive;
     font-size: 15px;
     color: #000000;
     text-decoration: none;
     color: "#1a1717";
-}
-
-.go-back a:hover {
+  }
+  
+  & .go-back a:hover {
     text-decoration: underline;
     background: transparent;
-}
-
-.body-signup{
+  }
+  
+  & .body-signup{
     position: relative;
     height: 100%;
     font-family: Arial, sans-serif;
@@ -55,9 +56,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.signup-container, .login-container {
+  }
+  
+  & .signup-container, & .login-container {
     position: relative;
     width: 500px;
     height: auto;
@@ -66,25 +67,25 @@
     padding: 30px;
     margin: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.signup-container h2, .login-container h2 {
+  }
+  
+  & .signup-container h2, & .login-container h2 {
     margin-top: 40px;
     text-align: center;
     font-family: 'Amadeus', cursive;
     font-weight: bold;
-}
-
-.signup-container h3, .login-container h3 {
+  }
+  
+  & .signup-container h3, & .login-container h3 {
     text-align: center;
     font-family: 'Dancing Script', cursive;
     margin-top: 0px;
     margin-bottom: 30px;
     font-weight: bold;
     color: #070505c4;
-}
-
-.login-container input {
+  }
+  
+  & .login-container input {
     width: 100%;
     padding: 10px 10px 10px 10px;
     margin-bottom: 15px;
@@ -92,9 +93,9 @@
     background: #ffffff;
     border: 2px solid #000000e2;
     border-radius: 10px;
-}
-
-.signup-container input {
+  }
+  
+  & .signup-container input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -102,25 +103,25 @@
     background: transparent;
     border: none;             
     border-bottom: 2px solid #33333379;
-}
-
-.signup-container input::placeholder, .login-container input::placeholder {
+  }
+  
+  & .signup-container input::placeholder, & .login-container input::placeholder {
     color: #33333379;
     font-family: 'Amadeus', cursive;
     font-style: bold;
-}
-
-.signup-container input:focus, .login-container input:focus {
+  }
+  
+  & .signup-container input:focus, & .login-container input:focus {
     outline: none;
     border-bottom-color: #000000;
-}
-
-.signup-container p, .login-container p {
+  }
+  
+  & & .signup-container p, & .login-container p {
     text-align: center;
     font-family: 'Amadeus', cursive;
-}
-
-.signup-container button, .login-container button {
+  }
+  
+  & .signup-container button, & .login-container button {
     width: 100%;
     padding: 10px;
     background: #000000d6;
@@ -128,13 +129,13 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-
-.signup-container button:hover, .login-container button:hover {
+  }
+  
+  & .signup-container button:hover, & .login-container button:hover {
     background: #3c3737;
-}
-
-.body-updatepassword {
+  }
+  
+  & .body-updatepassword {
     position: relative;
     height: 100%;
     font-family: Arial, sans-serif;
@@ -150,9 +151,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-}
-
-.updatepassword-container {
+  }
+  
+  & .updatepassword-container {
     position: relative;
     width: 500px;
     height: auto;
@@ -161,25 +162,25 @@
     padding: 30px;
     margin: 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.updatepassword-container h2 {
+  }
+  
+  & .updatepassword-container h2 {
     margin-top: 40px;
     text-align: center;
     font-family: 'Amadeus', cursive;
     font-weight: bold;
-}
-
-.updatepassword-container h3 {
+  }
+  
+  & .updatepassword-container h3 {
     text-align: center;
     font-family: 'Dancing Script', cursive;
     margin-top: 0px;
     margin-bottom: 30px;
     font-weight: bold;
     color: #070505c4;
-}
-
-.updatepassword-container input {
+  }
+  
+  & .updatepassword-container input {
     width: 100%;
     padding: 10px;
     margin-bottom: 15px;
@@ -187,25 +188,25 @@
     background: transparent;
     border: none;             
     border-bottom: 2px solid #33333379;
-}
-
-.updatepassword-container input::placeholder {
+  }
+  
+  & .updatepassword-container input::placeholder {
     color: #33333379;
     font-family: 'Amadeus', cursive;
     font-style: bold;
-}
-
-.updatepassword-container input:focus {
+  }
+  
+  & .updatepassword-container input:focus {
     outline: none;
     border-bottom-color: #000000;
-}
-
-.updatepassword-container p {
+  }
+  
+  & .updatepassword-container p {
     text-align: center;
     font-family: 'Amadeus', cursive;
-}
-
-.updatepassword-container button {
+  }
+  
+  & .updatepassword-container button {
     width: 100%;
     padding: 10px;
     background: #000000d6;
@@ -213,8 +214,9 @@
     border: none;
     border-radius: 4px;
     cursor: pointer;
-}
-
-.updatepassword-container button:hover {
+  }
+  
+  & .updatepassword-container button:hover {
     background: #3c3737;
+  }
 }

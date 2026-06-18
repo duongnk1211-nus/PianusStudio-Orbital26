@@ -1,17 +1,16 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { apiFetch } from '../components/API'
-import { supabase } from '../components/supabaseClient'
-import AvatarUpload from '../components/AvatarUpload'
-import { Bio, Username } from '../components/BioUsernameUpload'
-import '../styles/Profile.css'
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { apiFetch } from "../components/API";
+import { supabase } from "../components/supabaseClient";
+import AvatarUpload from "../components/AvatarUpload";
+import { Bio, Username } from "../components/BioUsernameUpload";
+import "../styles/Profile.css";
 
 export default function ProfilePage() {
-  const navigate = useNavigate()
-  const [profile, setProfile] = useState(null)
-  const [user, setUser] = useState(null)
-  const [slowLoad, setSlowLoad] = useState(false)
-
+  const navigate = useNavigate();
+  const [profile, setProfile] = useState(null);
+  const [user, setUser] = useState(null);
+  const [slowLoad, setSlowLoad] = useState(false);
 
   const goBack = () => { navigate(-1); }
 
@@ -48,7 +47,7 @@ export default function ProfilePage() {
   const lastSignIn = new Date(user.last_sign_in_at).toLocaleString();
 
   return (
-    <div className='profile-page'>
+    <div className='Profile'>
       <button onClick={goBack}>Return</button>
       <div className='avatar-wrap'>
         <p><img src="/PianusStudio.png" alt="PianusStudio Logo" style={{ position: 'relative', top: '4px', height: '20px', width: '20px' }} /> Pianus Studio</p>

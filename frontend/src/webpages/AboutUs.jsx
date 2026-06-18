@@ -3,7 +3,7 @@ import "../styles/AboutUs.css";
 
 export default function AboutUsPage() {
   return (
-    <div className="wrapper-for-AboutUs">
+    <div className="AboutUs">
       <header className="header-for-AboutUs">
         <div>
           <Link to="/" className="return-for-AboutUs">

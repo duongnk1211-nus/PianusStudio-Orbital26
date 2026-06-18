@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 export default function ContactUs() {
   return (
-    <div className="wrapper-for-ContactUs">
+    <div className="ContactUs">
       <div className="button-for-ContactUs">
       <Link to="/" className="return-for-ContactUs">
         Return

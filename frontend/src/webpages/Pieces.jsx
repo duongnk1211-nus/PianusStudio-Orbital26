@@ -24,16 +24,17 @@ export default function Piece() {
   addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars);
 
   return (
-    <div className="piano-container" style={{backgroundImage: "url('/P1.jpg')"}}>
-      <button className="return-button" onClick={goBack}>
-        Return
-      </button>
+    <div className="Piano" style={{backgroundImage: "url('/P1.jpg')"}}>
+      <button onClick={goBack}>Return</button>
       <div className="piano-wrapper">
         <div>
         <img src="/PianusStudio.png" style={{background: '#517edfbc'}} />
         <h1>⭐Twinkle Twinkle Little Star⭐</h1>
         <p style={{color: '#e7a53c', fontFamily: 'Dancing Script'}}>By Dao Quang Linh</p>
         </div>
+        <button className="play-button" onClick={P1.display(synthRef, barsRef)}>
+          Play
+        </button>
         <div className="synthesia-container">
           {displayBars.map(b => (
             <div
@@ -51,9 +52,6 @@ export default function Piece() {
         <div className="key-rows">
           {Notes.map(n => n.toHTML(synthRef, barsRef))}
         </div>
-      </div>
-      <div className="play-button" onClick={P1.display(synthRef, barsRef)}>
-        <Link>Play</Link>
       </div>
     </div>
   );

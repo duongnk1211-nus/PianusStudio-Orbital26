@@ -9,12 +9,14 @@ import LoginPage from "./webpages/Login.jsx";
 import SignupPage from "./webpages/Signup.jsx";
 import UpdatePassword from "./webpages/UpdatePassword.jsx";
 import ProfilePage from "./webpages/Profile.jsx";
+import SettingsPage from "./webpages/Settings.jsx";
 
 export default function App() {
   return (
     <Routes>
-      <Route path="/profile"        element={<ProfilePage />} />
-      <Route path="/library"        element={<Library />} />
+      <Route path="/profile"         element={<ProfilePage />} />
+      <Route path="/settings"        element={<SettingsPage />} />
+      <Route path="/library"         element={<Library />} />
       <Route path="/p1"              element={<P1 />} />
       <Route path="/update-password" element={<UpdatePassword />} />
       <Route path="/signup"          element={<SignupPage />} />

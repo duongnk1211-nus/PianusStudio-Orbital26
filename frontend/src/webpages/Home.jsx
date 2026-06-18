@@ -92,7 +92,7 @@ function IsLoggedIn() {
 
 export default function HomePage() {
   return (
-    <div className="body">
+    <div className="Home">
       <div className="header">
         <IsLoggedIn />
         <h1>Welcome to PianusStudio</h1>

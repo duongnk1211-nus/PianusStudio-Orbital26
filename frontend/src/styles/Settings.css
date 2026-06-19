@@ -1,0 +1,116 @@
+.Settings {
+  min-height: 100vh;
+  margin: 0;
+  background-image: url('../public/BackGroundForSettings.jpg');
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  & .return-button {
+    position: absolute;
+    top: -4px;
+    left: -10px;
+    background: #e7a53c;
+    color: #fefefe;
+    font-family: 'Amadeus', cursive;
+    font-weight: bold;
+    padding: 4px 7px 6px;
+    cursor: pointer;
+    border-radius: 8px;
+    border: 2px solid rgb(110, 74, 20);
+    align-items: center;
+  }
+
+  & .top-bar {
+    width: 100%;
+    background: #fefefe94;
+    font-family: 'Amadeus', cursive;
+    font-weight: bold;
+    color: #000000;
+  }
+
+  & h1 {
+    font-family: 'Amadeus', cursive;
+    font-weight: bold;
+    font-size: 5rem;
+    color: #e7a53c;
+    padding: 30px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+  }
+
+  & .settings-wrap {
+    display: flex;
+    flex-direction: column;
+    background-color: #fefefe8e;
+    box-sizing: border-box;
+    width: 900px;
+    padding: 24px 32px;
+    border-radius: 20px;
+    border: 6px solid #563407;
+    margin: 0 auto;
+    font-family: 'Amadeus', cursive;
+    font-weight: bold;
+    color: #000000;
+    backdrop-filter: blur(4px);
+
+    & button {
+      background: transparent;
+      font-family: 'Amadeus', cursive;
+      font-weight: bold;
+      margin-left: 8px;
+      margin-right: 8px;
+      border: none;
+      font-size: 1.5rem;
+      cursor: pointer;
+      text-decoration: underline;
+      transition: opacity 0.15s, transform 0.15s;
+      &:hover {
+        opacity: 0.7;
+        transform: scale(1.1);
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    & .preview-button {
+      text-decoration: none;
+      background: #e7a53c;
+      color: #fff;
+      padding: 4px 16px;
+      border-radius: 8px;
+      border: 2px solid #563407 !important;
+      font-size: 1.2rem;
+      &:hover {
+        opacity: 1;
+        background: #cf9030;
+        transform: scale(1.05);
+      }
+    }
+  }
+
+  & .key-rebinding-box {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    gap: 8px;
+  }
+
+  & .property-name {
+    margin-right: 80px;
+    font-size: 2rem;
+  }
+
+  & .property-current-option {
+    font-size: 1.5rem;
+    min-width: 100px;
+    text-align: center;
+  }
+}

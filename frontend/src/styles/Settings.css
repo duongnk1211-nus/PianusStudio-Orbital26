@@ -1,7 +1,7 @@
 .Settings {
   min-height: 100vh;
   margin: 0;
-  background-image: url('../public/BackGroundForSettings.jpg');
+  background-image: url('/BackGroundForSettings.jpg');
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;

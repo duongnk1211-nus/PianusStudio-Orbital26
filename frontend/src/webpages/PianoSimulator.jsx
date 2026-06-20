@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import * as Tone from "tone";
 import "../styles/Piano.css";
 import "../styles/Synthesia.css";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Note, Notes } from "../components/Note.jsx";
 import { addEffect } from "../components/AddEffect.jsx";
 
@@ -18,11 +18,12 @@ export default function PianoSimulator() {
 
   addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars);
 
+  const navigate = useNavigate();
+  const goBack = () => { navigate(-1); };
+
   return (
-    <div className="piano-container">
-      <div className="return-button">
-        <Link to="/">Return</Link>
-      </div>
+    <div className="Piano">
+      <button className="return-button" onClick={goBack}>Return</button>
       <div className="piano-wrapper">
         <div>
         <img src="/PianusStudio.png"/>

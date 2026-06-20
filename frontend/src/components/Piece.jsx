@@ -36,6 +36,10 @@ export class Piece {
 
         currentTime += arr[i].duration;
       }
+
+      Tone.Transport.schedule(time => {
+        Tone.Transport.stop();
+      }, currentTime); // release slightly before the next note
     }
     return timeline;
   }
@@ -43,6 +47,5 @@ export class Piece {
   display = (synthRef, barsRef) => () => {
     this.#displayOneHand(this.#LH, synthRef, barsRef)();
     this.#displayOneHand(this.#RH, synthRef, barsRef)();
-    Tone.Transport.start();
   }
 }

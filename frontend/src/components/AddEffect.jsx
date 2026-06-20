@@ -79,6 +79,8 @@ export function addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
+      cancelAnimationFrame(rafRef.current);
+      synthRef.current?.dispose();
     }
   }, []);
 }

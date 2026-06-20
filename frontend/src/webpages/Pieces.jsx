@@ -22,18 +22,45 @@ export default function Piece() {
   const [displayBars, setDisplayBars] = useState([]);
 
   addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars);
+  useEffect(() => {
+    const handleStop = () => {
+      setIsPlaying(false); // your React state update
+    };
+
+    Tone.Transport.on("stop", handleStop);
+
+    return () => {
+      Tone.Transport.off("stop", handleStop);
+    };
+  }, []);
+
+  const [isPlaying, setIsPlaying] = useState(false);
+  const flipPlaying = () => {
+    const prev = isPlaying;
+    if (prev == false) {
+      if (Tone.Transport.state === "stopped") {
+        P1.display(synthRef, barsRef)();
+      }
+      Tone.Transport.start();
+    } else {
+      Tone.Transport.pause();
+      synthRef.current?.releaseAll();
+    }
+    setIsPlaying(!prev);
+  }
 
   return (
-    <div className="piano-container" style={{backgroundImage: "url('/P1.jpg')"}}>
-      <button className="return-button" onClick={goBack}>
-        Return
-      </button>
+    <div className="Piano" style={{backgroundImage: "url('/P1.jpg')"}}>
+      <button className="return-button" onClick={goBack}>Return</button>
       <div className="piano-wrapper">
         <div>
         <img src="/PianusStudio.png" style={{background: '#517edfbc'}} />
         <h1>⭐Twinkle Twinkle Little Star⭐</h1>
         <p style={{color: '#e7a53c', fontFamily: 'Dancing Script'}}>By Dao Quang Linh</p>
         </div>
+        <button className={isPlaying ? "pause-button" : "play-button"} onClick={flipPlaying}>
+          {isPlaying ? "Pause" : "Play"}
+        </button>
         <div className="synthesia-container">
           {displayBars.map(b => (
             <div
@@ -51,9 +78,6 @@ export default function Piece() {
         <div className="key-rows">
           {Notes.map(n => n.toHTML(synthRef, barsRef))}
         </div>
-      </div>
-      <div className="play-button" onClick={P1.display(synthRef, barsRef)}>
-        <Link>Play</Link>
       </div>
     </div>
   );

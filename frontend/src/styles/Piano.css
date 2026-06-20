@@ -211,7 +211,7 @@ body {
   background: #e7a53c;
 }
 
-.play-button, .pause-button {
+.play-button, .pause-button, .start-button, .restart-button {
   position: relative;
   top: 45px;
   left: -520px;
@@ -224,4 +224,12 @@ body {
 
 .pause-button {
   background: red;
+}
+
+.start-button {
+  background: green;
+}
+
+.restart-button {
+  background: #e7a53c;
 }

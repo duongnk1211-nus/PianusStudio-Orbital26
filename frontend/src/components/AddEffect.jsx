@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import * as Tone from "tone";
+import { Note, Notes } from "./Note.jsx";
 
 export function addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars) {
   useEffect(() => {
@@ -76,11 +77,19 @@ export function addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars) {
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
 
+    for (let i = 0; i < Notes.length; i++) {
+      Notes[i].release(synthRef, barsRef)();
+    }
+
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
       cancelAnimationFrame(rafRef.current);
+      synthRef.current?.releaseAll();
       synthRef.current?.dispose();
+      barsRef.current = [];
+      rafRef.current = null;
+      setDisplayBars([]);
     }
   }, []);
 }

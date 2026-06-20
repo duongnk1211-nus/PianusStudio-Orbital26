@@ -138,5 +138,3 @@ export const Notes = [
   new Note("G#5", "  ", 18),
   new Note("A#5", "    ", 19),
 ];
-
-Tone.start();

@@ -1,17 +1,14 @@
 import { useEffect, useRef, useState } from "react";
 import * as Tone from "tone";
-import "../styles/Piano.css";
-import "../styles/Synthesia.css";
+import "../../styles/Piano.css";
+import "../../styles/Synthesia.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Note, Notes } from "../components/Note.jsx";
-import { addEffect } from "../components/AddEffect.jsx";
-import { P1 } from "../components/PianoPieces/P1.jsx";
+import { Note, Notes } from "../../components/Note.jsx";
+import { addEffect } from "../../components/AddEffect.jsx";
+import { P1 } from "../../components/PianoPieces/P1.jsx";
 
-export default function Piece() {
+export default function P1Learn() {
   const navigate = useNavigate();
-  const goBack = () => {
-    navigate(-1);
-  }
   const KeyMap = {};
   for (let i = 0; i < Notes.length; i++) {
     if (Notes[i].key.length === 1) KeyMap[Notes[i].key] = Notes[i];
@@ -20,9 +17,29 @@ export default function Piece() {
   const barsRef = useRef([]);
   const rafRef = useRef(null);
   const [displayBars, setDisplayBars] = useState([]);
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const flipPlaying = () => {
+    const prev = isPlaying;
+    if (prev == false) {
+      if (Tone.Transport.state == "stopped") {
+        P1.display(synthRef, barsRef)();
+      }
+      Tone.Transport.start();
+    } else {
+      Tone.Transport.pause();
+      synthRef.current?.releaseAll();
+    }
+    setIsPlaying(!prev);
+  }
+
+  const goBack = () => {
+    navigate(-1);
+  }
 
   addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars);
   useEffect(() => {
+    Tone.Transport.stop();
     const handleStop = () => {
       setIsPlaying(false); // your React state update
     };
@@ -33,21 +50,6 @@ export default function Piece() {
       Tone.Transport.off("stop", handleStop);
     };
   }, []);
-
-  const [isPlaying, setIsPlaying] = useState(false);
-  const flipPlaying = () => {
-    const prev = isPlaying;
-    if (prev == false) {
-      if (Tone.Transport.state === "stopped") {
-        P1.display(synthRef, barsRef)();
-      }
-      Tone.Transport.start();
-    } else {
-      Tone.Transport.pause();
-      synthRef.current?.releaseAll();
-    }
-    setIsPlaying(!prev);
-  }
 
   return (
     <div className="Piano" style={{backgroundImage: "url('/P1.jpg')"}}>

@@ -24,7 +24,7 @@ export class Piece {
 
   #displayOneHand = (arr, synthRef, barsRef) => {
     async function timeline() {
-      let currentTime = Tone.now();
+      let currentTime = 0;
       for (let i = 0; i < arr.length; i++) {
         Tone.Transport.schedule(time => {
           symMap[arr[i].note].attack(synthRef, barsRef)();

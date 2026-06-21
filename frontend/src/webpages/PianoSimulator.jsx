@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import * as Tone from "tone";
 import "../styles/Piano.css";
 import "../styles/Synthesia.css";
@@ -7,18 +7,23 @@ import { Note, Notes } from "../components/Note.jsx";
 import { addEffect } from "../components/AddEffect.jsx";
 
 export default function PianoSimulator() {
-  const KeyMap = {};
-  for (let i = 0; i < Notes.length; i++) {
-    if (Notes[i].key.length === 1) KeyMap[Notes[i].key] = Notes[i];
-  }
+  const navigate = useNavigate();
+  const KeyMap = useMemo(() => {
+    const map = {};
+    for (let i = 0; i < Notes.length; i++) {
+      if (Notes[i].key.length === 1) map[Notes[i].key] = Notes[i];
+    }
+    return map;
+  }, []);
   const synthRef = useRef(null);
   const barsRef = useRef([]);
   const rafRef = useRef(null);
   const [displayBars, setDisplayBars] = useState([]);
+  const sideEffect = useMemo(() => {
+    return (sym, isAttack) => {};
+  }, []);
 
-  addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars);
-
-  const navigate = useNavigate();
+  addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, sideEffect);
   const goBack = () => { navigate(-1); };
 
   return (
@@ -44,7 +49,7 @@ export default function PianoSimulator() {
           ))}
         </div>
         <div className="key-rows">
-          {Notes.map(n => n.toHTML(synthRef, barsRef))}
+          {Notes.map(n => n.toHTML(synthRef, barsRef, sideEffect))}
         </div>
       </div>
     </div>

@@ -12,6 +12,7 @@ export class Note {
   #key;
   #offset;
   #active = false;
+  #guide = false;
 
   constructor(sym, key, offset) {
     this.#sym = sym;
@@ -37,7 +38,7 @@ export class Note {
     }
   }
 
-  attack = (synthRef, barsRef) => async () => {
+  attack = (synthRef, barsRef, sideEffect) => async () => {
     await Tone.start();
     
     this.#active = true;
@@ -47,31 +48,41 @@ export class Note {
       id: Date.now() + Math.random(),
       note: this.#sym,
       type: this.#type,
-      left: this.#computedLeftForNote(),  // same formula you already use for black keys
+      left: this.#computedLeftForNote(),
       width: this.#type === "white" ? WHITE_KEY_WIDTH : BLACK_KEY_WIDTH,
       startTime: Date.now(),
       released: false,
       top: 400,
       height: 0,
     });
+    sideEffect(this.#sym, true);
   }
 
-  release = (synthRef, barsRef) => async() => {
+  release = (synthRef, barsRef, sideEffect) => async() => {
     this.#active = false;
     synthRef.current.triggerRelease(this.#sym);
     barsRef.current = barsRef.current.map(b =>
       b.note === this.#sym && !b.released ? { ...b, released: true } : b
     );
+    sideEffect(this.#sym, false);
   }
 
-  toHTML = (synthRef, barsRef) => {
+  setGuide = async() => {
+    this.#guide = true;
+  }
+
+  unsetGuide = async() => {
+    this.#guide = false;
+  }
+
+  toHTML = (synthRef, barsRef, sideEffect) => {
     if (this.#type == "white") {
       return (
         <div
           key={this.#sym}
-          onMouseDown={this.attack(synthRef, barsRef)}
-          onMouseUp={this.release(synthRef, barsRef)}
-          className={`white-key ${this.#active ? 'active' : ''}`}
+          onMouseDown={this.attack(synthRef, barsRef, sideEffect)}
+          onMouseUp={this.release(synthRef, barsRef, sideEffect)}
+          className={`white-key ${this.#active ? 'active' : ''} ${(this.#guide && !this.#active) ? 'guide' : ''}`}
         >
           <span className="white-key-letter-label">
             {this.#key.toUpperCase()}
@@ -84,10 +95,10 @@ export class Note {
       return (
         <div
           key={this.#sym}
-          className={`black-key ${this.#active ? 'active' : ''}`}
+          className={`black-key ${this.#active ? 'active' : ''} ${(this.#guide && !this.#active) ? 'guide' : ''}`}
           style={{ left: `${left}px` }}
-          onMouseDown={this.attack(synthRef, barsRef)}
-          onMouseUp={this.release(synthRef, barsRef)}
+          onMouseDown={this.attack(synthRef, barsRef, sideEffect)}
+          onMouseUp={this.release(synthRef, barsRef, sideEffect)}
         >
           <span className="black-key-letter-label">
             {this.#key.toUpperCase()}
@@ -138,5 +149,3 @@ export const Notes = [
   new Note("G#5", "  ", 18),
   new Note("A#5", "    ", 19),
 ];
-
-Tone.start();

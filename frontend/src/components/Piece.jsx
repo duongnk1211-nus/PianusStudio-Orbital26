@@ -9,11 +9,15 @@ for (let i = 0; i < Notes.length; i++) {
 
 export class Piece {
   #title;
+  #description;
+  #backgroundImageURL;
   #LH;
   #RH;
   
-  constructor(title, LH, RH) {
+  constructor(title, description, backgroundImageURL, LH, RH) {
     this.#title = title;
+    this.#description = description;
+    this.#backgroundImageURL = backgroundImageURL;
     this.#LH = LH;
     this.#RH = RH;
   }
@@ -22,16 +26,24 @@ export class Piece {
     return this.#title;
   }
 
-  #displayOneHand = (arr, synthRef, barsRef) => {
+  get description() {
+    return this.#description;
+  }
+
+  get backgroundImageURL() {
+    return this.#backgroundImageURL;
+  }
+
+  #displayOneHand = (arr, synthRef, barsRef, sideEffect) => {
     async function timeline() {
-      let currentTime = Tone.now();
+      let currentTime = 0;
       for (let i = 0; i < arr.length; i++) {
         Tone.Transport.schedule(time => {
-          symMap[arr[i].note].attack(synthRef, barsRef)();
+          symMap[arr[i].note].attack(synthRef, barsRef, sideEffect)();
         }, currentTime);
 
         Tone.Transport.schedule(time => {
-          symMap[arr[i].note].release(synthRef, barsRef)();
+          symMap[arr[i].note].release(synthRef, barsRef, sideEffect)();
         }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
 
         currentTime += arr[i].duration;
@@ -44,8 +56,36 @@ export class Piece {
     return timeline;
   }
 
-  display = (synthRef, barsRef) => () => {
-    this.#displayOneHand(this.#LH, synthRef, barsRef)();
-    this.#displayOneHand(this.#RH, synthRef, barsRef)();
+  display = (synthRef, barsRef, sideEffect) => () => {
+    this.#displayOneHand(this.#LH, synthRef, barsRef, sideEffect)();
+    this.#displayOneHand(this.#RH, synthRef, barsRef, sideEffect)();
+  }
+
+  breakChords = () => {
+    const LHMap = {}, RHMap = {};
+    
+    let currentTime = 0;
+    for (let i = 0; i < this.#LH.length; i++) {
+      LHMap[currentTime] = this.#LH[i].note;
+      currentTime += 10 * this.#LH[i].duration;
+    }
+    currentTime = 0;
+    for (let i = 0; i < this.#RH.length; i++) {
+      RHMap[currentTime] = this.#RH[i].note;
+      currentTime += 10 * this.#RH[i].duration;
+    }
+
+    let totTime = currentTime;
+    let result = [];
+    for (let t = 0; t <= totTime; t++) {
+      let s = new Set();
+      if (LHMap[t] !== undefined) s.add(LHMap[t]);
+      if (RHMap[t] !== undefined) s.add(RHMap[t]);
+
+      if (s.size > 0) {
+        result.push(s);
+      }
+    }
+    return result;
   }
 }

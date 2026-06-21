@@ -61,8 +61,13 @@ body {
 } 
 
 .white-key.active {
-  background: linear-gradient(180deg,#f3f5cb 0%,#f3f5cb 100%);
-  border-color: #d5d6a5;
+  background: linear-gradient(180deg,#fde047 0%,#facc15 100%);
+  border-color: #eab308;
+}
+
+.white-key.guide {
+  background: linear-gradient(180deg,#7ed957 0%,#a3e635 100%);
+  border-color: #4ade80;
 }
 
 .white-key-letter-label {
@@ -91,8 +96,16 @@ body {
   box-sizing: border-box;
 }
 
+.black-key:hover {
+  background: linear-gradient(180deg,#2d3548 0%,#16243a 70%,#1f2d40 100%);
+}
+
 .black-key.active {
-  background: linear-gradient(180deg,#5e6412 0%,#0d2040 100%);
+  background: linear-gradient(180deg,#a16207 0%,#422006 70%,#854d0e 100%);
+}
+
+.black-key.guide {
+  background: linear-gradient(180deg,#15803d 0%,#052e16 70%,#166534 100%);
 }
 
 .black-key-letter-label {
@@ -211,7 +224,7 @@ body {
   background: #e7a53c;
 }
 
-.play-button, .pause-button {
+.play-button, .pause-button, .start-button, .restart-button {
   position: relative;
   top: 45px;
   left: -520px;
@@ -224,4 +237,12 @@ body {
 
 .pause-button {
   background: red;
+}
+
+.start-button {
+  background: green;
+}
+
+.restart-button {
+  background: #e7a53c;
 }

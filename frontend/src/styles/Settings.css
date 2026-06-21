@@ -9,7 +9,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-
+  
   & .return-button {
     position: absolute;
     top: 10px;
@@ -24,11 +24,11 @@
     border: 2px solid rgb(110, 74, 20);
     align-items: center;
   }
-
+  
   & .return-button:hover {
     background: #ef8d05d6;
   }
-
+  
   & .top-bar {
     width: 100%;
     background: #fefefe94;
@@ -36,7 +36,7 @@
     font-weight: bold;
     color: #000000;
   }
-
+  
   & h1 {
     font-family: 'Amadeus', cursive;
     font-weight: bold;
@@ -45,7 +45,7 @@
     padding: 30px;
     text-shadow: 0 2px 8px rgba(0,0,0,0.4);
   }
-
+  
   & .settings-wrap {
     display: flex;
     flex-direction: column;
@@ -60,7 +60,7 @@
     font-weight: bold;
     color: #000000;
     backdrop-filter: blur(4px);
-
+    
     & button {
       background: transparent;
       font-family: 'Amadeus', cursive;
@@ -80,7 +80,7 @@
         transform: scale(0.95);
       }
     }
-
+    
     & .preview-button {
       text-decoration: none;
       background: #e7a53c;
@@ -96,7 +96,7 @@
       }
     }
   }
-
+  
   & .key-rebinding-box {
     display: flex;
     flex-direction: row;
@@ -106,12 +106,12 @@
     margin-bottom: 15px;
     gap: 8px;
   }
-
+  
   & .property-name {
     margin-right: 80px;
     font-size: 2rem;
   }
-
+  
   & .property-current-option {
     font-size: 1.5rem;
     min-width: 100px;

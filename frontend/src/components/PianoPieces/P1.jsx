@@ -1,7 +1,9 @@
 import { Piece } from "../Piece.jsx";
 
-export const P1 = new Piece(
+const P1 = new Piece(
   "Twinkle, Twinkle, Little Star",
+  "Playing Twinkle, Twinkle, Little Star on the piano is the ultimate beginner's rite of passage. Its memorable A-B-C-C-A-B song structure uses only six white keys in the C major scale—Middle C through A. The melody is highly repetitive, making it incredibly easy to memorize and play by ear!",
+  "/P1.jpg",
   [
     { note: "C5", duration: 0.5 },
     { note: "C5", duration: 0.5 },
@@ -85,3 +87,5 @@ export const P1 = new Piece(
     { note: "C4", duration: 1.0 },
   ]
 );
+
+export default P1;

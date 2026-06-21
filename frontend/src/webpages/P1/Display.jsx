@@ -22,8 +22,12 @@ export default function P1Display() {
   const [displayBars, setDisplayBars] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
   const sideEffect = useMemo(() => {
-    return (sym) => {};
+    return (sym, isAttack) => {console.log((isAttack ? "Attack " : "Release ") + sym)};
   }, []);
+
+  const goBack = () => {
+    navigate(-1);
+  }
 
   const flipPlaying = () => {
     const prev = isPlaying;
@@ -37,10 +41,6 @@ export default function P1Display() {
       synthRef.current?.releaseAll();
     }
     setIsPlaying(!prev);
-  }
-
-  const goBack = () => {
-    navigate(-1);
   }
 
   addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, sideEffect);

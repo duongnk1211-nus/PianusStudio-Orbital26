@@ -16,30 +16,88 @@ export default function P1Learn() {
     }
     return map;
   }, []);
+  const symMap = useMemo(() => {
+    const map = {};
+    for (let i = 0; i < Notes.length; i++) {
+      map[Notes[i].sym] = Notes[i];
+    }
+    return map;
+  }, []);
   const synthRef = useRef(null);
   const barsRef = useRef([]);
   const rafRef = useRef(null);
   const [displayBars, setDisplayBars] = useState([]);
   const [isStarted, setIsStarted] = useState(false);
-  const chords = undefined;
-  const [currentIndex, setCurrentIndex] = useState(null);
-  const sideEffect = useMemo(() => {
-    return (sym) => {};
+  const chords = useMemo(() => {
+    return P1.breakChords();
   }, []);
-
-  const start = () => {
-    if (!isStarted) {
-      chords = P1.breakChords();
-    }
-    setIsStarted(true);
-    setCurrentIndex(0);
-    Tone.Transport.stop();
-    Tone.Transport.start();
-  }
+  const [activeKeys, setActiveKeys] = useState(new Set());
+  const currentIndexRef = useRef(-1);
 
   const goBack = () => {
     navigate(-1);
   }
+
+  const isSubset = (setA, setB) => {
+    if (setA.size > setB.size) return false;
+    for (const item of setA) {
+      if (!setB.has(item)) return false;
+    }
+    return true;
+  }
+
+  const addActiveKey = (sym) => {
+    setActiveKeys(prev => {
+      const newSet = new Set(prev);
+      newSet.add(sym);
+
+      const idx = currentIndexRef.current;
+      if (idx !== -1 && isSubset(chords[idx], newSet)) {
+        queueMicrotask(() => handleChangeIndex(idx + 1));
+      }
+
+      return newSet;
+    });
+  }
+
+  const removeActiveKey = (sym) => {
+    setActiveKeys(prev => {
+      const newSet = new Set(prev);
+      newSet.delete(sym);
+      return newSet;
+    });
+  }
+
+  const handleChangeIndex = (id) => {
+    const prev = currentIndexRef.current;
+    if (prev !== -1) {
+      for (const item of chords[prev]) {
+        console.log("remove " + item);
+        symMap[item].unsetGuide();
+      }
+    }
+    for (const item of chords[id]) {
+      console.log("add " + item);
+      symMap[item].setGuide();
+    }
+    currentIndexRef.current = id;
+    setActiveKeys(new Set());
+  }
+
+  const start = () => {
+    setIsStarted(true);
+    handleChangeIndex(0);
+  }
+
+  const sideEffect = useMemo(() => {
+    return (sym, isAttack) => {
+      if (isAttack) {
+        addActiveKey(sym);
+      } else {
+        removeActiveKey(sym);
+      }
+    };
+  }, []);
 
   addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, sideEffect);
 

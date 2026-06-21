@@ -70,7 +70,7 @@ export function addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, sid
     const handleKeyUp = async (e) => {
       const note = KeyMap[e.key];
       if (note) {
-        note.release(synthRef, barsRef)();
+        note.release(synthRef, barsRef, sideEffect)();
       }
     }
 
@@ -78,7 +78,7 @@ export function addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, sid
     window.addEventListener("keyup", handleKeyUp);
 
     for (let i = 0; i < Notes.length; i++) {
-      Notes[i].release(synthRef, barsRef)();
+      Notes[i].release(synthRef, barsRef, sideEffect)();
     }
 
     return () => {

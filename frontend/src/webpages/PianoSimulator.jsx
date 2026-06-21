@@ -7,6 +7,7 @@ import { Note, Notes } from "../components/Note.jsx";
 import { addEffect } from "../components/AddEffect.jsx";
 
 export default function PianoSimulator() {
+  const navigate = useNavigate();
   const KeyMap = useMemo(() => {
     const map = {};
     for (let i = 0; i < Notes.length; i++) {
@@ -19,12 +20,10 @@ export default function PianoSimulator() {
   const rafRef = useRef(null);
   const [displayBars, setDisplayBars] = useState([]);
   const sideEffect = useMemo(() => {
-    return (sym) => {};
+    return (sym, isAttack) => {};
   }, []);
 
   addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, sideEffect);
-
-  const navigate = useNavigate();
   const goBack = () => { navigate(-1); };
 
   return (

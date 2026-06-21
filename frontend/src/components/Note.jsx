@@ -12,6 +12,7 @@ export class Note {
   #key;
   #offset;
   #active = false;
+  #guide = false;
 
   constructor(sym, key, offset) {
     this.#sym = sym;
@@ -54,16 +55,24 @@ export class Note {
       top: 400,
       height: 0,
     });
-
-    sideEffect(this.#sym);
+    sideEffect(this.#sym, true);
   }
 
-  release = (synthRef, barsRef) => async() => {
+  release = (synthRef, barsRef, sideEffect) => async() => {
     this.#active = false;
     synthRef.current.triggerRelease(this.#sym);
     barsRef.current = barsRef.current.map(b =>
       b.note === this.#sym && !b.released ? { ...b, released: true } : b
     );
+    sideEffect(this.#sym, false);
+  }
+
+  setGuide = async() => {
+    this.#guide = true;
+  }
+
+  unsetGuide = async() => {
+    this.#guide = false;
   }
 
   toHTML = (synthRef, barsRef, sideEffect) => {
@@ -72,8 +81,8 @@ export class Note {
         <div
           key={this.#sym}
           onMouseDown={this.attack(synthRef, barsRef, sideEffect)}
-          onMouseUp={this.release(synthRef, barsRef)}
-          className={`white-key ${this.#active ? 'active' : ''}`}
+          onMouseUp={this.release(synthRef, barsRef, sideEffect)}
+          className={`white-key ${this.#active ? 'active' : ''} ${(this.#guide && !this.#active) ? 'guide' : ''}`}
         >
           <span className="white-key-letter-label">
             {this.#key.toUpperCase()}
@@ -86,10 +95,10 @@ export class Note {
       return (
         <div
           key={this.#sym}
-          className={`black-key ${this.#active ? 'active' : ''}`}
+          className={`black-key ${this.#active ? 'active' : ''} ${(this.#guide && !this.#active) ? 'guide' : ''}`}
           style={{ left: `${left}px` }}
           onMouseDown={this.attack(synthRef, barsRef, sideEffect)}
-          onMouseUp={this.release(synthRef, barsRef)}
+          onMouseUp={this.release(synthRef, barsRef, sideEffect)}
         >
           <span className="black-key-letter-label">
             {this.#key.toUpperCase()}

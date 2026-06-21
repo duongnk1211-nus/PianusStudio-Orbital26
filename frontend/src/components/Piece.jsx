@@ -31,7 +31,7 @@ export class Piece {
         }, currentTime);
 
         Tone.Transport.schedule(time => {
-          symMap[arr[i].note].release(synthRef, barsRef)();
+          symMap[arr[i].note].release(synthRef, barsRef, sideEffect)();
         }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
 
         currentTime += arr[i].duration;
@@ -50,7 +50,6 @@ export class Piece {
   }
 
   breakChords = () => {
-    console.log("GOATED!!!");
     const LHMap = {}, RHMap = {};
     
     let currentTime = 0;
@@ -63,21 +62,18 @@ export class Piece {
       RHMap[currentTime] = this.#RH[i].note;
       currentTime += 10 * this.#RH[i].duration;
     }
-    console.log(LHMap);
-    console.log(RHMap);
 
     let totTime = currentTime;
-    let arr = [], result = [];
+    let result = [];
     for (let t = 0; t <= totTime; t++) {
-      arr = [];
-      if (LHMap[t] !== undefined) arr.push(LHMap[t]);
-      if (RHMap[t] !== undefined) arr.push(RHMap[t]);
+      let s = new Set();
+      if (LHMap[t] !== undefined) s.add(LHMap[t]);
+      if (RHMap[t] !== undefined) s.add(RHMap[t]);
 
-      if (arr.length > 0) {
-        result.push(arr);
+      if (s.size > 0) {
+        result.push(s);
       }
     }
-
     return result;
   }
 }

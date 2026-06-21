@@ -37,7 +37,7 @@ export class Note {
     }
   }
 
-  attack = (synthRef, barsRef) => async () => {
+  attack = (synthRef, barsRef, sideEffect) => async () => {
     await Tone.start();
     
     this.#active = true;
@@ -47,13 +47,17 @@ export class Note {
       id: Date.now() + Math.random(),
       note: this.#sym,
       type: this.#type,
-      left: this.#computedLeftForNote(),  // same formula you already use for black keys
+      left: this.#computedLeftForNote(),
       width: this.#type === "white" ? WHITE_KEY_WIDTH : BLACK_KEY_WIDTH,
       startTime: Date.now(),
       released: false,
       top: 400,
       height: 0,
     });
+
+    if (typeof sideEffect === 'function') {
+      sideEffect();
+    }
   }
 
   release = (synthRef, barsRef) => async() => {

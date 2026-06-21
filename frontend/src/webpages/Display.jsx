@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState, useMemo } from "react";
 import * as Tone from "tone";
-import "../../styles/Piano.css";
-import "../../styles/Synthesia.css";
+import "../styles/Piano.css";
+import "../styles/Synthesia.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Note, Notes } from "../../components/Note.jsx";
-import { addEffect } from "../../components/AddEffect.jsx";
-import { P1 } from "../../components/PianoPieces/P1.jsx";
+import { Note, Notes } from "../components/Note.jsx";
+import { addEffect } from "../components/AddEffect.jsx";
 
-export default function P1Display() {
+export default function Display({ P }) {
   const navigate = useNavigate();
   const KeyMap = useMemo(() => {
+    console.log(P.backgroundImageURL);
     const map = {};
     for (let i = 0; i < Notes.length; i++) {
       if (Notes[i].key.length === 1) map[Notes[i].key] = Notes[i];
@@ -33,7 +33,7 @@ export default function P1Display() {
     const prev = isPlaying;
     if (prev == false) {
       if (Tone.Transport.state == "stopped") {
-        P1.display(synthRef, barsRef, sideEffect)();
+        P.display(synthRef, barsRef, sideEffect)();
       }
       Tone.Transport.start();
     } else {
@@ -58,13 +58,13 @@ export default function P1Display() {
   }, []);
 
   return (
-    <div className="Piano" style={{backgroundImage: "url('/P1.jpg')"}}>
+    <div className="Piano" style={{ backgroundImage: `url(${P.backgroundImageURL})` }}>
       <button className="return-button" onClick={goBack}>Return</button>
       <div className="piano-wrapper">
         <div>
         <img src="/PianusStudio.png" style={{background: '#517edfbc'}} />
-        <h1>⭐Twinkle Twinkle Little Star⭐</h1>
-        <p style={{color: '#e7a53c', fontFamily: 'Dancing Script'}}>By Dao Quang Linh</p>
+        <h1>{P.title}</h1>
+        {/* <p style={{color: '#e7a53c', fontFamily: 'Dancing Script'}}>By Dao Quang Linh</p> */}
         </div>
         <button className={isPlaying ? "pause-button" : "play-button"} onClick={flipPlaying}>
           {isPlaying ? "Pause" : "Play"}

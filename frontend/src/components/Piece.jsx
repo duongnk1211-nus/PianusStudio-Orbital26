@@ -9,17 +9,29 @@ for (let i = 0; i < Notes.length; i++) {
 
 export class Piece {
   #title;
+  #description;
+  #backgroundImageURL;
   #LH;
   #RH;
   
-  constructor(title, LH, RH) {
+  constructor(title, description, backgroundImageURL, LH, RH) {
     this.#title = title;
+    this.#description = description;
+    this.#backgroundImageURL = backgroundImageURL;
     this.#LH = LH;
     this.#RH = RH;
   }
 
   get title() {
     return this.#title;
+  }
+
+  get description() {
+    return this.#description;
+  }
+
+  get backgroundImageURL() {
+    return this.#backgroundImageURL;
   }
 
   #displayOneHand = (arr, synthRef, barsRef, sideEffect) => {

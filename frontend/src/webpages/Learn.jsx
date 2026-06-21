@@ -1,13 +1,12 @@
 import { useEffect, useRef, useState, useMemo } from "react";
 import * as Tone from "tone";
-import "../../styles/Piano.css";
-import "../../styles/Synthesia.css";
+import "../styles/Piano.css";
+import "../styles/Synthesia.css";
 import { Link, useNavigate } from "react-router-dom";
-import { Note, Notes } from "../../components/Note.jsx";
-import { addEffect } from "../../components/AddEffect.jsx";
-import { P1 } from "../../components/PianoPieces/P1.jsx";
+import { Note, Notes } from "../components/Note.jsx";
+import { addEffect } from "../components/AddEffect.jsx";
 
-export default function P1Learn() {
+export default function Learn({ P }) {
   const navigate = useNavigate();
   const KeyMap = useMemo(() => {
     const map = {};
@@ -29,7 +28,7 @@ export default function P1Learn() {
   const [displayBars, setDisplayBars] = useState([]);
   const [isStarted, setIsStarted] = useState(false);
   const chords = useMemo(() => {
-    return P1.breakChords();
+    return P.breakChords();
   }, []);
   const [activeKeys, setActiveKeys] = useState(new Set());
   const currentIndexRef = useRef(-1);
@@ -109,7 +108,7 @@ export default function P1Learn() {
   addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, sideEffect);
 
   return (
-    <div className="Piano" style={{backgroundImage: "url('/P1.jpg')"}}>
+    <div className="Piano" style={{backgroundImage: `url(${P.backgroundImageURL})`}}>
       <button className="return-button" onClick={goBack}>Return</button>
       <div className="piano-wrapper">
         <div>

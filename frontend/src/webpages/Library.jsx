@@ -1,6 +1,6 @@
-import '../styles/Library.css'
-import { useNavigate } from 'react-router-dom'
-
+import "../styles/Library.css";
+import { useNavigate } from "react-router-dom";
+import P1 from "../components/PianoPieces/P1.jsx";
 
 export default function Library() {
   const navigate = useNavigate()
@@ -18,9 +18,9 @@ export default function Library() {
         <p>A place where our pianists share their passion! Join us and create your own pieces here! 🎶</p>
         <p>More pieces coming soon! 🎉</p>
         <div className='piece-shelf'>
-          <h2>Twinkle Twinkle Little Star</h2>
-          <p style={{marginBottom: '30px'}}><span style={{fontWeight:'1000'}}>Description: </span> Playing Twinkle, Twinkle, Little Star on the piano is the ultimate beginner's rite of passage. Its memorable A-B-C-C-A-B song structure uses only six white keys in the C major scale—Middle C through A. The melody is highly repetitive, making it incredibly easy to memorize and play by ear!</p>
-          <p style={{marginBottom: '0px'}}><span style={{fontWeight:'1000'}}>Author:</span> Dao Quang Linh</p>
+          <h2>{P1.title}</h2>
+          <p style={{marginBottom: '40px'}}><span style={{fontWeight:'1000'}}>Description: </span>{P1.description}</p>
+          {/* <p style={{marginBottom: '0px'}}><span style={{fontWeight:'1000'}}>Author:</span> Dao Quang Linh</p> */}
           <button onClick={goToP1Display}>Listen The Piece</button>
           <button onClick={goToP1Learn}>Learn The Piece</button>
         </div>

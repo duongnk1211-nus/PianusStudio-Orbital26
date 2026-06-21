@@ -21,12 +21,15 @@ export default function P1Display() {
   const rafRef = useRef(null);
   const [displayBars, setDisplayBars] = useState([]);
   const [isPlaying, setIsPlaying] = useState(false);
+  const sideEffect = useMemo(() => {
+    return (sym) => {};
+  }, []);
 
   const flipPlaying = () => {
     const prev = isPlaying;
     if (prev == false) {
       if (Tone.Transport.state == "stopped") {
-        P1.display(synthRef, barsRef, (sym) => {console.log(sym);})();
+        P1.display(synthRef, barsRef, sideEffect)();
       }
       Tone.Transport.start();
     } else {
@@ -40,7 +43,7 @@ export default function P1Display() {
     navigate(-1);
   }
 
-  addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, (sym) => {});
+  addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, sideEffect);
   useEffect(() => {
     Tone.Transport.stop();
     const handleStop = () => {
@@ -81,7 +84,7 @@ export default function P1Display() {
           ))}
         </div>
         <div className="key-rows">
-          {Notes.map(n => n.toHTML(synthRef, barsRef, (sym) => {}))}
+          {Notes.map(n => n.toHTML(synthRef, barsRef, sideEffect))}
         </div>
       </div>
     </div>

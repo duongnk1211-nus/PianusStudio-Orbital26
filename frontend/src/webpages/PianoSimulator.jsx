@@ -18,8 +18,11 @@ export default function PianoSimulator() {
   const barsRef = useRef([]);
   const rafRef = useRef(null);
   const [displayBars, setDisplayBars] = useState([]);
+  const sideEffect = useMemo(() => {
+    return (sym) => {};
+  }, []);
 
-  addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, (sym) => {});
+  addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, sideEffect);
 
   const navigate = useNavigate();
   const goBack = () => { navigate(-1); };
@@ -47,7 +50,7 @@ export default function PianoSimulator() {
           ))}
         </div>
         <div className="key-rows">
-          {Notes.map(n => n.toHTML(synthRef, barsRef, (sym) => {}))}
+          {Notes.map(n => n.toHTML(synthRef, barsRef, sideEffect))}
         </div>
       </div>
     </div>

@@ -23,6 +23,9 @@ export default function P1Learn() {
   const [isStarted, setIsStarted] = useState(false);
   const chords = undefined;
   const [currentIndex, setCurrentIndex] = useState(null);
+  const sideEffect = useMemo(() => {
+    return (sym) => {};
+  }, []);
 
   const start = () => {
     if (!isStarted) {
@@ -38,7 +41,7 @@ export default function P1Learn() {
     navigate(-1);
   }
 
-  addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, (sym) => {});
+  addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, sideEffect);
 
   return (
     <div className="Piano" style={{backgroundImage: "url('/P1.jpg')"}}>
@@ -67,7 +70,7 @@ export default function P1Learn() {
           ))}
         </div>
         <div className="key-rows">
-          {Notes.map(n => n.toHTML(synthRef, barsRef, (sym) => {}))}
+          {Notes.map(n => n.toHTML(synthRef, barsRef, sideEffect))}
         </div>
       </div>
     </div>

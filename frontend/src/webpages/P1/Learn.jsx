@@ -36,7 +36,7 @@ export default function P1Learn() {
 
   const goBack = () => {
     navigate(-1);
-  }
+  };
 
   const isSubset = (setA, setB) => {
     if (setA.size > setB.size) return false;
@@ -44,7 +44,7 @@ export default function P1Learn() {
       if (!setB.has(item)) return false;
     }
     return true;
-  }
+  };
 
   const addActiveKey = (sym) => {
     setActiveKeys(prev => {
@@ -58,7 +58,7 @@ export default function P1Learn() {
 
       return newSet;
     });
-  }
+  };
 
   const removeActiveKey = (sym) => {
     setActiveKeys(prev => {
@@ -66,7 +66,7 @@ export default function P1Learn() {
       newSet.delete(sym);
       return newSet;
     });
-  }
+  };
 
   const handleChangeIndex = (id) => {
     const prev = currentIndexRef.current;
@@ -76,18 +76,25 @@ export default function P1Learn() {
         symMap[item].unsetGuide();
       }
     }
+    if (id >= chords.length) {
+      setTimeout(() => {
+        alert("Lesson completed!");
+        goBack();
+      }, 1000);
+      return;
+    }
     for (const item of chords[id]) {
       console.log("add " + item);
       symMap[item].setGuide();
     }
     currentIndexRef.current = id;
     setActiveKeys(new Set());
-  }
+  };
 
   const start = () => {
     setIsStarted(true);
     handleChangeIndex(0);
-  }
+  };
 
   const sideEffect = useMemo(() => {
     return (sym, isAttack) => {

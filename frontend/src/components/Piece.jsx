@@ -22,12 +22,12 @@ export class Piece {
     return this.#title;
   }
 
-  #displayOneHand = (arr, synthRef, barsRef) => {
+  #displayOneHand = (arr, synthRef, barsRef, sideEffect) => {
     async function timeline() {
       let currentTime = 0;
       for (let i = 0; i < arr.length; i++) {
         Tone.Transport.schedule(time => {
-          symMap[arr[i].note].attack(synthRef, barsRef)();
+          symMap[arr[i].note].attack(synthRef, barsRef, sideEffect)();
         }, currentTime);
 
         Tone.Transport.schedule(time => {
@@ -44,28 +44,31 @@ export class Piece {
     return timeline;
   }
 
-  display = (synthRef, barsRef) => () => {
-    this.#displayOneHand(this.#LH, synthRef, barsRef)();
-    this.#displayOneHand(this.#RH, synthRef, barsRef)();
+  display = (synthRef, barsRef, sideEffect) => () => {
+    this.#displayOneHand(this.#LH, synthRef, barsRef, sideEffect)();
+    this.#displayOneHand(this.#RH, synthRef, barsRef, sideEffect)();
   }
 
   breakChords = () => {
+    console.log("GOATED!!!");
     const LHMap = {}, RHMap = {};
     
     let currentTime = 0;
     for (let i = 0; i < this.#LH.length; i++) {
       LHMap[currentTime] = this.#LH[i].note;
-      currentTime += this.#LH[i].duration;
+      currentTime += 10 * this.#LH[i].duration;
     }
     currentTime = 0;
     for (let i = 0; i < this.#RH.length; i++) {
       RHMap[currentTime] = this.#RH[i].note;
-      currentTime += this.#RH[i].duration;
+      currentTime += 10 * this.#RH[i].duration;
     }
+    console.log(LHMap);
+    console.log(RHMap);
 
     let totTime = currentTime;
     let arr = [], result = [];
-    for (let t = 0; t <= totTime; t += 0.1) {
+    for (let t = 0; t <= totTime; t++) {
       arr = [];
       if (LHMap[t] !== undefined) arr.push(LHMap[t]);
       if (RHMap[t] !== undefined) arr.push(RHMap[t]);

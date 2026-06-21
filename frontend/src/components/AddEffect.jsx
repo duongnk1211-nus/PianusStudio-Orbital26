@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import * as Tone from "tone";
 import { Note, Notes } from "./Note.jsx";
 
-export function addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars) {
+export function addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, sideEffect) {
   useEffect(() => {
     synthRef.current = new Tone.Sampler({
       urls: {
@@ -41,8 +41,8 @@ export function addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars) {
       baseUrl: "https://tonejs.github.io/audio/salamander/",
     }).toDestination();
 
-    const GROW_SPEED = 1;    // px per frame while held
-    const FLY_SPEED = 1;    // px per frame after release
+    const GROW_SPEED = 1;
+    const FLY_SPEED = 1;
 
     const tick = () => {
       barsRef.current = barsRef.current
@@ -53,18 +53,18 @@ export function addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars) {
             return { ...b, top: b.top - FLY_SPEED };
           }
         })
-        .filter(b => b.top + b.height > -600);  // remove bars fully off screen
+        .filter(b => b.top + b.height > -600);
 
-      setDisplayBars([...barsRef.current]);  // trigger re-render
+      setDisplayBars([...barsRef.current]);
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
 
     const handleKeyDown = async (e) => {
-      if (e.repeat) return;  // ignore auto-repeats
+      if (e.repeat) return;
       const note = KeyMap[e.key];
       if (note) {
-        note.attack(synthRef, barsRef)();
+        note.attack(synthRef, barsRef, sideEffect)();
       }
     };
     const handleKeyUp = async (e) => {

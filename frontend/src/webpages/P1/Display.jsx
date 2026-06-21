@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useMemo } from "react";
 import * as Tone from "tone";
 import "../../styles/Piano.css";
 import "../../styles/Synthesia.css";
@@ -9,10 +9,13 @@ import { P1 } from "../../components/PianoPieces/P1.jsx";
 
 export default function P1Display() {
   const navigate = useNavigate();
-  const KeyMap = {};
-  for (let i = 0; i < Notes.length; i++) {
-    if (Notes[i].key.length === 1) KeyMap[Notes[i].key] = Notes[i];
-  }
+  const KeyMap = useMemo(() => {
+    const map = {};
+    for (let i = 0; i < Notes.length; i++) {
+      if (Notes[i].key.length === 1) map[Notes[i].key] = Notes[i];
+    }
+    return map;
+  }, []);
   const synthRef = useRef(null);
   const barsRef = useRef([]);
   const rafRef = useRef(null);
@@ -23,7 +26,7 @@ export default function P1Display() {
     const prev = isPlaying;
     if (prev == false) {
       if (Tone.Transport.state == "stopped") {
-        P1.display(synthRef, barsRef)();
+        P1.display(synthRef, barsRef, (sym) => {console.log(sym);})();
       }
       Tone.Transport.start();
     } else {
@@ -37,7 +40,7 @@ export default function P1Display() {
     navigate(-1);
   }
 
-  addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars);
+  addEffect(KeyMap, synthRef, barsRef, rafRef, setDisplayBars, (sym) => {});
   useEffect(() => {
     Tone.Transport.stop();
     const handleStop = () => {
@@ -78,7 +81,7 @@ export default function P1Display() {
           ))}
         </div>
         <div className="key-rows">
-          {Notes.map(n => n.toHTML(synthRef, barsRef))}
+          {Notes.map(n => n.toHTML(synthRef, barsRef, (sym) => {}))}
         </div>
       </div>
     </div>

@@ -55,9 +55,7 @@ export class Note {
       height: 0,
     });
 
-    if (typeof sideEffect === 'function') {
-      sideEffect();
-    }
+    sideEffect(this.#sym);
   }
 
   release = (synthRef, barsRef) => async() => {
@@ -68,12 +66,12 @@ export class Note {
     );
   }
 
-  toHTML = (synthRef, barsRef) => {
+  toHTML = (synthRef, barsRef, sideEffect) => {
     if (this.#type == "white") {
       return (
         <div
           key={this.#sym}
-          onMouseDown={this.attack(synthRef, barsRef)}
+          onMouseDown={this.attack(synthRef, barsRef, sideEffect)}
           onMouseUp={this.release(synthRef, barsRef)}
           className={`white-key ${this.#active ? 'active' : ''}`}
         >
@@ -90,7 +88,7 @@ export class Note {
           key={this.#sym}
           className={`black-key ${this.#active ? 'active' : ''}`}
           style={{ left: `${left}px` }}
-          onMouseDown={this.attack(synthRef, barsRef)}
+          onMouseDown={this.attack(synthRef, barsRef, sideEffect)}
           onMouseUp={this.release(synthRef, barsRef)}
         >
           <span className="black-key-letter-label">
@@ -142,5 +140,3 @@ export const Notes = [
   new Note("G#5", "  ", 18),
   new Note("A#5", "    ", 19),
 ];
-
-Tone.start();

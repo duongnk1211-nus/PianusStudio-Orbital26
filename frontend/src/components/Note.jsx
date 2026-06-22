@@ -14,10 +14,10 @@ export class Note {
   #active = false;
   #guide = false;
 
-  constructor(sym, key, offset) {
+  constructor(sym, offset) {
     this.#sym = sym;
     this.#type = (sym.includes("#") ? "black" : "white");
-    this.#key = key;
+    this.#key = " ";
     this.#offset = offset;
   }
 
@@ -27,6 +27,10 @@ export class Note {
 
   get key() {
     return this.#key;
+  }
+
+  set key(newKey) {
+    this.#key = newKey;
   }
 
   #computedLeftForNote = () => {
@@ -125,42 +129,42 @@ export class Note {
 }
 
 export const Notes = [
-  new Note("C3", "z", 0),
-  new Note("D3", "x", 1),
-  new Note("E3", "c", 2),
-  new Note("F3", "v", 3),
-  new Note("G3", "b", 4),
-  new Note("A3", "n", 5),
-  new Note("B3", "m", 6),
-  new Note("C4", "q", 7),
-  new Note("D4", "w", 8),
-  new Note("E4", "e", 9),
-  new Note("F4", "r", 10),
-  new Note("G4", "t", 11),
-  new Note("A4", "y", 12),
-  new Note("B4", "u", 13),
-  new Note("C5", "i", 14),
-  new Note("D5", "o", 15),
-  new Note("E5", "p", 16),
-  new Note("F5", "[", 17),
-  new Note("G5", "]", 18),
-  new Note("A5", "\\", 19),
-  new Note("B5", "     ", 20),
-  new Note("C6", "      ", 21),
+  new Note("C3", 0),
+  new Note("D3", 1),
+  new Note("E3", 2),
+  new Note("F3", 3),
+  new Note("G3", 4),
+  new Note("A3", 5),
+  new Note("B3", 6),
+  new Note("C4", 7),
+  new Note("D4", 8),
+  new Note("E4", 9),
+  new Note("F4", 10),
+  new Note("G4", 11),
+  new Note("A4", 12),
+  new Note("B4", 13),
+  new Note("C5", 14),
+  new Note("D5", 15),
+  new Note("E5", 16),
+  new Note("F5", 17),
+  new Note("G5", 18),
+  new Note("A5", 19),
+  new Note("B5", 20),
+  new Note("C6", 21),
 
-  new Note("C#3", "s", 0),
-  new Note("D#3", "d", 0),
-  new Note("F#3", "g", 3),
-  new Note("G#3", "h", 3),
-  new Note("A#3", "j", 3),
-  new Note("C#4", "2", 7),
-  new Note("D#4", "3", 7),
-  new Note("F#4", "5", 10),
-  new Note("G#4", "6", 10),
-  new Note("A#4", "7", 10),
-  new Note("C#5", "9", 14),
-  new Note("D#5", "0", 14),
-  new Note("F#5", "=", 17),
-  new Note("G#5", "  ", 17),
-  new Note("A#5", "    ", 17),
+  new Note("C#3", 0),
+  new Note("D#3", 0),
+  new Note("F#3", 3),
+  new Note("G#3", 3),
+  new Note("A#3", 3),
+  new Note("C#4", 7),
+  new Note("D#4", 7),
+  new Note("F#4", 10),
+  new Note("G#4", 10),
+  new Note("A#4", 10),
+  new Note("C#5", 14),
+  new Note("D#5", 14),
+  new Note("F#5", 17),
+  new Note("G#5", 17),
+  new Note("A#5", 17),
 ];

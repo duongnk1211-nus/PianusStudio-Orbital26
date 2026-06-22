@@ -10,7 +10,7 @@ function KeyRebindingBox() {
     apiFetch('/user').then(setProfile);
   }, []);
 
-  const lim = useMemo(() => 5, []);
+  const lim = useMemo(() => 6, []);
   const [optionIndex, setOptionIndex] = useState(1);
   const incOptionIndex = () => {
     const prev = optionIndex;

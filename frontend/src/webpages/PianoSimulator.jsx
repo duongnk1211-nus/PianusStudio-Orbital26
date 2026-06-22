@@ -28,7 +28,7 @@ export default function PianoSimulator() {
 
   return (
     <div className="Piano">
-      <button className="return-button" onClick={goBack}>Return</button>
+      <button className="return-button" onClick={goBack} style={{width:'65px', marginLeft:'10px', marginRight:'50px', paddingBottom:'3px'}}>Return</button>
       <div className="piano-wrapper">
         <div>
         <img src="/PianusStudio.png"/>

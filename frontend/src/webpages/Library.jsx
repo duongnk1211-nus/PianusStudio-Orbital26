@@ -21,8 +21,8 @@ export default function Library() {
           <h2>{P1.title}</h2>
           <p style={{marginBottom: '40px'}}><span style={{fontWeight:'1000'}}>Description: </span>{P1.description}</p>
           {/* <p style={{marginBottom: '0px'}}><span style={{fontWeight:'1000'}}>Author:</span> Dao Quang Linh</p> */}
-          <button onClick={goToP1Display}>Listen The Piece</button>
-          <button onClick={goToP1Learn}>Learn The Piece</button>
+          <button onClick={goToP1Display}>Listen & Feel</button>
+          <button onClick={goToP1Learn} style={{marginTop: '0px'}}>Play it yourself</button>
         </div>
       </div>
     </div>

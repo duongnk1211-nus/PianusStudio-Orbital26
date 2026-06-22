@@ -59,7 +59,7 @@ export default function Display({ P }) {
 
   return (
     <div className="Piano" style={{ backgroundImage: `url(${P.backgroundImageURL})` }}>
-      <button className="return-button" onClick={goBack}>Return</button>
+      <button className="return-button" onClick={goBack} style={{width:'65px', paddingBottom:'3px'}}>Return</button>
       <div className="piano-wrapper">
         <div>
         <img src="/PianusStudio.png" style={{background: '#517edfbc'}} />

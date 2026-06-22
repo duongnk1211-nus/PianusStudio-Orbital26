@@ -43,6 +43,51 @@ export default function Learn({ P }) {
   }, []);
   
   useEffect(() => {
+    for (const note of Notes) {
+      note.key = " ";
+    }
+    const bindingOption = profile ? profile.binding_option : 1;
+    const keyMap = new Map(Object.entries(keyMaps[bindingOption]));
+    const noteMap = new Map();
+    for (const [sym, key] of keyMap) {
+      if (key !== " "){
+        noteMap.set(key, symMap[sym]);
+        symMap[sym].key = key;
+      }
+    }
+
+    const handleKeyDown = async (e) => {
+      if (e.key === " ") return;
+      const note = noteMap.get(e.key);
+      if (note) {
+        e.preventDefault();
+        if (e.repeat) return;
+        note.attack(synthRef, barsRef, sideEffect)();
+      }
+    };
+    const handleKeyUp = async (e) => {
+      if (e.key === " ") return;
+      const note = noteMap.get(e.key);
+      if (note) {
+        e.preventDefault();
+        note.release(synthRef, barsRef, sideEffect)();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    for (let i = 0; i < Notes.length; i++) {
+      Notes[i].release(synthRef, barsRef, sideEffect)();
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    }
+  }, [profile]);
+
+  useEffect(() => {
     synthRef.current = new Tone.Sampler({
       urls: { "D#1": "Ds1.mp3", "F#1": "Fs1.mp3", A1: "A1.mp3", C2: "C2.mp3", "D#2": "Ds2.mp3", "F#2": "Fs2.mp3", A2: "A2.mp3", C3: "C3.mp3", "D#3": "Ds3.mp3", "F#3": "Fs3.mp3", A3: "A3.mp3", C4: "C4.mp3", "D#4": "Ds4.mp3", "F#4": "Fs4.mp3", A4: "A4.mp3", C5: "C5.mp3", "D#5": "Ds5.mp3", "F#5": "Fs5.mp3", A5: "A5.mp3", C6: "C6.mp3", "D#6": "Ds6.mp3", "F#6": "Fs6.mp3", A6: "A6.mp3", C7: "C7.mp3", "D#7": "Ds7.mp3", "F#7": "Fs7.mp3", A7: "A7.mp3", C8: "C8.mp3" },
       release: 1,
@@ -77,54 +122,6 @@ export default function Learn({ P }) {
       setDisplayBars([]);
     }
   }, []);
-
-  useEffect(() => {
-    if (profile) {
-      setBindingOption(profile.binding_option);
-    }
-    for (const note of Notes) {
-      note.key = " ";
-    }
-
-    const keyMap = new Map(Object.entries(keyMaps[bindingOption]));
-    const noteMap = new Map();
-    for (const [sym, key] of keyMap) {
-      if (key !== " "){
-        noteMap[key] = symMap[sym];
-        symMap[sym].key = key;
-      }
-    }
-
-    const handleKeyDown = async (e) => {
-      if (e.key === " ") return;
-      const note = noteMap[e.key];
-      if (note) {
-        e.preventDefault();
-        if (e.repeat) return;
-        note.attack(synthRef, barsRef, sideEffect)();
-      }
-    };
-    const handleKeyUp = async (e) => {
-      if (e.key === " ") return;
-      const note = noteMap[e.key];
-      if (note) {
-        e.preventDefault();
-        note.release(synthRef, barsRef, sideEffect)();
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
-
-    for (let i = 0; i < Notes.length; i++) {
-      Notes[i].release(synthRef, barsRef, sideEffect)();
-    }
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
-    }
-  }, [profile]);
 
   const [isStarted, setIsStarted] = useState(false);
   const chords = useMemo(() => {

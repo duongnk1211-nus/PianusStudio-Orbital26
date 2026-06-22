@@ -21,7 +21,6 @@ export default function PianoSimulator() {
   }, []);
 
   const [profile, setProfile] = useState(null);
-  const [bindingOption, setBindingOption] = useState(1);
 
   useEffect(() => {
     apiFetch('/user').then(setProfile);
@@ -34,6 +33,51 @@ export default function PianoSimulator() {
   const sideEffect = useMemo(() => {
     return (sym, isAttack) => {};
   }, []);
+
+  useEffect(() => {
+    for (const note of Notes) {
+      note.key = " ";
+    }
+    const bindingOption = profile ? profile.binding_option : 1;
+    const keyMap = new Map(Object.entries(keyMaps[bindingOption]));
+    const noteMap = new Map();
+    for (const [sym, key] of keyMap) {
+      if (key !== " "){
+        noteMap.set(key, symMap[sym]);
+        symMap[sym].key = key;
+      }
+    }
+
+    const handleKeyDown = async (e) => {
+      if (e.key === " ") return;
+      const note = noteMap.get(e.key);
+      if (note) {
+        e.preventDefault();
+        if (e.repeat) return;
+        note.attack(synthRef, barsRef, sideEffect)();
+      }
+    };
+    const handleKeyUp = async (e) => {
+      if (e.key === " ") return;
+      const note = noteMap.get(e.key);
+      if (note) {
+        e.preventDefault();
+        note.release(synthRef, barsRef, sideEffect)();
+      }
+    }
+
+    window.addEventListener("keydown", handleKeyDown);
+    window.addEventListener("keyup", handleKeyUp);
+
+    for (let i = 0; i < Notes.length; i++) {
+      Notes[i].release(synthRef, barsRef, sideEffect)();
+    }
+
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("keyup", handleKeyUp);
+    }
+  }, [profile]);
 
   useEffect(() => {
     synthRef.current = new Tone.Sampler({
@@ -70,54 +114,6 @@ export default function PianoSimulator() {
       setDisplayBars([]);
     }
   }, []);
-
-  useEffect(() => {
-    if (profile) {
-      setBindingOption(profile.binding_option);
-    }
-    for (const note of Notes) {
-      note.key = " ";
-    }
-
-    const keyMap = new Map(Object.entries(keyMaps[bindingOption]));
-    const noteMap = new Map();
-    for (const [sym, key] of keyMap) {
-      if (key !== " "){
-        noteMap[key] = symMap[sym];
-        symMap[sym].key = key;
-      }
-    }
-
-    const handleKeyDown = async (e) => {
-      if (e.key === " ") return;
-      const note = noteMap[e.key];
-      if (note) {
-        e.preventDefault();
-        if (e.repeat) return;
-        note.attack(synthRef, barsRef, sideEffect)();
-      }
-    };
-    const handleKeyUp = async (e) => {
-      if (e.key === " ") return;
-      const note = noteMap[e.key];
-      if (note) {
-        e.preventDefault();
-        note.release(synthRef, barsRef, sideEffect)();
-      }
-    }
-
-    window.addEventListener("keydown", handleKeyDown);
-    window.addEventListener("keyup", handleKeyUp);
-
-    for (let i = 0; i < Notes.length; i++) {
-      Notes[i].release(synthRef, barsRef, sideEffect)();
-    }
-
-    return () => {
-      window.removeEventListener("keydown", handleKeyDown);
-      window.removeEventListener("keyup", handleKeyUp);
-    }
-  }, [profile]);
 
   return (
     <div className="Piano">

@@ -60,7 +60,18 @@ export default function Display({ P }) {
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
+    
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      synthRef.current?.releaseAll();
+      synthRef.current?.dispose();
+      barsRef.current = [];
+      rafRef.current = null;
+      setDisplayBars([]);
+    }
+  }, []);
 
+  useEffect(() => {
     if (profile) {
       setBindingOption(profile.binding_option);
     }
@@ -105,14 +116,8 @@ export default function Display({ P }) {
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
-      cancelAnimationFrame(rafRef.current);
-      synthRef.current?.releaseAll();
-      synthRef.current?.dispose();
-      barsRef.current = [];
-      rafRef.current = null;
-      setDisplayBars([]);
     }
-  }, [profile]);
+  }, [profile]);    
 
   const [isPlaying, setIsPlaying] = useState(false);
 

@@ -30,6 +30,7 @@ export default function Learn({ P }) {
   const synthRef = useRef(null);
   const barsRef = useRef([]);
   const rafRef = useRef(null);
+  const completedRef = useRef(false);
   const [displayBars, setDisplayBars] = useState([]);
   const sideEffect = useMemo(() => {
     return (sym, isAttack) => {
@@ -166,12 +167,14 @@ export default function Learn({ P }) {
       }
     }
     if (id >= chords.length) {
+      if (!completedRef.current){
       setTimeout(() => {
         alert("Lesson completed!!!");
         goBack();
       }, 1000);
-      return;
+      completedRef.current = true;
     }
+  }
     for (const item of chords[id]) {
       console.log("add " + item);
       symMap[item].setGuide();
@@ -181,20 +184,20 @@ export default function Learn({ P }) {
   };
   
   const start = () => {
-    setIsStarted(true);
-    handleChangeIndex(0);
+    setIsStarted(!isStarted);
+    isStarted ? handleChangeIndex(-1) : handleChangeIndex(0);
   };
   
   return (
     <div className="Piano" style={{backgroundImage: `url(${P.backgroundImageURL})`}}>
-      <button className="return-button" onClick={goBack}>Return</button>
+      <button className="return-button" onClick={goBack} style={{width:'65px', marginLeft:'10px', paddingBottom:'3px'}}>Return</button>
       <div className="piano-wrapper">
         <div>
           <img src="/PianusStudio.png" style={{background: '#517edfbc'}} />
           <h1>{P.title}</h1>
           {/* <p style={{color: '#e7a53c', fontFamily: 'Dancing Script'}}>By Dao Quang Linh</p> */}
         </div>
-        <button className={isStarted ? "restart-button" : "start-button"} onClick={start}>
+        <button className={isStarted ? "restart-button" : "start-button"} onClick={start} style={{width:'70px', paddingBottom:'3px'}}>
           {isStarted ? "Restart" : "Start"}
         </button>
         <div className="synthesia-container">

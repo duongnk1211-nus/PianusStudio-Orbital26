@@ -9,7 +9,7 @@ import SignupPage from "./webpages/Signup.jsx";
 import UpdatePassword from "./webpages/UpdatePassword.jsx";
 import ProfilePage from "./webpages/Profile.jsx";
 import SettingsPage from "./webpages/Settings.jsx";
-// import Display from "./webpages/Display.jsx";
+import Display from "./webpages/Display.jsx";
 // import Learn from "./webpages/Learn.jsx";
 import P1 from "./components/PianoPieces/P1.jsx";
 
@@ -26,8 +26,8 @@ export default function App() {
       <Route path="/piano-simulator" element={<PianoSimulator />}    />
       <Route path="/login"           element={<LoginPage />} />
       <Route path="/"                element={<HomePage />} />
-      {/* <Route path="/library/p1/display" element={<Display P = {P1}/>} />
-      <Route path="/library/p1/learn"   element={<Learn P = {P1}/>} /> */}
+      <Route path="/library/p1/display" element={<Display P = {P1}/>} />
+      {/* <Route path="/library/p1/learn"   element={<Learn P = {P1}/>} /> */}
     </Routes>
   );
 }

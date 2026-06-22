@@ -10,6 +10,8 @@ import { keyMaps } from "../components/keyMaps.jsx";
 
 export default function PianoSimulator() {
   const navigate = useNavigate();
+  const goBack = () => { navigate(-1); };
+
   const symMap = useMemo(() => {
     const map = {};
     for (let i = 0; i < Notes.length; i++) {
@@ -73,19 +75,19 @@ export default function PianoSimulator() {
     }
 
     const handleKeyDown = async (e) => {
-      e.preventDefault();
       if (e.repeat) return;
       if (e.key === " ") return;
       const note = noteMap[e.key];
       if (note) {
+        e.preventDefault();
         note.attack(synthRef, barsRef, sideEffect)();
       }
     };
     const handleKeyUp = async (e) => {
-      e.preventDefault();
       if (e.key === " ") return;
       const note = noteMap[e.key];
       if (note) {
+        e.preventDefault();
         note.release(synthRef, barsRef, sideEffect)();
       }
     }
@@ -108,8 +110,6 @@ export default function PianoSimulator() {
       setDisplayBars([]);
     }
   }, [profile]);
-
-  const goBack = () => { navigate(-1); };
 
   return (
     <div className="Piano">

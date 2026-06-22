@@ -14,7 +14,7 @@ function KeyRebindingBox() {
   const [optionIndex, setOptionIndex] = useState(1);
   const incOptionIndex = () => {
     const prev = optionIndex;
-    if (prev == 5) {
+    if (prev == 6) {
       setOptionIndex(1);
     } else {
       setOptionIndex(prev + 1);
@@ -23,7 +23,7 @@ function KeyRebindingBox() {
   const decOptionIndex = () => {
     const prev = optionIndex;
     if (prev == 1) {
-      setOptionIndex(5);
+      setOptionIndex(6);
     } else {
       setOptionIndex(prev - 1);
     }

@@ -75,11 +75,11 @@ export default function PianoSimulator() {
     }
 
     const handleKeyDown = async (e) => {
-      if (e.repeat) return;
       if (e.key === " ") return;
       const note = noteMap[e.key];
       if (note) {
         e.preventDefault();
+        if (e.repeat) return;
         note.attack(synthRef, barsRef, sideEffect)();
       }
     };

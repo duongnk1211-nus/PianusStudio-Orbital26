@@ -3,7 +3,8 @@ import { Piece } from "../Piece.jsx";
 const P1 = new Piece(
   "Twinkle, Twinkle, Little Star",
   "Playing Twinkle, Twinkle, Little Star on the piano is the ultimate beginner's rite of passage. Its memorable A-B-C-C-A-B song structure uses only six white keys in the C major scale—Middle C through A. The melody is highly repetitive, making it incredibly easy to memorize and play by ear!",
-  "/P1.jpg",
+  "p1",
+  "/PianoPieces/P1.jpg",
   [
     { note: "C5", duration: 0.5 },
     { note: "C5", duration: 0.5 },

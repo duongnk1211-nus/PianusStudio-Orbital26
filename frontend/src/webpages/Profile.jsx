@@ -1,37 +1,36 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { apiFetch } from '../components/API'
-import { supabase } from '../components/supabaseClient'
-import AvatarUpload from '../components/AvatarUpload'
-import { Bio, Username } from '../components/BioUsernameUpload'
-import '../styles/Profile.css'
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { apiFetch } from "../components/API";
+import { supabase } from "../components/supabaseClient";
+import AvatarUpload from "../components/AvatarUpload";
+import { Bio, Username } from "../components/BioUsernameUpload";
+import "../styles/Profile.css";
 
 export default function ProfilePage() {
-  const navigate = useNavigate()
-  const [profile, setProfile] = useState(null)
-  const [user, setUser] = useState(null)
-  const [slowLoad, setSlowLoad] = useState(false)
-
+  const navigate = useNavigate();
+  const [profile, setProfile] = useState(null);
+  const [user, setUser] = useState(null);
+  const [slowLoad, setSlowLoad] = useState(false);
 
   const goBack = () => { navigate(-1); }
 
   useEffect(() => {
     async function load() {
-      const timer = setTimeout(() => setSlowLoad(true), 3000)
+      const timer = setTimeout(() => setSlowLoad(true), 3000);
 
       // Both fetches together, once, on mount
       const [profileData, { data: { user } }] = await Promise.all([
         apiFetch('/user'),
         supabase.auth.getUser()
-      ])
-      clearTimeout(timer)
-      setSlowLoad(false)
+      ]);
+      clearTimeout(timer);
+      setSlowLoad(false);
 
-      setProfile(profileData)
-      setUser(user)
+      setProfile(profileData);
+      setUser(user);
     }
-    load()
-  }, [])
+    load();
+  }, []);
 
 
   if (!profile || !user) {
@@ -42,7 +41,7 @@ export default function ProfilePage() {
         Server is waking up, this may take ~30 seconds...
       </p>}
     </div>
-    )
+    );
   }
 
   const lastSignIn = new Date(user.last_sign_in_at).toLocaleString();
@@ -71,5 +70,5 @@ export default function ProfilePage() {
         <p style={{ position: 'absolute', bottom: '40px', left: '30px', marginBottom: '0px' }}>Last signed in: {lastSignIn}</p>
       </div>
     </div>
-  )
+  );
 }

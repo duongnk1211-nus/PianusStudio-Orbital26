@@ -1,7 +1,7 @@
-import { useState, useRef, useEffect } from 'react'
-import { supabase } from './supabaseClient'
-import { apiFetch } from './API';
-import '../styles/Profile.css'
+import { useState, useRef, useEffect } from "react";
+import { supabase } from "./supabaseClient";
+import { apiFetch } from "./API";
+import "../styles/Profile.css";
 
 export function Username({ currentName, onChangeComplete }) {
   const [name, setName] = useState(currentName || '');
@@ -13,7 +13,7 @@ export function Username({ currentName, onChangeComplete }) {
   const inputRef = useRef(null);
 
   useEffect(() => {
-    apiFetch('/user').then(setProfile)
+    apiFetch('/user').then(setProfile);
   }, []);
 
   useEffect(() => {
@@ -23,41 +23,41 @@ export function Username({ currentName, onChangeComplete }) {
   }, [editing]);
 
   function handleUsernameChange(e) {
-    const newName = e.target.value
+    const newName = e.target.value;
     if (newName.length > 30) {
-      setError("Username cannot be over than 30 characters")
+      setError("Username cannot be over than 30 characters");
       setTimeout(() => setError(""), 2000);
-      return
+      return;
     }
     if (newName.includes(" ")) {
-      setError("Username cannot have space")
+      setError("Username cannot have space");
       setTimeout(() => setError(""), 2000);
-      return
+      return;
     }
-    setName(newName)
+    setName(newName);
   }
 
   function handleBlur() {
-    setEditing(false)
-    setName(currentName || '')
+    setEditing(false);
+    setName(currentName || '');
   }
 
   function handleKeyDown(e) {
     if (e.key === 'Enter') {
-      e.preventDefault()
-      setEditing(false)
-      updateName(name)
+      e.preventDefault();
+      setEditing(false);
+      updateName(name);
     } else if (e.key === 'Escape') {
-      setName(currentName || '')
-      setEditing(false)
+      setName(currentName || '');
+      setEditing(false);
     }
   }
 
   async function updateName(newName) {
-    setUploading(true)
+    setUploading(true);
     try {
-      const result = await supabase.auth.getSession()
-      const session = result.data.session
+      const result = await supabase.auth.getSession();
+      const session = result.data.session;
       const res = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
         method: 'PUT',
         headers: {
@@ -65,26 +65,26 @@ export function Username({ currentName, onChangeComplete }) {
           Authorization: `Bearer ${session.access_token}`,
         },
         body: JSON.stringify({ username: newName })
-      })
-      if (!res.ok) throw new Error('Upload username failed!')
-      const { name } = await res.json()
-      onChangeComplete(name)
+      });
+      if (!res.ok) throw new Error('Upload username failed!');
+      const { name } = await res.json();
+      onChangeComplete(name);
     } catch (err) {
-      setName(currentName || '')
-      setError(err.message)
+      setName(currentName || '');
+      setError(err.message);
       setTimeout(() => setError(""), 2000);
     } finally {
-      setUploading(false)
-      setShowMessage(true)
+      setUploading(false);
+      setShowMessage(true);
       setTimeout(() => {
         setShowMessage(false);
       }, 2000);
     }
   }
 
-  const rawRole = profile?.role
-  const role = (typeof rawRole === 'string' ? rawRole.trim() : rawRole)
-  const displayRole = role && role !== 'null' && role !== 'undefined' ? role : ''
+  const rawRole = profile?.role;
+  const role = (typeof rawRole === 'string' ? rawRole.trim() : rawRole);
+  const displayRole = role && role !== 'null' && role !== 'undefined' ? role : '';
 
   return (
     <div className='profileName-container'>
@@ -124,35 +124,35 @@ export function Bio({ currentBio, onChangeComplete }) {
   }, [isEditing]);
 
   function handleBioChange(e) {
-    const newBio = e.target.value
+    const newBio = e.target.value;
     if (newBio.length > 800) {
-      setError("Bio length cannot be over 800 characters including whitespace")
-      return
+      setError("Bio length cannot be over 800 characters including whitespace");
+      return;
     }
-    setBio(newBio)
+    setBio(newBio);
   }
 
   function handleBlur() {
-    setIsEditing(false)
-    setBio(currentBio || '')
+    setIsEditing(false);
+    setBio(currentBio || '');
   }
 
   function handleKeyDown(e) {
     if (e.key === 'Enter') {
-      e.preventDefault()
-      setIsEditing(false)
-      updateBio(bio)
+      e.preventDefault();
+      setIsEditing(false);
+      updateBio(bio);
     } else if (e.key === 'Escape') {
-      setBio(currentBio || '')
-      setIsEditing(false)
+      setBio(currentBio || '');
+      setIsEditing(false);
     }
   }
 
   async function updateBio(newBio) {
-    setUploading(true)
+    setUploading(true);
     try {
-      const result = await supabase.auth.getSession()
-      const session = result.data.session
+      const result = await supabase.auth.getSession();
+      const session = result.data.session;
       const res = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
         method: 'PUT',
         headers: {
@@ -160,17 +160,17 @@ export function Bio({ currentBio, onChangeComplete }) {
           Authorization: `Bearer ${session.access_token}`,
         },
         body: JSON.stringify({ bio: newBio })
-      })
-      if (!res.ok) throw new Error('Upload bio failed')
-      const { bio } = await res.json()
-      onChangeComplete(bio)
+      });
+      if (!res.ok) throw new Error('Upload bio failed');
+      const { bio } = await res.json();
+      onChangeComplete(bio);
     } catch (err) {
-      setBio(currentBio || '')
-      setError(err.message)
+      setBio(currentBio || '');
+      setError(err.message);
       setTimeout(() => setError(""), 2000);
     } finally {
-      setUploading(false)
-      setShowMessage(true)
+      setUploading(false);
+      setShowMessage(true);
       setTimeout(() => {
         setShowMessage(false);
       }, 2000);

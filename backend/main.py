@@ -39,7 +39,7 @@ def get_user(user= Depends(get_current_user)):
 
 @app.put("/user")
 def update_user(body: dict, user=Depends(get_current_user)):
-    allowed = {k: body[k] for k in ("username","bio", "avatar_url",) if k in body}
+    allowed = {k: body[k] for k in ("username", "bio", "avatar_url",) if k in body}
     try:
         res = supabase.table("users_data").update(allowed).eq("id", user.id).execute()
     except Exception as e:
@@ -61,5 +61,3 @@ async def upload_avatar(file: UploadFile = File(...), user=Depends(get_current_u
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error saving avatar: {str(e)}")
     return {"avatar_url": url}
-
-

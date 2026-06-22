@@ -2,9 +2,9 @@ import { useEffect, useRef, useState } from "react";
 import * as Tone from "tone";
 import "../styles/Piano.css";
 
-const WHITE_KEY_WIDTH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--white-key-width'));
-const WHITE_KEY_GAP = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--white-key-gap'));
-const BLACK_KEY_WIDTH = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--black-key-width'));
+const WKWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--white-key-width'));
+const WKGap = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--white-key-gap'));
+const BKWidth = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--black-key-width'));
 
 export class Note {
   #sym;
@@ -31,10 +31,25 @@ export class Note {
 
   #computedLeftForNote = () => {
     if (this.#type === "white") {
-      return this.#offset * (WHITE_KEY_WIDTH + WHITE_KEY_GAP);
+      return this.#offset * (WKWidth + WKGap);
     } else {
-      return (this.#offset + 1) * (WHITE_KEY_WIDTH + WHITE_KEY_GAP) 
-              - WHITE_KEY_GAP / 2 - BLACK_KEY_WIDTH / 2;
+      let result = this.#offset * (WKWidth + WKGap);
+      const x = (3 * WKWidth + 2 * WKGap - 2 * BKWidth) / 3;
+      const y = (4 * WKWidth + 3 * WKGap - 3 * BKWidth) / 4;
+
+      if (this.#sym.includes("C")) {
+        result += x;
+      } else if (this.#sym.includes("D")) {
+        result += 2 * x + BKWidth;
+      } else if (this.#sym.includes("F")) {
+        result += y;
+      } else if (this.#sym.includes("G")) {
+        result += 2 * y + BKWidth;
+      } else {
+        result += 3 * y + 2 * BKWidth;
+      }
+      
+      return result;
     }
   }
 
@@ -49,7 +64,7 @@ export class Note {
       note: this.#sym,
       type: this.#type,
       left: this.#computedLeftForNote(),
-      width: this.#type === "white" ? WHITE_KEY_WIDTH : BLACK_KEY_WIDTH,
+      width: this.#type === "white" ? WKWidth : BKWidth,
       startTime: Date.now(),
       released: false,
       top: 400,
@@ -134,18 +149,18 @@ export const Notes = [
   new Note("C6", "      ", 21),
 
   new Note("C#3", "s", 0),
-  new Note("D#3", "d", 1),
+  new Note("D#3", "d", 0),
   new Note("F#3", "g", 3),
-  new Note("G#3", "h", 4),
-  new Note("A#3", "j", 5),
+  new Note("G#3", "h", 3),
+  new Note("A#3", "j", 3),
   new Note("C#4", "2", 7),
-  new Note("D#4", "3", 8),
+  new Note("D#4", "3", 7),
   new Note("F#4", "5", 10),
-  new Note("G#4", "6", 11),
-  new Note("A#4", "7", 12),
+  new Note("G#4", "6", 10),
+  new Note("A#4", "7", 10),
   new Note("C#5", "9", 14),
-  new Note("D#5", "0", 15),
+  new Note("D#5", "0", 14),
   new Note("F#5", "=", 17),
-  new Note("G#5", "  ", 18),
-  new Note("A#5", "    ", 19),
+  new Note("G#5", "  ", 17),
+  new Note("A#5", "    ", 17),
 ];

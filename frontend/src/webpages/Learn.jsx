@@ -77,7 +77,7 @@ export default function Learn({ P }) {
     }
     if (id >= chords.length) {
       setTimeout(() => {
-        alert("Lesson completed!");
+        alert("Lesson completed!!!");
         goBack();
       }, 1000);
       return;
@@ -113,8 +113,8 @@ export default function Learn({ P }) {
       <div className="piano-wrapper">
         <div>
         <img src="/PianusStudio.png" style={{background: '#517edfbc'}} />
-        <h1>⭐Twinkle Twinkle Little Star⭐</h1>
-        <p style={{color: '#e7a53c', fontFamily: 'Dancing Script'}}>By Dao Quang Linh</p>
+        <h1>{P.title}</h1>
+        {/* <p style={{color: '#e7a53c', fontFamily: 'Dancing Script'}}>By Dao Quang Linh</p> */}
         </div>
         <button className={isStarted ? "restart-button" : "start-button"} onClick={start}>
           {isStarted ? "Restart" : "Start"}

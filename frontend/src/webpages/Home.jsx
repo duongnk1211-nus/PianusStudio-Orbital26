@@ -12,7 +12,7 @@ function IsLoggedIn() {
   const [profile, setProfile] = useState(null)
   
   useEffect(() => {
-    apiFetch('/user').then(setProfile)
+    apiFetch('/user').then(setProfile);
   }, [])
 
   useEffect(() => {

@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
-import { apiFetch } from '../components/API'
-import { supabase } from '../components/supabaseClient'
-import AvatarUpload from '../components/AvatarUpload'
-import { Bio, Username } from '../components/BioUsernameUpload'
-import '../styles/Profile.css'
+import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { apiFetch } from "../components/API";
+import { supabase } from "../components/supabaseClient";
+import AvatarUpload from "../components/AvatarUpload";
+import { Bio, Username } from "../components/BioUsernameUpload";
+import "../styles/Profile.css";
 
 export default function ProfilePage() {
   const navigate = useNavigate()
@@ -71,5 +71,5 @@ export default function ProfilePage() {
         <p style={{ position: 'absolute', bottom: '40px', left: '30px', marginBottom: '0px' }}>Last signed in: {lastSignIn}</p>
       </div>
     </div>
-  )
+  );
 }

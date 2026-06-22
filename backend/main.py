@@ -39,7 +39,7 @@ def get_user(user= Depends(get_current_user)):
 
 @app.put("/user")
 def update_user(body: dict, user=Depends(get_current_user)):
-    allowed = {k: body[k] for k in ("username", "bio", "avatar_url",) if k in body}
+    allowed = {k: body[k] for k in ("username", "bio", "avatar_url", "binding_option", ) if k in body}
     try:
         res = supabase.table("users_data").update(allowed).eq("id", user.id).execute()
     except Exception as e:

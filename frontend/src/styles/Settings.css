@@ -81,17 +81,17 @@
       }
     }
     
-    & .preview-button {
+    & .save-button {
       text-decoration: none;
-      background: #e7a53c;
+      background: #3cb87a;
       color: #fff;
       padding: 4px 16px;
       border-radius: 8px;
-      border: 2px solid #563407 !important;
+      border: 2px solid #1a5c3a !important;
       font-size: 1.2rem;
       &:hover {
         opacity: 1;
-        background: #cf9030;
+        background: #2ea368;
         transform: scale(1.05);
       }
     }

@@ -9,7 +9,7 @@ export function Username({ currentName, onChangeComplete }) {
   const [error, setError] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [showMessage, setShowMessage] = useState(false);
-  const [profile, setProfile] = useState(null)
+  const [profile, setProfile] = useState(null);
   const inputRef = useRef(null);
 
   useEffect(() => {

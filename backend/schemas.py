@@ -7,3 +7,4 @@ class UserResponse(BaseModel):
     avatar_url: str | None
     bio: str | None
     created_at: datetime
+    binding_option: int

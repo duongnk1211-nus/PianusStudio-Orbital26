@@ -48,33 +48,44 @@ export default function Learn({ P }) {
       release: 1,
       baseUrl: "https://tonejs.github.io/audio/salamander/",
     }).toDestination();
-    
+
     const GROW_SPEED = 1;
     const FLY_SPEED = 1;
-    
+
     const tick = () => {
       barsRef.current = barsRef.current
-      .map(b => {
-        if (!b.released) {
-          return { ...b, height: b.height + GROW_SPEED, top: b.top - GROW_SPEED };
-        } else {
-          return { ...b, top: b.top - FLY_SPEED };
-        }
-      })
-      .filter(b => b.top + b.height > -600);
-      
+        .map(b => {
+          if (!b.released) {
+            return { ...b, height: b.height + GROW_SPEED, top: b.top - GROW_SPEED };
+          } else {
+            return { ...b, top: b.top - FLY_SPEED };
+          }
+        })
+        .filter(b => b.top + b.height > -600);
+
       setDisplayBars([...barsRef.current]);
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
     
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      synthRef.current?.releaseAll();
+      synthRef.current?.dispose();
+      barsRef.current = [];
+      rafRef.current = null;
+      setDisplayBars([]);
+    }
+  }, []);
+
+  useEffect(() => {
     if (profile) {
       setBindingOption(profile.binding_option);
     }
     for (const note of Notes) {
       note.key = " ";
     }
-    
+
     const keyMap = new Map(Object.entries(keyMaps[bindingOption]));
     const noteMap = new Map();
     for (const [sym, key] of keyMap) {
@@ -83,7 +94,7 @@ export default function Learn({ P }) {
         symMap[sym].key = key;
       }
     }
-    
+
     const handleKeyDown = async (e) => {
       if (e.key === " ") return;
       const note = noteMap[e.key];
@@ -101,23 +112,17 @@ export default function Learn({ P }) {
         note.release(synthRef, barsRef, sideEffect)();
       }
     }
-    
+
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
-    
+
     for (let i = 0; i < Notes.length; i++) {
       Notes[i].release(synthRef, barsRef, sideEffect)();
     }
-    
+
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
-      cancelAnimationFrame(rafRef.current);
-      synthRef.current?.releaseAll();
-      synthRef.current?.dispose();
-      barsRef.current = [];
-      rafRef.current = null;
-      setDisplayBars([]);
     }
   }, [profile]);
 

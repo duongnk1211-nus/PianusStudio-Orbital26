@@ -95,7 +95,7 @@ export default function Learn({ P }) {
 
   const start = () => {
     setIsStarted(!isStarted);
-    isStarted ? handleChangeIndex(-1) : handleChangeIndex(41);
+    isStarted ? handleChangeIndex(-1) : handleChangeIndex(0);
   };
 
   const sideEffect = useMemo(() => {

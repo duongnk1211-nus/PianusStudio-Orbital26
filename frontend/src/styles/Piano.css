@@ -124,7 +124,7 @@ body {
   background-position: top;
   background-repeat: no-repeat;
   background-attachment: fixed; 
-  min-height: 1000vh;
+  min-height: 160vh;
 }
 
 .piano-wrapper {

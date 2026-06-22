@@ -32,11 +32,12 @@ export default function SettingsPage() {
     }
   }
 
+  const [savedIndex, setSavedIndex] = useState(1);
+
   useEffect(() => {
     setOptionIndex(profile ? profile.binding_option : 1);
+    setSavedIndex(profile ? profile.binding_option : 1);
   }, [profile]);
-
-  const [savedIndex, setSavedIndex] = useState(profile ? profile.binding_option : 1);
 
   const handleChangeBindingOption = (id) => async() => {
     const result = await supabase.auth.getSession();
@@ -51,6 +52,7 @@ export default function SettingsPage() {
     });
     if (!res.ok) throw new Error('Update binding option failed!');
     setSavedIndex(id);
+    alert("Key binding option saved!!!");
   }
 
   return (

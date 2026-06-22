@@ -12,6 +12,7 @@ import SettingsPage from "./webpages/Settings.jsx";
 import Display from "./webpages/Display.jsx";
 import Learn from "./webpages/Learn.jsx";
 import P1 from "./components/PianoPieces/P1.jsx";
+import P2 from "./components/PianoPieces/P2.jsx";
 
 export default function App() {
   return (
@@ -28,6 +29,8 @@ export default function App() {
       <Route path="/"                element={<HomePage />} />
       <Route path="/library/p1/display" element={<Display P = {P1}/>} />
       <Route path="/library/p1/learn"   element={<Learn P = {P1}/>} />
+      <Route path="/library/p2/display" element={<Display P = {P2}/>} />
+      <Route path="/library/p2/learn"   element={<Learn P = {P2}/>} />
     </Routes>
   );
 }

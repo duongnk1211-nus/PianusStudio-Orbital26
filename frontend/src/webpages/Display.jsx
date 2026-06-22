@@ -64,6 +64,9 @@ export default function Display({ P }) {
     if (profile) {
       setBindingOption(profile.binding_option);
     }
+    for (const note of Notes) {
+      note.key = " ";
+    }
 
     const keyMap = new Map(Object.entries(keyMaps[bindingOption]));
     const noteMap = new Map();

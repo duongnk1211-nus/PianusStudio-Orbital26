@@ -1,5 +1,5 @@
 .Settings {
-  min-height: 100vh;
+  min-height: 120vh;
   margin: 0;
   background-image: url('/BackGroundForSettings.jpg');
   background-size: cover;
@@ -116,5 +116,17 @@
     font-size: 1.5rem;
     min-width: 100px;
     text-align: center;
+  }
+
+  & p.property-saved-option{
+    position: relative;
+    top: 10px;
+  }
+
+  & img {
+    position: relative;
+    top: 25px;
+    width: 800px;
+    height: auto;
   }
 }

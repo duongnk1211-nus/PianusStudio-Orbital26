@@ -2,6 +2,12 @@ import "../styles/Library.css";
 import { useNavigate } from "react-router-dom";
 import P1 from "../components/PianoPieces/P1.jsx";
 import P2 from "../components/PianoPieces/P2.jsx";
+import P3 from "../components/PianoPieces/P3.jsx";
+import P4 from "../components/PianoPieces/P4.jsx";
+import P5 from "../components/PianoPieces/P5.jsx";
+import P6 from "../components/PianoPieces/P6.jsx";
+import P7 from "../components/PianoPieces/P7.jsx";
+import P8 from "../components/PianoPieces/P8.jsx";
 
 function PieceShelf( { P } ) {
   const navigate = useNavigate();
@@ -33,6 +39,12 @@ export default function Library() {
         <p>More pieces coming soon! 🎉</p>
         <PieceShelf P = {P1} />
         <PieceShelf P = {P2} />
+        <PieceShelf P = {P3} />
+        <PieceShelf P = {P4} />
+        <PieceShelf P = {P5} />
+        <PieceShelf P = {P6} />
+        <PieceShelf P = {P7} />
+        <PieceShelf P = {P8} />
       </div>
     </div>
   );

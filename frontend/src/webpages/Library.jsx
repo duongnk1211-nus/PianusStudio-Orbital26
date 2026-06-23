@@ -11,10 +11,9 @@ function PieceShelf( { P } ) {
   return (
     <div className='piece-shelf'>
       <h2>{P.title}</h2>
-      <p style={{marginBottom: '40px'}}><span style={{fontWeight:'1000'}}>Description: </span>{P.description}</p>
-      {/* <p style={{marginBottom: '0px'}}><span style={{fontWeight:'1000'}}>Author:</span> Dao Quang Linh</p> */}
-      <button onClick={goToDisplay}>Listen The Piece</button>
-      <button onClick={goToLearn}>Learn The Piece</button>
+      <p style={{marginBottom: '30px'}}><span style={{fontWeight:'1000'}}>Description: </span>{P.description}</p>
+      <button onClick={goToDisplay} style={{marginBottom: '0px'}}>Listen & Feel</button>
+      <button onClick={goToLearn}>Play it yourself</button>
     </div>
   );
 }

@@ -1,6 +1,6 @@
 .library-wrapper {
   display: block;
-  height: 150vh;
+  height: 300vh;
   background-image: url('/LibraryBackGround.jpg');
   background-size: cover;
   background-position: top;
@@ -41,7 +41,7 @@
 
 .library-shelf {
   width: 1100px;
-  height:100vh;
+  height:150vh;
   background: #fcfbfabd;
   background-size: cover;
   margin: 50px auto;
@@ -65,12 +65,13 @@
 }
 
 .piece-shelf {
-  height: 48vh;
-  width: 60vh;
+  height: 37vh;
+  width: 92%;
   margin-top: 30px;
   margin-left: 30px;
   padding-right:20px;
   padding-top: 10px;
+  padding-bottom: 0px;
   border-radius: 20px;
   display: flex;
   flex-direction: column;
@@ -84,6 +85,7 @@
 }
 
 .piece-shelf p {
+  height: 15vh;
   color: #000000;
   font-weight: 300;
   font-family: 'Amadeus', cursive;

@@ -1,10 +1,10 @@
 import { Note, Notes } from "./Note.jsx";
 import * as Tone from "tone";
 
-const symMap = {};
+const symMap = new Map();
 
 for (let i = 0; i < Notes.length; i++) {
-  symMap[Notes[i].sym] = Notes[i];
+  symMap.set(Notes[i].sym, Notes[i]);
 }
 
 export class Piece {
@@ -44,21 +44,23 @@ export class Piece {
     async function timeline() {
       let currentTime = 0;
       for (let i = 0; i < arr.length; i++) {
-        if (arr[i].note !== "R") {
-          Tone.Transport.schedule(time => {
-            symMap[arr[i].note].attack(synthRef, barsRef, sideEffect)(time);
-          }, currentTime);
+        if (arr[i].chord !== "R") {
+          for (const sym of arr[i].chord.split(" ")) {
+            Tone.Transport.schedule(time => {
+              symMap.get(sym).attack(synthRef, barsRef, sideEffect)(time);
+            }, currentTime);
 
-          Tone.Transport.schedule(time => {
-            symMap[arr[i].note].release(synthRef, barsRef, sideEffect)(time);
-          }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
+            Tone.Transport.schedule(time => {
+              symMap.get(sym).release(synthRef, barsRef, sideEffect)(time);
+            }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
+          }
         }
         currentTime += arr[i].duration;
       }
 
       Tone.Transport.schedule(time => {
         Tone.Transport.stop();
-      }, currentTime); // release slightly before the next note
+      }, currentTime);
     }
     return timeline;
   }
@@ -69,19 +71,19 @@ export class Piece {
   }
 
   breakChords = () => {
-    const LHMap = {}, RHMap = {};
+    const LHMap = new Map(), RHMap = new Map();
     
     let currentTime = 0;
     for (let i = 0; i < this.#LH.length; i++) {
-      if (this.#LH[i].note !== "R") {
-        LHMap[currentTime] = this.#LH[i].note;
+      if (this.#LH[i].chord !== "R") {
+        LHMap.set(currentTime, i);
       }
       currentTime += 100 * this.#LH[i].duration;
     }
     currentTime = 0;
     for (let i = 0; i < this.#RH.length; i++) {
-      if (this.#RH[i].note !== "R") {
-        RHMap[currentTime] = this.#RH[i].note;
+      if (this.#RH[i].chord !== "R") {
+        RHMap.set(currentTime, i);
       }
       currentTime += 100 * this.#RH[i].duration;
     }
@@ -90,8 +92,18 @@ export class Piece {
     let result = [];
     for (let t = 0; t <= totTime; t++) {
       let s = new Set();
-      if (LHMap[t] !== undefined) s.add(LHMap[t]);
-      if (RHMap[t] !== undefined) s.add(RHMap[t]);
+      if (LHMap.get(t) !== undefined) {
+        const i = LHMap.get(t);
+        for (const sym of this.#LH[i].chord.split(" ")) {
+          s.add(sym);
+        }
+      }
+      if (RHMap.get(t) !== undefined) {
+        const i = RHMap.get(t);
+        for (const sym of this.#RH[i].chord.split(" ")) {
+          s.add(sym);
+        }
+      }
 
       if (s.size > 0) {
         result.push(s);

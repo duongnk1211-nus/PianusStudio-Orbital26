@@ -10,12 +10,16 @@ import { keyMaps } from "../components/keyMaps.jsx";
 
 export default function Display({ P }) {
   const navigate = useNavigate();
-  const goBack = () => { navigate(-1); };
+  const goBack = () => {
+    Tone.Transport.stop();
+    Tone.Transport.cancel();
+    navigate(-1);
+  };
   
   const symMap = useMemo(() => {
-    const map = {};
+    const map = new Map();
     for (let i = 0; i < Notes.length; i++) {
-      map[Notes[i].sym] = Notes[i];
+      map.set(Notes[i].sym, Notes[i]);
     }
     return map;
   }, []);
@@ -44,8 +48,8 @@ export default function Display({ P }) {
     const noteMap = new Map();
     for (const [sym, key] of keyMap) {
       if (key !== " "){
-        noteMap.set(key, symMap[sym]);
-        symMap[sym].key = key;
+        noteMap.set(key, symMap.get(sym));
+        symMap.get(sym).key = key;
       }
     }
 
@@ -69,10 +73,6 @@ export default function Display({ P }) {
 
     window.addEventListener("keydown", handleKeyDown);
     window.addEventListener("keyup", handleKeyUp);
-
-    for (let i = 0; i < Notes.length; i++) {
-      Notes[i].release(synthRef, barsRef, sideEffect)();
-    }
 
     return () => {
       window.removeEventListener("keydown", handleKeyDown);
@@ -105,6 +105,11 @@ export default function Display({ P }) {
       rafRef.current = requestAnimationFrame(tick);
     };
     rafRef.current = requestAnimationFrame(tick);
+
+    for (const note of Notes) {
+      note.release(synthRef, barsRef, sideEffect)();
+      note.unsetGuide();
+    }
     
     return () => {
       cancelAnimationFrame(rafRef.current);
@@ -134,11 +139,14 @@ export default function Display({ P }) {
 
   useEffect(() => {
     Tone.Transport.stop();
+    Tone.Transport.cancel();
     const handleStop = () => {
       setIsPlaying(false);
     };
     Tone.Transport.on("stop", handleStop);
     return () => {
+      Tone.Transport.stop();
+      Tone.Transport.cancel();
       Tone.Transport.off("stop", handleStop);
     };
   }, []);

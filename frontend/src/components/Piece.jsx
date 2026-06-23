@@ -12,16 +12,16 @@ export class Piece {
   #description;
   #navStr;
   #backgroundImageURL;
-  #LH;
   #RH;
+  #LH;
   
-  constructor(title, description, navStr, backgroundImageURL, LH, RH) {
+  constructor(title, description, navStr, backgroundImageURL, RH, LH) {
     this.#title = title;
     this.#description = description;
     this.#navStr = navStr;
     this.#backgroundImageURL = backgroundImageURL;
-    this.#LH = LH;
     this.#RH = RH;
+    this.#LH = LH;
   }
 
   get title() {
@@ -66,45 +66,45 @@ export class Piece {
   }
 
   display = (synthRef, barsRef, sideEffect) => () => {
-    this.#displayOneHand(this.#LH, synthRef, barsRef, sideEffect)();
     this.#displayOneHand(this.#RH, synthRef, barsRef, sideEffect)();
+    this.#displayOneHand(this.#LH, synthRef, barsRef, sideEffect)();
   }
 
   breakChords = () => {
-    const LHMap = new Map(), RHMap = new Map();
-    
+    const RHMap = new Map(), LHMap = new Map();
+
     let currentTime = 0;
-    for (let i = 0; i < this.#LH.length; i++) {
-      if (this.#LH[i].chord !== "R") {
-        LHMap.set(currentTime, i);
-      }
-      currentTime += 100 * this.#LH[i].duration;
-    }
-    currentTime = 0;
     for (let i = 0; i < this.#RH.length; i++) {
       if (this.#RH[i].chord !== "R") {
         RHMap.set(currentTime, i);
       }
       currentTime += 100 * this.#RH[i].duration;
     }
+    currentTime = 0;
+    for (let i = 0; i < this.#LH.length; i++) {
+      if (this.#LH[i].chord !== "R") {
+        LHMap.set(currentTime, i);
+      }
+      currentTime += 100 * this.#LH[i].duration;
+    }
 
     let totTime = currentTime;
     let result = [];
     for (let t = 0; t <= totTime; t++) {
       let s = new Set();
-      if (LHMap.get(t) !== undefined) {
-        const i = LHMap.get(t);
-        for (const sym of this.#LH[i].chord.split(" ")) {
-          s.add(sym);
-        }
-      }
       if (RHMap.get(t) !== undefined) {
         const i = RHMap.get(t);
         for (const sym of this.#RH[i].chord.split(" ")) {
           s.add(sym);
         }
       }
-
+      if (LHMap.get(t) !== undefined) {
+        const i = LHMap.get(t);
+        for (const sym of this.#LH[i].chord.split(" ")) {
+          s.add(sym);
+        }
+      }
+      
       if (s.size > 0) {
         result.push(s);
       }

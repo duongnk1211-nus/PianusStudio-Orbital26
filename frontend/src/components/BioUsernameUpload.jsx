@@ -201,5 +201,3 @@ export function Bio({ currentBio, onChangeComplete }) {
     </div>
   )
 }
-
-

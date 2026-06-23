@@ -13,6 +13,12 @@ import Display from "./webpages/Display.jsx";
 import Learn from "./webpages/Learn.jsx";
 import P1 from "./components/PianoPieces/P1.jsx";
 import P2 from "./components/PianoPieces/P2.jsx";
+import P3 from "./components/PianoPieces/P3.jsx";
+import P4 from "./components/PianoPieces/P4.jsx";
+import P5 from "./components/PianoPieces/P5.jsx";
+import P6 from "./components/PianoPieces/P6.jsx";
+import P7 from "./components/PianoPieces/P7.jsx";
+import P8 from "./components/PianoPieces/P8.jsx";
 
 export default function App() {
   return (
@@ -31,6 +37,18 @@ export default function App() {
       <Route path="/library/p1/learn"   element={<Learn P = {P1}/>} />
       <Route path="/library/p2/display" element={<Display P = {P2}/>} />
       <Route path="/library/p2/learn"   element={<Learn P = {P2}/>} />
+      <Route path="/library/p3/display" element={<Display P = {P3}/>} />
+      <Route path="/library/p3/learn"   element={<Learn P = {P3}/>} />
+      <Route path="/library/p4/display" element={<Display P = {P4}/>} />
+      <Route path="/library/p4/learn"   element={<Learn P = {P4}/>} />
+      <Route path="/library/p5/display" element={<Display P = {P5}/>} />
+      <Route path="/library/p5/learn"   element={<Learn P = {P5}/>} />
+      <Route path="/library/p6/display" element={<Display P = {P6}/>} />
+      <Route path="/library/p6/learn"   element={<Learn P = {P6}/>} />
+      <Route path="/library/p7/display" element={<Display P = {P7}/>} />
+      <Route path="/library/p7/learn"   element={<Learn P = {P7}/>} />
+      <Route path="/library/p8/display" element={<Display P = {P8}/>} />
+      <Route path="/library/p8/learn"   element={<Learn P = {P8}/>} />
     </Routes>
   );
 }

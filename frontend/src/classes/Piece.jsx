@@ -1,4 +1,4 @@
-import { Note, Notes } from "./Note.jsx";
+import { Notes } from "../components/Notes.jsx";
 import * as Tone from "tone";
 
 const symMap = new Map();

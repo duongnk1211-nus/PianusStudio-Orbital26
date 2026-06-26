@@ -13,11 +13,11 @@ export default function SettingsPage() {
     apiFetch('/user').then(setProfile);
   }, []);
 
-  const lim = useMemo(() => 6, []);
+  const optionLimit = 6;
   const [optionIndex, setOptionIndex] = useState(1);
   const incOptionIndex = () => {
     const prev = optionIndex;
-    if (prev == 6) {
+    if (prev == optionLimit) {
       setOptionIndex(1);
     } else {
       setOptionIndex(prev + 1);
@@ -26,7 +26,7 @@ export default function SettingsPage() {
   const decOptionIndex = () => {
     const prev = optionIndex;
     if (prev == 1) {
-      setOptionIndex(6);
+      setOptionIndex(optionLimit);
     } else {
       setOptionIndex(prev - 1);
     }

@@ -1,4 +1,4 @@
-import { Piece } from "../Piece.jsx";
+import { Piece } from "../../classes/Piece.jsx";
 
 const P6 = new Piece(
   "Happy Birthday to You",

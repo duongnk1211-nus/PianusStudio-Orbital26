@@ -1,6 +1,6 @@
 import { useState, useRef, useEffect } from "react";
 import * as Tone from "tone";
-import { Note, Notes } from "../components/Note.jsx";
+import { Notes } from "../components/Notes.jsx";
 
 export function usePiano(sideEffect) {
   const synthRef = useRef(null);

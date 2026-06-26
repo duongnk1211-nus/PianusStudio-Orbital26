@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import { Note, Notes } from "../components/Note.jsx";
+import { Notes } from "./Notes.jsx";
 import "../styles/Piano.css";
 import "../styles/Synthesia.css";
 

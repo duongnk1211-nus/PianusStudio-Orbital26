@@ -3,7 +3,7 @@ import "../styles/Piano.css";
 import "../styles/Synthesia.css";
 import { apiFetch } from "../components/API";
 import { useNavigate } from "react-router-dom";
-import { Notes } from "../components/Note.jsx";
+import { Notes } from "../components/Notes.jsx";
 import { useKeyboard } from "../hooks/useKeyboard.jsx";
 import { usePiano } from "../hooks/usePiano.jsx";
 import { PianoLayout } from "../components/PianoLayout.jsx";

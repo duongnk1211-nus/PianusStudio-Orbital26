@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { Note, Notes } from "../components/Note.jsx";
+import { Notes } from "../components/Notes.jsx";
 import { keyMaps } from "../components/keyMaps.jsx";
 
 export function useKeyboard(profile, symMap, synthRef, barsRef, sideEffect) {

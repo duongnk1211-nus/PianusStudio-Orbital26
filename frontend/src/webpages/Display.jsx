@@ -1,14 +1,13 @@
-import { useEffect, useRef, useState, useMemo } from "react";
+import { useEffect, useState, useMemo } from "react";
 import * as Tone from "tone";
 import "../styles/Piano.css";
 import "../styles/Synthesia.css";
 import { apiFetch } from "../components/API";
-import { supabase } from "../components/supabaseClient";
+import { Notes } from "../components/Note.jsx";
 import { useNavigate } from "react-router-dom";
-import { Note, Notes } from "../components/Note.jsx";
-import { keyMaps } from "../components/keyMaps.jsx";
-import { useKeyboard } from "../components/useKeyboard.jsx";
-import { usePiano } from "../components/usePiano.jsx";
+import { useKeyboard } from "../hooks/useKeyboard.jsx";
+import { usePiano } from "../hooks/usePiano.jsx";
+import { PianoLayout } from "../components/PianoLayout.jsx";
 
 export default function Display({ P }) {
   const navigate = useNavigate();
@@ -27,22 +26,16 @@ export default function Display({ P }) {
   }, []);
 
   const [profile, setProfile] = useState(null);
-  const [bindingOption, setBindingOption] = useState(1);
 
   useEffect(() => {
     apiFetch('/user').then(setProfile);
   }, []);
 
-  const synthRef = useRef(null);
-  const barsRef = useRef([]);
-  const rafRef = useRef(null);
-  const [displayBars, setDisplayBars] = useState([]);
   const sideEffect = useMemo(() => {
     return (sym, isAttack) => {};
   }, []);
-
+  const { synthRef, barsRef, displayBars } = usePiano(sideEffect);
   useKeyboard(profile, symMap, synthRef, barsRef, sideEffect);
-  usePiano(synthRef, barsRef, rafRef, sideEffect, setDisplayBars);
 
   const [isPlaying, setIsPlaying] = useState(false);
 
@@ -75,35 +68,15 @@ export default function Display({ P }) {
   }, []);
 
   return (
-    <div className="Piano" style={{ backgroundImage: `url(${P.backgroundImageURL})` }}>
-      <button className="return-button" onClick={goBack} style={{width:'65px', paddingBottom:'3px'}}>Return</button>
-      <div className="piano-wrapper">
-        <div>
-        <img src="/PianusStudio.png" style={{background: '#517edfbc'}} />
-        <h1>{P.title}</h1>
-        {/* <p style={{color: '#e7a53c', fontFamily: 'Dancing Script'}}>By Dao Quang Linh</p> */}
-        </div>
-        <button className={isPlaying ? "pause-button" : "play-button"} onClick={flipPlaying}>
-          {isPlaying ? "Pause" : "Play"}
-        </button>
-        <div className="synthesia-container">
-          {displayBars.map(b => (
-            <div
-              key={b.id}
-              className={`synthesia-bar ${b.type}`}
-              style={{
-                left: `${b.left}px`,
-                width: `${b.width - 2}px`,
-                height: `${b.height}px`,
-                top: `${b.top}px`,
-              }}
-            />
-          ))}
-        </div>
-        <div className="key-rows">
-          {Notes.map(n => n.toHTML(synthRef, barsRef, sideEffect))}
-        </div>
-      </div>
-    </div>
+    <PianoLayout 
+      header={P.title} 
+      backgroundImageURL={P.backgroundImageURL} 
+      displayBars={displayBars}
+      synthRef={synthRef}
+      barsRef={barsRef}
+      sideEffect={sideEffect}
+      isPlaying={isPlaying}
+      flipPlaying={flipPlaying}
+    />
   );
 }

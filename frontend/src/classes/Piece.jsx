@@ -42,6 +42,7 @@ export class Piece {
 
   #displayOneHand = (arr, synthRef, barsRef, sideEffect) => {
     async function timeline() {
+      assert(arr.length > 0);
       let currentTime = 0;
       for (let i = 0; i < arr.length; i++) {
         if (arr[i].chord !== "R") {
@@ -72,25 +73,27 @@ export class Piece {
 
   breakChords = () => {
     const RHMap = new Map(), LHMap = new Map();
+    const timeSet = new Set();
 
     let currentTime = 0;
     for (let i = 0; i < this.#RH.length; i++) {
       if (this.#RH[i].chord !== "R") {
         RHMap.set(currentTime, i);
+        timeSet.add(currentTime);
       }
-      currentTime += 100 * this.#RH[i].duration;
+      currentTime += this.#RH[i].duration;
     }
     currentTime = 0;
     for (let i = 0; i < this.#LH.length; i++) {
       if (this.#LH[i].chord !== "R") {
         LHMap.set(currentTime, i);
+        timeSet.add(currentTime);
       }
-      currentTime += 100 * this.#LH[i].duration;
+      currentTime += this.#LH[i].duration;
     }
 
-    let totTime = currentTime;
     let result = [];
-    for (let t = 0; t <= totTime; t++) {
+    for (const t of timeSet) {
       let s = new Set();
       if (RHMap.get(t) !== undefined) {
         const i = RHMap.get(t);

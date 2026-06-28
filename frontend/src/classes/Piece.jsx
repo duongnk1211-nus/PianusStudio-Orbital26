@@ -42,7 +42,6 @@ export class Piece {
 
   #displayOneHand = (arr, synthRef, barsRef, sideEffect) => {
     async function timeline() {
-      assert(arr.length > 0);
       let currentTime = 0;
       for (let i = 0; i < arr.length; i++) {
         if (arr[i].chord !== "R") {

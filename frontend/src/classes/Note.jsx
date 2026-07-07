@@ -57,7 +57,7 @@ export class Note {
     }
   }
 
-  attack = (synthRef, barsRef, sideEffect) => async () => {
+  attack = (synthRef, barsRef, sideEffect, addOn) => async () => {
     await Tone.start();
     
     this.#active = true;
@@ -67,6 +67,7 @@ export class Note {
       id: Date.now() + Math.random(),
       note: this.#sym,
       type: this.#type,
+      addOn: addOn,
       left: this.#computedLeftForNote(),
       width: this.#type === "white" ? WKWidth : BKWidth,
       startTime: Date.now(),
@@ -99,7 +100,7 @@ export class Note {
       return (
         <div
           key={this.#sym}
-          onMouseDown={this.attack(synthRef, barsRef, sideEffect)}
+          onMouseDown={this.attack(synthRef, barsRef, sideEffect, "")}
           onMouseUp={this.release(synthRef, barsRef, sideEffect)}
           className={`white-key ${this.#active ? 'active' : ''} ${(this.#guide && !this.#active) ? 'guide' : ''}`}
         >
@@ -116,7 +117,7 @@ export class Note {
           key={this.#sym}
           className={`black-key ${this.#active ? 'active' : ''} ${(this.#guide && !this.#active) ? 'guide' : ''}`}
           style={{ left: `${left}px` }}
-          onMouseDown={this.attack(synthRef, barsRef, sideEffect)}
+          onMouseDown={this.attack(synthRef, barsRef, sideEffect, "")}
           onMouseUp={this.release(synthRef, barsRef, sideEffect)}
         >
           <span className="black-key-letter-label">

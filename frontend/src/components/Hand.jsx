@@ -17,7 +17,7 @@ export function Hand( { isRightHand, isAttacking } ) {
       <g 
         transform={isRightHand ? "translate(200, 0) scale(-0.0705219, 0.0705219)" : "scale(0.0705219, 0.0705219)"}
       >
-        <path fill="#FFB3A7" stroke="black" stroke-width="4" d="
+        <path fill="#FFB3A7" stroke="black" strokeWidth="4" d="
           M 610.203125 1859.570312 
           L 610.203125 897.300781 
           C 610.203125 836.160156 660.226562 786.128906 721.367188 786.128906  
@@ -64,7 +64,7 @@ export function Hand( { isRightHand, isAttacking } ) {
           ry="111.1640625"
           fill={isAttacking[4] ? "#FF6B6B" : "none"}
           stroke="black"
-          stroke-width="0"
+          strokeWidth="0"
         />
 
         <rect
@@ -76,7 +76,7 @@ export function Hand( { isRightHand, isAttacking } ) {
           ry="125.0585935"
           fill={isAttacking[3] ? "#FFA94D" : "none"}
           stroke="black"
-          stroke-width="0"
+          strokeWidth="0"
         />
 
         <rect
@@ -88,7 +88,7 @@ export function Hand( { isRightHand, isAttacking } ) {
           ry="127.6191405"
           fill={isAttacking[2] ? "#FFD93D" : "none"}
           stroke="black"
-          stroke-width="0"
+          strokeWidth="0"
       />
 
         <rect
@@ -100,7 +100,7 @@ export function Hand( { isRightHand, isAttacking } ) {
           ry="121.039063"
           fill={isAttacking[1] ? "#69DB7C" : "none"}
           stroke="black"
-          stroke-width="0"
+          strokeWidth="0"
         />
 
         <rect
@@ -112,7 +112,7 @@ export function Hand( { isRightHand, isAttacking } ) {
           ry="121.038425"
           fill={isAttacking[0] ? "#4DABF7" : "none"}
           stroke="black"
-          stroke-width="0"
+          strokeWidth="0"
           transform="rotate(26 2105.234375 1455.8496095)"
         />
       </g>

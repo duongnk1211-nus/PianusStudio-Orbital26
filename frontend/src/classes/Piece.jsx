@@ -40,45 +40,44 @@ export class Piece {
     return this.#backgroundImageURL;
   }
 
-  #displayOneHand = (arr, synthRef, barsRef, sideEffect, setIsAttacking) => {
+  #displayOneHand = (arr, synthRef, barsRef, sideEffect, addOn, setIsAttacking) => {
     async function timeline() {
       let currentTime = 0;
       for (let i = 0; i < arr.length; i++) {
-        let C = arr[i].chord.split(" ");
-        let F = arr[i].fingers.split(" ").map(f => parseInt(f));
-        if (C !== "R") {
-          for (const sym of C) {
-            Tone.Transport.schedule(time => {
-              symMap.get(sym).attack(synthRef, barsRef, sideEffect)(time);
-            }, currentTime);
+        let C = arr[i].chord != "" ? arr[i].chord.split(" ") : [];
+        let F = arr[i].fingers ? arr[i].fingers.split(" ").map(f => parseInt(f)) : [];
 
-            Tone.Transport.schedule(time => {
-              symMap.get(sym).release(synthRef, barsRef, sideEffect)(time);
-            }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
-          }
+        for (const sym of C) {
+          Tone.Transport.schedule(time => {
+            (() => {console.log(`Playing ${sym} at time ${time}`)})(time);
+            symMap.get(sym).attack(synthRef, barsRef, sideEffect, addOn)(time);
+          }, currentTime);
 
-          for (const f of F) {
-            console.log("f: ", f);
-            Tone.Transport.schedule(time => {
-              (async() => {
-                setIsAttacking(prev => {
-                  const newIsAttacking = [...prev];
-                  newIsAttacking[f - 1] = true;
-                  return newIsAttacking;
-                });
-              })(time);
-            }, currentTime);
+          Tone.Transport.schedule(time => {
+            symMap.get(sym).release(synthRef, barsRef, sideEffect)(time);
+          }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
+        }
 
-            Tone.Transport.schedule(time => {
-              (async() => {
-                setIsAttacking(prev => {
-                  const newIsAttacking = [...prev];
-                  newIsAttacking[f - 1] = false;
-                  return newIsAttacking;
-                });
-              })(time);
-            }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
-          }
+        for (const f of F) {
+          Tone.Transport.schedule(time => {
+            (async() => {
+              setIsAttacking(prev => {
+              const newIsAttacking = [...prev];
+              newIsAttacking[f - 1] = true;
+              return newIsAttacking;
+              });
+            })(time);
+          }, currentTime);
+
+          Tone.Transport.schedule(time => {
+            (async() => {
+              setIsAttacking(prev => {
+                const newIsAttacking = [...prev];
+                newIsAttacking[f - 1] = false;
+                return newIsAttacking;
+              });
+            })(time);
+          }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
         }
         currentTime += arr[i].duration;
       }
@@ -91,8 +90,8 @@ export class Piece {
   }
 
   display = (synthRef, barsRef, sideEffect, setIsAttackingRight, setIsAttackingLeft) => () => {
-    this.#displayOneHand(this.#RH, synthRef, barsRef, sideEffect, setIsAttackingRight)();
-    this.#displayOneHand(this.#LH, synthRef, barsRef, sideEffect, setIsAttackingLeft)();
+    this.#displayOneHand(this.#RH, synthRef, barsRef, sideEffect, "right", setIsAttackingRight)();
+    this.#displayOneHand(this.#LH, synthRef, barsRef, sideEffect, "left", setIsAttackingLeft)();
   }
 
   breakChords = () => {
@@ -101,7 +100,7 @@ export class Piece {
 
     let currentTimeRight = 0;
     for (let i = 0; i < this.#RH.length; i++) {
-      if (this.#RH[i].chord !== "R") {
+      if (this.#RH[i].chord !== "") {
         RHMap.set(currentTimeRight, i);
         timeSet.add(currentTimeRight);
       }
@@ -109,7 +108,7 @@ export class Piece {
     }
     let currentTimeLeft = 0;
     for (let i = 0; i < this.#LH.length; i++) {
-      if (this.#LH[i].chord !== "R") {
+      if (this.#LH[i].chord !== "") {
         LHMap.set(currentTimeLeft, i);
         timeSet.add(currentTimeLeft);
       }

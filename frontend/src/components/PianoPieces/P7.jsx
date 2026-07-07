@@ -74,7 +74,7 @@ const P7 = new Piece(
 
     { chord: "C4", duration: 1.5 },
     { chord: "G3", duration: 1.5 },
-    { chord: "R", duration: 1.5 },
+    { chord: "", duration: 1.5 },
   ]
 );
 

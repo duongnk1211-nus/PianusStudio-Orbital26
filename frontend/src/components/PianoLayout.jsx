@@ -60,7 +60,7 @@ export function PianoLayout({
           {displayBars.map(b => (
             <div
               key={b.id}
-              className={`synthesia-bar ${b.type}`}
+              className={`synthesia-bar ${b.type} ${b.addOn}`}
               style={{
                 left: `${b.left}px`,
                 width: `${b.width - 2}px`,

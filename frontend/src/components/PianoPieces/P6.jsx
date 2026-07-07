@@ -6,7 +6,7 @@ const P6 = new Piece(
   "p6",
   "/PianoPieces/P6.png",
   [
-    { chord: "R", duration: 1.0 },
+    { chord: "", duration: 1.0 },
     { chord: "C4", duration: 0.25 },
     { chord: "C4", duration: 0.25 },
     { chord: "D4", duration: 0.5 },
@@ -62,7 +62,7 @@ const P6 = new Piece(
     { chord: "F4", duration: 1.5 },
   ],
   [
-    { chord: "R", duration: 1.5 },
+    { chord: "", duration: 1.5 },
     { chord: "F3 A3", duration: 1.5 },
     { chord: "C3 A#3", duration: 1.5 },
     { chord: "C3 A#3", duration: 1.5 },

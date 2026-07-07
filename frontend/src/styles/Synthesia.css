@@ -17,23 +17,33 @@
 
 .synthesia-bar.white {
   background: #D6C9F0;
-  & .right-hand {
-    background: #5DADE2;
-  }
-  & .left-hand {
-    background: #F5B041;
-  }
+  opacity: 0.9;
+}
+
+.synthesia-bar.white.right {
+  background: #5DADE2;
+  opacity: 0.9;
+}
+
+.synthesia-bar.white.left {
+  background: #F5B041;
   opacity: 0.9;
 }
 
 .synthesia-bar.black {
   background: #8E7CC3;
-  & .right-hand {
-    background: #2471A3;
-  }
-  & .left-hand {
-    background: #B9770E;
-  }
+  opacity: 0.95;
+  z-index: 2;
+}
+
+.synthesia-bar.black.right {
+  background: #3498DB;
+  opacity: 0.95;
+  z-index: 2;
+}
+
+.synthesia-bar.black.left {
+  background: #E67E22;
   opacity: 0.95;
   z-index: 2;
 }

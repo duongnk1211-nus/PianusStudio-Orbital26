@@ -124,7 +124,7 @@ body {
   background-position: top;
   background-repeat: no-repeat;
   background-attachment: fixed; 
-  min-height: 160vh;
+  min-height: 170vh;
 }
 
 .piano-wrapper {
@@ -137,11 +137,11 @@ body {
   position: relative;
 }
 
-.piano-wrapper h1 {
+.piano-wrapper h2 {
   position: relative;
   color: #ecb80c;
   font-family: 'Amadeus', cursive;
-  top: 0px;
+  top: -20px;
   padding-bottom: 0px;
 }
 
@@ -220,13 +220,23 @@ body {
   font-size: 14px;
 }
 
+.key-rows {
+  position: relative;
+  top: -40px;
+}
+
+.hands-container {
+  position: relative;
+  top: -40px;
+}
+
 .return-button {
   background: #e7a53c;
 }
 
 .play-button, .pause-button, .start-button, .restart-button {
   position: relative;
-  top: 45px;
+  top: 5px;
   left: -520px;
   transform: translateY(-50%);
 }

@@ -2,6 +2,7 @@ import { useNavigate } from "react-router-dom";
 import { Notes } from "./Notes.jsx";
 import "../styles/Piano.css";
 import "../styles/Synthesia.css";
+import { Hand } from "./Hand.jsx";
 
 export function PianoLayout({ 
   header, 
@@ -13,7 +14,11 @@ export function PianoLayout({
   isPlaying,
   flipPlaying,
   isStarted,
-  start
+  start,
+  isAttackingRight,
+  setIsAttackingRight,
+  isAttackingLeft,
+  setIsAttackingLeft,
 }) {
   const navigate = useNavigate();
   const goBack = () => {
@@ -31,10 +36,8 @@ export function PianoLayout({
       </button>
 
       <div className="piano-wrapper">
-        <div>
-          <img src="/PianusStudio.png" style={{background: '#517edfbc'}} />
-          <h1>{header}</h1>
-        </div>
+        <img src="/PianusStudio.png" style={{scale: "0.5", background: '#517edfbc'}} />
+        <h2>{header}</h2>
         { flipPlaying &&
           <button 
             className={isPlaying ? "pause-button" : "play-button"} 
@@ -70,6 +73,12 @@ export function PianoLayout({
         <div className="key-rows">
           {Notes.map(n => n.toHTML(synthRef, barsRef, sideEffect))}
         </div>
+        { setIsAttackingLeft && setIsAttackingRight && (
+          <div className="hands-container">
+            <Hand isRightHand={false} isAttacking={isAttackingLeft} />
+            <Hand isRightHand={true} isAttacking={isAttackingRight} />
+          </div>
+        )}
       </div>
     </div>
   );

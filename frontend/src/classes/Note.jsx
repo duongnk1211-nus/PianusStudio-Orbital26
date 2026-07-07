@@ -71,7 +71,7 @@ export class Note {
       width: this.#type === "white" ? WKWidth : BKWidth,
       startTime: Date.now(),
       released: false,
-      top: 400,
+      top: 300,
       height: 0,
     });
     sideEffect(this.#sym, true);

@@ -40,18 +40,43 @@ export class Piece {
     return this.#backgroundImageURL;
   }
 
-  #displayOneHand = (arr, synthRef, barsRef, sideEffect) => {
+  #displayOneHand = (arr, synthRef, barsRef, sideEffect, setIsAttacking) => {
     async function timeline() {
       let currentTime = 0;
       for (let i = 0; i < arr.length; i++) {
-        if (arr[i].chord !== "R") {
-          for (const sym of arr[i].chord.split(" ")) {
+        let C = arr[i].chord.split(" ");
+        let F = arr[i].fingers.split(" ").map(f => parseInt(f));
+        if (C !== "R") {
+          for (const sym of C) {
             Tone.Transport.schedule(time => {
               symMap.get(sym).attack(synthRef, barsRef, sideEffect)(time);
             }, currentTime);
 
             Tone.Transport.schedule(time => {
               symMap.get(sym).release(synthRef, barsRef, sideEffect)(time);
+            }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
+          }
+
+          for (const f of F) {
+            console.log("f: ", f);
+            Tone.Transport.schedule(time => {
+              (async() => {
+                setIsAttacking(prev => {
+                  const newIsAttacking = [...prev];
+                  newIsAttacking[f - 1] = true;
+                  return newIsAttacking;
+                });
+              })(time);
+            }, currentTime);
+
+            Tone.Transport.schedule(time => {
+              (async() => {
+                setIsAttacking(prev => {
+                  const newIsAttacking = [...prev];
+                  newIsAttacking[f - 1] = false;
+                  return newIsAttacking;
+                });
+              })(time);
             }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
           }
         }
@@ -65,30 +90,30 @@ export class Piece {
     return timeline;
   }
 
-  display = (synthRef, barsRef, sideEffect) => () => {
-    this.#displayOneHand(this.#RH, synthRef, barsRef, sideEffect)();
-    this.#displayOneHand(this.#LH, synthRef, barsRef, sideEffect)();
+  display = (synthRef, barsRef, sideEffect, setIsAttackingRight, setIsAttackingLeft) => () => {
+    this.#displayOneHand(this.#RH, synthRef, barsRef, sideEffect, setIsAttackingRight)();
+    this.#displayOneHand(this.#LH, synthRef, barsRef, sideEffect, setIsAttackingLeft)();
   }
 
   breakChords = () => {
     const RHMap = new Map(), LHMap = new Map();
     const timeSet = new Set();
 
-    let currentTime = 0;
+    let currentTimeRight = 0;
     for (let i = 0; i < this.#RH.length; i++) {
       if (this.#RH[i].chord !== "R") {
-        RHMap.set(currentTime, i);
-        timeSet.add(currentTime);
+        RHMap.set(currentTimeRight, i);
+        timeSet.add(currentTimeRight);
       }
-      currentTime += this.#RH[i].duration;
+      currentTimeRight += this.#RH[i].duration;
     }
-    currentTime = 0;
+    let currentTimeLeft = 0;
     for (let i = 0; i < this.#LH.length; i++) {
       if (this.#LH[i].chord !== "R") {
-        LHMap.set(currentTime, i);
-        timeSet.add(currentTime);
+        LHMap.set(currentTimeLeft, i);
+        timeSet.add(currentTimeLeft);
       }
-      currentTime += this.#LH[i].duration;
+      currentTimeLeft += this.#LH[i].duration;
     }
 
     let result = [];

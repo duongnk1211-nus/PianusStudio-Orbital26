@@ -27,7 +27,7 @@ export function usePiano(sideEffect) {
             return { ...b, top: b.top - FLY_SPEED };
           }
         })
-        .filter(b => b.top + b.height > -600);
+        .filter(b => b.top + b.height > -1000);
 
       setDisplayBars([...barsRef.current]);
       rafRef.current = requestAnimationFrame(tick);

@@ -49,7 +49,6 @@ export class Piece {
 
         for (const sym of C) {
           Tone.Transport.schedule(time => {
-            (() => {console.log(`Playing ${sym} at time ${time}`)})(time);
             symMap.get(sym).attack(synthRef, barsRef, sideEffect, addOn)(time);
           }, currentTime);
 

@@ -11,11 +11,13 @@ import ProfilePage from "./webpages/Profile.jsx";
 import SettingsPage from "./webpages/Settings.jsx";
 import Display from "./webpages/Display.jsx";
 import Learn from "./webpages/Learn.jsx";
+import LessonsPage from "./webpages/Lessons.jsx";
 import { Pieces } from "./components/Pieces.jsx";
 
 export default function App() {
   return (
     <Routes>
+      <Route path="/lessons"         element={<LessonsPage />} />
       <Route path="/profile"         element={<ProfilePage />} />
       <Route path="/settings"        element={<SettingsPage />} />
       <Route path="/library"         element={<Library />} />

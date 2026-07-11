@@ -11,12 +11,17 @@ import ProfilePage from "./webpages/Profile.jsx";
 import SettingsPage from "./webpages/Settings.jsx";
 import Display from "./webpages/Display.jsx";
 import Learn from "./webpages/Learn.jsx";
+import Scoring from "./webpages/Scoring.jsx";
+import GetReady from "./webpages/GetReady.jsx";
 import LessonsPage from "./webpages/Lessons.jsx";
 import { Pieces } from "./components/Pieces.jsx";
 
 export default function App() {
   return (
     <Routes>
+      <Route path="/lessons/moonlight-sonata/get-ready" element={<GetReady />} />
+      <Route path="/lessons/moonlight-sonata" element={<Scoring />} />
+
       <Route path="/lessons"         element={<LessonsPage />} />
       <Route path="/profile"         element={<ProfilePage />} />
       <Route path="/settings"        element={<SettingsPage />} />

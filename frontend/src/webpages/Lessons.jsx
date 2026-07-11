@@ -26,8 +26,7 @@ export default function LessonsPage() {
       <div className="lessons-header">
         <button onClick={goBack}>Return</button>
         <h1 className="energetic-title">Learn & Score!</h1>
-        <p>"The piano is the easiest instrument to play in the beginning, and the hardest to master in the end."
-        <span style={{ marginTop: '0px', fontStyle: 'italic' }}> - Vladimir Horowitz</span></p>
+        <p>Pick your favourite & master it!</p>
       </div>
 
       <table>
@@ -42,7 +41,7 @@ export default function LessonsPage() {
         </thead>
         <tbody>
           {songs.map((song) => (
-            <tr key={song.rank} onClick={() => navigate(`/lessons/${song.title.replace(/\s+/g, '-').toLowerCase()}`)}>
+            <tr key={song.rank} onClick={() => navigate(`/lessons/${song.title.replace(/\s+/g, '-').toLowerCase()}/get-ready`)}>
               <td>{song.rank}</td>
               <td>{song.title}</td>
               <td>{song.author}</td>

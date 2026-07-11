@@ -1,0 +1,54 @@
+.scoring-body {
+  display: block;
+  min-height: 200vh;
+  background-image: url('/LessonsBackGround.png');
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  justify-content: center;
+  align-items: center;
+}
+
+.scoring-header {
+  height: 10vh;
+  position: relative;
+  padding-top: 0px;
+}
+
+.scoring-header h1 {
+  font-size: 2.5rem;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+  height: 10vh;
+}
+
+.scoring-header button {
+  position:absolute;
+  height: 5vh;
+  width: 12vh;
+  top: 0px;
+  left: 20px;
+  justify-content: center;
+  padding: 8px 7px 8px 7px;
+  display: inline-block;
+  letter-spacing: 2px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fbfcf9;
+  background: linear-gradient(90deg, #ff6b00, #ff00c8, #00ffff);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 20px #ff00c8, 0 0 40px #00ffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.scoring-header button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px #ff6b00, 0 0 60px #00ffff;
+}

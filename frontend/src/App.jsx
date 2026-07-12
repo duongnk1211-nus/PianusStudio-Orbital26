@@ -20,7 +20,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/lessons/moonlight-sonata/get-ready" element={<GetReady />} />
-      <Route path="/lessons/moonlight-sonata" element={<Scoring />} />
+      <Route path="/lessons/moonlight-sonata/play" element={<Scoring />} />
 
       <Route path="/lessons"         element={<LessonsPage />} />
       <Route path="/profile"         element={<ProfilePage />} />

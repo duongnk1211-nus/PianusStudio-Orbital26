@@ -1,17 +1,160 @@
 import "../styles/Scoring.css";
+import { useEffect, useState, useRef, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
+import { Notes } from "../components/Notes.jsx";
+import P9 from "../components/PianoPieces/P9.jsx";
+import * as Tone from "tone";
 
 export default function Scoring() {
-  const navigate = useNavigate();
+  const [displayBars, setDisplayBars] = useState([]);
+  const synthRef = useRef(null);
+  const barsRef = useRef([]);
+  const rafRef = useRef(null);
 
-  const goBack = () => {
-    navigate(-1);
-  };
+  const sideEffect = useMemo(() => {
+    return (sym, isAttack) => { };
+  }, []);
+
+  useEffect(() => {
+    synthRef.current = new Tone.Sampler({
+      urls: { "D#1": "Ds1.mp3", "F#1": "Fs1.mp3", A1: "A1.mp3", C2: "C2.mp3", "D#2": "Ds2.mp3", "F#2": "Fs2.mp3", A2: "A2.mp3", C3: "C3.mp3", "D#3": "Ds3.mp3", "F#3": "Fs3.mp3", A3: "A3.mp3", C4: "C4.mp3", "D#4": "Ds4.mp3", "F#4": "Fs4.mp3", A4: "A4.mp3", C5: "C5.mp3", "D#5": "Ds5.mp3", "F#5": "Fs5.mp3", A5: "A5.mp3", C6: "C6.mp3", "D#6": "Ds6.mp3", "F#6": "Fs6.mp3", A6: "A6.mp3", C7: "C7.mp3", "D#7": "Ds7.mp3", "F#7": "Fs7.mp3", A7: "A7.mp3", C8: "C8.mp3" },
+      release: 1,
+      baseUrl: "https://tonejs.github.io/audio/salamander/",
+    }).toDestination();
+
+    const GROW_SPEED = 2;
+    const FALL_SPEED = 2;
+
+    const tick = () => {
+      barsRef.current = barsRef.current
+        .map(b => {
+          if (!b.released) {
+            return { ...b, height: b.height + GROW_SPEED, top: -2 + GROW_SPEED };
+          } else {
+            return { ...b, top: b.top + FALL_SPEED };
+          }
+        })
+        .filter(b => b.top < 420);
+
+      setDisplayBars([...barsRef.current]);
+      rafRef.current = requestAnimationFrame(tick);
+    };
+    rafRef.current = requestAnimationFrame(tick);
+
+    for (const note of Notes) {
+      note.release(synthRef, barsRef, sideEffect)();
+      note.unsetGuide();
+    }
+
+    return () => {
+      cancelAnimationFrame(rafRef.current);
+      synthRef.current?.releaseAll();
+      synthRef.current?.dispose();
+      barsRef.current = [];
+      rafRef.current = null;
+      setDisplayBars([]);
+    };
+  }, []);
+
+  const [isPlaying, setIsPlaying] = useState(false);
+
+  const flipPlaying = () => {
+      const prev = isPlaying;
+      if (prev == false) {
+        if (Tone.Transport.state == "stopped") {
+          P9.display(synthRef, barsRef, sideEffect)();
+        }
+        Tone.Transport.start();
+      } else {
+        Tone.Transport.pause();
+        synthRef.current?.releaseAll();
+      }
+      setIsPlaying(!prev);
+    }
+/*
+  useEffect(() => {
+    P9.display(synthRef, barsRef, sideEffect)();
+    Tone.Transport.start();
+
+    return () => {
+      Tone.Transport.stop();
+      Tone.Transport.cancel();
+      synthRef.current?.releaseAll();
+      Tone.Transport.off("stop", () => { });
+    };
+  }, []); */
+ 
+  useEffect(() => {
+      Tone.Transport.stop();
+      Tone.Transport.cancel();
+      Tone.Transport.on("stop", () => {});
+      return () => {
+        Tone.Transport.stop();
+        Tone.Transport.cancel();
+        Tone.Transport.off("stop", () => {});
+      };
+    }, []);
+
   return (
-    <div className="scoring-body">
+    <div className="scoring-body" style={{ backgroundImage: `url(${P9.backgroundImageURL})` }}>
+      <button onClick={flipPlaying}>
+        {isPlaying ? "Pause" : "Play"}
+      </button>
       <div className="scoring-header">
-        <button onClick={goBack}>Return</button>
         <h1 className="energetic-title">Moonlight Sonata</h1>
+      </div>
+      <div className="scoring-piano">
+        <div className="scoring-synthesia">
+          {displayBars.map(b => (
+            <div
+              key={b.id}
+              className={`scoring-synthesia-bar ${b.type}`}
+              style={{
+                left: `${b.left}px`,
+                width: `${b.width - 2}px`,
+                height: `${b.height}px`,
+                top: `${b.top}px`
+              }}
+            />
+          ))}
+        </div>
+        <div className="key-rows">
+          {Notes.map(n => {
+            if (n.type == "white") {
+              return (
+                <div
+                  key={n.sym}
+                  onMouseDown={n.attack(synthRef, barsRef, sideEffect)}
+                  onMouseUp={n.release(synthRef, barsRef, sideEffect)}
+                  className={`white-key ${n.active ? 'active' : ''} ${(n.guide && !n.active) ? 'guide' : ''}`}
+                >
+                  <span className="white-key-letter-label">
+                    {n.key.toUpperCase()}
+                  </span>
+                </div>
+              );
+            }
+            else {
+              const left = n.computedLeftForNote();
+              return (
+                <div
+                  key={n.sym}
+                  className={`black-key ${n.active ? 'active' : ''} ${(n.guide && !n.active) ? 'guide' : ''}`}
+                  style={{ left: `${left}px` }}
+                  onMouseDown={n.attack(synthRef, barsRef, sideEffect)}
+                  onMouseUp={n.release(synthRef, barsRef, sideEffect)}
+                >
+                  <span className="black-key-letter-label">
+                    {n.key.toUpperCase()}
+                  </span>
+                </div>
+              );
+            }
+          }
+          )}
+        </div>
+        <span className="corner-bl" />
+        <span className="corner-br" />
       </div>
     </div>
   )

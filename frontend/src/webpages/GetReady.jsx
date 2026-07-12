@@ -50,7 +50,7 @@ export default function GetReady() {
         </table>
         <div className="get-ready-buttons">
             <button onClick={goBack}>Return</button>
-            <button onClick={() => navigate(`/lessons/moonlight-sonata`)}>Start</button>
+            <button onClick={() => navigate(`/lessons/moonlight-sonata/play`)}>Start</button>
         </div>
       </div>
     </div>

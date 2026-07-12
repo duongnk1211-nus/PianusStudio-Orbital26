@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import * as Tone from "tone";
 import "../styles/Piano.css";
 
@@ -27,6 +26,22 @@ export class Note {
 
   get key() {
     return this.#key;
+  }
+
+  get type() {
+    return this.#type;
+  }
+
+  get active() {
+    return this.#active;
+  }
+  
+  get guide() {
+    return this.#guide;
+  }
+
+  computedLeftForNote() {
+    return this.#computedLeftForNote();
   }
 
   set key(newKey) {

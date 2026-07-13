@@ -1,6 +1,5 @@
 .synthesia-container {
   position: relative;
-  top: -40px;
   width: calc(22 * (var(--white-key-width) + var(--white-key-gap)) - var(--white-key-gap));
   height: 300px;
   overflow: hidden;

@@ -46,6 +46,7 @@ export default function Learn({ P }) {
   }, []);
   const [activeKeys, setActiveKeys] = useState(new Set());
   const currentIndexRef = useRef(-1);
+  const completedRef = useRef(false);
   
   const isSubset = (setA, setB) => {
     if (setA.size > setB.size) return false;

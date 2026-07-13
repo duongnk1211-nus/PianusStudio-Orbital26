@@ -1,10 +1,10 @@
-import { Piece } from "../../classes/Piece.jsx";
+import { FingerPiece } from "../../classes/FingerPiece.jsx";
 
-const P7 = new Piece(
+const P7 = new FingerPiece(
   "Silent Night",
   "Silent Night is one of the most peaceful and cherished Christmas carols ever written. Its gentle, lullaby-like melody flows softly from note to note, creating a warm and calming atmosphere that feels magical every time you play it. Perfect for the holiday season — or any time you need a moment of quiet beauty!",
   "p7",
-  "/PianoPieces/P7.jpg",
+  "/FingerPieces/P7.jpg",
   [
     { chord: "G4", fingers: "3", duration: 0.75 },
     { chord: "A4", fingers: "4", duration: 0.25 },

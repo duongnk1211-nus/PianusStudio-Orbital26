@@ -5,12 +5,12 @@ import "../styles/Synthesia.css";
 import { Hand } from "./Hand.jsx";
 
 export function PianoLayout({ 
-  header, 
-  backgroundImageURL, 
-  displayBars, 
-  synthRef, 
-  barsRef, 
-  sideEffect, 
+  header,
+  backgroundImageURL,
+  displayBars,
+  synthRef,
+  barsRef,
+  sideEffect,
   isPlaying,
   flipPlaying,
   isStarted,
@@ -19,6 +19,8 @@ export function PianoLayout({
   setIsAttackingRight,
   isAttackingLeft,
   setIsAttackingLeft,
+  status,
+  flipRecording,
 }) {
   const navigate = useNavigate();
   const goBack = () => {
@@ -38,7 +40,7 @@ export function PianoLayout({
       <div className="piano-wrapper">
         <img src="/PianusStudio.png" style={{scale: "0.5", background: '#517edfbc'}} />
         <h2>{header}</h2>
-        { flipPlaying &&
+        { flipPlaying && !flipRecording &&
           <button 
             className={isPlaying ? "pause-button" : "play-button"} 
             onClick={flipPlaying}
@@ -46,6 +48,31 @@ export function PianoLayout({
             {isPlaying ? "Pause" : "Play"}
           </button>
         }
+        { flipRecording && !flipPlaying &&
+          <button 
+            className={isRecording ? "stop-button" : "record-button"} 
+            onClick={flipRecording}
+          >
+            {isRecording ? "Stop" : "Record"}
+          </button>
+        }
+        { flipPlaying && flipRecording && 
+          <button 
+            className={status === "recording" ? "stop-button" : status === "stopped" ? "record-button" : "disabled-record-button" } 
+            onClick={status === "playing" ? () => {} : flipRecording}
+          >
+            {status === "recording" ? "Stop" : "Record"}
+          </button>
+        }
+        { flipPlaying && flipRecording && 
+          <button 
+            className={status === "playing" ? "pause-button" : status === "stopped" ? "play-button" : "disabled-play-button" } 
+            onClick={status === "recording" ? () => {} : flipPlaying}
+          >
+            {status === "playing" ? "Pause" : "Play"}
+          </button>
+        }
+
         { start && 
           <button 
             className={isStarted ? "restart-button" : "start-button"} 

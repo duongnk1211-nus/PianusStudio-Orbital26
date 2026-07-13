@@ -208,7 +208,7 @@ body {
   cursor: pointer;
 }
 
-.Piano button:hover {
+.Piano button:hover:not(.disabled-play-button):not(.disabled-record-button) {
   background: #ef8d05d6;
 }
 
@@ -220,24 +220,21 @@ body {
   font-size: 14px;
 }
 
-.key-rows {
-  position: relative;
-  top: -40px;
-}
-
-.hands-container {
-  position: relative;
-  top: -40px;
-}
-
 .return-button {
   background: #e7a53c;
 }
 
-.play-button, .pause-button, .start-button, .restart-button {
-  position: relative;
-  top: 5px;
-  left: -520px;
+.play-button, .pause-button, .disabled-play-button {
+  position: absolute;
+  top: 200px;
+  left: 40px;
+  transform: translateY(-50%);
+}
+
+.record-button, .stop-button, .start-button, .restart-button, .disabled-record-button {
+  position: absolute;
+  top: 160px;
+  left: 40px;
   transform: translateY(-50%);
 }
 
@@ -255,4 +252,12 @@ body {
 
 .restart-button {
   background: #e7a53c;
+}
+
+.record-button {
+  background: green;
+}
+
+.stop-button {
+  background: red;
 }

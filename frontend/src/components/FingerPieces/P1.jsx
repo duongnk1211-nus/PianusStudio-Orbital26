@@ -1,10 +1,10 @@
-import { Piece } from "../../classes/Piece.jsx";
+import { FingerPiece } from "../../classes/FingerPiece.jsx";
 
-const P1 = new Piece(
+const P1 = new FingerPiece(
   "Twinkle, Twinkle, Little Star",
   "Playing Twinkle, Twinkle, Little Star on the piano is the ultimate beginner's rite of passage. Its memorable A-B-C-C-A-B song structure uses only six white keys in the C major scale—Middle C through A. The melody is highly repetitive, making it incredibly easy to memorize and play by ear!",
   "p1",
-  "/PianoPieces/P1.jpg",
+  "/FingerPieces/P1.jpg",
   [
     { chord: "C5", fingers: "1", duration: 0.5 },
     { chord: "C5", fingers: "1", duration: 0.5 },

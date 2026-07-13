@@ -1,10 +1,10 @@
-import { Piece } from "../../classes/Piece.jsx";
+import { FingerPiece } from "../../classes/FingerPiece.jsx";
 
-const P8 = new Piece(
+const P8 = new FingerPiece(
   "Jingle Bell",
-  "Jingle Bells is the ultimate feel-good holiday classic that never gets old! Its bouncy, upbeat rhythm is instantly recognizable and impossible not to sing along to. This is one of those pieces that puts a smile on everyone's face the moment you start playing — festive, fun, and endlessly joyful!",
+  "Jingle Bells is the ultimate feel-good holiday classic that never gets old! Its bouncy, upbeat rhythm is instantly recognizable and impossible not to sing along to. This is one of those FingerPieces that puts a smile on everyone's face the moment you start playing — festive, fun, and endlessly joyful!",
   "p8",
-  "/PianoPieces/P8.jpg",
+  "/FingerPieces/P8.jpg",
   [
     { chord: "", duration: 0.375 },
     { chord: "G4", fingers: "1", duration: 0.375 },

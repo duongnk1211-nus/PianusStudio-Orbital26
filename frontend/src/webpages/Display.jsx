@@ -43,8 +43,8 @@ export default function Display({ P }) {
   
   const flipPlaying = () => {
     const prev = isPlaying;
-    if (prev == false) {
-      if (Tone.Transport.state == "stopped") {
+    if (prev === false) {
+      if (Tone.Transport.state === "stopped") {
         P.display(synthRef, barsRef, sideEffect, setIsAttackingRight, setIsAttackingLeft)();
       }
       Tone.Transport.start();

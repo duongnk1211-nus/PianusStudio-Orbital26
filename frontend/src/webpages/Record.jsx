@@ -42,10 +42,23 @@ export default function Record() {
 
   useEffect(() => { statusRef.current = status; }, [status]);
 
+  const lastAttackRef = useRef({});
+  const MIN_NOTE_LENGTH = 0.05;
+
   const sideEffect = useMemo(() => {
     return (sym, isAttack) => {
       if (statusRef.current !== "recording") return;
-      const t = Tone.Transport.seconds;
+      let t = Tone.Transport.seconds;
+
+      if (isAttack) {
+        if (lastAttackRef.current[sym] !== undefined) return;
+        lastAttackRef.current[sym] = t;
+      } else {
+        const attackTime = lastAttackRef.current[sym];
+        if (attackTime === undefined) return;
+        t = Math.max(attackTime + MIN_NOTE_LENGTH, t);
+        delete lastAttackRef.current[sym];
+      }
 
       setP(prev => {
         const newP = new Piece(prev.duration, [...prev.actions]);
@@ -60,6 +73,7 @@ export default function Record() {
     await Tone.start();
     if (statusRef.current === "stopped") {
       if (Tone.Transport.state === "stopped") {
+        synthRef.current?.releaseAll();
         Tone.Transport.cancel();
         P.display(synthRef, barsRef, sideEffect)();
       }
@@ -75,14 +89,19 @@ export default function Record() {
   const flipRecording = async () => {
     if (statusRef.current === "stopped") {
       Tone.Transport.cancel();
+      lastAttackRef.current = {};
       setP(new Piece(0.0, []));
       Tone.Transport.seconds = 0;
       Tone.Transport.start();
       setStatus("recording");
     } else {
       const D = Tone.Transport.seconds;
+      const openSyms = Object.entries(lastAttackRef.current);
       setP(prev => {
         const newP = new Piece(D, [...prev.actions]);
+        for (const [sym, attackTime] of openSyms) {
+          newP.addAction({ type: "release", sym, time: Math.max(D, attackTime + MIN_NOTE_LENGTH) });
+        }
         return newP;
       });
       Tone.Transport.pause();

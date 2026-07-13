@@ -82,7 +82,7 @@ export class FingerPiece {
       }
 
       Tone.Transport.schedule(time => {
-        Tone.Transport.stop(time);
+        Tone.Transport.stop();
       }, currentTime);
     }
     return timeline;

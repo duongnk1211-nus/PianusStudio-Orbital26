@@ -57,11 +57,13 @@ export class Note {
     }
   }
 
-  attack = (synthRef, barsRef, sideEffect, addOn) => async () => {
-    await Tone.start();
+  attack = (synthRef, barsRef, sideEffect, addOn) => async (time) => {
+    if (this.#active) return;
+
+    if (time === undefined) await Tone.start();
     
     this.#active = true;
-    synthRef.current.triggerAttack(this.#sym);
+    synthRef.current.triggerAttack(this.#sym, time);
 
     barsRef.current.push({
       id: Date.now() + Math.random(),
@@ -78,9 +80,11 @@ export class Note {
     sideEffect(this.#sym, true);
   }
 
-  release = (synthRef, barsRef, sideEffect) => async() => {
+  release = (synthRef, barsRef, sideEffect) => async(time) => {
+    if (!this.#active) return;
+
     this.#active = false;
-    synthRef.current.triggerRelease(this.#sym);
+    synthRef.current.triggerRelease(this.#sym, time);
     barsRef.current = barsRef.current.map(b =>
       b.note === this.#sym && !b.released ? { ...b, released: true } : b
     );
@@ -100,8 +104,9 @@ export class Note {
       return (
         <div
           key={this.#sym}
-          onMouseDown={this.attack(synthRef, barsRef, sideEffect, "")}
-          onMouseUp={this.release(synthRef, barsRef, sideEffect)}
+          onMouseDown={() => this.attack(synthRef, barsRef, sideEffect, "")()}
+          onMouseLeave={() => this.release(synthRef, barsRef, sideEffect)()}
+          onMouseUp={() => this.release(synthRef, barsRef, sideEffect)()}
           className={`white-key ${this.#active ? 'active' : ''} ${(this.#guide && !this.#active) ? 'guide' : ''}`}
         >
           <span className="white-key-letter-label">
@@ -117,8 +122,9 @@ export class Note {
           key={this.#sym}
           className={`black-key ${this.#active ? 'active' : ''} ${(this.#guide && !this.#active) ? 'guide' : ''}`}
           style={{ left: `${left}px` }}
-          onMouseDown={this.attack(synthRef, barsRef, sideEffect, "")}
-          onMouseUp={this.release(synthRef, barsRef, sideEffect)}
+          onMouseDown={() => this.attack(synthRef, barsRef, sideEffect, "")()}
+          onMouseLeave={() => this.release(synthRef, barsRef, sideEffect)()}
+          onMouseUp={() => this.release(synthRef, barsRef, sideEffect)()}
         >
           <span className="black-key-letter-label">
             {this.#key.toUpperCase()}

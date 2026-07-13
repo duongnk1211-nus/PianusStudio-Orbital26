@@ -41,10 +41,12 @@ export default function Display({ P }) {
   const [isAttackingRight, setIsAttackingRight] = useState([false, false, false, false, false]);
   const [isAttackingLeft, setIsAttackingLeft] = useState([false, false, false, false, false]);
   
-  const flipPlaying = () => {
+  const flipPlaying = async () => {
     const prev = isPlaying;
     if (prev === false) {
       if (Tone.Transport.state === "stopped") {
+        synthRef.current?.releaseAll();
+        Tone.Transport.cancel();
         P.display(synthRef, barsRef, sideEffect, setIsAttackingRight, setIsAttackingLeft)();
       }
       Tone.Transport.start();

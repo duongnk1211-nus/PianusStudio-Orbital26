@@ -48,7 +48,7 @@ export class Piece {
         }
       }
       Tone.Transport.schedule(time => {
-        Tone.Transport.stop(time);
+        Tone.Transport.stop();
       }, duration);
     }
     return timeline;

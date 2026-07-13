@@ -5,7 +5,7 @@ export default function GetReady() {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate(-1);
+    navigate('/lessons');
   }
 
   const songs = [
@@ -29,6 +29,7 @@ export default function GetReady() {
         <h1>Are you ready?</h1>
         <p>Moonlight Sonata</p>
         <p style={{ marginTop: '30px', marginLeft: '20px', textAlign: 'left', fontFamily: 'Orbitron' }}>Difficulty Level: 1500</p>
+        <p style={{ marginTop: '0px', marginLeft: '20px', textAlign: 'left', fontFamily: 'Orbitron' }}>Your current score: 0</p>
         <p style={{ marginTop: '0px', marginLeft: '20px', textAlign: 'left', fontFamily: 'Orbitron' }}>Your top score: 0</p>
         <table>
           <thead>
@@ -50,6 +51,7 @@ export default function GetReady() {
         </table>
         <div className="get-ready-buttons">
             <button onClick={goBack}>Return</button>
+            <button onClick={() => navigate(`/lessons/moonlight-sonata/demo`)}>Watch</button>
             <button onClick={() => navigate(`/lessons/moonlight-sonata/play`)}>Start</button>
         </div>
       </div>

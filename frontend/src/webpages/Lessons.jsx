@@ -5,7 +5,7 @@ export default function LessonsPage() {
   const navigate = useNavigate();
 
   const goBack = () => {
-    navigate(-1);
+    navigate('/');
   }
 
   const songs = [

@@ -14,7 +14,7 @@ export class Piece {
   #backgroundImageURL;
   #RH;
   #LH;
-  
+
   constructor(title, description, navStr, backgroundImageURL, RH, LH) {
     this.#title = title;
     this.#description = description;
@@ -70,6 +70,77 @@ export class Piece {
     this.#displayOneHand(this.#LH, synthRef, barsRef, sideEffect)();
   }
 
+  #displayOneHandForScoring = (arr, synthRef, barsRef, sideEffect) => {
+    async function timeline() {
+      let currentTime = 0;
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].chord !== "R") {
+          for (const sym of arr[i].chord.split(" ")) {
+            Tone.Transport.schedule(time => {
+              symMap.get(sym).attackForScoring(synthRef, barsRef, sideEffect)(time);
+            }, currentTime);
+
+            Tone.Transport.schedule(time => {
+              symMap.get(sym).releaseForScoring(synthRef, barsRef, sideEffect)(time);
+            }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
+          }
+        }
+        currentTime += arr[i].duration;
+      }
+
+      return currentTime;
+    }
+    return timeline;
+  }
+
+  displayForScoring = (synthRef, barsRef, sideEffect) => async () => {
+    const rhDuration = await this.#displayOneHandForScoring(this.#RH, synthRef, barsRef, sideEffect)();
+    const lhDuration = await this.#displayOneHandForScoring(this.#LH, synthRef, barsRef, sideEffect)();
+    const totalDuration = Math.max(rhDuration, lhDuration);
+
+    Tone.Transport.schedule(() => {
+      Tone.Transport.stop();
+    }, totalDuration); // single stop, timed to whichever hand finishes last
+
+  }
+
+  #displayOneHandForDemoScoring = (arr, synthRef, barsRef, sideEffect) => {
+    async function timeline() {
+      let currentTime = 3.2;
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].chord !== "R") {
+          for (const sym of arr[i].chord.split(" ")) {
+            Tone.Transport.schedule(time => {
+              symMap.get(sym).attackWithoutBars(synthRef, barsRef, sideEffect)(time);
+            }, currentTime);
+
+            Tone.Transport.schedule(time => {
+              symMap.get(sym).releaseWithoutBars(synthRef, barsRef, sideEffect)(time);
+            }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
+          } 
+        }
+        currentTime += arr[i].duration;
+      }
+
+      return currentTime;
+    }
+    return timeline;
+  }
+
+  displayForDemoScoring = (synthRef, barsRef, sideEffect) => async () => {
+    const rhDuration = await this.#displayOneHandForScoring(this.#RH, synthRef, barsRef, sideEffect)();
+    const lhDuration = await this.#displayOneHandForScoring(this.#LH, synthRef, barsRef, sideEffect)();
+    const rhDemoDuration = await this.#displayOneHandForDemoScoring(this.#RH, synthRef, barsRef, sideEffect)();
+    const lhDemoDuration = await this.#displayOneHandForDemoScoring(this.#LH, synthRef, barsRef, sideEffect)();
+    const totalDuration = Math.max(rhDuration, lhDuration, rhDemoDuration, lhDemoDuration);
+
+    Tone.Transport.schedule(() => {
+      Tone.Transport.stop();
+    }, totalDuration); // single stop, timed to whichever hand finishes last
+
+  }
+
+
   breakChords = () => {
     const RHMap = new Map(), LHMap = new Map();
     const timeSet = new Set();
@@ -106,7 +177,7 @@ export class Piece {
           s.add(sym);
         }
       }
-      
+
       if (s.size > 0) {
         result.push(s);
       }

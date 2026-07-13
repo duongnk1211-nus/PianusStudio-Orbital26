@@ -12,6 +12,7 @@ import SettingsPage from "./webpages/Settings.jsx";
 import Display from "./webpages/Display.jsx";
 import Learn from "./webpages/Learn.jsx";
 import Scoring from "./webpages/Scoring.jsx";
+import { ScoringDemo } from "./webpages/Scoring.jsx";
 import GetReady from "./webpages/GetReady.jsx";
 import LessonsPage from "./webpages/Lessons.jsx";
 import { Pieces } from "./components/Pieces.jsx";
@@ -19,6 +20,7 @@ import { Pieces } from "./components/Pieces.jsx";
 export default function App() {
   return (
     <Routes>
+      <Route path="/lessons/moonlight-sonata/demo" element={<ScoringDemo />} />
       <Route path="/lessons/moonlight-sonata/get-ready" element={<GetReady />} />
       <Route path="/lessons/moonlight-sonata/play" element={<Scoring />} />
 

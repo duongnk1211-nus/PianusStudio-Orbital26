@@ -40,7 +40,7 @@
 }
 
 .get-ready-table {
-  height: 100vh;
+  height: 105vh;
   width: 70%;
   position: relative;
   display: block;
@@ -182,9 +182,9 @@
 
 .get-ready-buttons {
   margin-top: 30px;
-  padding-left: 30px;
+  padding-left: 10%;
   display: flex;
-  gap: 78%;
+  gap: 30%;
 }
 
 .get-ready-buttons button {

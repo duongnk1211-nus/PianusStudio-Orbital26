@@ -244,7 +244,7 @@ export default function Scoring() {
                   key={n.sym}
                   onMouseDown={() => mouseDownCheck(n)}
                   onMouseUp={() => mouseUpCheck(n)}
-                  className={`white-key ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
+                  className={`white-key scoring ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
                 >
                   <span className="white-key-letter-label">
                     {n.item.key.toUpperCase()}
@@ -257,7 +257,7 @@ export default function Scoring() {
               return (
                 <div
                   key={n.item.sym}
-                  className={`black-key ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
+                  className={`black-key scoring ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
                   style={{ left: `${left}px` }}
                   onMouseDown={() => mouseDownCheck(n)}
                   onMouseUp={() => mouseUpCheck(n)}
@@ -368,7 +368,7 @@ export function ScoringDemo() {
           isScoringActiveRef.current = true;
         }
         Tone.Transport.start();
-      }, 5000);
+      }, 4000);
     } else {
       Tone.Transport.pause();
       synthRef.current?.releaseAll();
@@ -458,7 +458,7 @@ export function ScoringDemo() {
                   key={n.sym}
                   onMouseDown={() => mouseDownCheck(n)}
                   onMouseUp={() => mouseUpCheck(n)}
-                  className={`white-key ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
+                  className={`white-key scoring ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
                 >
                   <span className="white-key-letter-label">
                     {n.item.key.toUpperCase()}
@@ -471,7 +471,7 @@ export function ScoringDemo() {
               return (
                 <div
                   key={n.item.sym}
-                  className={`black-key ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
+                  className={`black-key scoring ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
                   style={{ left: `${left}px` }}
                   onMouseDown={() => mouseDownCheck(n)}
                   onMouseUp={() => mouseUpCheck(n)}

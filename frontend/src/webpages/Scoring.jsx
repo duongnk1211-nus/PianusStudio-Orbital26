@@ -16,6 +16,7 @@ export default function Scoring() {
   const navigate = useNavigate();
   const [isPoppedUp, setIsPoppedUp] = useState(false);
   const [poppedUp, setPoppedUp] = useState(null);
+  const [notes, setNotes] = useState(Notes.map(n => ({ item: n, sym: n.sym, correctScoring: false, wrongActive: false })));
 
   const sideEffect = useMemo(() => {
     return (sym, isAttack) => { };
@@ -35,7 +36,9 @@ export default function Scoring() {
     apiFetch('/user').then(setProfile);
   }, []);
 
-  const [notes, setNotes] = useState(Notes.map(n => ({ item: n, sym: n.sym, correctScoring: false })));
+  const scoredBarsRef = useRef(new Set());   // bar ids +100
+  const wrongActiveRef = useRef(new Set());  // note syms currently being penalized
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     synthRef.current = new Tone.Sampler({
@@ -51,28 +54,52 @@ export default function Scoring() {
       barsRef.current = barsRef.current
         .map(b => {
           if (!b.released) {
-            return { ...b, height: b.height + GROW_SPEED, top: -2 };
+            return { ...b, height: b.height + GROW_SPEED, top: -2, checkMissed: false };
           } else {
-            return { ...b, top: b.top + FALL_SPEED };
+            return { ...b, top: b.top + FALL_SPEED, checkMissed: false };
           }
         })
         .filter(b => b.top < 420);
 
+      let scoreChange = 0;
+
+      barsRef.current = barsRef.current.map(bar => {
+        const currentKey = notes.find(n => n.sym === bar.note);
+        const checkIfMissed = !currentKey?.item.keyActive && (bar.top + bar.height > 399) && (bar.top < 400);
+        const isPastLine = bar.top > 400;
+
+        if (checkIfMissed) return { ...bar, checkMissed: true, checkScored: true };
+        if (!isPastLine) return bar; // hasn't reached the line yet, nothing to resolve
+
+        if (currentKey?.item.keyActive) {
+          // correctly hit
+          if (!scoredBarsRef.current.has(bar.id) && !bar.checkScored) {
+            scoreChange += 100;
+            scoredBarsRef.current.add(bar.id);
+          }
+        }
+
+        return { ...bar, checkMissed: checkIfMissed, checkScored: true }; // resolved either way, won't be re-evaluated
+      });
+
+      if (scoreChange !== 0) {
+        setScore(n => n + scoreChange);
+      }
+
       setDisplayBars([...barsRef.current]);
 
       setNotes(prev => {
-        let changed = false;
         const next = prev.map(entry => {
           const bar = barsRef.current.find(b => b.note === entry.sym);
-          const shouldGrow = !!bar && bar.top + bar.height > 400;
+          const shouldGrow = !!bar && bar.top + bar.height > 360;
           const shouldApply = shouldGrow && entry.item.keyActive;
+          const checkWrongActive = !shouldGrow && entry.item.keyActive && isScoringActiveRef.current;
           if (shouldApply !== entry.correctScoring) {
-            changed = true;
-            return { ...entry, correctScoring: shouldApply };
+            return { ...entry, correctScoring: shouldApply, wrongActive: checkWrongActive };
           }
-          return entry;
+          return { ...entry, wrongActive: checkWrongActive };
         });
-        return changed ? next : prev; // bail out if nothing changed, avoids extra renders
+        return next;
       });
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -153,6 +180,20 @@ export default function Scoring() {
         }
         Tone.Transport.start();
       }, 5000);
+
+      setTimeout(() => {
+        setIsPoppedUp(true);
+        setPoppedUp('Nice!');
+      }, 20000);
+      setTimeout(() => setPoppedUp('KeepGoingggg'), 25000);
+      setTimeout(() => setIsPoppedUp(false), 28000);
+      setTimeout(() => {
+        setIsPoppedUp(true);
+        setPoppedUp('AlmostThere!');
+      }, 45000)
+      setTimeout(() => setPoppedUp('Vibing!'), 48000);
+      setTimeout(() => setIsPoppedUp(false), 53000);
+
     } else {
       Tone.Transport.pause();
       synthRef.current?.releaseAll();
@@ -171,34 +212,19 @@ export default function Scoring() {
     //console.log(n.correctScoring)
   }
 
-
-  /*
-    useEffect(() => {
-      P9.display(synthRef, barsRef, sideEffect)();
-      Tone.Transport.start();
-  
-      return () => {
-        Tone.Transport.stop();
-        Tone.Transport.cancel();
-        synthRef.current?.releaseAll();
-        Tone.Transport.off("stop", () => { });
-      };
-    }, []); */
-
   useEffect(() => {
     Tone.Transport.stop();
     Tone.Transport.cancel();
 
     const handleStop = () => {
-      // e.g. calculate score, save results, navigate away
       if (!isScoringActiveRef.current) return; // ignore stray/setup stop() calls
       isScoringActiveRef.current = false;
 
       setTimeout(() => {
         setIsPoppedUp(true);
-        setPoppedUp('Finished');
+        setPoppedUp('WellDone!');
       }, 2000);
-      setTimeout(() => setPoppedUp('Calculating...'), 4000);
+      setTimeout(() => setPoppedUp('SavingScore...'), 4000);
       setTimeout(() => setPoppedUp('Redirecting...'), 6000);
       setTimeout(() => {
         navigate('/lessons/moonlight-sonata/get-ready');
@@ -220,20 +246,32 @@ export default function Scoring() {
       <div className="scoring-header">
         <h1 className="energetic-title">Moonlight Sonata</h1>
       </div>
+      {isPlaying && <p className="scoring-score">{`Score: ${score}`}</p>}
       <div className="scoring-piano">
         <div className="scoring-synthesia">
           {isPoppedUp && <div className="scoring-synthesia-pop-up">{poppedUp}</div>}
           {displayBars.map(b => (
-            <div
-              key={b.id}
-              className={`scoring-synthesia-bar ${b.type}`}
-              style={{
-                left: `${b.left}px`,
-                width: `${b.width - 2}px`,
-                height: `${b.height}px`,
-                top: `${b.top}px`
-              }}
-            />
+            <div>
+              <div
+                key={b.id}
+                className={`scoring-synthesia-bar ${b.type}`}
+                style={{
+                  left: `${b.left}px`,
+                  width: `${b.width - 2}px`,
+                  height: `${b.height}px`,
+                  top: `${b.top}px`,
+                }}
+              />
+              {b.checkMissed &&
+                <div
+                  className={`scoring-missed ${b.type}`}
+                  style={{
+                    left: `${b.left}px`,
+                    top: `360px`,
+                  }}>
+                  Missed!
+                </div>}
+            </div>
           ))}
         </div>
         <div className="key-rows">
@@ -246,6 +284,7 @@ export default function Scoring() {
                   onMouseUp={() => mouseUpCheck(n)}
                   className={`white-key scoring ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
                 >
+                  {n.wrongActive && <div className='scoring-wrong'>Wrong!</div>}
                   <span className="white-key-letter-label">
                     {n.item.key.toUpperCase()}
                   </span>
@@ -262,6 +301,7 @@ export default function Scoring() {
                   onMouseDown={() => mouseDownCheck(n)}
                   onMouseUp={() => mouseUpCheck(n)}
                 >
+                  {n.wrongActive && <div className='scoring-wrong'>Wrong!</div>}
                   <span className="black-key-letter-label">
                     {n.item.key.toUpperCase()}
                   </span>
@@ -329,7 +369,7 @@ export function ScoringDemo() {
           }
           return entry;
         });
-        return changed ? next : prev; // bail out if nothing changed, avoids extra renders
+        return changed ? next : prev;
       });
       rafRef.current = requestAnimationFrame(tick);
     };
@@ -387,26 +427,11 @@ export function ScoringDemo() {
     //console.log(n.correctScoring)
   }
 
-
-  /*
-    useEffect(() => {
-      P9.display(synthRef, barsRef, sideEffect)();
-      Tone.Transport.start();
-  
-      return () => {
-        Tone.Transport.stop();
-        Tone.Transport.cancel();
-        synthRef.current?.releaseAll();
-        Tone.Transport.off("stop", () => { });
-      };
-    }, []); */
-
   useEffect(() => {
     Tone.Transport.stop();
     Tone.Transport.cancel();
 
     const handleStop = () => {
-      // e.g. calculate score, save results, navigate away
       if (!isScoringActiveRef.current) return; // ignore stray/setup stop() calls
       isScoringActiveRef.current = false;
 
@@ -459,11 +484,7 @@ export function ScoringDemo() {
                   onMouseDown={() => mouseDownCheck(n)}
                   onMouseUp={() => mouseUpCheck(n)}
                   className={`white-key scoring ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
-                >
-                  <span className="white-key-letter-label">
-                    {n.item.key.toUpperCase()}
-                  </span>
-                </div>
+                />
               );
             }
             else {
@@ -475,11 +496,7 @@ export function ScoringDemo() {
                   style={{ left: `${left}px` }}
                   onMouseDown={() => mouseDownCheck(n)}
                   onMouseUp={() => mouseUpCheck(n)}
-                >
-                  <span className="black-key-letter-label">
-                    {n.item.key.toUpperCase()}
-                  </span>
-                </div>
+                />
               );
             }
           }

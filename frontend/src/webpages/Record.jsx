@@ -9,6 +9,7 @@ import { useKeyboard } from "../hooks/useKeyboard.jsx";
 import { usePiano } from "../hooks/usePiano.jsx";
 import { PianoLayout } from "../components/PianoLayout.jsx";
 import { Piece } from "../classes/Piece.jsx";
+import { supabase } from "../components/supabaseClient";
 
 export default function Record() {
   const navigate = useNavigate();
@@ -111,6 +112,25 @@ export default function Record() {
     }
   }
 
+  const saveRecording = async () => {
+    let message = null;
+    if (!P.actions || P.actions.length === 0) {
+      message = "Nothing to save — record something first.";
+    }
+
+    try {
+      await apiFetch('/piece', {
+        method: 'POST',
+        body: JSON.stringify({ piece: { duration: P.duration, actions: P.actions } }),
+      });
+      message = "Recording saved successfully!";
+    } catch (err) {
+      console.error(err);
+      message = err.message || "Failed to save recording. Please try again.";
+    }
+    alert(message);
+  };
+
   const { synthRef, barsRef, displayBars } = usePiano(sideEffect);
   useKeyboard(profile, symMap, synthRef, barsRef, sideEffect);
 
@@ -139,6 +159,7 @@ export default function Record() {
       status={status}
       flipPlaying={flipPlaying}
       flipRecording={flipRecording}
+      saveRecording={saveRecording}
     />
   );
 }

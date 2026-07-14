@@ -43,8 +43,7 @@ export default function SettingsPage() {
   const handleChangeBindingOption = (id) => async() => {
     const result = await supabase.auth.getSession();
     const session = result.data.session;
-    console.log(session.access_token);
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
+    const status = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
@@ -52,7 +51,7 @@ export default function SettingsPage() {
       },
       body: JSON.stringify({ binding_option: id })
     });
-    if (!res.ok) throw new Error('Update binding option failed!');
+    if (!status.ok) throw new Error('Update binding option failed!');
     setSavedIndex(id);
     alert("Key binding option saved!!!");
   }

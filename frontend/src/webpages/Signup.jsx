@@ -23,7 +23,7 @@ export default function SignupPage() {
   }
 
   return (
-     <div className="body-signup">
+    <div className="body-signup">
       <div className="signup-container">
         <div className="go-back">
           &larr; {" "}

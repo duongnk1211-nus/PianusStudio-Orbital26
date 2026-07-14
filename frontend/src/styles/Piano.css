@@ -238,6 +238,13 @@ body {
   transform: translateY(-50%);
 }
 
+.save-button, .disabled-save-button {
+  position: absolute;
+  top: 160px;
+  left: 1120px;
+  transform: translateY(-50%);
+}
+
 .play-button {
   background: green;
 }
@@ -260,4 +267,8 @@ body {
 
 .stop-button {
   background: red;
+}
+
+.save-button {
+  background: green;
 }

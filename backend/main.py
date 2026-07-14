@@ -61,3 +61,24 @@ async def upload_avatar(file: UploadFile = File(...), user=Depends(get_current_u
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error saving avatar: {str(e)}")
     return {"avatar_url": url}
+
+from schemas import UserResponse, PieceCreate
+
+@app.post("/piece")
+def create_piece(body: PieceCreate, user=Depends(get_current_user)):
+    try:
+        res = supabase.table("pieces").insert({
+            "user_id": user.id,
+            "piece": body.piece
+        }).execute()
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=f"Error saving piece: {str(e)}")
+    return res.data
+
+@app.get("/pieces")
+def get_pieces(user=Depends(get_current_user)):
+    try:
+        res = supabase.table("pieces").select("*").eq("user_id", user.id).execute()
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Error fetching pieces: {str(e)}")
+    return res.data

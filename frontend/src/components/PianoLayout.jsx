@@ -21,6 +21,7 @@ export function PianoLayout({
   setIsAttackingLeft,
   status,
   flipRecording,
+  saveRecording,
 }) {
   const navigate = useNavigate();
   const goBack = () => {
@@ -70,6 +71,15 @@ export function PianoLayout({
             onClick={status === "recording" ? () => {} : flipPlaying}
           >
             {status === "playing" ? "Pause" : "Play"}
+          </button>
+        }
+        {
+          saveRecording &&
+          <button
+            className={status === "recording" ? "disabled-save-button" : "save-button"}
+            onClick={saveRecording}
+          >
+            Save
           </button>
         }
 

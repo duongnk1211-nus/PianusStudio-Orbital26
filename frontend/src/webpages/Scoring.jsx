@@ -68,13 +68,16 @@ export default function Scoring() {
         const checkIfMissed = !currentKey?.item.keyActive && (bar.top + bar.height > 399) && (bar.top < 400);
         const isPastLine = bar.top > 400;
 
-        if (checkIfMissed) return { ...bar, checkMissed: true, checkScored: true };
+        if (checkIfMissed && !bar.checkScored) {
+          scoreChange -= 50;
+          return { ...bar, checkMissed: true, checkScored: true };
+        }
         if (!isPastLine) return bar; // hasn't reached the line yet, nothing to resolve
 
         if (currentKey?.item.keyActive) {
           // correctly hit
           if (!scoredBarsRef.current.has(bar.id) && !bar.checkScored) {
-            scoreChange += 100;
+            scoreChange += 300;
             scoredBarsRef.current.add(bar.id);
           }
         }
@@ -141,6 +144,9 @@ export default function Scoring() {
         e.preventDefault();
         if (e.repeat) return;
         note.attackWithoutBars(synthRef, barsRef, sideEffect)();
+        const bar = barsRef.current.find(b => b.note === note.sym);
+        const shouldGrow = !!bar && bar.top + bar.height > 360;
+        if(!shouldGrow && isScoringActiveRef.current) setScore(n => n - 50);
       }
     };
     const handleKeyUp = async (e) => {
@@ -203,6 +209,9 @@ export default function Scoring() {
 
   const mouseDownCheck = (n) => {
     n.item.attackWithoutBars(synthRef, barsRef, sideEffect)();
+    const bar = barsRef.current.find(b => b.note === n.sym);
+    const shouldGrow = !!bar && bar.top + bar.height > 360;
+    if(!shouldGrow && isScoringActiveRef.current) setScore(n => n - 50);
     //console.log(`Correct! Note ${n.sym} was played at the right time.`);
     //console.log(n.correctScoring)
   }
@@ -246,7 +255,7 @@ export default function Scoring() {
       <div className="scoring-header">
         <h1 className="energetic-title">Moonlight Sonata</h1>
       </div>
-      {isPlaying && <p className="scoring-score">{`Score: ${score}`}</p>}
+      {isPlaying && <p className="scoring-score">{`Score: ${score < 0 ? 0 : score}`}</p>}
       <div className="scoring-piano">
         <div className="scoring-synthesia">
           {isPoppedUp && <div className="scoring-synthesia-pop-up">{poppedUp}</div>}

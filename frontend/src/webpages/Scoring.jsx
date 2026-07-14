@@ -36,9 +36,13 @@ export default function Scoring() {
     apiFetch('/user').then(setProfile);
   }, []);
 
-  const scoredBarsRef = useRef(new Set());   // bar ids +100
-  const wrongActiveRef = useRef(new Set());  // note syms currently being penalized
+  const scoredBarsRef = useRef(new Set());
   const [score, setScore] = useState(0);
+  const scoreRef = useRef(score);
+  useEffect(() => {
+    scoreRef.current = score;
+  }, [score]);
+
 
   useEffect(() => {
     synthRef.current = new Tone.Sampler({
@@ -54,9 +58,9 @@ export default function Scoring() {
       barsRef.current = barsRef.current
         .map(b => {
           if (!b.released) {
-            return { ...b, height: b.height + GROW_SPEED, top: -2, checkMissed: false };
+            return { ...b, height: b.height + GROW_SPEED, top: -2 };
           } else {
-            return { ...b, top: b.top + FALL_SPEED, checkMissed: false };
+            return { ...b, top: b.top + FALL_SPEED };
           }
         })
         .filter(b => b.top < 420);
@@ -72,7 +76,8 @@ export default function Scoring() {
           scoreChange -= 50;
           return { ...bar, checkMissed: true, checkScored: true };
         }
-        if (!isPastLine) return bar; // hasn't reached the line yet, nothing to resolve
+
+        if (!isPastLine) return bar;
 
         if (currentKey?.item.keyActive) {
           // correctly hit
@@ -82,7 +87,7 @@ export default function Scoring() {
           }
         }
 
-        return { ...bar, checkMissed: checkIfMissed, checkScored: true }; // resolved either way, won't be re-evaluated
+        return { ...bar, checkMissed: checkIfMissed, checkScored: true }; // resolved
       });
 
       if (scoreChange !== 0) {
@@ -146,7 +151,7 @@ export default function Scoring() {
         note.attackWithoutBars(synthRef, barsRef, sideEffect)();
         const bar = barsRef.current.find(b => b.note === note.sym);
         const shouldGrow = !!bar && bar.top + bar.height > 360;
-        if(!shouldGrow && isScoringActiveRef.current) setScore(n => n - 50);
+        if (!shouldGrow && isScoringActiveRef.current) setScore(n => n - 50);
       }
     };
     const handleKeyUp = async (e) => {
@@ -189,15 +194,35 @@ export default function Scoring() {
 
       setTimeout(() => {
         setIsPoppedUp(true);
-        setPoppedUp('Nice!');
+        if (scoreRef.current > 1000) {
+          setPoppedUp('Nice!');
+        } else {
+          setPoppedUp('YouCanDoIt!');
+        }
       }, 20000);
-      setTimeout(() => setPoppedUp('KeepGoingggg'), 25000);
+      setTimeout(() => {
+        if (scoreRef.current > 1000) {
+          setPoppedUp('Vibing!');
+        } else {
+          setPoppedUp('KeepGoingggg');
+        }
+      }, 25000);
       setTimeout(() => setIsPoppedUp(false), 28000);
       setTimeout(() => {
         setIsPoppedUp(true);
-        setPoppedUp('AlmostThere!');
+        if (scoreRef.current > 1000) {
+          setPoppedUp('OnFire!');
+        } else {
+          setPoppedUp('AlmostThere!');
+        }
       }, 45000)
-      setTimeout(() => setPoppedUp('Vibing!'), 48000);
+      setTimeout(() => {
+        if (scoreRef.current > 1000) {
+          setPoppedUp('TopOfTheWorld!');
+        } else {
+          setPoppedUp('KeepGoingggg');
+        }
+      }, 48000);
       setTimeout(() => setIsPoppedUp(false), 53000);
 
     } else {
@@ -211,7 +236,7 @@ export default function Scoring() {
     n.item.attackWithoutBars(synthRef, barsRef, sideEffect)();
     const bar = barsRef.current.find(b => b.note === n.sym);
     const shouldGrow = !!bar && bar.top + bar.height > 360;
-    if(!shouldGrow && isScoringActiveRef.current) setScore(n => n - 50);
+    if (!shouldGrow && isScoringActiveRef.current) setScore(n => n - 50);
     //console.log(`Correct! Note ${n.sym} was played at the right time.`);
     //console.log(n.correctScoring)
   }

@@ -8,6 +8,12 @@ const P4 = new Piece(
   "/PianoPieces/P4.png",
   "Antonio Vivaldi",
   "2",
+  "/AssetsForPiano/none.png",
+  "/AssetsForPiano/cherryBlossom.png",
+  "/AssetsForPiano/cherryBlossom.png",
+  "/AssetsForPiano/cartoonCloud.png",
+  "/AssetsForPiano/flyingBird.png",
+  "/AssetsForPiano/cartoonCloud.png",
   [
     { chord: "R", duration: 0.4 },
     { chord: "C5", duration: 0.4 },

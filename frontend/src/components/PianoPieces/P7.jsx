@@ -8,6 +8,12 @@ const P7 = new Piece(
   "/PianoPieces/P7.jpg",
   "Joseph Mohr",
   "2",
+  "/AssetsForPiano/cloud.png",
+  "/AssetsForPiano/shiningWhite.png",
+  "/AssetsForPiano/cloud.png",
+  "/AssetsForPiano/cloud.png",
+  "/AssetsForPiano/shiningMoon.png",
+  "/AssetsForPiano/cloud.png",
   [
     { chord: "G4", duration: 0.75 },
     { chord: "A4", duration: 0.25 },

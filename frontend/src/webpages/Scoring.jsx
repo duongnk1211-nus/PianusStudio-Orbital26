@@ -39,7 +39,7 @@ export default function Scoring({ P }) {
   const [score, setScore] = useState(0);
   const scoreRef = useRef(score);
   useEffect(() => {
-    scoreRef.current = score;
+    scoreRef.current = score > 0 ? score : 0;
   }, [score]);
 
 
@@ -276,18 +276,18 @@ export default function Scoring({ P }) {
   return (
     <div className="scoring-body" style={{ backgroundImage: `url(${P.backgroundImageURL})` }}>
       {!isPlaying && <button className="scoring-body-button" onClick={flipPlaying}>Start</button>}
-      <div className="scoring-header">
+      <div className={`scoring-header ${P.navStr}`}>
         <h1 className="energetic-title">{P.title}</h1>
       </div>
-      {isPlaying && <p className="scoring-score">{`Score: ${score < 0 ? 0 : score}`}</p>}
-      <div className="scoring-piano">
+      {isPlaying && <p className={`scoring-score ${P.navStr}`}>{`Score: ${score < 0 ? 0 : score}`}</p>}
+      <div className={`scoring-piano ${P.navStr}`}>
         <div className="scoring-synthesia">
-          {isPoppedUp && <div className="scoring-synthesia-pop-up">{poppedUp}</div>}
+          {isPoppedUp && <div className={`scoring-synthesia-pop-up ${P.navStr}`}>{poppedUp}</div>}
           {displayBars.map(b => (
             <div>
               <div
                 key={b.id}
-                className={`scoring-synthesia-bar ${b.type}`}
+                className={`scoring-synthesia-bar ${P.navStr} ${b.type}`}
                 style={{
                   left: `${b.left}px`,
                   width: `${b.width - 2}px`,
@@ -315,7 +315,7 @@ export default function Scoring({ P }) {
                   key={n.sym}
                   onMouseDown={() => mouseDownCheck(n)}
                   onMouseUp={() => mouseUpCheck(n)}
-                  className={`white-key scoring ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
+                  className={`white-key scoring ${P.navStr} ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
                 >
                   {n.wrongActive && <div className='scoring-wrong'>Wrong!</div>}
                   <span className="white-key-letter-label">
@@ -329,7 +329,7 @@ export default function Scoring({ P }) {
               return (
                 <div
                   key={n.item.sym}
-                  className={`black-key scoring ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
+                  className={`black-key scoring ${P.navStr} ${n.item.keyActive ? 'active' : ''} ${n.correctScoring ? 'correct' : ''}`}
                   style={{ left: `${left}px` }}
                   onMouseDown={() => mouseDownCheck(n)}
                   onMouseUp={() => mouseUpCheck(n)}
@@ -344,6 +344,30 @@ export default function Scoring({ P }) {
           }
           )}
         </div>
+        <span 
+          className="corner-tl" 
+          style={{ top: '-70px', left: '10px', backgroundImage: `url(${P.pianoDeco1})`}}
+        />
+        <span 
+          className="corner-tl" 
+          style={{ top: '-60px', left: '-40px', backgroundImage: `url(${P.pianoDeco2})`}}
+        />
+        <span 
+          className="corner-tl" 
+          style={{ top: '-10px', left: '-50px', backgroundImage: `url(${P.pianoDeco3})`}}
+        />
+        <span 
+          className="corner-tr" 
+          style={{ top: '-70px', right: '80px', backgroundImage: `url(${P.pianoDeco4})`}}
+        />
+        <span 
+          className="corner-tr" 
+          style={{ top: '-60px', right: '20px', backgroundImage: `url(${P.pianoDeco5})`}}
+        />
+        <span 
+          className="corner-tr" 
+          style={{ top: '-45px', right: '-50px', backgroundImage: `url(${P.pianoDeco6})`}}
+        />
         <span className="corner-bl" />
         <span className="corner-br" />
       </div>
@@ -489,7 +513,7 @@ export function ScoringDemo({ P }) {
   return (
     <div className="scoring-body" style={{ backgroundImage: `url(${P.backgroundImageURL})` }}>
       {!isPlaying && <button className="scoring-body-button" onClick={flipPlaying}>Start</button>}
-      <div className="scoring-header">
+      <div className={`scoring-header ${P.navStr}`}>
         <h1 className="energetic-title">{P.title}</h1>
       </div>
       <div className="scoring-piano">
@@ -535,6 +559,8 @@ export function ScoringDemo({ P }) {
           }
           )}
         </div>
+        <span className="corner-tl-demo" />
+        <span className="corner-tr-demo" />
         <span className="corner-bl" />
         <span className="corner-br" />
       </div>

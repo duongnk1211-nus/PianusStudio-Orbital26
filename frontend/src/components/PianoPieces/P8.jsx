@@ -8,6 +8,12 @@ const P8 = new Piece(
   "/PianoPieces/P8.jpg",
   "James Lord Pierpont",
   "2",
+  "/AssetsForPiano/cloud.png",
+  "/AssetsForPiano/santaComing.png",
+  "/AssetsForPiano/cloud.png",
+  "/AssetsForPiano/jingleBell.png",
+  "/AssetsForPiano/santaHat.png",
+  "/AssetsForPiano/santaGift.png",
   [
     { chord: "R", duration: 0.375 },
     { chord: "G4", duration: 0.375 },

@@ -8,6 +8,12 @@ const P6 = new Piece(
   "/PianoPieces/P6.png",
   "The Hill sisters",
   "2",
+  "/AssetsForPiano/flyingGift.png",
+  "/AssetsForPiano/flyingGift.png",
+  "/AssetsForPiano/birthdayCake.png",
+  "/AssetsForPiano/flyingGift.png",
+  "/AssetsForPiano/happyBirthday.png",
+  "/AssetsForPiano/santaGift.png",
   [
     { chord: "R", duration: 1.0 },
     { chord: "C4", duration: 0.25 },

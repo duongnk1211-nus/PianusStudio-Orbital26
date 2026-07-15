@@ -15,10 +15,16 @@ export class Piece {
   #backgroundImageURL;
   #author;
   #difficultyLevel;
+  #pianoDeco1;
+  #pianoDeco2;
+  #pianoDeco3;
+  #pianoDeco4;
+  #pianoDeco5;
+  #pianoDeco6;
   #RH;
   #LH;
 
-  constructor(id, title, description, navStr, backgroundImageURL, author, difficultyLevel, RH, LH) {
+  constructor(id, title, description, navStr, backgroundImageURL, author, difficultyLevel, pianoDeco1, pianoDeco2, pianoDeco3, pianoDeco4, pianoDeco5, pianoDeco6, RH, LH) {
     this.#id = id;
     this.#title = title;
     this.#description = description;
@@ -26,6 +32,12 @@ export class Piece {
     this.#backgroundImageURL = backgroundImageURL;
     this.#author = author;
     this.#difficultyLevel = difficultyLevel;
+    this.#pianoDeco1 = pianoDeco1;
+    this.#pianoDeco2 = pianoDeco2;
+    this.#pianoDeco3 = pianoDeco3;
+    this.#pianoDeco4 = pianoDeco4;
+    this.#pianoDeco5 = pianoDeco5;
+    this.#pianoDeco6 = pianoDeco6;
     this.#RH = RH;
     this.#LH = LH;
   }
@@ -56,6 +68,30 @@ export class Piece {
 
   get difficultyLevel() {
     return this.#difficultyLevel;
+  }
+
+  get pianoDeco1() {
+    return this.#pianoDeco1;
+  }
+
+  get pianoDeco2() {
+    return this.#pianoDeco2;
+  }
+
+  get pianoDeco3() {
+    return this.#pianoDeco3;
+  }
+
+  get pianoDeco4() {
+    return this.#pianoDeco4;
+  }
+
+  get pianoDeco5() {
+    return this.#pianoDeco5;
+  }
+
+  get pianoDeco6() {
+    return this.#pianoDeco6;
   }
 
   #displayOneHand = (arr, synthRef, barsRef, sideEffect) => {

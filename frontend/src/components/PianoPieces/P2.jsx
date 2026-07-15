@@ -8,6 +8,12 @@ const P2 = new Piece(
   "/PianoPieces/P2.jpg",
   "Scott Joplin",
   "2",
+  "/AssetsForPiano/balloons.png",
+  "/AssetsForPiano/firework.png",
+  "/AssetsForPiano/magicHat.png",
+  "/AssetsForPiano/balloons.png",
+  "/AssetsForPiano/carnival.png",
+  "/AssetsForPiano/firework.png",
   [
     { chord: "R", duration: 0.4 },
     { chord: "D4", duration: 0.2 },

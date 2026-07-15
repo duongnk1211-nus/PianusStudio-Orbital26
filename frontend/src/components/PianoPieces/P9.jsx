@@ -8,6 +8,12 @@ const P9 = new Piece(
   "/PianoPieces/P9.png",
   "Ludwig van Beethoven",
   "3",
+  "/AssetsForPiano/cloud.png",
+  "/AssetsForPiano/shiningMoon.png",
+  "/AssetsForPiano/cloud.png",
+  "/AssetsForPiano/cloud.png",
+  "/AssetsForPiano/shiningWhite.png",
+  "/AssetsForPiano/cloud.png",
   [
     // Measure 1 (i: C#m)
     { chord: 'G#3', duration: 0.5 }, { chord: 'C#4', duration: 0.5 }, { chord: 'E4', duration: 0.5 },

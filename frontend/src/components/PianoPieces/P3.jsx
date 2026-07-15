@@ -8,6 +8,12 @@ const P3 = new Piece(
   "/PianoPieces/P3.png",
   "Ludwig van Beethoven",
   "2",
+  "/AssetsForPiano/cartoonCloud.png",
+  "/AssetsForPiano/sun.png",
+  "/AssetsForPiano/cartoonCloud.png",
+  "/AssetsForPiano/cartoonCloud.png",
+  "/AssetsForPiano/flyingBird.png",
+  "/AssetsForPiano/cartoonCloud.png",
   [
     { chord: "E5", duration: 0.5 },
     { chord: "E5", duration: 0.5 },

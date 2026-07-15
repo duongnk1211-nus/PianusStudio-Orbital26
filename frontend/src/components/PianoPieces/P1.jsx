@@ -8,6 +8,12 @@ const P1 = new Piece(
   "/PianoPieces/P1.jpg",
   "Jane Taylor",
   "1",
+  "/AssetsForPiano/cartoonCloud.png",
+  "/AssetsForPiano/cartoonMoon.png",
+  "/AssetsForPiano/none.png",
+  "/AssetsForPiano/cartoonCloud.png",
+  "/AssetsForPiano/cartoonStars.png",
+  "/AssetsForPiano/cartoonStars.png",
   [
     { chord: "C5", duration: 0.5 },
     { chord: "C5", duration: 0.5 },

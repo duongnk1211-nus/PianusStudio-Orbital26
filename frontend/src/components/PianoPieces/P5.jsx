@@ -8,6 +8,12 @@ const P5 = new Piece(
   "/PianoPieces/P5.png",
   "King Henry VIII",
   "2",
+  "/AssetsForPiano/cartoonCloud.png",
+  "/AssetsForPiano/sun.png",
+  "/AssetsForPiano/cartoonCloud.png",
+  "/AssetsForPiano/cartoonCloud.png",
+  "/AssetsForPiano/flyingBird.png",
+  "/AssetsForPiano/branches.png",
   [
     { chord: "R", duration: 1.0 },
     { chord: "A4", duration: 0.5 },

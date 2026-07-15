@@ -1,10 +1,13 @@
 import { Piece } from "../../classes/Piece.jsx";
 
 const P8 = new Piece(
+  "8",
   "Jingle Bell",
   "Jingle Bells is the ultimate feel-good holiday classic that never gets old! Its bouncy, upbeat rhythm is instantly recognizable and impossible not to sing along to. This is one of those pieces that puts a smile on everyone's face the moment you start playing — festive, fun, and endlessly joyful!",
-  "p8",
+  "jinglebell",
   "/PianoPieces/P8.jpg",
+  "James Lord Pierpont",
+  "2",
   [
     { chord: "R", duration: 0.375 },
     { chord: "G4", duration: 0.375 },

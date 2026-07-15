@@ -1,8 +1,11 @@
 import '../styles/GetReady.css';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Pieces } from '../components/Pieces';
 
-export default function GetReady() {
+export default function GetReady({ P }) {
   const navigate = useNavigate();
+  const location = useLocation();
+  const finalScore = location.state?.finalScore;
 
   const goBack = () => {
     navigate('/lessons');
@@ -27,10 +30,10 @@ export default function GetReady() {
         <span className="corner-bl" />
         <span className="corner-br" />
         <h1>Are you ready?</h1>
-        <p>Moonlight Sonata</p>
-        <p style={{ marginTop: '30px', marginLeft: '20px', textAlign: 'left', fontFamily: 'Orbitron' }}>Difficulty Level: 1500</p>
-        <p style={{ marginTop: '0px', marginLeft: '20px', textAlign: 'left', fontFamily: 'Orbitron' }}>Your current score: 0</p>
-        <p style={{ marginTop: '0px', marginLeft: '20px', textAlign: 'left', fontFamily: 'Orbitron' }}>Your top score: 0</p>
+        <p>{P.title}</p>
+        <p style={{ marginTop: '30px', marginLeft: '20px', textAlign: 'left', fontFamily: 'Orbitron' }}>Difficulty Level: {P.difficultyLevel}</p>
+        <p style={{ marginTop: '0px', marginLeft: '20px', textAlign: 'left', fontFamily: 'Orbitron' }}>Your current score: {finalScore !== undefined ? finalScore : 0}</p>
+        <p style={{ marginTop: '0px', marginLeft: '20px', textAlign: 'left', fontFamily: 'Orbitron' }}>Your top score: {finalScore !== undefined ? finalScore : 0}</p>
         <table>
           <thead>
             <tr style={{ display: 'flex' }}>
@@ -40,19 +43,19 @@ export default function GetReady() {
             </tr>
           </thead>
           <tbody>
-            {songs.map((song) => (
-              <tr style={{ display: 'flex' }} key={song.rank} onClick={() => navigate(`/lessons/${song.title.replace(/\s+/g, '-').toLowerCase()}/get-ready`)}>
-                <td style={{ flex: '0 0 120px' }}>{song.rank}</td>
-                <td style={{ flex: 1 }}>{song.author}</td>
-                <td style={{ flex: '0 0 120px' }}>{song.score}</td>
+            {Pieces.map((piece) => (
+              <tr style={{ display: 'flex' }} key={piece.id} onClick={() => navigate(`/lessons/${piece.navStr}/get-ready`)}>
+                <td style={{ flex: '0 0 120px' }}>{piece.id}</td>
+                <td style={{ flex: 1 }}>{piece.author}</td>
+                <td style={{ flex: '0 0 120px' }}>{piece.difficultyLevel}</td>
               </tr>
             ))}
           </tbody>
         </table>
         <div className="get-ready-buttons">
             <button onClick={goBack}>Return</button>
-            <button onClick={() => navigate(`/lessons/moonlight-sonata/demo`)}>Watch</button>
-            <button onClick={() => navigate(`/lessons/moonlight-sonata/play`)}>Start</button>
+            <button onClick={() => navigate(`/lessons/${P.navStr}/demo`)}>Watch</button>
+            <button onClick={() => navigate(`/lessons/${P.navStr}/play`)}>Start</button>
         </div>
       </div>
     </div>

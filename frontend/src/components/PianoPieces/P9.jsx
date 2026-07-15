@@ -1,10 +1,13 @@
 import { Piece } from "../../classes/Piece.jsx";
 
 const P9 = new Piece(
+  "9",
   "Moonlight Sonata",
   "Moonlight Sonata is a masterpiece of piano composition, known for its haunting melody and emotional depth. This piece showcases the piano's ability to convey a wide range of emotions, from gentle serenity to passionate intensity.",
-  "p9",
+  "moonlightsonata",
   "/PianoPieces/P9.png",
+  "Ludwig van Beethoven",
+  "3",
   [
     // Measure 1 (i: C#m)
     { chord: 'G#3', duration: 0.5 }, { chord: 'C#4', duration: 0.5 }, { chord: 'E4', duration: 0.5 },

@@ -1,5 +1,6 @@
 import '../styles/Lessons.css';
 import { useNavigate } from 'react-router-dom';
+import { Pieces } from "../components/Pieces.jsx";
 
 export default function LessonsPage() {
   const navigate = useNavigate();
@@ -7,19 +8,6 @@ export default function LessonsPage() {
   const goBack = () => {
     navigate('/');
   }
-
-  const songs = [
-    { rank: 1, title: "Moonlight Sonata", author: "Ludwig van Beethoven", score: 2500 },
-    { rank: 2, title: "Fur Elise", author: "Ludwig van Beethoven", score: 2200 },
-    { rank: 3, title: "Canon in D", author: "Johann Pachelbel", score: 1800 },
-    { rank: 4, title: "Clair de Lune", author: "Claude Debussy", score: 1500 },
-    { rank: 5, title: "Nocturne in E-flat Major", author: "Frédéric Chopin", score: 1200 },
-    { rank: 6, title: "The Entertainer", author: "Scott Joplin", score: 1000 },
-    { rank: 7, title: "Rhapsody in Blue", author: "George Gershwin", score: 900 },
-    { rank: 8, title: "Gymnopédie No.1", author: "Erik Satie", score: 800 },
-    { rank: 9, title: "Prelude in C Major", author: "Johann Sebastian Bach", score: 700 },
-    { rank: 10, title: "Hungarian Rhapsody No.2", author: "Franz Liszt", score: 600 },
-  ];
 
   return (
     <div className="lessons-body">
@@ -40,13 +28,13 @@ export default function LessonsPage() {
           </tr>
         </thead>
         <tbody>
-          {songs.map((song) => (
-            <tr key={song.rank} onClick={() => navigate(`/lessons/${song.title.replace(/\s+/g, '-').toLowerCase()}/get-ready`)}>
-              <td>{song.rank}</td>
-              <td>{song.title}</td>
-              <td>{song.author}</td>
-              <td>{song.score}</td>
-              <td>{song.score}</td>
+          {Pieces.slice().reverse().map((P) => (
+            <tr key={P.id} onClick={() => navigate(`/lessons/${P.navStr}/get-ready`)}>
+              <td>{P.id}</td>
+              <td>{P.title}</td>
+              <td>{P.author}</td>
+              <td>{P.difficultyLevel}</td>
+              <td>{0}</td>
             </tr>
           ))}
         </tbody>

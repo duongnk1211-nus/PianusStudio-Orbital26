@@ -1,10 +1,13 @@
 import { Piece } from "../../classes/Piece.jsx";
 
 const P6 = new Piece(
+  "6",
   "Happy Birthday to You",
   "Happy Birthday to You is the most sung song in the world — and now you can play it on the piano! Its cheerful waltz rhythm makes it instantly feel festive and fun. Whether you're surprising someone at their party or just playing for the joy of it, this one is always a crowd-pleaser!",
-  "p6",
+  "happybirthdaytoyou",
   "/PianoPieces/P6.png",
+  "The Hill sisters",
+  "2",
   [
     { chord: "R", duration: 1.0 },
     { chord: "C4", duration: 0.25 },

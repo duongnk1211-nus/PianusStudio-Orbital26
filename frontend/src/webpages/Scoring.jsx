@@ -4,10 +4,9 @@ import { useNavigate } from "react-router-dom";
 import { apiFetch } from "../components/API";
 import { keyMaps } from "../components/keyMaps.jsx";
 import { Notes } from "../components/Notes.jsx";
-import P9 from "../components/PianoPieces/P9.jsx";
 import * as Tone from "tone";
 
-export default function Scoring() {
+export default function Scoring({ P }) {
   const [displayBars, setDisplayBars] = useState([]);
   const synthRef = useRef(null);
   const barsRef = useRef([]);
@@ -186,7 +185,7 @@ export default function Scoring() {
       setTimeout(() => setIsPoppedUp(false), 5500);
       setTimeout(() => {
         if (Tone.Transport.state == "stopped") {
-          P9.displayForScoring(synthRef, barsRef, sideEffect)();
+          P.displayForScoring(synthRef, barsRef, sideEffect)();
           isScoringActiveRef.current = true;
         }
         Tone.Transport.start();
@@ -194,14 +193,14 @@ export default function Scoring() {
 
       setTimeout(() => {
         setIsPoppedUp(true);
-        if (scoreRef.current > 1000) {
+        if (scoreRef.current > 2500) {
           setPoppedUp('Nice!');
         } else {
           setPoppedUp('YouCanDoIt!');
         }
       }, 20000);
       setTimeout(() => {
-        if (scoreRef.current > 1000) {
+        if (scoreRef.current > 2500) {
           setPoppedUp('Vibing!');
         } else {
           setPoppedUp('KeepGoingggg');
@@ -210,14 +209,14 @@ export default function Scoring() {
       setTimeout(() => setIsPoppedUp(false), 28000);
       setTimeout(() => {
         setIsPoppedUp(true);
-        if (scoreRef.current > 1000) {
+        if (scoreRef.current > 4000) {
           setPoppedUp('OnFire!');
         } else {
           setPoppedUp('AlmostThere!');
         }
       }, 45000)
       setTimeout(() => {
-        if (scoreRef.current > 1000) {
+        if (scoreRef.current > 5000) {
           setPoppedUp('TopOfTheWorld!');
         } else {
           setPoppedUp('KeepGoingggg');
@@ -261,7 +260,7 @@ export default function Scoring() {
       setTimeout(() => setPoppedUp('SavingScore...'), 4000);
       setTimeout(() => setPoppedUp('Redirecting...'), 6000);
       setTimeout(() => {
-        navigate('/lessons/moonlight-sonata/get-ready');
+        navigate(`/lessons/${P.navStr}/get-ready`, { state: { finalScore: scoreRef.current } });
       }, 8000)
     };
 
@@ -275,10 +274,10 @@ export default function Scoring() {
   }, []);
 
   return (
-    <div className="scoring-body" style={{ backgroundImage: `url(${P9.backgroundImageURL})` }}>
+    <div className="scoring-body" style={{ backgroundImage: `url(${P.backgroundImageURL})` }}>
       {!isPlaying && <button className="scoring-body-button" onClick={flipPlaying}>Start</button>}
       <div className="scoring-header">
-        <h1 className="energetic-title">Moonlight Sonata</h1>
+        <h1 className="energetic-title">{P.title}</h1>
       </div>
       {isPlaying && <p className="scoring-score">{`Score: ${score < 0 ? 0 : score}`}</p>}
       <div className="scoring-piano">
@@ -352,7 +351,7 @@ export default function Scoring() {
   )
 }
 
-export function ScoringDemo() {
+export function ScoringDemo({ P }) {
   const [displayBars, setDisplayBars] = useState([]);
   const synthRef = useRef(null);
   const barsRef = useRef([]);
@@ -438,7 +437,7 @@ export function ScoringDemo() {
       setTimeout(() => setIsPoppedUp(false), 5500);
       setTimeout(() => {
         if (Tone.Transport.state == "stopped") {
-          P9.displayForDemoScoring(synthRef, barsRef, sideEffect)();
+          P.displayForDemoScoring(synthRef, barsRef, sideEffect)();
           isScoringActiveRef.current = true;
         }
         Tone.Transport.start();
@@ -474,7 +473,7 @@ export function ScoringDemo() {
       setTimeout(() => setPoppedUp('YourTurn!'), 2000);
       setTimeout(() => setPoppedUp('Redirecting...'), 4000);
       setTimeout(() => {
-        navigate('/lessons/moonlight-sonata/get-ready');
+        navigate(`/lessons/${P.navStr}/get-ready`);
       }, 6000)
     };
 
@@ -488,10 +487,10 @@ export function ScoringDemo() {
   }, []);
 
   return (
-    <div className="scoring-body" style={{ backgroundImage: `url(${P9.backgroundImageURL})` }}>
+    <div className="scoring-body" style={{ backgroundImage: `url(${P.backgroundImageURL})` }}>
       {!isPlaying && <button className="scoring-body-button" onClick={flipPlaying}>Start</button>}
       <div className="scoring-header">
-        <h1 className="energetic-title">Moonlight Sonata</h1>
+        <h1 className="energetic-title">{P.title}</h1>
       </div>
       <div className="scoring-piano">
         <div className="scoring-synthesia">

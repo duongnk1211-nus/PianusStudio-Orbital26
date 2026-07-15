@@ -1,10 +1,13 @@
 import { Piece } from "../../classes/Piece.jsx";
 
 const P4 = new Piece(
+  "4",
   "Spring from the Four Seasons",
   "Spring is the opening movement of Vivaldi's Four Seasons — one of the most cheerful and recognizable pieces in all of classical music. The melody dances along with a bright, energetic feel that perfectly captures the freshness of a new season blooming to life. It's a joy to play and even more of a joy to listen to!",
-  "p4",
+  "springfromthefourseasons",
   "/PianoPieces/P4.png",
+  "Antonio Vivaldi",
+  "2",
   [
     { chord: "R", duration: 0.4 },
     { chord: "C5", duration: 0.4 },

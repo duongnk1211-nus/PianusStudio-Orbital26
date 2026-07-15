@@ -8,20 +8,30 @@ for (let i = 0; i < Notes.length; i++) {
 }
 
 export class Piece {
+  #id;
   #title;
   #description;
   #navStr;
   #backgroundImageURL;
+  #author;
+  #difficultyLevel;
   #RH;
   #LH;
 
-  constructor(title, description, navStr, backgroundImageURL, RH, LH) {
+  constructor(id, title, description, navStr, backgroundImageURL, author, difficultyLevel, RH, LH) {
+    this.#id = id;
     this.#title = title;
     this.#description = description;
     this.#navStr = navStr;
     this.#backgroundImageURL = backgroundImageURL;
+    this.#author = author;
+    this.#difficultyLevel = difficultyLevel;
     this.#RH = RH;
     this.#LH = LH;
+  }
+
+  get id() {
+    return this.#id;
   }
 
   get title() {
@@ -38,6 +48,14 @@ export class Piece {
 
   get backgroundImageURL() {
     return this.#backgroundImageURL;
+  }
+
+  get author() {
+    return this.#author;
+  }
+
+  get difficultyLevel() {
+    return this.#difficultyLevel;
   }
 
   #displayOneHand = (arr, synthRef, barsRef, sideEffect) => {

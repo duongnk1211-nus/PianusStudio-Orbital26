@@ -11,7 +11,7 @@ import ProfilePage from "./webpages/Profile.jsx";
 import SettingsPage from "./webpages/Settings.jsx";
 import Display from "./webpages/Display.jsx";
 import Learn from "./webpages/Learn.jsx";
-import Record from "./webpages/Record.jsx";
+import PianoRecorder from "./webpages/PianoRecorder.jsx";
 import { FingerPieces } from "./components/FingerPieces.jsx";
 
 export default function App() {
@@ -27,7 +27,7 @@ export default function App() {
       <Route path="/piano-simulator" element={<PianoSimulator />}    />
       <Route path="/login"           element={<LoginPage />} />
       <Route path="/"                element={<HomePage />} />
-      <Route path="/record"          element={<Record />} />
+      <Route path="/piano-recorder"  element={<PianoRecorder />} />
 
       {FingerPieces.map((P) => (
         <>

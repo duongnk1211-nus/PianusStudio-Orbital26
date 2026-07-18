@@ -129,10 +129,11 @@ export class FingerPiece {
           s.add(sym);
         }
       }
-      
-      if (s.size > 0) {
-        result.push(s);
-      }
+      result.push({
+        chord: s, 
+        rightFingers: RHMap.get(t) !== undefined ? this.#RH[RHMap.get(t)].fingers : "", 
+        leftFingers: LHMap.get(t) !== undefined ? this.#LH[LHMap.get(t)].fingers : ""}
+      );
     }
     return result;
   }

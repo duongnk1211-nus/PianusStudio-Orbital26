@@ -11,7 +11,7 @@ import { PianoLayout } from "../components/PianoLayout.jsx";
 import { Piece } from "../classes/Piece.jsx";
 import { supabase } from "../components/supabaseClient";
 
-export default function Record() {
+export default function PianoRecorder() {
   const navigate = useNavigate();
   const goBack = () => {
     Tone.Transport.stop();

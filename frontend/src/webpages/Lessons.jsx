@@ -1,9 +1,19 @@
 import '../styles/Lessons.css';
+import { useEffect, useState } from 'react';
+import { apiFetch } from "../components/API.jsx";
 import { useNavigate } from 'react-router-dom';
 import { Pieces } from "../components/Pieces.jsx";
 
 export default function LessonsPage() {
   const navigate = useNavigate();
+  const [scores, setScores] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    apiFetch('/user/scores').then(setScores)
+      .catch(err => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
 
   const goBack = () => {
     navigate('/');
@@ -34,12 +44,11 @@ export default function LessonsPage() {
               <td>{P.title}</td>
               <td>{P.author}</td>
               <td>{P.difficultyLevel}</td>
-              <td>{0}</td>
+              <td>{loading ? 'Loading...' : (scores ? scores[P.id].top_score : 0)}</td>
             </tr>
           ))}
         </tbody>
       </table>
-
     </div>
   )
 }

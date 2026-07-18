@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from database import supabase
-from schemas import UserResponse
+from schemas import UserResponse, UserScoreResponse, LeaderboardScoreResponse, UserScores
 
 app = FastAPI()
 bearer = HTTPBearer()
@@ -30,11 +30,36 @@ def get_current_user(creds: HTTPAuthorizationCredentials = Depends(bearer)):
 
 
 @app.get("/user", response_model = UserResponse)
-def get_user(user= Depends(get_current_user)):
+async def get_user(user= Depends(get_current_user)):
     try:
         res = supabase.table("users_data").select("*").eq("id", user.id).single().execute()
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"Error finding user: {str(e)}")
+    return res.data
+
+@app.get("/leaderboard/{pieceNumber}", response_model = list[LeaderboardScoreResponse])
+async def get_leaderboard(pieceNumber: int):
+    try:
+        res = supabase.table("scoring_data").select("user_id, user_name, top_score").eq("piece_number", pieceNumber).order("top_score").limit(20).execute()
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Error fetching leaderboard: {str(e)}")
+    return res.data
+
+@app.get("/user/scores", response_model = list[UserScores])
+async def get_user_scores(user= Depends(get_current_user)):
+    try:
+        res = supabase.table("scoring_data").select("*").eq("user_id", user.id).order("piece_number").execute()
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Error finding user's score: {str(e)}")
+    return res.data
+
+
+@app.get("/user/score/{pieceNumber}", response_model = UserScoreResponse)
+def get_user_score(pieceNumber: int, user= Depends(get_current_user)):
+    try:
+        res = supabase.table("scoring_data").select("*").eq("user_id", user.id).eq("piece_number", pieceNumber).single().execute()
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Error finding user's score: {str(e)}")
     return res.data
 
 @app.put("/user")
@@ -42,6 +67,15 @@ def update_user(body: dict, user=Depends(get_current_user)):
     allowed = {k: body[k] for k in ("username", "bio", "avatar_url", "binding_option", ) if k in body}
     try:
         res = supabase.table("users_data").update(allowed).eq("id", user.id).execute()
+    except Exception as e:
+        raise HTTPException(status_code=501, detail=f"Error saving user: {str(e)}")
+    return res.data
+
+@app.put("/user/score/{pieceNumber}")
+def update_user_score(body: dict, pieceNumber: int, user=Depends(get_current_user)):
+    allowed = {k: body[k] for k in ("top_score", "current_score", "changed_at", ) if k in body}
+    try:
+        res = supabase.table("scoring_data").update(allowed).eq("user_id", user.id).eq("piece_number", pieceNumber).execute()
     except Exception as e:
         raise HTTPException(status_code=501, detail=f"Error saving user: {str(e)}")
     return res.data

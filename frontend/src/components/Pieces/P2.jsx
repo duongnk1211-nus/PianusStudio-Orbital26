@@ -1,10 +1,10 @@
-import { FingerPiece } from "../../classes/FingerPiece.jsx";
+import { Piece } from "../../classes/Piece.jsx";
 
-const P2 = new FingerPiece(
+const P2 = new Piece(
   "The Entertainer",
-  "The Entertainer is one of the most iconic and instantly recognizable piano FingerPieces ever written. Composed by Scott Joplin, this lively ragtime classic has a bouncy, upbeat feel that makes it impossible not to smile while playing. Once you learn it, you'll find yourself coming back to it again and again!",
+  "The Entertainer is one of the most iconic and instantly recognizable piano Pieces ever written. Composed by Scott Joplin, this lively ragtime classic has a bouncy, upbeat feel that makes it impossible not to smile while playing. Once you learn it, you'll find yourself coming back to it again and again!",
   "p2",
-  "/FingerPieces/P2.jpg",
+  "/Pieces/P2.jpg",
   [
     { chord: "", duration: 1.0 },
     { chord: "C5", fingers: "1", duration: 0.4 },

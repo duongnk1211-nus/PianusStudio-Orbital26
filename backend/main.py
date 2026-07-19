@@ -67,10 +67,24 @@ from schemas import UserResponse, PieceCreate
 @app.post("/piece")
 def create_piece(body: PieceCreate, user=Depends(get_current_user)):
     try:
+        position = body.position
+        col_map = {1: "first_piece", 2: "second_piece", 3: "third_piece"}
+        col_name = col_map.get(position)
+            
+        query = supabase.table("users_data").select(col_name).eq("id", user.id).execute()
+        old_uuid = query.data[0][col_name]
+
+        if old_uuid is not None:
+            supabase.table("pieces").delete().eq("id", old_uuid).execute()
+
         res = supabase.table("pieces").insert({
             "user_id": user.id,
             "piece": body.piece
         }).execute()
+
+        new_uuid = res.data[0]["id"]
+        supabase.table("users_data").update({col_name: new_uuid}).eq("id", user.id).execute()
+
     except Exception as e:
         raise HTTPException(status_code=500, detail=f"Error saving piece: {str(e)}")
     return res.data

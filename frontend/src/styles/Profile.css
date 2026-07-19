@@ -1,5 +1,5 @@
 .profile-page {
-  height: 150vh;
+  min-height: 200vh;
   margin: 0;
   background-image: url('/BackGroundForContactUs.jpg');
   background-size: cover;
@@ -8,10 +8,10 @@
   background-attachment: fixed;
 }
 
-.profile-page button {
+.profile-page .return-btn {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 0px;
+  left: 0px;
   background: #e7a53c;
   color: #fefefe;
   font-family: 'Amadeus', cursive;
@@ -23,7 +23,7 @@
   align-items: center;
 }
 
-.profile-page button:hover {
+.profile-page .return-btn:hover {
   background: #ef8d05d6;
 }
 
@@ -200,4 +200,47 @@
   font-family: 'Amadeus', cursive;
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.pieces-container {
+  display: flex;
+  position: relative;
+  top: 90px;
+  margin: 90px;
+  gap: 120px;
+}
+
+.piece-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background: #fefefe95;
+  width: 20%;
+  padding: 20px;
+  border-radius: 20px;
+  border: 10px solid #563407;
+  z-index: 1;
+}
+
+.profile-page h2 {
+  font-family: 'Amadeus', cursive;
+  font-weight: bold;
+  font-size: 1.5 rem;
+  color: #000000;
+}
+
+.listen-button {
+  text-decoration: none;
+  background: #3cb87a;
+  color: #fff;
+  padding: 4px 16px;
+  border-radius: 8px;
+  border: 2px solid #1a5c3a !important;
+  font-size: 1.2rem;
+  &:hover {
+    opacity: 1;
+    background: #2ea368;
+    transform: scale(1.05);
+  }
 }

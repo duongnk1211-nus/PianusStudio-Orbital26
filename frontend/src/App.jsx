@@ -12,7 +12,7 @@ import SettingsPage from "./webpages/Settings.jsx";
 import Display from "./webpages/Display.jsx";
 import Learn from "./webpages/Learn.jsx";
 import PianoRecorder from "./webpages/PianoRecorder.jsx";
-import { FingerPieces } from "./components/FingerPieces.jsx";
+import { PieceList } from "./components/PieceList.jsx";
 
 export default function App() {
   return (
@@ -29,7 +29,7 @@ export default function App() {
       <Route path="/"                element={<HomePage />} />
       <Route path="/piano-recorder"  element={<PianoRecorder />} />
 
-      {FingerPieces.map((P) => (
+      {PieceList.map((P) => (
         <>
           <Route key={`${P.navStr}-display`} path={`/library/${P.navStr}/display`} element={<Display P={P} />} />
           <Route key={`${P.navStr}-learn`}   path={`/library/${P.navStr}/learn`}   element={<Learn P={P} />} />

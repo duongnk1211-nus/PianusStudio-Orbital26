@@ -8,7 +8,7 @@ import { useNavigate } from "react-router-dom";
 import { useKeyboard } from "../hooks/useKeyboard.jsx";
 import { usePiano } from "../hooks/usePiano.jsx";
 import { PianoLayout } from "../components/PianoLayout.jsx";
-import { Piece } from "../classes/Piece.jsx";
+import { Record } from "../classes/Record.jsx";
 import { supabase } from "../components/supabaseClient";
 
 export default function PianoRecorder() {
@@ -36,7 +36,7 @@ export default function PianoRecorder() {
   const [status, setStatus] = useState("stopped");
   const statusRef = useRef(status);
 
-  const [P, setP] = useState(new Piece(
+  const [P, setP] = useState(new Record(
     0.0,
     []
   ));
@@ -62,7 +62,7 @@ export default function PianoRecorder() {
       }
 
       setP(prev => {
-        const newP = new Piece(prev.duration, [...prev.actions]);
+        const newP = new Record(prev.duration, [...prev.actions]);
         newP.addAction({ type: isAttack ? "attack" : "release", sym, time: t });
         return newP;
       });
@@ -91,7 +91,7 @@ export default function PianoRecorder() {
     if (statusRef.current === "stopped") {
       Tone.Transport.cancel();
       lastAttackRef.current = {};
-      setP(new Piece(0.0, []));
+      setP(new Record(0.0, []));
       Tone.Transport.seconds = 0;
       Tone.Transport.start();
       setStatus("recording");
@@ -99,7 +99,7 @@ export default function PianoRecorder() {
       const D = Tone.Transport.seconds;
       const openSyms = Object.entries(lastAttackRef.current);
       setP(prev => {
-        const newP = new Piece(D, [...prev.actions]);
+        const newP = new Record(D, [...prev.actions]);
         for (const [sym, attackTime] of openSyms) {
           newP.addAction({ type: "release", sym, time: Math.max(D, attackTime + MIN_NOTE_LENGTH) });
         }
@@ -112,24 +112,35 @@ export default function PianoRecorder() {
     }
   }
 
-  const saveRecording = async () => {
-    let message = null;
-    if (!P.actions || P.actions.length === 0) {
-      message = "Nothing to save — record something first.";
-    }
+  const [showSaveDialog, setShowSaveDialog] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const [isFetched, setIsFetched] = useState(false);
+  const [saveError, setSaveError] = useState(null);
+
+  const saveRecord = (id) => async() => {
+    setIsSaving(true);
 
     try {
+      const result = await supabase.auth.getSession();
+      const session = result.data.session;
       await apiFetch('/piece', {
         method: 'POST',
-        body: JSON.stringify({ piece: { duration: P.duration, actions: P.actions } }),
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.access_token}`
+        },
+        body: JSON.stringify({ position: id, piece: { duration: P.duration, actions: P.actions } })
       });
-      message = "Recording saved successfully!";
+      setSaveError(`Recording was successfully saved to piece ${id}.`)
     } catch (err) {
-      console.error(err);
-      message = err.message || "Failed to save recording. Please try again.";
+      setSaveError(err.message || `Failed to save recording. Please try again.`);
+    } finally {
+      setIsSaving(false);
     }
-    alert(message);
-  };
+
+    setShowSaveDialog(false);
+    setIsFetched(true);
+  }
 
   const { synthRef, barsRef, displayBars } = usePiano(sideEffect);
   useKeyboard(profile, symMap, synthRef, barsRef, sideEffect);
@@ -159,7 +170,14 @@ export default function PianoRecorder() {
       status={status}
       flipPlaying={flipPlaying}
       flipRecording={flipRecording}
-      saveRecording={saveRecording}
+      showSaveDialog={showSaveDialog}
+      setShowSaveDialog={setShowSaveDialog}
+      saveRecord={saveRecord}
+      isSaving={isSaving}
+      setIsSaving={setIsSaving}
+      isFetched={isFetched}
+      setIsFetched={setIsFetched}
+      saveError={saveError}
     />
   );
 }

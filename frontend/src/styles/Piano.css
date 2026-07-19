@@ -159,48 +159,16 @@ body {
   border-radius: 10px;
 }
 
-/* .Piano button {
-  display: flex;
-  display: inline-block;
-  width: 60px;
-  height: 30px;
-  margin-left: 20px;
-  margin-right:70px;
-  margin-top: 15px;
-  background: #e7a53c;
-  border-radius: 4px;
+.piano-control button, .return-btn {
+  display: inline-flex;
   justify-content: center;
-  background-color: #df9e12;
-  color: #100b4d;
-  font-family: 'Amadeus', cursive;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.Piano button hover {
-  background: #ef8d05d6;
-}
-
-.Piano button a {
-  color: #100b4d;
-  text-decoration: none;
-  font-family: 'Amadeus', cursive;
-  font-weight: 600;
-  font-size: 14px;
-}
-} */
-
-.Piano button {
-  display: flex;
-  display: inline-block;
+  align-items: center;
   width: 60px;
   height: 30px;
   margin-left: 20px;
   margin-right:70px;
   margin-top: 15px;
   border-radius: 15px;
-  justify-content: center;
   color: #100b4d;
   font-family: 'Amadeus', cursive;
   font-weight: 600;
@@ -208,7 +176,7 @@ body {
   cursor: pointer;
 }
 
-.Piano button:hover:not(.disabled-play-button):not(.disabled-record-button) {
+.Piano button:hover:not(.disabled) {
   background: #ef8d05d6;
 }
 
@@ -220,55 +188,177 @@ body {
   font-size: 14px;
 }
 
-.return-button {
+.return-btn {
   background: #e7a53c;
 }
 
-.play-button, .pause-button, .disabled-play-button {
+.play-btn, .pause-btn {
   position: absolute;
   top: 200px;
   left: 40px;
   transform: translateY(-50%);
 }
 
-.record-button, .stop-button, .start-button, .restart-button, .disabled-record-button {
+.record-btn, .stop-btn, .start-btn, .restart-btn {
   position: absolute;
   top: 160px;
   left: 40px;
   transform: translateY(-50%);
 }
 
-.save-button, .disabled-save-button {
+.save-btn, .saving-btn {
   position: absolute;
-  top: 160px;
-  left: 1120px;
+  top: 240px;
+  left: 40px;
   transform: translateY(-50%);
 }
 
-.play-button {
-  background: green;
+.play-btn {
+  background: #22c55e;
 }
 
-.pause-button {
-  background: red;
+.pause-btn {
+  background: #f59e0b;
 }
 
-.start-button {
+.start-btn {
   background: #e7a53c;
 }
 
-.restart-button {
+.restart-btn {
   background: #e7a53c;
 }
 
-.record-button {
-  background: green;
+.record-btn {
+  background: #22c55e;
 }
 
-.stop-button {
-  background: red;
+.stop-btn {
+  background: #ef4444;
 }
 
-.save-button {
-  background: green;
+.save-btn {
+  background: #3b82f6;
+}
+
+.disabled {
+  background: #9ca3af;
+}
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+}
+
+.save-modal {
+  width: 430px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.save-modal h2 {
+  margin: 0;
+  color: #d6a000;
+  font-size: 34px;
+  font-weight: 600;
+}
+
+.save-modal p {
+  margin: 0;
+  color: #555;
+  font-size: 18px;
+}
+
+.save-slots {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.save-modal button {
+  position: static;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color .15s, filter .15s;
+}
+
+.save-slots button {
+  width: 105px;
+  height: 42px;
+  border: none;
+  border-radius: 8px;
+  background: #22c55e;
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.save-slots button:hover {
+  filter: brightness(1.08);
+}
+
+.cancel-btn {
+  width: 150px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: #ef4444;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.cancel-btn:hover {
+  filter: brightness(1.08);
+}
+
+.fetched-modal {
+  width: 430px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.fetched-modal p {
+  margin: 0;
+  color: #374151;
+  font-size: 18px;
+}
+
+.ok-btn {
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: #2563EB;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ok-btn:hover {
+  filter: brightness(1.08);
 }

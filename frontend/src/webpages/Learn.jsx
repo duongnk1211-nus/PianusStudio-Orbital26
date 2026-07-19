@@ -62,7 +62,7 @@ export default function Learn({ P }) {
       newSet.add(sym);
       
       const idx = currentIndexRef.current;
-      if (idx !== -1 && isSubset(chords[idx], newSet)) {
+      if (idx !== -1 && isSubset(result[idx].chord, newSet)) {
         queueMicrotask(() => handleChangeIndex(idx + 1));
       }
       return newSet;

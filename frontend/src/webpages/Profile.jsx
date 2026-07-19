@@ -48,7 +48,7 @@ export default function ProfilePage() {
 
   return (
     <div className='profile-page'>
-      <button onClick={goBack}>Return</button>
+      <button className='return-btn' onClick={goBack}>Return</button>
       <div className='avatar-wrap'>
         <p><img src="/PianusStudio.png" alt="PianusStudio Logo" style={{ position: 'relative', top: '4px', height: '20px', width: '20px' }} /> Pianus Studio</p>
         {profile.role && <p>{profile?.role || ''}</p>}
@@ -68,6 +68,23 @@ export default function ProfilePage() {
           onChangeComplete={(bio) => setProfile(p => ({ ...p, bio: bio }))}
         />
         <p style={{ position: 'absolute', bottom: '40px', left: '30px', marginBottom: '0px' }}>Last signed in: {lastSignIn}</p>
+      </div>
+
+      <div className='pieces-container'>
+        <div className='piece-wrap' id="first-piece-wrap">
+          <h2 className="piece-title">Piece 1</h2>
+          <button className="listen-button"n>Listen</button>
+        </div>
+
+        <div className='piece-wrap' id="second-piece-wrap">
+          <h2 className="piece-title">Piece 2</h2>
+          <button className="listen-button">Listen</button>
+        </div>
+
+        <div className='piece-wrap' id="third-piece-wrap">
+          <h2 className="piece-title">Piece 3</h2>
+          <button className="listen-button">Listen</button>
+        </div>
       </div>
     </div>
   );

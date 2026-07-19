@@ -1,10 +1,10 @@
-import { FingerPiece } from "../../classes/FingerPiece.jsx";
+import { Piece } from "../../classes/Piece.jsx";
 
-const P4 = new FingerPiece(
+const P4 = new Piece(
   "Spring from the Four Seasons",
-  "Spring is the opening movement of Vivaldi's Four Seasons — one of the most cheerful and recognizable FingerPieces in all of classical music. The melody dances along with a bright, energetic feel that perfectly captures the freshness of a new season blooming to life. It's a joy to play and even more of a joy to listen to!",
+  "Spring is the opening movement of Vivaldi's Four Seasons — one of the most cheerful and recognizable Pieces in all of classical music. The melody dances along with a bright, energetic feel that perfectly captures the freshness of a new season blooming to life. It's a joy to play and even more of a joy to listen to!",
   "p4",
-  "/FingerPieces/P4.png",
+  "/Pieces/P4.png",
   [
     { chord: "", duration: 0.4 },
     { chord: "C5", fingers: "1", duration: 0.4 },

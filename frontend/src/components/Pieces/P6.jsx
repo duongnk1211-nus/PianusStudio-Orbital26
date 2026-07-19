@@ -1,10 +1,10 @@
-import { FingerPiece } from "../../classes/FingerPiece.jsx";
+import { Piece } from "../../classes/Piece.jsx";
 
-const P6 = new FingerPiece(
+const P6 = new Piece(
   "Happy Birthday to You",
   "Happy Birthday to You is the most sung song in the world — and now you can play it on the piano! Its cheerful waltz rhythm makes it instantly feel festive and fun. Whether you're surprising someone at their party or just playing for the joy of it, this one is always a crowd-pleaser!",
   "p6",
-  "/FingerPieces/P6.png",
+  "/Pieces/P6.png",
   [
     { chord: "", duration: 1.0 },
     { chord: "C4", fingers: "1", duration: 0.25 },

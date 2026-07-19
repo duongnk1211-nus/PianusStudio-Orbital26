@@ -1,6 +1,6 @@
 import "../styles/Library.css";
 import { useNavigate } from "react-router-dom";
-import { FingerPieces } from "../components/FingerPieces.jsx";
+import { PieceList } from "../components/PieceList.jsx";
 
 function PieceShelf( { P } ) {
   const navigate = useNavigate();
@@ -31,7 +31,7 @@ export default function Library() {
         <p>A place where our pianists share their passion! Join us and create your own pieces here! 🎶</p>
         <p>More pieces coming soon! 🎉</p>
 
-        {FingerPieces.map((P) => (
+        {PieceList.map((P) => (
           <PieceShelf key={P.navStr} P={P} />
         ))}
       </div>

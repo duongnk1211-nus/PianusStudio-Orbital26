@@ -1,10 +1,10 @@
-import { FingerPiece } from "../../classes/FingerPiece.jsx";
+import { Piece } from "../../classes/Piece.jsx";
 
-const P5 = new FingerPiece(
+const P5 = new Piece(
   "Greensleeves",
   "Greensleeves is a timeless English folk melody that has been beloved for centuries. Its gentle, flowing rhythm gives it a wistful and romantic feel that's unlike anything else you'll play. The left hand keeps a steady, song-like accompaniment while the right hand sings out the iconic tune — hauntingly beautiful from the very first note!",
   "p5",
-  "/FingerPieces/P5.png",
+  "/Pieces/P5.png",
   [
     { chord: "", duration: 1.0 },
     { chord: "A4", fingers: "1", duration: 0.5 },

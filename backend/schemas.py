@@ -11,9 +11,5 @@ class UserResponse(BaseModel):
     binding_option: int
 
 class PieceCreate(BaseModel):
-    piece: Any
-
-class PieceResponse(BaseModel):
-    id: str
-    user_id: str
+    position: int
     piece: Any

@@ -149,7 +149,28 @@ function LessonCompletedDialog({
         </button>
       </div>
     </div>
-  )
+  );
+}
+
+function PitchResultDialog({
+  correctNotes,
+  setCorrectNotes,
+  total,
+}) {
+  return setCorrectNotes && (correctNotes !== null) && (
+    <div className="modal-overlay">
+      <div className="pitch-result-modal">
+        <p>Number of correct notes: {correctNotes} out of {total}.</p>
+
+        <button
+          className="ok-btn"
+          onClick={() => {setCorrectNotes(null)}}
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  );
 }
 
 export function PianoLayout({
@@ -180,6 +201,9 @@ export function PianoLayout({
   isCompleted,
   setIsCompleted,
   P,
+  correctNotes,
+  setCorrectNotes,
+  total,
 }) {
   const navigate = useNavigate();
   const goBack = () => {
@@ -256,6 +280,12 @@ export function PianoLayout({
           isCompleted={isCompleted}
           setIsCompleted={setIsCompleted}
           P={P}
+        />
+
+        <PitchResultDialog
+          correctNotes={correctNotes}
+          setCorrectNotes={setCorrectNotes}
+          total={total}
         />
       </div>
     </div>

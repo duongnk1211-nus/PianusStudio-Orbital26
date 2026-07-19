@@ -13,6 +13,7 @@ import Display from "./webpages/Display.jsx";
 import Learn from "./webpages/Learn.jsx";
 import PianoRecorder from "./webpages/PianoRecorder.jsx";
 import RecordingDisplayer from "./webpages/RecordingDisplayer.jsx";
+import PitchRecognition from "./webpages/PitchRecognition.jsx";
 import { PieceList } from "./components/PieceList.jsx";
 
 export default function App() {
@@ -30,6 +31,7 @@ export default function App() {
       <Route path="/"                element={<HomePage />} />
       <Route path="/piano-recorder"  element={<PianoRecorder />} />
       <Route path="/recording"       element={<RecordingDisplayer />} />
+      <Route path="/pitch-recognition" element={<PitchRecognition />}/>
 
       {PieceList.map((P) => (
         <>

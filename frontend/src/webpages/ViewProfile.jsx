@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { apiFetch } from "../components/API";
-import { Pieces } from "../components/Pieces";
+import { PieceList } from "../components/PieceList";
 import "../styles/Profile.css";
 
 export default function ViewProfile() {
@@ -35,7 +35,7 @@ export default function ViewProfile() {
 
   return (
     <div className='profile-page'>
-      <button onClick={goBack}>Return</button>
+      <button className='return-btn' onClick={goBack}>Return</button>
       <div className='avatar-wrap'>
         <p><img src="/PianusStudio.png" alt="PianusStudio Logo" style={{ position: 'relative', top: '4px', height: '20px', width: '20px' }} /> Pianus Studio</p>
         {profile.role && <p>{profile?.role || ''}</p>}
@@ -55,9 +55,9 @@ export default function ViewProfile() {
         <div className='bio-container'>
           <p>{profile.bio}</p>
         </div>
-        <p style={{ position: 'absolute', top: '250px' }}>Top Achievement:</p>
+        <p style={{ position: 'absolute', top: '220px' }}>Top Achievement:</p>
         <div className='profile-top-score'>
-          <p>Piece: <span style={{ color: '#efac48' }}>{Pieces[profile.top_piece_number - 1].title}</span></p>
+          <p>Piece: <span style={{ color: '#efac48' }}>{PieceList[profile.top_piece_number - 1].title}</span></p>
           <p>Top score: <span style={{ color: '#efac48' }}>{profile.top_score}</span></p>
         </div>
         <p style={{ position: 'absolute', bottom: '40px', left: '30px', marginBottom: '0px' }}>Last signed in: {lastSignIn}</p>

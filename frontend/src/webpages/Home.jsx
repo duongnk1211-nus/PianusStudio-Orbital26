@@ -134,6 +134,11 @@ export default function HomePage() {
               <Link to="/practice-tools">Try Tools</Link>
             </div>
             <div className="feature-card">
+              <h3>Piano Recorder</h3>
+              <p>Record your performances and track your progress over time.</p>
+              <Link to="/piano-recorder">Start Recording</Link>
+            </div>
+            <div className="feature-card">
               <h3>Community Forum</h3>
               <p>Connect with other piano enthusiasts.</p>
               <Link to="/community">Join Forum</Link>

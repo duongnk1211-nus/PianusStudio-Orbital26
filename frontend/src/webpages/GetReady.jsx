@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { apiFetch } from "../components/API.jsx";
 import { supabase } from "../components/supabaseClient";
 import { useNavigate, useLocation } from 'react-router-dom';
-import { Pieces } from '../components/Pieces';
+import { PieceList } from '../components/PieceList';
 
 export default function GetReady({ P }) {
   const navigate = useNavigate();
@@ -109,7 +109,7 @@ export default function GetReady({ P }) {
                       <td style={{ flex: '0 0 120px' }}>{row.top_score}</td>
                     </tr>)
                 })
-                : Pieces.map((piece) => (
+                : PieceList.map((piece) => (
                   <tr style={{ display: 'flex' }} key={piece.id} onClick={() => navigate(`/lessons/${piece.navStr}/get-ready`)}>
                     <td style={{ flex: '0 0 120px' }}>{piece.id}</td>
                     <td style={{ flex: 1 }}>{piece.author}</td>

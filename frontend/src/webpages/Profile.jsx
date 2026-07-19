@@ -4,7 +4,7 @@ import { apiFetch } from "../components/API";
 import { supabase } from "../components/supabaseClient";
 import AvatarUpload from "../components/AvatarUpload";
 import { Bio, Username } from "../components/BioUsernameUpload";
-import { Pieces } from "../components/Pieces";
+import { PieceList } from "../components/PieceList";
 import "../styles/Profile.css";
 
 export default function ProfilePage() {
@@ -38,6 +38,66 @@ export default function ProfilePage() {
     load();
   }, [scores]);
 
+  const [isRecorded, setIsRecorded] = useState([false, false, false]);
+
+  async function updateRecordings() {
+    try {
+      const result = await supabase.auth.getSession();
+      const session = result.data.session;
+      const data = await apiFetch('/records', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.access_token}`
+        },
+      });
+
+      const row = data?.[0];
+      if (!row) {
+        console.warn('updateRecordings: /records returned no row', data);
+        setIsRecorded([false, false, false]);
+        return;
+      }
+
+      setIsRecorded([
+        Boolean(row.first_record),
+        Boolean(row.second_record),
+        Boolean(row.third_record),
+      ]);
+    } catch (err) {
+      console.error('updateRecordings failed:', err);
+      setIsRecorded([false, false, false]);
+    }
+  }
+
+  useEffect(() => {
+    updateRecordings();
+  }, []);
+
+  const [deleteError, setDeleteError] = useState(null);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
+  const handleDeleteRecording = (id) => async () => {
+    try {
+      const result = await supabase.auth.getSession();
+      const session = result.data.session;
+      await apiFetch(`/record/${id + 1}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.access_token}`
+        }
+      });
+      setDeleteError(`Recording ${id + 1} was successfully deleted!!!`);
+    } catch (err) {
+      console.error(`handleDeleteRecording(${id}) failed:`, err);
+      setDeleteError(err.message || `Failed to delete recording ${id + 1}. Please try again.`);
+    } finally {
+      setShowDeleteDialog(true);
+      updateRecordings();
+    }
+  }
+
   if (!profile || !user) {
     return (
     <div>
@@ -53,7 +113,7 @@ export default function ProfilePage() {
 
   return (
     <div className='profile-page'>
-      <button onClick={goBack}>Return</button>
+      <button className='return-btn' onClick={goBack}>Return</button>
       <div className='avatar-wrap'>
         <p><img src="/PianusStudio.png" alt="PianusStudio Logo" style={{ position: 'relative', top: '4px', height: '20px', width: '20px' }} /> Pianus Studio</p>
         {profile.role && <p>{profile?.role || ''}</p>}
@@ -72,12 +132,54 @@ export default function ProfilePage() {
           currentBio={profile.bio}
           onChangeComplete={(bio) => setProfile(p => ({ ...p, bio: bio }))}
         />
-        <p style={{position: 'absolute', top:'250px'}}>Top Achievement:</p>
+        <p style={{position: 'absolute', top:'220px'}}>Top Achievement:</p>
         <div className='profile-top-score'>
-          <p>Piece: <span style={{color: '#efac48'}}>{Pieces[maxScore.piece_number-1].title}</span></p>
+          <p>Piece: <span style={{color: '#efac48'}}>{PieceList[maxScore.piece_number-1].title}</span></p>
           <p>Top score: <span style={{color: '#efac48'}}>{maxScore.top_score}</span></p>
         </div>
         <p style={{ position: 'absolute', bottom: '40px', left: '30px', marginBottom: '0px' }}>Last signed in: {lastSignIn}</p>
+      </div>
+
+      <h1>User's Recordings</h1>
+
+      <div className="recordings-container">
+        {[1, 2, 3].map((num) => {
+          const idx = num - 1;
+          return (
+            <div className="recording-wrap" key={num}>
+              <h2 className="recording-title">Recording {num}</h2>
+              <div className="recording-options">
+                <button 
+                  className={`listen-btn ${isRecorded[idx] ? "" : "disabled"}`}
+                  onClick={() => navigate('/recording', { state: { focus: num } })}
+                >
+                  Listen
+                </button>
+                <button
+                  className={`delete-btn ${isRecorded[idx] ? "" : "disabled"}`}
+                  onClick={handleDeleteRecording(idx)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          );
+        })}
+
+        {showDeleteDialog && (
+          <div className="modal-overlay">
+            <div className="deleted-modal">
+              <p>{deleteError}</p>      
+              <button
+                className="ok-btn"
+                onClick={() => setShowDeleteDialog(false)}
+              >
+                OK
+              </button>
+
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

@@ -94,20 +94,43 @@ export class Piece {
     return this.#pianoDeco6;
   }
 
-  #displayOneHand = (arr, synthRef, barsRef, sideEffect) => {
+  #displayOneHand = (arr, synthRef, barsRef, sideEffect, addOn, setIsAttacking) => {
     async function timeline() {
       let currentTime = 0;
       for (let i = 0; i < arr.length; i++) {
-        if (arr[i].chord !== "R") {
-          for (const sym of arr[i].chord.split(" ")) {
-            Tone.Transport.schedule(time => {
-              symMap.get(sym).attack(synthRef, barsRef, sideEffect)(time);
-            }, currentTime);
+        let C = arr[i].chord != "" ? arr[i].chord.split(" ") : [];
+        let F = arr[i].fingers ? arr[i].fingers.split(" ").map(f => parseInt(f)) : [];
 
-            Tone.Transport.schedule(time => {
-              symMap.get(sym).release(synthRef, barsRef, sideEffect)(time);
-            }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
-          }
+        for (const sym of C) {
+          Tone.Transport.schedule(time => {
+            symMap.get(sym).attack(synthRef, barsRef, sideEffect, addOn)(time);
+          }, currentTime);
+
+          Tone.Transport.schedule(time => {
+            symMap.get(sym).release(synthRef, barsRef, sideEffect)(time);
+          }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
+        }
+
+        for (const f of F) {
+          Tone.Transport.schedule(time => {
+            (async() => {
+              setIsAttacking(prev => {
+              const newIsAttacking = [...prev];
+              newIsAttacking[f - 1] = true;
+              return newIsAttacking;
+              });
+            })(time);
+          }, currentTime);
+
+          Tone.Transport.schedule(time => {
+            (async() => {
+              setIsAttacking(prev => {
+                const newIsAttacking = [...prev];
+                newIsAttacking[f - 1] = false;
+                return newIsAttacking;
+              });
+            })(time);
+          }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
         }
         currentTime += arr[i].duration;
       }
@@ -119,9 +142,9 @@ export class Piece {
     return timeline;
   }
 
-  display = (synthRef, barsRef, sideEffect) => () => {
-    this.#displayOneHand(this.#RH, synthRef, barsRef, sideEffect)();
-    this.#displayOneHand(this.#LH, synthRef, barsRef, sideEffect)();
+  display = (synthRef, barsRef, sideEffect, setIsAttackingRight, setIsAttackingLeft) => () => {
+    this.#displayOneHand(this.#RH, synthRef, barsRef, sideEffect, "right", setIsAttackingRight)();
+    this.#displayOneHand(this.#LH, synthRef, barsRef, sideEffect, "left", setIsAttackingLeft)();
   }
 
   #displayOneHandForScoring = (arr, synthRef, barsRef, sideEffect) => {
@@ -199,21 +222,21 @@ export class Piece {
     const RHMap = new Map(), LHMap = new Map();
     const timeSet = new Set();
 
-    let currentTime = 0;
+    let currentTimeRight = 0;
     for (let i = 0; i < this.#RH.length; i++) {
-      if (this.#RH[i].chord !== "R") {
-        RHMap.set(currentTime, i);
-        timeSet.add(currentTime);
+      if (this.#RH[i].chord !== "") {
+        RHMap.set(currentTimeRight, i);
+        timeSet.add(currentTimeRight);
       }
-      currentTime += this.#RH[i].duration;
+      currentTimeRight += this.#RH[i].duration;
     }
-    currentTime = 0;
+    let currentTimeLeft = 0;
     for (let i = 0; i < this.#LH.length; i++) {
-      if (this.#LH[i].chord !== "R") {
-        LHMap.set(currentTime, i);
-        timeSet.add(currentTime);
+      if (this.#LH[i].chord !== "") {
+        LHMap.set(currentTimeLeft, i);
+        timeSet.add(currentTimeLeft);
       }
-      currentTime += this.#LH[i].duration;
+      currentTimeLeft += this.#LH[i].duration;
     }
 
     let result = [];
@@ -231,10 +254,11 @@ export class Piece {
           s.add(sym);
         }
       }
-
-      if (s.size > 0) {
-        result.push(s);
-      }
+      result.push({
+        chord: s, 
+        rightFingers: RHMap.get(t) !== undefined ? this.#RH[RHMap.get(t)].fingers : "", 
+        leftFingers: LHMap.get(t) !== undefined ? this.#LH[LHMap.get(t)].fingers : ""}
+      );
     }
     return result;
   }

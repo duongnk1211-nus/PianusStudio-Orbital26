@@ -124,7 +124,7 @@ body {
   background-position: top;
   background-repeat: no-repeat;
   background-attachment: fixed; 
-  min-height: 160vh;
+  min-height: 170vh;
 }
 
 .piano-wrapper {
@@ -137,11 +137,11 @@ body {
   position: relative;
 }
 
-.piano-wrapper h1 {
+.piano-wrapper h2 {
   position: relative;
   color: #ecb80c;
   font-family: 'Amadeus', cursive;
-  top: 0px;
+  top: -20px;
   padding-bottom: 0px;
 }
 
@@ -159,48 +159,16 @@ body {
   border-radius: 10px;
 }
 
-/* .Piano button {
-  display: flex;
-  display: inline-block;
-  width: 60px;
-  height: 30px;
-  margin-left: 20px;
-  margin-right:70px;
-  margin-top: 15px;
-  background: #e7a53c;
-  border-radius: 4px;
+.piano-control button, .return-btn {
+  display: inline-flex;
   justify-content: center;
-  background-color: #df9e12;
-  color: #100b4d;
-  font-family: 'Amadeus', cursive;
-  font-weight: 600;
-  font-size: 14px;
-  cursor: pointer;
-}
-
-.Piano button hover {
-  background: #ef8d05d6;
-}
-
-.Piano button a {
-  color: #100b4d;
-  text-decoration: none;
-  font-family: 'Amadeus', cursive;
-  font-weight: 600;
-  font-size: 14px;
-}
-} */
-
-.Piano button {
-  display: flex;
-  display: inline-block;
+  align-items: center;
   width: 60px;
   height: 30px;
   margin-left: 20px;
   margin-right:70px;
   margin-top: 15px;
   border-radius: 15px;
-  justify-content: center;
   color: #100b4d;
   font-family: 'Amadeus', cursive;
   font-weight: 600;
@@ -208,7 +176,7 @@ body {
   cursor: pointer;
 }
 
-.Piano button:hover {
+.Piano button:hover:not(.disabled) {
   background: #ef8d05d6;
 }
 
@@ -220,29 +188,195 @@ body {
   font-size: 14px;
 }
 
-.return-button {
+.return-btn {
   background: #e7a53c;
 }
 
-.play-button, .pause-button, .start-button, .restart-button {
-  position: relative;
-  top: 45px;
-  left: -520px;
+.start-btn, .restart-btn {
+  position: absolute;
+  top: 160px;
+  left: 30px;
   transform: translateY(-50%);
 }
 
-.play-button {
-  background: green;
+.play-btn, .pause-btn {
+  position: absolute;
+  top: 160px;
+  left: 40px;
+  transform: translateY(-50%);
 }
 
-.pause-button {
-  background: red;
+.record-btn, .stop-btn {
+  position: absolute;
+  top: 200px;
+  left: 40px;
+  transform: translateY(-50%);
 }
 
-.start-button {
+.save-btn, .saving-btn {
+  position: absolute;
+  top: 240px;
+  left: 40px;
+  transform: translateY(-50%);
+}
+
+.play-btn {
+  background: #22c55e;
+}
+
+.pause-btn {
+  background: #f59e0b;
+}
+
+.start-btn {
   background: #e7a53c;
 }
 
-.restart-button {
+.restart-btn {
   background: #e7a53c;
+}
+
+.record-btn {
+  background: #22c55e;
+}
+
+.stop-btn {
+  background: #ef4444;
+}
+
+.save-btn {
+  background: #3b82f6;
+}
+
+.disabled {
+  background: #9ca3af;
+}
+
+.Piano .modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+}
+
+.save-modal, .completed-modal, .fetched-modal, .pitch-result-modal  {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.save-modal {
+  width: 430px;
+}
+
+.completed-modal {
+  width: 600px;
+}
+
+.fetched-modal {
+  width: 430px;
+}
+
+.pitch-result-modal {
+  width: 300px;
+}
+
+.save-modal h2 {
+  margin: 0;
+  color: #d6a000;
+  font-size: 34px;
+  font-weight: 600;
+}
+
+.save-slots {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 24px;
+}
+
+.save-modal button {
+  position: static;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color .15s, filter .15s;
+}
+
+.save-slots button {
+  width: 150px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: #22c55e;
+  color: white;
+  font-size: 17px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.save-slots button:hover {
+  filter: brightness(1.08);
+}
+
+.cancel-btn {
+  width: 150px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: #ef4444;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.cancel-btn:hover {
+  filter: brightness(1.08);
+}
+
+.ok-btn {
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 8px;
+  background: #2563EB;
+  color: white;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.ok-btn:hover {
+  filter: brightness(1.08);
+}
+
+.completed-modal {
+  width: 600px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.completed-modal p, .fetched-modal p, .save-modal p {
+  font-family: 'Amadeus', cursive;
+  font-weight: bold;
+  margin: 0;
+  color: #555;
+  font-size: 18px;
 }

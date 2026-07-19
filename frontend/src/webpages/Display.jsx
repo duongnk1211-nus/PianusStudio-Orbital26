@@ -24,26 +24,30 @@ export default function Display({ P }) {
     }
     return map;
   }, []);
-
+  
   const [profile, setProfile] = useState(null);
-
+  
   useEffect(() => {
     apiFetch('/user').then(setProfile);
   }, []);
-
+  
   const sideEffect = useMemo(() => {
     return (sym, isAttack) => {};
   }, []);
   const { synthRef, barsRef, displayBars } = usePiano(sideEffect);
   useKeyboard(profile, symMap, synthRef, barsRef, sideEffect);
-
+  
   const [isPlaying, setIsPlaying] = useState(false);
-
-  const flipPlaying = () => {
+  const [isAttackingRight, setIsAttackingRight] = useState([false, false, false, false, false]);
+  const [isAttackingLeft, setIsAttackingLeft] = useState([false, false, false, false, false]);
+  
+  const flipPlaying = async () => {
     const prev = isPlaying;
-    if (prev == false) {
-      if (Tone.Transport.state == "stopped") {
-        P.display(synthRef, barsRef, sideEffect)();
+    if (prev === false) {
+      if (Tone.Transport.state === "stopped") {
+        synthRef.current?.releaseAll();
+        Tone.Transport.cancel();
+        P.display(synthRef, barsRef, sideEffect, setIsAttackingRight, setIsAttackingLeft)();
       }
       Tone.Transport.start();
     } else {
@@ -52,7 +56,7 @@ export default function Display({ P }) {
     }
     setIsPlaying(!prev);
   }
-
+  
   useEffect(() => {
     Tone.Transport.stop();
     Tone.Transport.cancel();
@@ -77,6 +81,10 @@ export default function Display({ P }) {
       sideEffect={sideEffect}
       isPlaying={isPlaying}
       flipPlaying={flipPlaying}
+      isAttackingRight={isAttackingRight}
+      setIsAttackingRight={setIsAttackingRight}
+      isAttackingLeft={isAttackingLeft}
+      setIsAttackingLeft={setIsAttackingLeft}
     />
   );
 }

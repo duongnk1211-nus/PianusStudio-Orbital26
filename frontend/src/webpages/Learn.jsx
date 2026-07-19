@@ -41,7 +41,7 @@ export default function Learn({ P }) {
   useKeyboard(profile, symMap, synthRef, barsRef, sideEffect);
 
   const [isStarted, setIsStarted] = useState(false);
-  const chords = useMemo(() => {
+  const result = useMemo(() => {
     return P.breakChords();
   }, []);
   const [activeKeys, setActiveKeys] = useState(new Set());
@@ -61,7 +61,7 @@ export default function Learn({ P }) {
       newSet.add(sym);
       
       const idx = currentIndexRef.current;
-      if (idx !== -1 && isSubset(chords[idx], newSet)) {
+      if (idx !== -1 && isSubset(result[idx].chord, newSet)) {
         queueMicrotask(() => handleChangeIndex(idx + 1));
       }
       return newSet;
@@ -75,30 +75,57 @@ export default function Learn({ P }) {
       return newSet;
     });
   };
+
+  const [isAttackingRight, setIsAttackingRight] = useState([false, false, false, false, false]);
+  const [isAttackingLeft, setIsAttackingLeft] = useState([false, false, false, false, false]);
+  const [isCompleted, setIsCompleted] = useState(false);
   
   const handleChangeIndex = (id) => {
     const prev = currentIndexRef.current;
     if (prev !== -1) {
-      for (const item of chords[prev]) {
+      for (const item of result[prev].chord) {
         // console.log("remove " + item);
         symMap.get(item).unsetGuide();
       }
+      for (const f of result[prev].rightFingers) {
+        setIsAttackingRight(prev => {
+          const newIsAttacking = [...prev];
+          newIsAttacking[f - 1] = false;
+          return newIsAttacking;
+        });
+      }
+      for (const f of result[prev].leftFingers) {
+        setIsAttackingLeft(prev => {
+          const newIsAttacking = [...prev];
+          newIsAttacking[f - 1] = false;
+          return newIsAttacking;
+        });
+      }
     }
-    if (id >= chords.length) {
-      if (!completedRef.current){
-      setTimeout(() => {
-        alert("Lesson completed!!!");
-        goBack();
-      }, 1000);
-      completedRef.current = true;
+    if (id >= result.length) {
+      setIsCompleted(true);
+    } else {
+      for (const item of result[id].chord) {
+        // console.log("add " + item);
+        symMap.get(item).setGuide();
+      }
+      for (const f of result[id].rightFingers) {
+        setIsAttackingRight(prev => {
+          const newIsAttacking = [...prev];
+          newIsAttacking[f - 1] = true;
+          return newIsAttacking;
+        });
+      }
+      for (const f of result[id].leftFingers) {
+        setIsAttackingLeft(prev => {
+          const newIsAttacking = [...prev];
+          newIsAttacking[f - 1] = true;
+          return newIsAttacking;
+        });
+      }
+      currentIndexRef.current = id;
+      setActiveKeys(new Set());
     }
-  }
-    for (const item of chords[id]) {
-      // console.log("add " + item);
-      symMap.get(item).setGuide();
-    }
-    currentIndexRef.current = id;
-    setActiveKeys(new Set());
   };
   
   const start = () => {
@@ -116,6 +143,13 @@ export default function Learn({ P }) {
       sideEffect={sideEffect}
       isStarted={isStarted}
       start={start}
+      isAttackingRight={isAttackingRight}
+      setIsAttackingRight={setIsAttackingRight}
+      isAttackingLeft={isAttackingLeft}
+      setIsAttackingLeft={setIsAttackingLeft}
+      isCompleted={isCompleted}
+      setIsCompleted={setIsCompleted}
+      P={P}
     />
   );
 }

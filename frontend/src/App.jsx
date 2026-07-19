@@ -16,7 +16,10 @@ import Scoring from "./webpages/Scoring.jsx";
 import { ScoringDemo } from "./webpages/Scoring.jsx";
 import GetReady from "./webpages/GetReady.jsx";
 import LessonsPage from "./webpages/Lessons.jsx";
-import { Pieces } from "./components/Pieces.jsx";
+import PianoRecorder from "./webpages/PianoRecorder.jsx";
+import RecordingDisplayer from "./webpages/RecordingDisplayer.jsx";
+import PitchRecognition from "./webpages/PitchRecognition.jsx";
+import { PieceList } from "./components/PieceList.jsx";
 
 export default function App() {
   return (
@@ -33,8 +36,11 @@ export default function App() {
       <Route path="/piano-simulator" element={<PianoSimulator />}    />
       <Route path="/login"           element={<LoginPage />} />
       <Route path="/"                element={<HomePage />} />
+      <Route path="/piano-recorder"  element={<PianoRecorder />} />
+      <Route path="/recording"       element={<RecordingDisplayer />} />
+      <Route path="/pitch-recognition" element={<PitchRecognition />}/>
 
-      {Pieces.map((P) => (
+      {PieceList.map((P) => (
         <>
           <Route key={`${P.navStr}-getReady`} path={`/lessons/${P.navStr}/get-ready`} element={<GetReady P={P} />} />
           <Route key={`${P.navStr}-scoring`} path={`/lessons/${P.navStr}/play`} element={<Scoring P={P} />} />

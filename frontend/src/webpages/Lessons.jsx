@@ -2,7 +2,7 @@ import '../styles/Lessons.css';
 import { useEffect, useState } from 'react';
 import { apiFetch } from "../components/API.jsx";
 import { useNavigate } from 'react-router-dom';
-import { Pieces } from "../components/Pieces.jsx";
+import { PieceList } from "../components/PieceList.jsx";
 
 export default function LessonsPage() {
   const navigate = useNavigate();
@@ -38,7 +38,7 @@ export default function LessonsPage() {
           </tr>
         </thead>
         <tbody>
-          {Pieces.slice().reverse().map((P) => (
+          {PieceList.slice().reverse().map((P) => (
             <tr key={P.id} onClick={scores ? () => navigate(`/lessons/${P.navStr}/get-ready`) : () => navigate('/login')}>
               <td>{P.id}</td>
               <td>{P.title}</td>

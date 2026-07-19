@@ -1,3 +1,4 @@
+from typing import Any
 from pydantic import BaseModel
 from datetime import datetime
 
@@ -36,3 +37,7 @@ class UserProfileResponse(BaseModel):
     top_score: int
     last_sign_in_at: datetime
     created_at: datetime
+    
+class RecordCreate(BaseModel):
+    position: int
+    record: Any

@@ -8,10 +8,10 @@
   background-attachment: fixed;
 }
 
-.profile-page button {
+.profile-page .return-btn {
   position: absolute;
-  top: 10px;
-  left: 10px;
+  top: 0px;
+  left: 0px;
   background: #e7a53c;
   color: #fefefe;
   font-family: 'Amadeus', cursive;
@@ -23,7 +23,7 @@
   align-items: center;
 }
 
-.profile-page button:hover {
+.profile-page .return-btn:hover {
   background: #ef8d05d6;
 }
 
@@ -223,4 +223,121 @@
   color: #000000;
   border-radius: 12px;
   overflow: hidden;
+}
+
+.recordings-container {
+  display: flex;
+  position: relative;
+  top: 130px;
+  margin: 90px;
+  gap: 32px;
+}
+
+.recording-wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+  background: #fefefe95;
+  width: 280px;
+  padding: 20px;
+  border-radius: 20px;
+  border: 10px solid #563407;
+  z-index: 1;
+}
+
+.profile-page h2 {
+  font-family: 'Amadeus', cursive;
+  font-weight: bold;
+  font-size: 1.5 rem;
+  color: #000000;
+}
+
+.recording-options {
+  display: flex;
+  gap: 20px;
+}
+
+.listen-btn {
+  text-decoration: none;
+  background: #3cb87a;
+  color: #fff;
+  padding: 4px 16px;
+  border-radius: 8px;
+  border: 2px solid #1a5c3a !important;
+  font-size: 1.2rem;
+  &:hover {
+    opacity: 1;
+    background: #2ea368;
+    transform: scale(1.05);
+  }
+}
+
+.delete-btn {
+  text-decoration: none;
+  background: #e0433e;
+  color: #fff;
+  padding: 4px 16px;
+  border-radius: 8px;
+  border: 2px solid #1a5c3a !important;
+  font-size: 1.2rem;
+  &:hover {
+    opacity: 1;
+    background: #c8362f;
+    transform: scale(1.05);
+  }
+}
+
+.listen-btn.disabled,
+.delete-btn.disabled {
+  background: #9e9e9e;
+  border: 2px solid #6b6b6b !important;
+  cursor: not-allowed;
+  pointer-events: none;
+
+  &:hover {
+    opacity: 1;
+    background: #9e9e9e;
+    transform: none;
+  }
+}
+
+.profile-page h1 {
+  position: relative;
+  top: 180px;
+  font-family: 'Amadeus', cursive;
+  font-weight: bold;
+  font-size: 2rem;
+  color: #e7a53c;
+}
+
+.profile-page .modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: rgba(0, 0, 0, 0.45);
+  z-index: 1000;
+}
+
+.deleted-modal {
+  width: 400px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 30px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.deleted-modal p {
+  font-family: 'Amadeus', cursive;
+  font-weight: bold;
+  margin: 0;
+  color: #555;
+  font-size: 18px;
 }

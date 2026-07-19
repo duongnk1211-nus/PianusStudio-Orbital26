@@ -23,7 +23,7 @@ export function useKeyboard(profile, symMap, synthRef, barsRef, sideEffect) {
       if (note) {
         e.preventDefault();
         if (e.repeat) return;
-        note.attack(synthRef, barsRef, sideEffect)();
+        await note.attack(synthRef, barsRef, sideEffect)();
       }
     };
     const handleKeyUp = async (e) => {
@@ -31,7 +31,7 @@ export function useKeyboard(profile, symMap, synthRef, barsRef, sideEffect) {
       const note = noteMap.get(e.key);
       if (note) {
         e.preventDefault();
-        note.release(synthRef, barsRef, sideEffect)();
+        await note.release(synthRef, barsRef, sideEffect)();
       }
     }
 

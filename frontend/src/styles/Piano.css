@@ -192,16 +192,23 @@ body {
   background: #e7a53c;
 }
 
+.start-btn, .restart-btn {
+  position: absolute;
+  top: 160px;
+  left: 30px;
+  transform: translateY(-50%);
+}
+
 .play-btn, .pause-btn {
   position: absolute;
-  top: 200px;
+  top: 160px;
   left: 40px;
   transform: translateY(-50%);
 }
 
-.record-btn, .stop-btn, .start-btn, .restart-btn {
+.record-btn, .stop-btn {
   position: absolute;
-  top: 160px;
+  top: 200px;
   left: 40px;
   transform: translateY(-50%);
 }
@@ -265,7 +272,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 10px;
+  gap: 20px;
 }
 
 .save-modal h2 {
@@ -273,12 +280,6 @@ body {
   color: #d6a000;
   font-size: 34px;
   font-weight: 600;
-}
-
-.save-modal p {
-  margin: 0;
-  color: #555;
-  font-size: 18px;
 }
 
 .save-slots {
@@ -299,8 +300,8 @@ body {
 }
 
 .save-slots button {
-  width: 105px;
-  height: 42px;
+  width: 150px;
+  height: 40px;
   border: none;
   border-radius: 8px;
   background: #22c55e;
@@ -342,12 +343,6 @@ body {
   gap: 20px;
 }
 
-.fetched-modal p {
-  margin: 0;
-  color: #374151;
-  font-size: 18px;
-}
-
 .ok-btn {
   width: 100px;
   height: 40px;
@@ -361,4 +356,25 @@ body {
 
 .ok-btn:hover {
   filter: brightness(1.08);
+}
+
+.completed-modal {
+  width: 600px;
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 50px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.completed-modal p, .fetched-modal p, .save-modal p {
+  font-family: 'Amadeus', cursive;
+  font-weight: bold;
+  margin: 0;
+  color: #555;
+  font-size: 18px;
 }

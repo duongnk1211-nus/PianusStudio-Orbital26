@@ -43,7 +43,6 @@ export default function SettingsPage() {
   const handleChangeBindingOption = (id) => async() => {
     const result = await supabase.auth.getSession();
     const session = result.data.session;
-    console.log(session.access_token);
     const res = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
       method: 'PUT',
       headers: {

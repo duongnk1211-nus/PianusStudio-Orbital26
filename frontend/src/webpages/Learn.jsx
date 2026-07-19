@@ -46,7 +46,6 @@ export default function Learn({ P }) {
   }, []);
   const [activeKeys, setActiveKeys] = useState(new Set());
   const currentIndexRef = useRef(-1);
-  const completedRef = useRef(false);
   
   const isSubset = (setA, setB) => {
     if (setA.size > setB.size) return false;
@@ -79,6 +78,7 @@ export default function Learn({ P }) {
 
   const [isAttackingRight, setIsAttackingRight] = useState([false, false, false, false, false]);
   const [isAttackingLeft, setIsAttackingLeft] = useState([false, false, false, false, false]);
+  const [isCompleted, setIsCompleted] = useState(false);
   
   const handleChangeIndex = (id) => {
     const prev = currentIndexRef.current;
@@ -103,34 +103,29 @@ export default function Learn({ P }) {
       }
     }
     if (id >= result.length) {
-      if (!completedRef.current){
-      setTimeout(() => {
-        alert("Lesson completed!!!");
-        goBack();
-      }, 1000);
-      completedRef.current = true;
+      setIsCompleted(true);
+    } else {
+      for (const item of result[id].chord) {
+        // console.log("add " + item);
+        symMap.get(item).setGuide();
+      }
+      for (const f of result[id].rightFingers) {
+        setIsAttackingRight(prev => {
+          const newIsAttacking = [...prev];
+          newIsAttacking[f - 1] = true;
+          return newIsAttacking;
+        });
+      }
+      for (const f of result[id].leftFingers) {
+        setIsAttackingLeft(prev => {
+          const newIsAttacking = [...prev];
+          newIsAttacking[f - 1] = true;
+          return newIsAttacking;
+        });
+      }
+      currentIndexRef.current = id;
+      setActiveKeys(new Set());
     }
-  }
-    for (const item of result[id].chord) {
-      // console.log("add " + item);
-      symMap.get(item).setGuide();
-    }
-    for (const f of result[id].rightFingers) {
-      setIsAttackingRight(prev => {
-        const newIsAttacking = [...prev];
-        newIsAttacking[f - 1] = true;
-        return newIsAttacking;
-      });
-    }
-    for (const f of result[id].leftFingers) {
-      setIsAttackingLeft(prev => {
-        const newIsAttacking = [...prev];
-        newIsAttacking[f - 1] = true;
-        return newIsAttacking;
-      });
-    }
-    currentIndexRef.current = id;
-    setActiveKeys(new Set());
   };
   
   const start = () => {
@@ -152,6 +147,9 @@ export default function Learn({ P }) {
       setIsAttackingRight={setIsAttackingRight}
       isAttackingLeft={isAttackingLeft}
       setIsAttackingLeft={setIsAttackingLeft}
+      isCompleted={isCompleted}
+      setIsCompleted={setIsCompleted}
+      P={P}
     />
   );
 }

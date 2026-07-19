@@ -123,17 +123,17 @@ export default function PianoRecorder() {
     try {
       const result = await supabase.auth.getSession();
       const session = result.data.session;
-      await apiFetch('/piece', {
+      await apiFetch('/record', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session.access_token}`
         },
-        body: JSON.stringify({ position: id, piece: { duration: P.duration, actions: P.actions } })
+        body: JSON.stringify({ position: id, record: { duration: P.duration, actions: P.actions } })
       });
-      setSaveError(`Recording was successfully saved to piece ${id}.`)
+      setSaveError(`Recording ${id} was successfully saved!!!`)
     } catch (err) {
-      setSaveError(err.message || `Failed to save recording. Please try again.`);
+      setSaveError(err.message || `Failed to save recording ${id}. Please try again.`);
     } finally {
       setIsSaving(false);
     }

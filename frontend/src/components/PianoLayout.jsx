@@ -67,6 +67,91 @@ function PianoControl({
   );
 }
 
+function SaveDialog({
+  showSaveDialog,
+  setShowSaveDialog,
+  saveRecord,
+  isSaving,
+  setIsSaving,
+}) {
+  return showSaveDialog && (
+    <div className="modal-overlay">
+      <div className="save-modal">
+        <h2>Save Recording</h2>
+        <p>Choose a save slot.</p>
+        <div className="save-slots">
+          <button onClick={saveRecord(1)}>
+            Recording 1
+          </button>
+          <button onClick={saveRecord(2)}>
+            Recording 2
+          </button>
+          <button onClick={saveRecord(3)}>
+            Recording 3
+          </button>
+        </div>
+        <button
+          className="cancel-btn"
+          onClick={() => setShowSaveDialog(false)}
+        >
+          Don't Save
+        </button>
+
+        {isSaving && (
+          <div className="saving-message">
+            Saving...
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function SaveDoneDialog({
+  isFetched,
+  setIsFetched,
+  saveError,
+}) {
+  return isFetched && (
+    <div className="modal-overlay">
+      <div className="fetched-modal">
+        <p>{saveError}</p>
+              
+        <button
+          className="ok-btn"
+          onClick={() => setIsFetched(false)}
+        >
+          OK
+        </button>
+
+      </div>
+    </div>
+  );
+}
+
+function LessonCompletedDialog({
+  isCompleted,
+  setIsCompleted,
+  P,
+}) {
+  const navigate = useNavigate();
+  
+  return isCompleted && (
+    <div className="modal-overlay">
+      <div className="completed-modal">
+        <p>You have completed learning {P.title}!!!</p>
+
+        <button
+          className="ok-btn"
+          onClick={() => {setIsCompleted(false); navigate(-1)}}
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  )
+}
+
 export function PianoLayout({
   header,
   backgroundImageURL,
@@ -86,12 +171,15 @@ export function PianoLayout({
   flipRecording,
   showSaveDialog,
   setShowSaveDialog,
-  savePiece,
+  saveRecord,
   isSaving,
   setIsSaving,
   isFetched,
   setIsFetched,
   saveError,
+  isCompleted,
+  setIsCompleted,
+  P,
 }) {
   const navigate = useNavigate();
   const goBack = () => {
@@ -150,59 +238,25 @@ export function PianoLayout({
           </div>
         )}
 
-        {showSaveDialog && (
-          <div className="modal-overlay">
-            <div className="save-modal">
-              <h2>Save Recording</h2>
-              <p>Choose a save slot.</p>
-              <div className="save-slots">
-                <button onClick={savePiece(1)}>
-                  Piece 1
-                </button>
-                <button onClick={savePiece(2)}>
-                  Piece 2
-                </button>
-                <button onClick={savePiece(3)}>
-                  Piece 3
-                </button>
-              </div>
-              <button
-                className="cancel-btn"
-                onClick={() => setShowSaveDialog(false)}
-              >
-                Don't Save
-              </button>
+        <SaveDialog
+          showSaveDialog={showSaveDialog}
+          setShowSaveDialog={setShowSaveDialog}
+          saveRecord={saveRecord}
+          isSaving={isSaving}
+          setIsSaving={setIsSaving}
+        />
 
-              {isSaving && (
-                <div className="saving-message">
-                  Saving...
-                </div>
-              )}
-            </div>
-          </div>
-        )}
+        <SaveDoneDialog
+          isFetched={isFetched}
+          setIsFetched={setIsFetched}
+          saveError={saveError}
+        />
 
-        {isFetched && (
-          <div className="modal-overlay">
-            <div className="fetched-modal">
-              <p>{saveError}</p>
-              {isSaving && (
-                <div className="saving-message">
-                  Saving...
-                </div>
-              )}
-              
-              <button
-                className="ok-btn"
-                onClick={() => setIsFetched(false)}
-              >
-                OK
-              </button>
-
-            </div>
-          </div>
-        )}
-
+        <LessonCompletedDialog
+          isCompleted={isCompleted}
+          setIsCompleted={setIsCompleted}
+          P={P}
+        />
       </div>
     </div>
   );

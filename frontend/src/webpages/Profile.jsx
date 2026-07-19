@@ -18,7 +18,6 @@ export default function ProfilePage() {
     async function load() {
       const timer = setTimeout(() => setSlowLoad(true), 3000);
 
-      // Both fetches together, once, on mount
       const [profileData, { data: { user } }] = await Promise.all([
         apiFetch('/user'),
         supabase.auth.getUser()
@@ -32,6 +31,65 @@ export default function ProfilePage() {
     load();
   }, []);
 
+  const [isRecorded, setIsRecorded] = useState([false, false, false]);
+
+  async function updateRecordings() {
+    try {
+      const result = await supabase.auth.getSession();
+      const session = result.data.session;
+      const data = await apiFetch('/records', {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.access_token}`
+        },
+      });
+
+      const row = data?.[0];
+      if (!row) {
+        console.warn('updateRecordings: /records returned no row', data);
+        setIsRecorded([false, false, false]);
+        return;
+      }
+
+      setIsRecorded([
+        Boolean(row.first_record),
+        Boolean(row.second_record),
+        Boolean(row.third_record),
+      ]);
+    } catch (err) {
+      console.error('updateRecordings failed:', err);
+      setIsRecorded([false, false, false]);
+    }
+  }
+
+  useEffect(() => {
+    updateRecordings();
+  }, []);
+
+  const [deleteError, setDeleteError] = useState(null);
+  const [showDeleteDialog, setShowDeleteDialog] = useState(false);
+
+  const handleDeleteRecording = (id) => async () => {
+    try {
+      const result = await supabase.auth.getSession();
+      const session = result.data.session;
+      await apiFetch(`/record/${id + 1}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.access_token}`
+        }
+      });
+      setDeleteError(`Recording ${id + 1} was successfully deleted!!!`);
+    } catch (err) {
+      console.error(`handleDeleteRecording(${id}) failed:`, err);
+      setDeleteError(err.message || `Failed to delete recording ${id + 1}. Please try again.`);
+    } finally {
+      setShowDeleteDialog(true);
+      updateRecordings();
+    }
+  }
 
   if (!profile || !user) {
     return (
@@ -70,21 +128,46 @@ export default function ProfilePage() {
         <p style={{ position: 'absolute', bottom: '40px', left: '30px', marginBottom: '0px' }}>Last signed in: {lastSignIn}</p>
       </div>
 
-      <div className='pieces-container'>
-        <div className='piece-wrap' id="first-piece-wrap">
-          <h2 className="piece-title">Piece 1</h2>
-          <button className="listen-button"n>Listen</button>
-        </div>
+      <h1>User's Recordings</h1>
 
-        <div className='piece-wrap' id="second-piece-wrap">
-          <h2 className="piece-title">Piece 2</h2>
-          <button className="listen-button">Listen</button>
-        </div>
+      <div className="recordings-container">
+        {[1, 2, 3].map((num) => {
+          const idx = num - 1;
+          return (
+            <div className="recording-wrap" key={num}>
+              <h2 className="recording-title">Recording {num}</h2>
+              <div className="recording-options">
+                <button 
+                  className={`listen-btn ${isRecorded[idx] ? "" : "disabled"}`}
+                  onClick={() => navigate('/recording', { state: { focus: num } })}
+                >
+                  Listen
+                </button>
+                <button
+                  className={`delete-btn ${isRecorded[idx] ? "" : "disabled"}`}
+                  onClick={handleDeleteRecording(idx)}
+                >
+                  Delete
+                </button>
+              </div>
+            </div>
+          );
+        })}
 
-        <div className='piece-wrap' id="third-piece-wrap">
-          <h2 className="piece-title">Piece 3</h2>
-          <button className="listen-button">Listen</button>
-        </div>
+        {showDeleteDialog && (
+          <div className="modal-overlay">
+            <div className="deleted-modal">
+              <p>{deleteError}</p>      
+              <button
+                className="ok-btn"
+                onClick={() => setShowDeleteDialog(false)}
+              >
+                OK
+              </button>
+
+            </div>
+          </div>
+        )}
       </div>
     </div>
   );

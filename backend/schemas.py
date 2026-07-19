@@ -10,6 +10,6 @@ class UserResponse(BaseModel):
     created_at: datetime
     binding_option: int
 
-class PieceCreate(BaseModel):
+class RecordCreate(BaseModel):
     position: int
-    piece: Any
+    record: Any

@@ -12,6 +12,7 @@ import SettingsPage from "./webpages/Settings.jsx";
 import Display from "./webpages/Display.jsx";
 import Learn from "./webpages/Learn.jsx";
 import PianoRecorder from "./webpages/PianoRecorder.jsx";
+import RecordingDisplayer from "./webpages/RecordingDisplayer.jsx";
 import { PieceList } from "./components/PieceList.jsx";
 
 export default function App() {
@@ -28,6 +29,7 @@ export default function App() {
       <Route path="/login"           element={<LoginPage />} />
       <Route path="/"                element={<HomePage />} />
       <Route path="/piano-recorder"  element={<PianoRecorder />} />
+      <Route path="/recording"       element={<RecordingDisplayer />} />
 
       {PieceList.map((P) => (
         <>

@@ -103,7 +103,7 @@ export default function GetReady({ P }) {
                 ? leaderBoard.slice().reverse().map((row) => {
                   ranking = ranking + 1;
                   return (
-                    <tr style={{ display: 'flex' }} key={row.user_id} onClick={() => navigate(`/profile/${row.user_name}`)}>
+                    <tr style={{ display: 'flex' }} key={row.user_id} onClick={() => navigate(`/user-profile/${row.user_name}`)}>
                       <td style={{ flex: '0 0 120px' }}>{ranking}</td>
                       <td style={{ flex: 1 }}>{row.user_name}</td>
                       <td style={{ flex: '0 0 120px' }}>{row.top_score}</td>

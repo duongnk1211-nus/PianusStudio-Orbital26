@@ -74,7 +74,7 @@ export default function ProfilePage() {
         />
         <p style={{position: 'absolute', top:'250px'}}>Top Achievement:</p>
         <div className='profile-top-score'>
-          <p>Piece: <span style={{color: '#efac48'}}>{Pieces[maxScore.piece_number].title}</span></p>
+          <p>Piece: <span style={{color: '#efac48'}}>{Pieces[maxScore.piece_number-1].title}</span></p>
           <p>Top score: <span style={{color: '#efac48'}}>{maxScore.top_score}</span></p>
         </div>
         <p style={{ position: 'absolute', bottom: '40px', left: '30px', marginBottom: '0px' }}>Last signed in: {lastSignIn}</p>

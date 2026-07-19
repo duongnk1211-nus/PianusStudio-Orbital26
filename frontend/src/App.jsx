@@ -21,7 +21,7 @@ import { Pieces } from "./components/Pieces.jsx";
 export default function App() {
   return (
     <Routes>
-      <Route path="/profile/:username" element={<ViewProfile />} />
+      <Route path="/user-profile/:username" element={<ViewProfile />} />
       <Route path="/lessons"         element={<LessonsPage />} />
       <Route path="/profile"         element={<ProfilePage />} />
       <Route path="/settings"        element={<SettingsPage />} />

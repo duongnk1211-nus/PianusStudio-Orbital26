@@ -8,14 +8,21 @@ import LoginPage from "./webpages/Login.jsx";
 import SignupPage from "./webpages/Signup.jsx";
 import UpdatePassword from "./webpages/UpdatePassword.jsx";
 import ProfilePage from "./webpages/Profile.jsx";
+import ViewProfile from "./webpages/ViewProfile.jsx";
 import SettingsPage from "./webpages/Settings.jsx";
 import Display from "./webpages/Display.jsx";
 import Learn from "./webpages/Learn.jsx";
+import Scoring from "./webpages/Scoring.jsx";
+import { ScoringDemo } from "./webpages/Scoring.jsx";
+import GetReady from "./webpages/GetReady.jsx";
+import LessonsPage from "./webpages/Lessons.jsx";
 import { Pieces } from "./components/Pieces.jsx";
 
 export default function App() {
   return (
     <Routes>
+      <Route path="/user-profile/:username" element={<ViewProfile />} />
+      <Route path="/lessons"         element={<LessonsPage />} />
       <Route path="/profile"         element={<ProfilePage />} />
       <Route path="/settings"        element={<SettingsPage />} />
       <Route path="/library"         element={<Library />} />
@@ -29,6 +36,9 @@ export default function App() {
 
       {Pieces.map((P) => (
         <>
+          <Route key={`${P.navStr}-getReady`} path={`/lessons/${P.navStr}/get-ready`} element={<GetReady P={P} />} />
+          <Route key={`${P.navStr}-scoring`} path={`/lessons/${P.navStr}/play`} element={<Scoring P={P} />} />
+          <Route key={`${P.navStr}-scoringDemo`} path={`/lessons/${P.navStr}/demo`} element={<ScoringDemo P={P} />} />
           <Route key={`${P.navStr}-display`} path={`/library/${P.navStr}/display`} element={<Display P={P} />} />
           <Route key={`${P.navStr}-learn`}   path={`/library/${P.navStr}/learn`}   element={<Learn P={P} />} />
         </>

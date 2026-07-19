@@ -1,10 +1,19 @@
 import { Piece } from "../../classes/Piece.jsx";
 
 const P2 = new Piece(
+  "2",
   "The Entertainer",
   "The Entertainer is one of the most iconic and instantly recognizable piano pieces ever written. Composed by Scott Joplin, this lively ragtime classic has a bouncy, upbeat feel that makes it impossible not to smile while playing. Once you learn it, you'll find yourself coming back to it again and again!",
-  "p2",
+  "theentertainer",
   "/PianoPieces/P2.jpg",
+  "Scott Joplin",
+  "2",
+  "/AssetsForPiano/balloons.png",
+  "/AssetsForPiano/firework.png",
+  "/AssetsForPiano/magicHat.png",
+  "/AssetsForPiano/balloons.png",
+  "/AssetsForPiano/carnival.png",
+  "/AssetsForPiano/firework.png",
   [
     { chord: "R", duration: 0.4 },
     { chord: "D4", duration: 0.2 },

@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import * as Tone from "tone";
 import "../styles/Piano.css";
 
@@ -12,6 +11,7 @@ export class Note {
   #key;
   #offset;
   #active = false;
+  #keyActive = false;
   #guide = false;
 
   constructor(sym, offset) {
@@ -27,6 +27,26 @@ export class Note {
 
   get key() {
     return this.#key;
+  }
+
+  get type() {
+    return this.#type;
+  }
+
+  get active() {
+    return this.#active;
+  }
+
+  get keyActive() {
+    return this.#keyActive;
+  }
+  
+  get guide() {
+    return this.#guide;
+  }
+
+  computedLeftForNote() {
+    return this.#computedLeftForNote();
   }
 
   set key(newKey) {
@@ -83,6 +103,43 @@ export class Note {
     barsRef.current = barsRef.current.map(b =>
       b.note === this.#sym && !b.released ? { ...b, released: true } : b
     );
+    sideEffect(this.#sym, false);
+  }
+
+  attackForScoring = (synthRef, barsRef, sideEffect) => async () => {
+    barsRef.current.push({
+      id: Date.now() + Math.random(),
+      note: this.#sym,
+      type: this.#type,
+      left: this.#computedLeftForNote(),
+      width: this.#type === "white" ? WKWidth : BKWidth,
+      startTime: Date.now(),
+      released: false,
+      top: 400,
+      height: 0,
+    });
+    sideEffect(this.#sym, true);
+  }
+
+  releaseForScoring = (synthRef, barsRef, sideEffect) => async() => {
+    barsRef.current = barsRef.current.map(b =>
+      b.note === this.#sym && !b.released ? { ...b, released: true } : b
+    );
+    sideEffect(this.#sym, false);
+  }
+
+  attackWithoutBars = (synthRef, barsRef, sideEffect) => async () => {
+    await Tone.start();
+    
+    this.#keyActive = true;
+    synthRef.current.triggerAttack(this.#sym);
+
+    sideEffect(this.#sym, true);
+  }
+
+  releaseWithoutBars = (synthRef, barsRef, sideEffect) => async () => {
+    this.#keyActive = false;
+    synthRef.current.triggerRelease(this.#sym);
     sideEffect(this.#sym, false);
   }
 

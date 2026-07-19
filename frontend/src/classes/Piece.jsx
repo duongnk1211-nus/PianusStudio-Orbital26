@@ -8,20 +8,42 @@ for (let i = 0; i < Notes.length; i++) {
 }
 
 export class Piece {
+  #id;
   #title;
   #description;
   #navStr;
   #backgroundImageURL;
+  #author;
+  #difficultyLevel;
+  #pianoDeco1;
+  #pianoDeco2;
+  #pianoDeco3;
+  #pianoDeco4;
+  #pianoDeco5;
+  #pianoDeco6;
   #RH;
   #LH;
-  
-  constructor(title, description, navStr, backgroundImageURL, RH, LH) {
+
+  constructor(id, title, description, navStr, backgroundImageURL, author, difficultyLevel, pianoDeco1, pianoDeco2, pianoDeco3, pianoDeco4, pianoDeco5, pianoDeco6, RH, LH) {
+    this.#id = id;
     this.#title = title;
     this.#description = description;
     this.#navStr = navStr;
     this.#backgroundImageURL = backgroundImageURL;
+    this.#author = author;
+    this.#difficultyLevel = difficultyLevel;
+    this.#pianoDeco1 = pianoDeco1;
+    this.#pianoDeco2 = pianoDeco2;
+    this.#pianoDeco3 = pianoDeco3;
+    this.#pianoDeco4 = pianoDeco4;
+    this.#pianoDeco5 = pianoDeco5;
+    this.#pianoDeco6 = pianoDeco6;
     this.#RH = RH;
     this.#LH = LH;
+  }
+
+  get id() {
+    return this.#id;
   }
 
   get title() {
@@ -38,6 +60,38 @@ export class Piece {
 
   get backgroundImageURL() {
     return this.#backgroundImageURL;
+  }
+
+  get author() {
+    return this.#author;
+  }
+
+  get difficultyLevel() {
+    return this.#difficultyLevel;
+  }
+
+  get pianoDeco1() {
+    return this.#pianoDeco1;
+  }
+
+  get pianoDeco2() {
+    return this.#pianoDeco2;
+  }
+
+  get pianoDeco3() {
+    return this.#pianoDeco3;
+  }
+
+  get pianoDeco4() {
+    return this.#pianoDeco4;
+  }
+
+  get pianoDeco5() {
+    return this.#pianoDeco5;
+  }
+
+  get pianoDeco6() {
+    return this.#pianoDeco6;
   }
 
   #displayOneHand = (arr, synthRef, barsRef, sideEffect) => {
@@ -69,6 +123,77 @@ export class Piece {
     this.#displayOneHand(this.#RH, synthRef, barsRef, sideEffect)();
     this.#displayOneHand(this.#LH, synthRef, barsRef, sideEffect)();
   }
+
+  #displayOneHandForScoring = (arr, synthRef, barsRef, sideEffect) => {
+    async function timeline() {
+      let currentTime = 0;
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].chord !== "R") {
+          for (const sym of arr[i].chord.split(" ")) {
+            Tone.Transport.schedule(time => {
+              symMap.get(sym).attackForScoring(synthRef, barsRef, sideEffect)(time);
+            }, currentTime);
+
+            Tone.Transport.schedule(time => {
+              symMap.get(sym).releaseForScoring(synthRef, barsRef, sideEffect)(time);
+            }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
+          }
+        }
+        currentTime += arr[i].duration;
+      }
+
+      return currentTime;
+    }
+    return timeline;
+  }
+
+  displayForScoring = (synthRef, barsRef, sideEffect) => async () => {
+    const rhDuration = await this.#displayOneHandForScoring(this.#RH, synthRef, barsRef, sideEffect)();
+    const lhDuration = await this.#displayOneHandForScoring(this.#LH, synthRef, barsRef, sideEffect)();
+    const totalDuration = Math.max(rhDuration, lhDuration);
+
+    Tone.Transport.schedule(() => {
+      Tone.Transport.stop();
+    }, totalDuration); // single stop, timed to whichever hand finishes last
+
+  }
+
+  #displayOneHandForDemoScoring = (arr, synthRef, barsRef, sideEffect) => {
+    async function timeline() {
+      let currentTime = 3.2;
+      for (let i = 0; i < arr.length; i++) {
+        if (arr[i].chord !== "R") {
+          for (const sym of arr[i].chord.split(" ")) {
+            Tone.Transport.schedule(time => {
+              symMap.get(sym).attackWithoutBars(synthRef, barsRef, sideEffect)(time);
+            }, currentTime);
+
+            Tone.Transport.schedule(time => {
+              symMap.get(sym).releaseWithoutBars(synthRef, barsRef, sideEffect)(time);
+            }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
+          } 
+        }
+        currentTime += arr[i].duration;
+      }
+
+      return currentTime;
+    }
+    return timeline;
+  }
+
+  displayForDemoScoring = (synthRef, barsRef, sideEffect) => async () => {
+    const rhDuration = await this.#displayOneHandForScoring(this.#RH, synthRef, barsRef, sideEffect)();
+    const lhDuration = await this.#displayOneHandForScoring(this.#LH, synthRef, barsRef, sideEffect)();
+    const rhDemoDuration = await this.#displayOneHandForDemoScoring(this.#RH, synthRef, barsRef, sideEffect)();
+    const lhDemoDuration = await this.#displayOneHandForDemoScoring(this.#LH, synthRef, barsRef, sideEffect)();
+    const totalDuration = Math.max(rhDuration, lhDuration, rhDemoDuration, lhDemoDuration);
+
+    Tone.Transport.schedule(() => {
+      Tone.Transport.stop();
+    }, totalDuration); // single stop, timed to whichever hand finishes last
+
+  }
+
 
   breakChords = () => {
     const RHMap = new Map(), LHMap = new Map();
@@ -106,7 +231,7 @@ export class Piece {
           s.add(sym);
         }
       }
-      
+
       if (s.size > 0) {
         result.push(s);
       }

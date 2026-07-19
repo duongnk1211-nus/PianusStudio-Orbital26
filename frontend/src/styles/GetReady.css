@@ -1,0 +1,199 @@
+.get-ready-body {
+  display: block;
+  min-height: 200vh;
+  background-image: url('/LessonsBackGround.png');
+  background-size: cover;
+  background-position: top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.get-ready-body button {
+  position:absolute;
+  height: 5vh;
+  width: 12vh;
+  top: 20px;
+  left: 20px;
+  justify-content: center;
+  padding: 8px 7px 8px 7px;
+  display: inline-block;
+  letter-spacing: 2px;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 0.55rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fbfcf9;
+  background: linear-gradient(90deg, #ff6b00, #ff00c8, #00ffff);
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  box-shadow: 0 0 20px #ff00c8, 0 0 40px #00ffff;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.get-ready-body button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 30px #ff6b00, 0 0 60px #00ffff;
+}
+
+.get-ready-table {
+  height: 105vh;
+  width: 70%;
+  position: relative;
+  display: block;
+  top: 7vh;
+  margin: 0px auto;
+  border: 15px solid;
+  border-image: linear-gradient(45deg, #FFD700, #FFF8DC, #DAA520) 1;
+  border-radius: 12px;
+  box-shadow: 0 0 25px rgba(255, 215, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7); 
+}
+
+/* Top-left corner */
+.get-ready-table::before {
+  content: "";
+  position: absolute;
+  top: -25px;
+  left: -25px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #FFD700, #DAA520);
+  box-shadow: 0 0 10px #FFD700;
+}
+
+/* Top-right corner */
+.get-ready-table::after {
+  content: "";
+  position: absolute;
+  top: -25px;
+  right: -25px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #FFD700, #DAA520);
+  box-shadow: 0 0 10px #FFD700;
+}
+
+/* Bottom-left corner */
+.get-ready-table .corner-bl {
+  content: "";
+  position: absolute;
+  bottom: -25px;
+  left: -25px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #FFD700, #DAA520);
+  box-shadow: 0 0 10px #FFD700;
+}
+
+/* Bottom-right corner */
+.get-ready-table .corner-br {
+  content: "";
+  position: absolute;
+  bottom: -25px;
+  right: -25px;
+  width: 40px;
+  height: 40px;
+  background: linear-gradient(135deg, #FFD700, #DAA520);
+  box-shadow: 0 0 10px #FFD700;
+}
+
+.get-ready-table h1 {
+  letter-spacing: 10px;
+  background: linear-gradient(45deg, #FFD700, #FFF8DC, #DAA520);
+  box-shadow: 0 0 10px #FFD700;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 2.5rem;
+  line-height: 1;
+  font-weight: 800;
+  text-transform: uppercase;
+  color: #fff;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.get-ready-table p {
+  width: 100%;
+  font-weight: 800;
+  letter-spacing: 2px;
+  background: linear-gradient(45deg, #FFD700, #FFF8DC, #DAA520);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  font-size: 1rem;
+  color: #fff;
+  text-align: center;
+  margin-top: 0px;
+}
+
+.get-ready-table table {
+  width: 90%;
+  table-layout: fixed;
+  border-collapse: collapse;
+  margin: 30px auto;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+
+.get-ready-table table tbody {
+  display: block;
+  table-layout: fixed;
+  max-height: 250px; 
+  overflow-y: auto;
+}
+
+.get-ready-table table th, .get-ready-table table td {
+  padding: 16px;
+  text-align: center;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.get-ready-table table th {
+  background: linear-gradient(45deg, #FFD700, #FFF8DC, #DAA520);
+  text-transform: uppercase;
+  font-weight: bold;
+  letter-spacing: 2px;
+  box-shadow: inset 0 0 15px rgba(255, 215, 0, 0.6);
+  color: #000000;
+}
+.get-ready-table table tr {
+  cursor: pointer;
+}
+
+.get-ready-table table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.get-ready-table table tr:hover {
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: inset 0 0 20px #FFD700;
+}
+
+.get-ready-buttons {
+  margin-top: 30px;
+  padding-left: 10%;
+  display: flex;
+  gap: 30%;
+}
+
+.get-ready-buttons button {
+  position: static;
+  background: linear-gradient(45deg, #FFD700, #FFF8DC, #DAA520);
+  box-shadow: 0 0 10px #FFD700;
+  color: #000000;
+  border: none;
+  border-radius: 10px;
+  font-weight: 800;
+  cursor: pointer;
+}

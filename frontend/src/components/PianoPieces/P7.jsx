@@ -1,10 +1,19 @@
 import { Piece } from "../../classes/Piece.jsx";
 
 const P7 = new Piece(
+  "7",
   "Silent Night",
   "Silent Night is one of the most peaceful and cherished Christmas carols ever written. Its gentle, lullaby-like melody flows softly from note to note, creating a warm and calming atmosphere that feels magical every time you play it. Perfect for the holiday season — or any time you need a moment of quiet beauty!",
-  "p7",
+  "silentnight",
   "/PianoPieces/P7.jpg",
+  "Joseph Mohr",
+  "2",
+  "/AssetsForPiano/cloud.png",
+  "/AssetsForPiano/shiningWhite.png",
+  "/AssetsForPiano/cloud.png",
+  "/AssetsForPiano/cloud.png",
+  "/AssetsForPiano/shiningMoon.png",
+  "/AssetsForPiano/cloud.png",
   [
     { chord: "G4", duration: 0.75 },
     { chord: "A4", duration: 0.25 },

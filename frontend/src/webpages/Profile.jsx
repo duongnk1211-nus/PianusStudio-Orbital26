@@ -4,6 +4,7 @@ import { apiFetch } from "../components/API";
 import { supabase } from "../components/supabaseClient";
 import AvatarUpload from "../components/AvatarUpload";
 import { Bio, Username } from "../components/BioUsernameUpload";
+import { Pieces } from "../components/Pieces";
 import "../styles/Profile.css";
 
 export default function ProfilePage() {
@@ -11,6 +12,8 @@ export default function ProfilePage() {
   const [profile, setProfile] = useState(null);
   const [user, setUser] = useState(null);
   const [slowLoad, setSlowLoad] = useState(false);
+  const [scores, setScores] = useState(null);
+  const [maxScore, setMaxScore] = useState(null);
 
   const goBack = () => { navigate(-1); }
 
@@ -19,19 +22,21 @@ export default function ProfilePage() {
       const timer = setTimeout(() => setSlowLoad(true), 3000);
 
       // Both fetches together, once, on mount
-      const [profileData, { data: { user } }] = await Promise.all([
+      const [profileData, { data: { user } }, listScores] = await Promise.all([
         apiFetch('/user'),
-        supabase.auth.getUser()
+        supabase.auth.getUser(),
+        apiFetch('/user/scores')
       ]);
       clearTimeout(timer);
       setSlowLoad(false);
 
       setProfile(profileData);
       setUser(user);
+      setScores(listScores);
+      setMaxScore(listScores.reduce((max, obj) => obj.top_score > max.top_score ? obj : max));
     }
     load();
-  }, []);
-
+  }, [scores]);
 
   if (!profile || !user) {
     return (
@@ -67,6 +72,11 @@ export default function ProfilePage() {
           currentBio={profile.bio}
           onChangeComplete={(bio) => setProfile(p => ({ ...p, bio: bio }))}
         />
+        <p style={{position: 'absolute', top:'250px'}}>Top Achievement:</p>
+        <div className='profile-top-score'>
+          <p>Piece: <span style={{color: '#efac48'}}>{Pieces[maxScore.piece_number-1].title}</span></p>
+          <p>Top score: <span style={{color: '#efac48'}}>{maxScore.top_score}</span></p>
+        </div>
         <p style={{ position: 'absolute', bottom: '40px', left: '30px', marginBottom: '0px' }}>Last signed in: {lastSignIn}</p>
       </div>
     </div>

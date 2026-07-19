@@ -44,7 +44,7 @@ export default function LessonsPage() {
               <td>{P.title}</td>
               <td>{P.author}</td>
               <td>{P.difficultyLevel}</td>
-              <td>{loading ? 'Loading...' : (scores ? scores[P.id].top_score : 0)}</td>
+              <td>{loading ? 'Loading...' : (scores ? scores[P.id-1].top_score : 0)}</td>
             </tr>
           ))}
         </tbody>

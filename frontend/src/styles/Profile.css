@@ -1,5 +1,5 @@
 .profile-page {
-  height: 150vh;
+  min-height: 200vh;
   margin: 0;
   background-image: url('/BackGroundForContactUs.jpg');
   background-size: cover;
@@ -108,7 +108,7 @@
 .bio-wrap {
   position: relative;
   background: #fefefe95;
-  height: 35vh;
+  height: 70vh;
   width: 80%;
   top: 170px;
   left: 90px;
@@ -200,4 +200,27 @@
   font-family: 'Amadeus', cursive;
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.profile-top-score {
+  width: 90%;
+  height: 125px;
+  margin: 41vh auto;
+  border-collapse: collapse;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  color: #000000;
+  background: #fefefe8e;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.profile-top-score p {
+  margin: 20px 15px auto;
+  border-collapse: collapse;
+  font-family: 'Orbitron', sans-serif;
+  font-size: 1.1rem;
+  color: #000000;
+  border-radius: 12px;
+  overflow: hidden;
 }

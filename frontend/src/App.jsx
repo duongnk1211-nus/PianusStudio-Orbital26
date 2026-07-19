@@ -8,6 +8,7 @@ import LoginPage from "./webpages/Login.jsx";
 import SignupPage from "./webpages/Signup.jsx";
 import UpdatePassword from "./webpages/UpdatePassword.jsx";
 import ProfilePage from "./webpages/Profile.jsx";
+import ViewProfile from "./webpages/ViewProfile.jsx";
 import SettingsPage from "./webpages/Settings.jsx";
 import Display from "./webpages/Display.jsx";
 import Learn from "./webpages/Learn.jsx";
@@ -20,10 +21,7 @@ import { Pieces } from "./components/Pieces.jsx";
 export default function App() {
   return (
     <Routes>
-      <Route path="/lessons/moonlight-sonata/demo" element={<ScoringDemo />} />
-      <Route path="/lessons/moonlight-sonata/get-ready" element={<GetReady />} />
-      <Route path="/lessons/moonlight-sonata/play" element={<Scoring />} />
-
+      <Route path="/profile/:username" element={<ViewProfile />} />
       <Route path="/lessons"         element={<LessonsPage />} />
       <Route path="/profile"         element={<ProfilePage />} />
       <Route path="/settings"        element={<SettingsPage />} />

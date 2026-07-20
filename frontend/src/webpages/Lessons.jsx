@@ -20,7 +20,7 @@ export default function LessonsPage() {
   }
 
   return (
-    <div className="lessons-body">
+    <div className="lessons-page" id="lessons-page">
       <div className="lessons-header">
         <button onClick={goBack}>Return</button>
         <h1 className="energetic-title">Learn & Score!</h1>

@@ -274,8 +274,8 @@ export default function Scoring({ P }) {
   }, []);
 
   return (
-    <div className="scoring-body" style={{ backgroundImage: `url(${P.backgroundImageURL})` }}>
-      {!isPlaying && <button className="scoring-body-button" onClick={flipPlaying}>Start</button>}
+    <div className="scoring-page" id="scoring-page" style={{ backgroundImage: `url(${P.backgroundImageURL})` }}>
+      {!isPlaying && <button className="scoring-start-btn" onClick={flipPlaying}>Start</button>}
       <div className={`scoring-header ${P.navStr}`}>
         <h1 className="energetic-title">{P.title}</h1>
       </div>
@@ -511,8 +511,8 @@ export function ScoringDemo({ P }) {
   }, []);
 
   return (
-    <div className="scoring-body" style={{ backgroundImage: `url(${P.backgroundImageURL})` }}>
-      {!isPlaying && <button className="scoring-body-button" onClick={flipPlaying}>Start</button>}
+    <div className="scoring-page" id="scoring-demo-page" style={{ backgroundImage: `url(${P.backgroundImageURL})` }}>
+      {!isPlaying && <button className="scoring-start-btn" onClick={flipPlaying}>Start</button>}
       <div className={`scoring-header ${P.navStr}`}>
         <h1 className="energetic-title">{P.title}</h1>
       </div>

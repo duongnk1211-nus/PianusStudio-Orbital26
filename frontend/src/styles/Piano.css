@@ -8,92 +8,87 @@ body {
 }
 
 .app-container {
-  width: 100%;
-  height: 100%;
-  
   display: flex;
-  
   justify-content: center;
   align-items: flex-end;
-  
-  padding-bottom: 40px;
-  
   box-sizing: border-box;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 40px;
 }
 
 :root {
-  --white-key-height:180px;
-  --white-key-width:44px;
-  --white-key-gap:2px;
-  
-  --black-key-height:110px;
-  --black-key-width:28px;
+  --white-key-height: 180px;
+  --white-key-width: 44px;
+  --white-key-gap: 2px;
+  --black-key-height: 110px;
+  --black-key-width: 28px;
 }
 
 .key-rows {
-  display: flex;
   position: relative;
+  display: flex;
   height: var(--white-key-height);
 }
 
 .white-key {
+  position: relative;
+  display: flex;
+  flex-shrink: 0;
+  justify-content: center;
+  align-items: flex-end;
+  box-sizing: border-box;
   width: var(--white-key-width);
   height: var(--white-key-height);
-  background: linear-gradient(180deg,#f8f8f5 0%,#fff 60%,#f0f0ea 100%);
+  margin-right: var(--white-key-gap);
+  padding-bottom: 10px;
   border: 1px solid #c8c8c0;
   border-radius: 0 0 6px 6px;
-  margin-right: var(--white-key-gap);
-  cursor: pointer;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding-bottom: 10px;
-  position: relative;
-  flex-shrink: 0;
+  background: linear-gradient(180deg,#f8f8f5 0%,#fff 60%,#f0f0ea 100%);
   box-shadow: inset 0 -4px 0 rgba(0,0,0,0.1), 0 2px 4px rgba(0,0,0,0.2);
+  cursor: pointer;
   transition: background 0.05s;
-  box-sizing: border-box;
 }
 
 .white-key:hover {
-  background: linear-gradient(180deg,#d4e8ff 0%,#e8f4ff 100%);
   border-color: #85b7eb;
-} 
+  background: linear-gradient(180deg,#d4e8ff 0%,#e8f4ff 100%);
+}
 
 .white-key.active {
-  background: linear-gradient(180deg,#fde047 0%,#422006 70%, #facc15 100%);
   border-color: #eab308;
+  background: linear-gradient(180deg,#fde047 0%,#422006 70%, #facc15 100%);
 }
 
 .white-key.guide {
-  background: linear-gradient(180deg,#7ed957 0%,#a3e635 100%);
   border-color: #4ade80;
+  background: linear-gradient(180deg,#7ed957 0%,#a3e635 100%);
 }
 
 .white-key-letter-label {
   font-size: 10px;
   font-weight: 600;
-  color: #aaa;
   letter-spacing: 0.05em;
+  color: #aaa;
   pointer-events: none;
 }
 
 .black-key {
+  position: absolute;
+  top: 0;
+  z-index: 2;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  box-sizing: border-box;
   width: var(--black-key-width);
   height: var(--black-key-height);
-  background: linear-gradient(180deg,#2a2a2a 0%,#111 70%,#1a1a1a 100%);
-  border-radius: 0 0 4px 4px;
-  cursor: pointer;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
   padding-bottom: 6px;
-  position: absolute;
-  z-index: 2;
-  top: 0;
+  border-radius: 0 0 4px 4px;
+  background: linear-gradient(180deg,#2a2a2a 0%,#111 70%,#1a1a1a 100%);
   box-shadow: inset 0 -3px 0 rgba(255,255,255,0.05), 2px 4px 8px rgba(0,0,0,0.5);
+  cursor: pointer;
   transition: background 0.05s;
-  box-sizing: border-box;
 }
 
 .black-key:hover {
@@ -111,52 +106,52 @@ body {
 .black-key-letter-label {
   font-size: 8px;
   font-weight: 600;
-  color: #b5adad;
   letter-spacing: 0.05em;
+  color: #b5adad;
   pointer-events: none;
 }
 
-.Piano {
+.piano-page {
   display: flex;
   flex-direction: row;
-  background-image: url('/BackGroundForPiano.jpg');
-  background-size: cover;
+  min-height: 1073px;
+  background-image: url("/BackGroundForPiano.jpg");
   background-position: top;
   background-repeat: no-repeat;
-  background-attachment: fixed; 
-  min-height: 1073px;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-.piano-wrapper {
+.piano-container {
   display: block;
-  align-items: center;
   justify-content: center;
+  align-items: center;
 }
 
 .title-wrapper {
   position: relative;
 }
 
-.piano-wrapper h2 {
+.piano-container h2 {
   position: relative;
-  color: #ecb80c;
-  font-family: 'Amadeus', cursive;
   top: -20px;
   padding-bottom: 0px;
+  font-family: "Amadeus", cursive;
+  color: #ecb80c;
 }
 
-.piano-wrapper img { 
+.piano-container img {
   top: 10px;
-  left: 380px; 
-  max-height: 120px;
-  padding-bottom: 0px;
-  background-color: #a7ad4ea2;
+  left: 380px;
   width: 120px;
   height: 120px;
+  max-height: 120px;
+  padding-bottom: 0px;
+  border-radius: 10px;
   overflow: hidden;
+  background-color: #a7ad4ea2;
   object-fit: cover;
   object-position: center;
-  border-radius: 10px;
 }
 
 .piano-control button, .return-btn {
@@ -165,113 +160,115 @@ body {
   align-items: center;
   width: 60px;
   height: 30px;
-  margin-left: 20px;
-  margin-right:70px;
   margin-top: 15px;
+  margin-right: 70px;
+  margin-left: 20px;
   border-radius: 15px;
-  color: #100b4d;
-  font-family: 'Amadeus', cursive;
-  font-weight: 600;
+  font-family: "Amadeus", cursive;
   font-size: 14px;
+  font-weight: 600;
+  color: #100b4d;
   cursor: pointer;
 }
 
-.Piano button:hover:not(.disabled) {
+.piano-page button:hover:not(.disabled) {
   background: #ef8d05d6;
 }
 
-.Piano button a {
-  color: #100b4d;
-  text-decoration: none;
-  font-family: 'Amadeus', cursive;
-  font-weight: 600;
+.piano-page button a {
+  font-family: "Amadeus", cursive;
   font-size: 14px;
+  font-weight: 600;
+  text-decoration: none;
+  color: #100b4d;
 }
 
-.return-btn {
-  background: #e7a53c;
+.piano-page {
+  & .return-btn {
+    background: #e7a53c;
+  }
+  
+  & .start-btn, & .restart-btn {
+    position: absolute;
+    top: 160px;
+    left: 30px;
+    transform: translateY(-50%);
+  }
+  
+  & .play-btn, & .pause-btn {
+    position: absolute;
+    top: 160px;
+    left: 40px;
+    transform: translateY(-50%);
+  }
+  
+  & .record-btn, & .stop-btn {
+    position: absolute;
+    top: 200px;
+    left: 40px;
+    transform: translateY(-50%);
+  }
+  
+  & .save-btn, & .saving-btn {
+    position: absolute;
+    top: 240px;
+    left: 40px;
+    transform: translateY(-50%);
+  }
+  
+  & .play-btn {
+    background: #22c55e;
+  }
+  
+  & .pause-btn {
+    background: #f59e0b;
+  }
+  
+  & .start-btn {
+    background: #e7a53c;
+  }
+  
+  & .restart-btn {
+    background: #e7a53c;
+  }
+  
+  & .record-btn {
+    background: #22c55e;
+  }
+  
+  & .stop-btn {
+    background: #ef4444;
+  }
+  
+  & .save-btn {
+    background: #3b82f6;
+  }
+  
+  & .disabled {
+    background: #9ca3af;
+  }
 }
 
-.start-btn, .restart-btn {
-  position: absolute;
-  top: 160px;
-  left: 30px;
-  transform: translateY(-50%);
-}
-
-.play-btn, .pause-btn {
-  position: absolute;
-  top: 160px;
-  left: 40px;
-  transform: translateY(-50%);
-}
-
-.record-btn, .stop-btn {
-  position: absolute;
-  top: 200px;
-  left: 40px;
-  transform: translateY(-50%);
-}
-
-.save-btn, .saving-btn {
-  position: absolute;
-  top: 240px;
-  left: 40px;
-  transform: translateY(-50%);
-}
-
-.play-btn {
-  background: #22c55e;
-}
-
-.pause-btn {
-  background: #f59e0b;
-}
-
-.start-btn {
-  background: #e7a53c;
-}
-
-.restart-btn {
-  background: #e7a53c;
-}
-
-.record-btn {
-  background: #22c55e;
-}
-
-.stop-btn {
-  background: #ef4444;
-}
-
-.save-btn {
-  background: #3b82f6;
-}
-
-.disabled {
-  background: #9ca3af;
-}
-
-.Piano .modal-overlay {
+.piano-page .modal-overlay {
   position: fixed;
-  inset: 0;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.45);
-  z-index: 1000;
+  inset: 0;
 }
 
-.save-modal, .completed-modal, .fetched-modal, .pitch-result-modal  {
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  text-align: center;
+.save-modal, .completed-modal, .fetched-modal, .pitch-result-modal {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .save-modal {
@@ -292,9 +289,9 @@ body {
 
 .save-modal h2 {
   margin: 0;
-  color: #d6a000;
   font-size: 34px;
   font-weight: 600;
+  color: #d6a000;
 }
 
 .save-slots {
@@ -319,11 +316,11 @@ body {
   height: 40px;
   border: none;
   border-radius: 8px;
-  background: #22c55e;
-  color: white;
   font-size: 17px;
   font-weight: 600;
   white-space: nowrap;
+  color: white;
+  background: #22c55e;
 }
 
 .save-slots button:hover {
@@ -335,10 +332,10 @@ body {
   height: 40px;
   border: none;
   border-radius: 8px;
-  background: #ef4444;
-  color: white;
   font-size: 16px;
   font-weight: 600;
+  color: white;
+  background: #ef4444;
 }
 
 .cancel-btn:hover {
@@ -350,10 +347,10 @@ body {
   height: 40px;
   border: none;
   border-radius: 8px;
-  background: #2563EB;
-  color: white;
   font-size: 16px;
   font-weight: 600;
+  color: white;
+  background: #2563EB;
 }
 
 .ok-btn:hover {
@@ -361,22 +358,22 @@ body {
 }
 
 .completed-modal {
-  width: 600px;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 50px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  width: 600px;
+  padding: 50px;
+  border-radius: 12px;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .completed-modal p, .fetched-modal p, .save-modal p {
-  font-family: 'Amadeus', cursive;
-  font-weight: bold;
   margin: 0;
-  color: #555;
+  font-family: "Amadeus", cursive;
   font-size: 18px;
+  font-weight: bold;
+  color: #555;
 }

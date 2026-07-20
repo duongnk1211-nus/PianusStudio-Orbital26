@@ -39,7 +39,7 @@ export default function LoginPage() {
   };
   
   return (
-    <div className="body-login">
+    <div className="login-page" id="login-page">
       <div className="login-container">
         <div className="go-back">
           &larr; {""}
@@ -50,6 +50,7 @@ export default function LoginPage() {
         <h2>Log In</h2>
         <h3 style={{ fontFamily: 'Amadeus', fontSize: "1.0rem", marginBottom: "1rem", color: "#070505c8" }}>Please log in to continue!</h3>
         <input
+          id="login-email"
           type="email"
           placeholder="Email"
           value={email}
@@ -57,6 +58,7 @@ export default function LoginPage() {
           style={{ width: "95%", marginBottom: "1rem", marginTop: "10px" }}
         />
         <input
+          id="login-password"
           type="password"
           placeholder="Password"
           value={password}

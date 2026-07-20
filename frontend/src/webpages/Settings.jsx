@@ -57,8 +57,8 @@ export default function SettingsPage() {
   }
 
   return (
-    <div className="Settings">
-      <button className="return-button" onClick={goBack}>
+    <div className="settings-page" id="settings-page">
+      <button className="settings-return-btn" onClick={goBack}>
         Return
       </button>
       <div className="top-bar">
@@ -67,7 +67,7 @@ export default function SettingsPage() {
 
       <h1>Settings</h1>
 
-      <div className="settings-wrap">
+      <div className="settings-container">
         <div className="key-rebinding-box">
           <div className="property-name">
             ⌨️ Key Binding:
@@ -77,7 +77,7 @@ export default function SettingsPage() {
             Option {optionIndex}
           </div>
           <button onClick={incOptionIndex}>{">>"}</button>
-          <button className="save-button" onClick={handleChangeBindingOption(optionIndex)}>Save</button>
+          <button className="settings-save-btn" onClick={handleChangeBindingOption(optionIndex)}>Save</button>
         </div>
         <p className="property-saved-option">Currently saving: Option {savedIndex}</p>
       </div>

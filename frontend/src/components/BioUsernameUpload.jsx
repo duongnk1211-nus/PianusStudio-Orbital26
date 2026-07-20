@@ -87,9 +87,10 @@ export function Username({ currentName, onChangeComplete }) {
   const displayRole = role && role !== 'null' && role !== 'undefined' ? role : '';
 
   return (
-    <div className='profileName-container'>
+    <div className='profile-name-container'>
       {editing ? (
         <input
+          id="profile-username-input"
           ref={inputRef}
           type="text"
           value={name}
@@ -185,6 +186,7 @@ export function Bio({ currentBio, onChangeComplete }) {
     >
       {isEditing ? (
         <input
+          id="profile-bio-input"
           ref={inputRef}
           type="text"
           value={bio}

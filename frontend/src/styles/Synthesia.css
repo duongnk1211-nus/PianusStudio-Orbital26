@@ -1,17 +1,17 @@
 .synthesia-container {
   position: relative;
+  z-index: 1;
   width: calc(22 * (var(--white-key-width) + var(--white-key-gap)) - var(--white-key-gap));
   height: 300px;
+  border-bottom: 2px solid #2a1560;
   overflow: hidden;
   background: #0d0a04;
-  border-bottom: 2px solid #2a1560;
-  z-index: 1;
 }
 
 .synthesia-bar {
   position: absolute;
-  border-radius: 3px 3px 0 0;
   box-sizing: border-box;
+  border-radius: 3px 3px 0 0;
 }
 
 .synthesia-bar.white {
@@ -30,19 +30,19 @@
 }
 
 .synthesia-bar.black {
+  z-index: 2;
   background: #8E7CC3;
   opacity: 0.95;
-  z-index: 2;
 }
 
 .synthesia-bar.black.right {
+  z-index: 2;
   background: #3498DB;
   opacity: 0.95;
-  z-index: 2;
 }
 
 .synthesia-bar.black.left {
+  z-index: 2;
   background: #E67E22;
   opacity: 0.95;
-  z-index: 2;
 }

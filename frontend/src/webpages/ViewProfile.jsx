@@ -34,9 +34,9 @@ export default function ViewProfile() {
   const displayRole = role && role !== 'null' && role !== 'undefined' ? role : '';
 
   return (
-    <div className='profile-page'>
+    <div className='profile-page' id="view-profile-page">
       <button className='return-btn' onClick={goBack}>Return</button>
-      <div className='avatar-wrap'>
+      <div className='avatar-section'>
         <p><img src="/PianusStudio.png" alt="PianusStudio Logo" style={{ position: 'relative', top: '4px', height: '20px', width: '20px' }} /> Pianus Studio</p>
         {profile.role && <p>{profile?.role || ''}</p>}
         <div className='avatar-preview' style={{ cursor: 'pointer' }}>
@@ -44,13 +44,13 @@ export default function ViewProfile() {
             <img src={profile.avatar_url || './avatar.png'} alt="Avatar" />
           </div>
         </div>
-        <div className='profileName-container'>
+        <div className='profile-name-container'>
           <p>
             {profile.username + (displayRole === '' ? '' : " (" + displayRole + ")")}
           </p>
         </div>
       </div>
-      <div className='bio-wrap'>
+      <div className='bio-section'>
         <p style={{ position: 'absolute', top: '40px', left: '30px', marginBottom: '0px' }}>Bio:</p>
         <div className='bio-container'>
           <p>{profile.bio}</p>

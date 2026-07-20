@@ -29,11 +29,12 @@ export default function UpdatePassword() {
   };
   
   return (
-    <div className="body-updatepassword">
+    <div className="update-password-page" id="update-password-page">
       <div className="updatepassword-container">
         <p style={{color: '#000000', fontWeight: 'bold', marginBottom:'30px'}}>Reset password:</p>    
         <form onSubmit={handleUpdatePassword}>
           <input
+            id="update-password-input"
             type="password"
             placeholder="New password"
             value={newPassword}

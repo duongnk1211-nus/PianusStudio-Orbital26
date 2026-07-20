@@ -3,111 +3,111 @@
   height: 100%;
 }
 
-.wrapper-for-AboutUs {
+.about-us-page {
   height: 100%;
-  font-family: Arial, sans-serif;
   margin: 0;
-  background: #f4f4f4;
+  font-family: Arial, sans-serif;
   color: #0d0c0c;
-  background-image: url('../src/assets/BackGround.jpg');
-  background-size: cover;
+  color: #3d1f1f45;
+  background: #f4f4f4;
+  background-image: url("../src/assets/BackGround.jpg");
   background-position: top;
   background-repeat: no-repeat;
-  background-attachment: fixed; 
-  color: #3d1f1f45;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-.header-for-AboutUs {
-  height: 0px;
+.about-us-header {
   position: relative;
-  background: transparent;
-  color: #210be3;
-  padding: 5px;
   justify-content: left;
-  /* align-items: left; */
+  height: 0px;
+  padding: 5px;
+  color: #210be3;
+  background: transparent;
+  /* align-items: left; */;
 }
 
-.return-for-AboutUs {
-  display: flex;
+.about-us-return-link {
   position: absolute;
-  left: 30px;
   top: 30px;
-  flex-direction: row;
+  left: 30px;
+  display: flex;
   display: inline-block;
+  flex-direction: row;
+  justify-content: left;
   width: 50px;
   height: 30px;
-  margin-left: 20px;
-  margin-right:70px;
   margin-top: 15px;
+  margin-right: 70px;
+  margin-left: 20px;
   padding: 3px 5px;
-  background: #e7a53c;
   border-radius: 4px;
-  justify-content: left;
-  background-color: #df9e12;
   font-size: 16px;
+  background: #e7a53c;
+  background-color: #df9e12;
 }
 
-.return-for-AboutUs:hover {
+.about-us-return-link:hover {
   background: #ef8d05d6;
 }
 
-.header-for-AboutUs a {
-  color: #ebeaf1;
-  text-decoration: none;
-  font-family: 'Amadeus', cursive;
+.about-us-header a {
+  font-family: "Amadeus", cursive;
   font-size: 14px;
+  text-decoration: none;
+  color: #ebeaf1;
 }
 
-.main-for-AboutUs {
+.about-us-main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-image: url('/BackGround.jpg');
-  background-size: cover;
-  background-position: top;
-  background-repeat: no-repeat;
-  background-attachment: fixed; 
   padding: 100px;
   text-align: center;
+  background-image: url("/BackGround.jpg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-.main-for-AboutUs h1 {
-  font-family: 'Dancing Script', cursive;
+.about-us-main h1 {
+  font-family: "Dancing Script", cursive;
   font-size: 3em;
   color: #e39f0b;
 }
 
-.main-for-AboutUs p {
+.about-us-main p {
   padding: 1px 10px 20px 1px;
-  font-family: 'Amadeus', cursive;
+  font-family: "Amadeus", cursive;
   font-size: 1em;
   color: #e39f0b;
 }
 
-.main-for-AboutUs a{
-  margin-top: 20px;
-  color: #efeeee;
+.about-us-main a {
   display: inline-block;
-  background: #db9f05fc;
+  margin-top: 20px;
   padding: 10px 20px;
   border-radius: 4px;
-  font-family: 'Amadeus', cursive;
+  font-family: "Amadeus", cursive;
   font-size: 1.2em;
+  color: #efeeee;
+  background: #db9f05fc;
 }
 
-.main-for-AboutUs a:hover {
-  background: #e7a53c;
+.about-us-main a:hover {
   color: #210be3;
+  background: #e7a53c;
   cursor: pointer;
 }
 
-.feature-card-for-AboutUs {
-  background: rgba(255, 255, 255, 0.8);
-  border-radius: 10px;
-  padding: 20px;
-  margin: 20px;
+.about-us-feature-card {
   display: inline-block;
   width: 800px;
+  margin: 20px;
+  padding: 20px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.8);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }

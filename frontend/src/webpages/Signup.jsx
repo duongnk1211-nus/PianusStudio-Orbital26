@@ -23,7 +23,7 @@ export default function SignupPage() {
   }
 
   return (
-    <div className="body-signup">
+    <div className="signup-page" id="signup-page">
       <div className="signup-container">
         <div className="go-back">
           &larr; {" "}
@@ -35,6 +35,7 @@ export default function SignupPage() {
         <h3>Please sign up to continue!</h3>
         <div style={{ marginBottom: "40px" }}>
           <input
+            id="signup-email"
             type="email"
             placeholder="Email"
             value={email}
@@ -42,6 +43,7 @@ export default function SignupPage() {
             style={{ width: "95%", marginBottom: "1rem" }}
           />
           <input
+            id="signup-username"
             type="username"
             placeholder="Username"
             value={username}
@@ -49,6 +51,7 @@ export default function SignupPage() {
             style={{ width: "95%", marginBottom: "1rem" }}
           />
           <input
+            id="signup-password"
             type="password"
             placeholder="Password"
             value={password}
@@ -56,6 +59,7 @@ export default function SignupPage() {
             style={{ width: "95%", marginBottom: "1rem" }}
           />
           <input
+            id="signup-confirm-password"
             type="password"
             placeholder="Retype Password"
             value={confirmPassword}

@@ -211,7 +211,7 @@ export function PianoLayout({
   };
 
   return (
-    <div className="Piano" style={{ backgroundImage: `url(${backgroundImageURL})` }}>
+    <div className="piano-page" id="piano-page" style={{ backgroundImage: `url(${backgroundImageURL})` }}>
       <button 
         className="return-btn" 
         onClick={goBack} 
@@ -220,7 +220,7 @@ export function PianoLayout({
         Return
       </button>
 
-      <div className="piano-wrapper">
+      <div className="piano-container">
         <img src="/PianusStudio.png" style={{scale: "0.5", background: '#517edfbc'}} />
         <h2>{header}</h2>
         <PianoControl 

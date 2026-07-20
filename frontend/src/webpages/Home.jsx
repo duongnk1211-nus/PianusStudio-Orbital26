@@ -53,7 +53,7 @@ function IsLoggedIn() {
       {user ? (
         <div className="user-avatar" ref={menuRef}>
           <button
-            className="avatar-button"
+            className="avatar-btn"
             onClick={() => setMenuOpen(v => !v)}
             aria-haspopup="true"
             aria-expanded={menuOpen}
@@ -78,10 +78,10 @@ function IsLoggedIn() {
       ) : (
         <div className="auth-links">
           <Link to="/login">
-            <button className="auth-button login">Login</button>
+            <button className="auth-btn login">Login</button>
           </Link>
           <Link to="/signup">
-            <button className="auth-button signup">Sign Up</button>
+            <button className="auth-btn signup">Sign Up</button>
           </Link>
         </div>
       )}
@@ -92,7 +92,7 @@ function IsLoggedIn() {
 
 export default function HomePage() {
   return (
-    <div className="body">
+    <div className="home-page" id="home-page">
       <div className="header">
         <IsLoggedIn />
         <h1>Welcome to PianusStudio</h1>

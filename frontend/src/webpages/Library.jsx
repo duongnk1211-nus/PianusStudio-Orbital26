@@ -22,7 +22,7 @@ export default function Library() {
   const goBack = () => { navigate(-1); }
   
   return (
-    <div className='library-wrapper'>
+    <div className='library-page' id="library-page">
       <button onClick={goBack}>Go Back</button>
       <img src="/PianusStudio.png" />
       <h1>Music  Library</h1>

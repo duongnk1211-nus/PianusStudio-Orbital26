@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Amadeus&family=Dancing+Script&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Amadeus&family=Dancing+Script&display=swap");
+
+@import url("https://fonts.googleapis.com/css2?family=Orbitron:wght@700&display=swap");
 
 #root {
   width: 100%;
@@ -12,40 +13,40 @@ html {
   padding: 0;
 }
 
-.body {
+.home-page {
   height: 100%;
-  font-family: Arial, sans-serif;
   margin: 0;
-  background: #f4f4f4;
+  font-family: Arial, sans-serif;
   color: #0d0c0c;
-  background-image: url('/BackGround.jpg');
-  background-size: cover;
+  color: #3d1f1f45;
+  background: #f4f4f4;
+  background-image: url("/BackGround.jpg");
   background-position: top;
   background-repeat: no-repeat;
-  background-attachment: fixed; 
-  color: #3d1f1f45;
-  /* text color for contrast */
+  background-size: cover;
+  background-attachment: fixed;
+  /* text color for contrast */;
 }
 
 .header {
-  height: 120px;
   position: relative;
-  background: hsla(0, 0%, 100%, 0.822);
-  color: #000000;
+  height: 120px;
   padding: 20px;
   text-align: center;
+  color: #000000;
+  background: hsla(0, 0%, 100%, 0.822);
 }
 
 .header button {
-  width: 221px;
-  display: flex;
   position: absolute;
   top: 20px;
   right: 30px;
-  background: #e7a53c;
-  color: #fff;
+  display: flex;
+  width: 221px;
   border: none;
   border-radius: 4px;
+  color: #fff;
+  background: #e7a53c;
   cursor: pointer;
 }
 
@@ -57,94 +58,95 @@ html {
   position: absolute;
   top: 10px;
   right: 5px;
+  z-index: 40;
   display: flex;
   align-items: center;
   gap: 8px;
-  z-index: 40;
 }
 
 .user-avatar button {
-  background: #e7a53c;
-  cursor: pointer;
-  border-radius: 10px;
   border: 2px solid rgb(110, 74, 20);
+  border-radius: 10px;
+  background: #e7a53c;
   box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.192);
+  cursor: pointer;
 }
 
 .user-avatar button:hover {
   background: #ef8d05d6;
 }
 
-.avatar-button {
+.avatar-btn {
   display: flex;
   align-items: center;
   gap: 5px;
-  border: none;
-  cursor: pointer;
   padding: 6px 8px;
+  border: none;
   border-radius: 10px;
+  cursor: pointer;
 }
 
-.avatar-button:focus { outline: 2px solid rgba(14,30,90,0.2); }
+.avatar-btn:focus {
+  outline: 2px solid rgba(14,30,90,0.2);
+}
 
 .avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 44px;
   height: 44px;
   border-radius: 50%;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   background: linear-gradient(135deg, #f6a43a, #ef8d05);
   box-shadow: 0 2px 6px rgba(0,0,0,0.15);
 }
 
 .avatar img {
+  display: block;
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  object-position: top;
-  display: block;
-  background:#ededee84;
   border: 3px solid #563407;
   border-radius: 50%;
+  background: #ededee84;
+  object-fit: cover;
+  object-position: top;
 }
 
-
 .user-name {
-  margin-left: 7px;
-  font-size: 1rem;
-  color: #222;
   max-width: 140px;
-  font-family: 'Amadeus', cursive;
-  white-space: nowrap;
+  margin-left: 7px;
   overflow: hidden;
+  font-family: "Amadeus", cursive;
+  font-size: 1rem;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #222;
 }
 
 .avatar-menu {
   position: absolute;
   top: 79px;
   right: 45px;
-  background: #dca553;
-  border-radius: 8px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-  padding: 8px;
-  min-width: 160px;
   display: flex;
   flex-direction: column;
   gap: 6px;
+  min-width: 160px;
+  padding: 8px;
+  border-radius: 8px;
+  background: #dca553;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
 }
 
-.avatar-menu a{
+.avatar-menu a {
   display: block;
   padding: 8px 10px;
-  text-align: left;
-  background: transparent;
   border: none;
-  color: #111;
-  text-decoration: none;
   border-radius: 6px;
+  text-align: left;
+  text-decoration: none;
+  color: #111;
+  background: transparent;
   cursor: pointer;
 }
 
@@ -152,58 +154,59 @@ html {
   background: #ef8d0571;
 }
 
-.auth-links { 
-  position: absolute; 
-  top: 18px; 
-  right: 20px; 
-  display:flex; 
-  gap:8px 
+.auth-links {
+  position: absolute;
+  top: 18px;
+  right: 20px;
+  display: flex;
+  gap: 8px;
 }
 
-.auth-button { 
-  padding: 8px 12px; 
-  border-radius:6px; 
-  border:none; 
-  cursor:pointer;
+.auth-btn {
+  padding: 8px 12px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
 }
-.auth-button.login { 
-  width: 55px;
-  background: #e7a53c; 
-  color:#f8f8f8;
+
+.auth-btn.login {
   position: absolute;
   top: 10px;
   right: 83px;
+  width: 55px;
+  font-family: "Amadeus", cursive;
+  color: #f8f8f8;
+  background: #e7a53c;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
-  font-family: 'Amadeus', cursive;
 }
 
-.auth-button.signup { 
-  width: 72px;
-  background: #0f1558; 
-  color:#fff;
+.auth-btn.signup {
   position: absolute;
   top: 10px;
   right: 5px;
   justify-content: center;
+  width: 72px;
+  font-family: "Amadeus", cursive;
+  color: #fff;
+  background: #0f1558;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
-  font-family: 'Amadeus', cursive;
 }
 
-.auth-button.signup:hover {
+.auth-btn.signup:hover {
   background: #3845db;
 }
 
 .header a {
-  color: #f8f8f8;
   text-decoration: none;
-}   
+  color: #f8f8f8;
+}
 
 .header h1 {
-  margin: 0;
   position: absolute;
   top: 40px;
   left: 150px;
-  font-family: 'Dancing Script', cursive;
+  margin: 0;
+  font-family: "Dancing Script", cursive;
   font-size: 3em;
 }
 
@@ -211,7 +214,7 @@ html {
   position: absolute;
   top: 80px;
   left: 160px;
-  font-family: 'Dancing Script', cursive;
+  font-family: "Dancing Script", cursive;
   font-size: 1.5em;
   color: #e39f0b;
 }
@@ -231,10 +234,10 @@ nav {
 }
 
 nav a {
-  color: #000000;
-  font-family: 'Amadeus', cursive;
   padding: 14px 20px;
+  font-family: "Amadeus", cursive;
   text-decoration: none;
+  color: #000000;
 }
 
 nav a:hover {
@@ -242,37 +245,37 @@ nav a:hover {
 }
 
 main {
-  background-image: url('/BackGround.jpg');
-  background-size: cover;
-  background-position: top;
-  background-repeat: no-repeat;
-  background-attachment: fixed; 
   padding: 100px;
   text-align: center;
+  background-image: url("/BackGround.jpg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
 main h2 {
   display: inline-block;
-  background: #f6f1f1e1;
   padding: 10px 20px;
   border-radius: 4px;
+  font-family: "Amadeus", cursive;
   color: #000000;
-  font-family: 'Amadeus', cursive;
+  background: #f6f1f1e1;
 }
 
 main h3 {
+  font-family: "Amadeus", cursive;
   color: #000000;
-  font-family: 'Amadeus', cursive;
 }
 
 main a {
   display: inline-block;
   margin-top: 10px;
   padding: 10px 15px;
-  background: #e7a53c;
-  color: #fff;
-  text-decoration: none;
   border-radius: 4px;
+  text-decoration: none;
+  color: #fff;
+  background: #e7a53c;
 }
 
 main a:hover {
@@ -280,8 +283,8 @@ main a:hover {
 }
 
 main p {
+  font-family: "Amadeus", cursive;
   color: #000000;
-  font-family: 'Amadeus', cursive;
 }
 
 .features {
@@ -293,18 +296,18 @@ main p {
 }
 
 .feature-card {
-  background: #f6f1f1e1;
-  border-radius: 8px;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   width: 250px;
-  padding: 20px;
-  text-align: center;
   margin-top: 8px;
+  padding: 20px;
+  border-radius: 8px;
+  text-align: center;
+  background: #f6f1f1e1;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 footer {
-  background: #222;
-  color: #fff;
-  text-align: center;
   padding: 10px;
+  text-align: center;
+  color: #fff;
+  background: #222;
 }

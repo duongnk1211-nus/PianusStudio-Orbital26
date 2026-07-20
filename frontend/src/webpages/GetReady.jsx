@@ -79,7 +79,7 @@ export default function GetReady({ P }) {
   }
 
   return (
-    <div className="get-ready-body">
+    <div className="get-ready-page" id="get-ready-page">
       <div className="get-ready-table">
         <span className="corner-bl" />
         <span className="corner-br" />

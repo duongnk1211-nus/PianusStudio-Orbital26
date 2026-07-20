@@ -1,10 +1,10 @@
 .profile-page {
   min-height: 200vh;
   margin: 0;
-  background-image: url('/BackGroundForContactUs.jpg');
-  background-size: cover;
+  background-image: url("/BackGroundForContactUs.jpg");
   background-position: top;
   background-repeat: no-repeat;
+  background-size: cover;
   background-attachment: fixed;
 }
 
@@ -12,15 +12,15 @@
   position: absolute;
   top: 0px;
   left: 0px;
-  background: #e7a53c;
-  color: #fefefe;
-  font-family: 'Amadeus', cursive;
-  font-weight: bold;
-  padding: 4px 7px 6px;
-  cursor: pointer;
-  border-radius: 8px;
-  border: 2px solid rgb(110, 74, 20);
   align-items: center;
+  padding: 4px 7px 6px;
+  border: 2px solid rgb(110, 74, 20);
+  border-radius: 8px;
+  font-family: "Amadeus", cursive;
+  font-weight: bold;
+  color: #fefefe;
+  background: #e7a53c;
+  cursor: pointer;
 }
 
 .profile-page .return-btn:hover {
@@ -36,10 +36,10 @@
   position: absolute;
   top: 150px;
   left: 310px;
-  font-family: 'Amadeus', cursive;
+  font-family: "Amadeus", cursive;
   font-size: 1.5rem;
   font-weight: bold;
-  color:#563407;
+  color: #563407;
 }
 
 .avatar-profile {
@@ -53,26 +53,26 @@
 .avatar-profile img {
   width: 158px;
   height: 158px;
+  border: 10px solid #563407;
   border-radius: 50%;
+  background: #f8f8f8c0;
   object-fit: cover;
   object-position: top;
-  border: 10px solid #563407;
-  background: #f8f8f8c0;
 }
 
 .overlay-text {
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
+  font-family: "Amadeus", cursive;
   font-size: 20px;
-  font-family: 'Amadeus', cursive;
   font-weight: bold;
+  color: white;
   opacity: 0;
-  transition: opacity 0.3s ease;
   pointer-events: none;
-  /* so clicks go through to the image */
+  transform: translate(-50%, -50%);
+  transition: opacity 0.3s ease;
+  /* so clicks go through to the image */;
 }
 
 .avatar-profile:hover .overlay-text {
@@ -89,56 +89,56 @@
 }
 
 .avatar-profile p {
-  font-family: 'Amadeus', cursive;
+  font-family: "Amadeus", cursive;
   font-size: 0.8rem;
   font-weight: bold;
 }
 
-.avatar-wrap {
+.avatar-section {
   background: #fefefe94;
 }
 
-.avatar-wrap p {
-  font-family: 'Amadeus', cursive;
-  font-weight: bold;
+.avatar-section p {
+  font-family: "Amadeus", cursive;
   font-size: 1.5 rem;
+  font-weight: bold;
   color: #000000;
 }
 
-.bio-wrap {
+.bio-section {
   position: relative;
-  background: #fefefe95;
-  height: 442px;
-  width: 80%;
   top: 170px;
   left: 90px;
-  border-radius: 20px;
-  border: 10px solid #563407;
-  padding: 60px 10px 60px 30px;
   z-index: 1;
+  width: 80%;
+  height: 442px;
+  padding: 60px 10px 60px 30px;
+  border: 10px solid #563407;
+  border-radius: 20px;
+  background: #fefefe95;
 }
 
-.bio-wrap p {
-  text-align: left;
+.bio-section p {
   margin-top: 30px;
-  color: #000000;
-  font-family: 'Amadeus', cursive;
+  font-family: "Amadeus", cursive;
   font-weight: bold;
+  text-align: left;
+  color: #000000;
 }
 
 .bio-container {
+  position: absolute;
   top: 110px;
   left: 40px;
-  position: absolute;
-  background-color: #fefefe8e;
-  margin-top: 0px;
-  padding-left: 20px;
-  padding-right:20px;
-  height: 127px;
   width: 90%;
-  border-radius: 20px ;
-  word-wrap: break-word;
+  height: 127px;
+  margin-top: 0px;
+  padding-right: 20px;
+  padding-left: 20px;
+  border-radius: 20px;
   white-space: normal;
+  background-color: #fefefe8e;
+  word-wrap: break-word;
 }
 
 .bio-container p {
@@ -147,10 +147,10 @@
 
 .bio-container p {
   margin-top: 10px;
-  color: #000000;
-  font-family: 'Amadeus', cursive;
+  font-family: "Amadeus", cursive;
   font-weight: bold;
   text-align: left;
+  color: #000000;
 }
 
 .bio-container input {
@@ -160,96 +160,96 @@
   height: calc(100% - 20px);
   margin-top: 0px;
   padding: 8px 12px;
-  background: transparent;
   border: none;
   outline: none;
-  color: #000000;
-  font-family: 'Amadeus', cursive;
-  font-weight: bold;
-  text-align: left;
+  font-family: "Amadeus", cursive;
   font-size: 1rem;
+  font-weight: bold;
   line-height: 1.4;
-}
-
-.profileName-container {
+  text-align: left;
+  color: #000000;
   background: transparent;
 }
 
-.profileName-container p {
+.profile-name-container {
+  background: transparent;
+}
+
+.profile-name-container p {
   position: absolute;
   top: 150px;
   left: 310px;
-  font-family: 'Amadeus', cursive;
+  font-family: "Amadeus", cursive;
   font-size: 1.5rem;
   font-weight: bold;
-  color:#e7a53c;
+  color: #e7a53c;
   cursor: pointer;
 }
 
-.profileName-container input {
+.profile-name-container input {
   position: absolute;
   top: 136px;
   left: 298px;
   box-sizing: border-box;
   width: 400px;
   padding: 8px 12px;
-  background: transparent;
   border: none;
   outline: none;
-  color: #e7a53c;
-  font-family: 'Amadeus', cursive;
+  font-family: "Amadeus", cursive;
   font-size: 1.5rem;
   font-weight: bold;
+  color: #e7a53c;
+  background: transparent;
 }
 
 .profile-top-score {
   width: 90%;
   height: 125px;
   margin: 259px auto;
-  border-collapse: collapse;
-  font-family: 'Orbitron', sans-serif;
+  border-radius: 12px;
+  overflow: hidden;
+  font-family: "Orbitron", sans-serif;
   font-size: 1.1rem;
   color: #000000;
   background: #fefefe8e;
-  border-radius: 12px;
-  overflow: hidden;
+  border-collapse: collapse;
 }
 
 .profile-top-score p {
   margin: 20px 15px auto;
-  border-collapse: collapse;
-  font-family: 'Orbitron', sans-serif;
-  font-size: 1.1rem;
-  color: #000000;
   border-radius: 12px;
   overflow: hidden;
+  font-family: "Orbitron", sans-serif;
+  font-size: 1.1rem;
+  color: #000000;
+  border-collapse: collapse;
 }
 
 .recordings-container {
-  display: flex;
   position: relative;
   top: 130px;
-  margin: 90px;
+  display: flex;
   gap: 32px;
+  margin: 90px;
 }
 
-.recording-wrap {
+.recording-item {
+  z-index: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
-  background: #fefefe95;
   width: 280px;
   padding: 20px;
-  border-radius: 20px;
   border: 10px solid #563407;
-  z-index: 1;
+  border-radius: 20px;
+  background: #fefefe95;
 }
 
 .profile-page h2 {
-  font-family: 'Amadeus', cursive;
-  font-weight: bold;
+  font-family: "Amadeus", cursive;
   font-size: 1.5 rem;
+  font-weight: bold;
   color: #000000;
 }
 
@@ -259,45 +259,44 @@
 }
 
 .listen-btn {
-  text-decoration: none;
-  background: #3cb87a;
-  color: #fff;
   padding: 4px 16px;
-  border-radius: 8px;
   border: 2px solid #1a5c3a !important;
+  border-radius: 8px;
   font-size: 1.2rem;
+  text-decoration: none;
+  color: #fff;
+  background: #3cb87a;
   &:hover {
-    opacity: 1;
     background: #2ea368;
+    opacity: 1;
     transform: scale(1.05);
   }
 }
 
 .delete-btn {
-  text-decoration: none;
-  background: #e0433e;
-  color: #fff;
   padding: 4px 16px;
-  border-radius: 8px;
   border: 2px solid #1a5c3a !important;
+  border-radius: 8px;
   font-size: 1.2rem;
+  text-decoration: none;
+  color: #fff;
+  background: #e0433e;
   &:hover {
-    opacity: 1;
     background: #c8362f;
+    opacity: 1;
     transform: scale(1.05);
   }
 }
 
 .listen-btn.disabled,
 .delete-btn.disabled {
-  background: #9e9e9e;
   border: 2px solid #6b6b6b !important;
+  background: #9e9e9e;
   cursor: not-allowed;
   pointer-events: none;
-
   &:hover {
-    opacity: 1;
     background: #9e9e9e;
+    opacity: 1;
     transform: none;
   }
 }
@@ -305,39 +304,39 @@
 .profile-page h1 {
   position: relative;
   top: 180px;
-  font-family: 'Amadeus', cursive;
-  font-weight: bold;
+  font-family: "Amadeus", cursive;
   font-size: 2rem;
+  font-weight: bold;
   color: #e7a53c;
 }
 
 .profile-page .modal-overlay {
   position: fixed;
-  inset: 0;
+  z-index: 1000;
   display: flex;
   justify-content: center;
   align-items: center;
   background: rgba(0, 0, 0, 0.45);
-  z-index: 1000;
+  inset: 0;
 }
 
 .deleted-modal {
-  width: 400px;
-  background: #ffffff;
-  border-radius: 12px;
-  padding: 30px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
-  text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 20px;
+  width: 400px;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  background: #ffffff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
 }
 
 .deleted-modal p {
-  font-family: 'Amadeus', cursive;
-  font-weight: bold;
   margin: 0;
-  color: #555;
+  font-family: "Amadeus", cursive;
   font-size: 18px;
+  font-weight: bold;
+  color: #555;
 }

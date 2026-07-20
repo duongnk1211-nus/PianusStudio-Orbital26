@@ -112,9 +112,9 @@ export default function ProfilePage() {
   const lastSignIn = new Date(user.last_sign_in_at).toLocaleString();
 
   return (
-    <div className='profile-page'>
+    <div className='profile-page' id="profile-page">
       <button className='return-btn' onClick={goBack}>Return</button>
-      <div className='avatar-wrap'>
+      <div className='avatar-section'>
         <p><img src="/PianusStudio.png" alt="PianusStudio Logo" style={{ position: 'relative', top: '4px', height: '20px', width: '20px' }} /> Pianus Studio</p>
         {profile.role && <p>{profile?.role || ''}</p>}
         <AvatarUpload
@@ -126,7 +126,7 @@ export default function ProfilePage() {
           onChangeComplete={(name) => setProfile(p => ({ ...p, username: name }))}
         />
       </div>
-      <div className='bio-wrap'>
+      <div className='bio-section'>
         <p style={{ position: 'absolute', top: '40px', left: '30px', marginBottom: '0px' }}>Bio:</p>
         <Bio
           currentBio={profile.bio}
@@ -146,7 +146,7 @@ export default function ProfilePage() {
         {[1, 2, 3].map((num) => {
           const idx = num - 1;
           return (
-            <div className="recording-wrap" key={num}>
+            <div className="recording-item" key={num}>
               <h2 className="recording-title">Piece {num}</h2>
               <div className="recording-options">
                 <button 

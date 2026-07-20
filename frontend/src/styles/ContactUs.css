@@ -1,105 +1,104 @@
 #root-for-ContactUs {
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 700px;
 }
 
-.wrapper-for-ContactUs {
+.contact-us-page {
   position: relative;
   display: flex;
   flex-direction: column;
-  background-image: url('/BackGroundForContactUs.jpg');
-  background-size: cover;
+  height: 700px;
+  background-image: url("/BackGroundForContactUs.jpg");
   background-position: top;
   background-repeat: no-repeat;
-  background-attachment: fixed; 
-  height: 100vh;
+  background-size: cover;
+  background-attachment: fixed;
 }
 
-.return-for-ContactUs {
-  display: flex;
+.contact-us-return-link {
   position: absolute;
-  left: 10px;
   top: 5px;
-  flex-direction: row;
+  left: 10px;
+  display: flex;
   display: inline-block;
+  flex-direction: row;
+  justify-content: left;
   width: 50px;
   height: 30px;
-  margin-left: 20px;
-  margin-right:20px;
   margin-top: 15px;
+  margin-right: 20px;
+  margin-left: 20px;
   padding: 3px 5px;
-  background: #e7a53c;
   border-radius: 4px;
-  justify-content: left;
-  background-color: #df9e12;
   font-size: 16px;
+  background: #e7a53c;
+  background-color: #df9e12;
 }
 
-.return-for-ContactUs:hover {
+.contact-us-return-link:hover {
   background: #ef8d05d6;
 }
 
-.button-for-ContactUs a {
-  color: #ebeaf1;
-  text-decoration: none;
-  font-family: 'Amadeus', cursive;
+.contact-us-btn a {
+  font-family: "Amadeus", cursive;
   font-size: 14px;
+  text-decoration: none;
+  color: #ebeaf1;
 }
 
-.header-for-ContactUs {
+.contact-us-header {
   height: 60px;
-  font-family: 'Dancing Script', cursive;
-  font-size: 30px;
-  font-weight: 700; 
-  background-color: transparent;
-  color: #ffffff;
   margin-bottom: 20px;
+  font-family: "Dancing Script", cursive;
+  font-size: 30px;
+  font-weight: 700;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}   
+  color: #ffffff;
+  background-color: transparent;
+}
 
-.header-for-ContactUs h1 {
-  font-family: 'Dancing Script', cursive;
+.contact-us-header h1 {
+  font-family: "Dancing Script", cursive;
   color: #ef9d19;
   background-color: transparent;
 }
 
-.content-for-ContactUs {
+.contact-us-content {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: transparent;
   color: #3d1f1f45;
+  background-color: transparent;
 }
 
-.feature-card-for-ContactUs {
-  background: rgba(255, 255, 255, 0.352);
-  border-radius: 10px;
-  padding: 0px;
-  margin: 30px;
+.contact-us-feature-card {
   display: inline-block;
-  width: 800px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   justify-content: top;
   align-items: top;
+  width: 800px;
+  margin: 30px;
+  padding: 0px;
+  border-radius: 10px;
+  background: rgba(255, 255, 255, 0.352);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.main-for-ContactUs {
+.contact-us-main {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background: transparent;
   padding: 100px;
   text-align: center;
+  background: transparent;
 }
 
-.main-for-ContactUs p{
-  font-family: 'Amadeus', cursive;
+.contact-us-main p {
   align-items: top;
-  font-size: 1em;
   padding: 1px 20px 20px 1px;
+  font-family: "Amadeus", cursive;
+  font-size: 1em;
   color: #000000e5;
 }
-

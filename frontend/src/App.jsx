@@ -20,6 +20,7 @@ import PianoRecorder from "./webpages/PianoRecorder.jsx";
 import RecordingDisplayer from "./webpages/RecordingDisplayer.jsx";
 import PitchRecognition from "./webpages/PitchRecognition.jsx";
 import { PieceList } from "./components/PieceList.jsx";
+import { ExerciseList } from "./components/ExerciseList.jsx";
 
 export default function App() {
   return (
@@ -47,6 +48,12 @@ export default function App() {
           <Route key={`${P.navStr}-scoringDemo`} path={`/lessons/${P.navStr}/demo`} element={<ScoringDemo P={P} />} />
           <Route key={`${P.navStr}-display`} path={`/library/${P.navStr}/display`} element={<Display P={P} />} />
           <Route key={`${P.navStr}-learn`}   path={`/library/${P.navStr}/learn`}   element={<Learn P={P} />} />
+        </>
+      ))}
+
+      {ExerciseList.map((R, i) => (
+        <>
+          <Route key={`ex-${i + 1}`} path={`/pitch-recognition/ex-${i + 1}`} element={<PitchRecognition R={R} />} />
         </>
       ))}
     </Routes>

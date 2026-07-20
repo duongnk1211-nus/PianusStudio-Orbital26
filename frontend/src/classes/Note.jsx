@@ -190,4 +190,13 @@ export class Note {
       );
     }
   }
+
+  attackWithoutVisual = (synthRef) => async (time) => {
+    if (time === undefined) await Tone.start();
+    synthRef.current.triggerAttack(this.#sym, time);
+  }
+
+  releaseWithoutVisual = (synthRef) => async(time) => {
+    synthRef.current.triggerRelease(this.#sym, time);
+  }
 }

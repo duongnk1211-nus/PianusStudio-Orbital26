@@ -28,9 +28,11 @@ export default function PianoRecorder() {
   }, []);
   
   const [profile, setProfile] = useState(null);
+  const [profileLoading, setProfileLoading] = useState(true);
   
   useEffect(() => {
     apiFetch('/user').then(setProfile);
+    setProfileLoading(false);
   }, []);
   
   const [status, setStatus] = useState("stopped");
@@ -158,6 +160,12 @@ export default function PianoRecorder() {
       Tone.Transport.off("stop", handleStop);
     };
   }, []);
+
+  if (profileLoading) {
+    return (
+      <p>Loading...</p>
+    );
+  }
 
   return (
     <PianoLayout 

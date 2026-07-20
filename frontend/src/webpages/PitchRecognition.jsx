@@ -11,25 +11,13 @@ import { PianoLayout } from "../components/PianoLayout.jsx";
 import { Record } from "../classes/Record.jsx";
 import { supabase } from "../components/supabaseClient";
 
-export default function PitchRecognition({ P }) {
-  P = new Record(
-    1.5,
-    [
-      { type: "attack", sym: "C4", time: 0.0 },
-      { type: "release", sym: "C4", time: 0.4 },
-      { type: "attack", sym: "D4", time: 0.5 },
-      { type: "release", sym: "D4", time: 0.9 },
-      { type: "attack", sym: "E4", time: 1.0 },
-      { type: "release", sym: "E4", time: 1.4 },
-    ]
-  );
-
-  const total = P.actions.length / 2;
+export default function PitchRecognition({ R }) {
+  const total = R.actions.length / 2;
   const ansList = useMemo(() => {
     let result = [];
-    for (let i = 0; i < P.actions.length; i++) {
-      if (P.actions[i].type === "attack") {
-        result.push(P.actions[i].sym);
+    for (let i = 0; i < R.actions.length; i++) {
+      if (R.actions[i].type === "attack") {
+        result.push(R.actions[i].sym);
       }
     }
     return result;
@@ -51,9 +39,11 @@ export default function PitchRecognition({ P }) {
   }, []);
   
   const [profile, setProfile] = useState(null);
+  const [profileLoading, setProfileLoading] = useState(true);
   
   useEffect(() => {
     apiFetch('/user').then(setProfile);
+    setProfileLoading(false);
   }, []);
   
   const [status, setStatus] = useState("stopped");
@@ -91,7 +81,7 @@ export default function PitchRecognition({ P }) {
       if (Tone.Transport.state === "stopped") {
         synthRef.current?.releaseAll();
         Tone.Transport.cancel();
-        P.display(synthRef, barsRef, sideEffect)();
+        R.display(synthRef, barsRef, sideEffect)();
       }
       Tone.Transport.start();
       setStatus("playing");
@@ -143,6 +133,12 @@ export default function PitchRecognition({ P }) {
       Tone.Transport.off("stop", handleStop);
     };
   }, []);
+
+  if (profileLoading) {
+    return (
+      <p>Loading...</p>
+    );
+  }
 
   return (
     <PianoLayout 

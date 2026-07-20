@@ -23,9 +23,11 @@ export default function Learn({ P }) {
   }, []);
   
   const [profile, setProfile] = useState(null);
+  const [profileLoading, setProfileLoading] = useState(true);
   
   useEffect(() => {
     apiFetch('/user').then(setProfile);
+    setProfileLoading(false);
   }, []);
   
   const sideEffect = useMemo(() => {
@@ -132,6 +134,12 @@ export default function Learn({ P }) {
     setIsStarted(!isStarted);
     isStarted ? handleChangeIndex(-1) : handleChangeIndex(0);
   };
+
+  if (profileLoading) {
+    return (
+      <p>Loading...</p>
+    );
+  }
   
   return (
     <PianoLayout 

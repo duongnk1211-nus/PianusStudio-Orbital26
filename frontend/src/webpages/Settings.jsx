@@ -35,25 +35,38 @@ export default function SettingsPage() {
   const [savedIndex, setSavedIndex] = useState(1);
 
   useEffect(() => {
-    console.log(profile);
     setOptionIndex(profile ? profile.binding_option : 1);
     setSavedIndex(profile ? profile.binding_option : 1);
   }, [profile]);
 
+  const [isSaving, setIsSaving] = useState(false);
+  const [isFetched, setIsFetched] = useState(false);
+  const [saveError, setSaveError] = useState(null);
+
   const handleChangeBindingOption = (id) => async() => {
-    const result = await supabase.auth.getSession();
-    const session = result.data.session;
-    const res = await fetch(`${import.meta.env.VITE_API_URL}/user`, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${session.access_token}`,
-      },
-      body: JSON.stringify({ binding_option: id })
-    });
-    if (!res.ok) throw new Error('Update binding option failed!');
-    setSavedIndex(id);
-    alert("Key binding option saved!!!");
+    setIsSaving(true);
+
+    try {
+      const result = await supabase.auth.getSession();
+      const session = result.data.session;
+      await apiFetch('/user', {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${session.access_token}`
+        },
+        body: JSON.stringify({ binding_option: id })
+      });
+      setSaveError(`Binding option ${id} was successfully saved!!!`);
+    } catch (err) {
+      setSaveError(err.message || `Failed to save the binding option.`);
+    } finally {
+      setIsSaving(false);
+    }
+    console.log("GOAT");
+    console.log(saveError);
+
+    setIsFetched(true);
   }
 
   return (
@@ -82,6 +95,21 @@ export default function SettingsPage() {
         <p className="property-saved-option">Currently saving: Option {savedIndex}</p>
       </div>
       <img src={`/KeyBinding/Option${optionIndex}.png`} />
+
+      { isFetched && 
+        <div className="modal-overlay">
+          <div className="settings-save-modal">
+            <p>{saveError}</p>
+
+            <button
+              className="ok-btn"
+              onClick={() => setIsFetched(false)}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      }
     </div>
   );
 }

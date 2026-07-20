@@ -24,12 +24,12 @@ export class Record {
     this.#duration = duration;
   }
 
-  addAction(action) {
-    this.#actions.push(action);
-  }
-
   get actions() {
     return this.#actions;
+  }
+
+  addAction(action) {
+    this.#actions.push(action);
   }
 
   display = (synthRef, barsRef, sideEffect) => {

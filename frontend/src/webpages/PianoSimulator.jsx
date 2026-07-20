@@ -17,9 +17,11 @@ export default function PianoSimulator() {
   }, []);
 
   const [profile, setProfile] = useState(null);
+  const [profileLoading, setProfileLoading] = useState(true);
 
   useEffect(() => {
     apiFetch('/user').then(setProfile);
+    setProfileLoading(false);
   }, []);
 
   const sideEffect = useMemo(() => {
@@ -27,6 +29,12 @@ export default function PianoSimulator() {
   }, []);
   const { synthRef, barsRef, displayBars } = usePiano(sideEffect);
   useKeyboard(profile, symMap, synthRef, barsRef, sideEffect);
+
+  if (profileLoading) {
+    return (
+      <p>Loading...</p>
+    );
+  }
 
   return (
     <PianoLayout 

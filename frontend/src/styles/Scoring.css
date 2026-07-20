@@ -1,6 +1,6 @@
 .scoring-body {
   display: block;
-  min-height: 200vh;
+  min-height: 1262px;
   background-size: cover;
   background-position: top;
   background-repeat: no-repeat;
@@ -34,7 +34,7 @@
 }
 
 .scoring-header {
-  height: 10vh;
+  height: 63px;
   position: relative;
   padding-top: 0px;
 }
@@ -45,7 +45,7 @@
   font-weight: 800;
   text-transform: uppercase;
   color: #fff;
-  height: 10vh;
+  height: 63px;
   letter-spacing: 10px;
   background: linear-gradient(180deg, #ffffff, #e0eafc, #1c1c2b);
   -webkit-background-clip: text;
@@ -244,7 +244,7 @@
 }
 
 .scoring-piano {
-  height: 90vh;
+  height: 568px;
   width: 80%;
   position: relative;
   display: block;

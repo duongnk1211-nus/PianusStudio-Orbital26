@@ -132,7 +132,7 @@ export default function ProfilePage() {
           currentBio={profile.bio}
           onChangeComplete={(bio) => setProfile(p => ({ ...p, bio: bio }))}
         />
-        <p style={{position: 'absolute', top:'220px'}}>Top Achievement:</p>
+        <p style={{position: 'absolute', top:'250px'}}>Top Achievement:</p>
         <div className='profile-top-score'>
           <p>Piece: <span style={{color: '#efac48'}}>{PieceList[maxScore.piece_number-1].title}</span></p>
           <p>Top score: <span style={{color: '#efac48'}}>{maxScore.top_score}</span></p>
@@ -140,14 +140,14 @@ export default function ProfilePage() {
         <p style={{ position: 'absolute', bottom: '40px', left: '30px', marginBottom: '0px' }}>Last signed in: {lastSignIn}</p>
       </div>
 
-      <h1>User's Recordings</h1>
+      <h1>User's Personal Pieces</h1>
 
       <div className="recordings-container">
         {[1, 2, 3].map((num) => {
           const idx = num - 1;
           return (
             <div className="recording-wrap" key={num}>
-              <h2 className="recording-title">Recording {num}</h2>
+              <h2 className="recording-title">Piece {num}</h2>
               <div className="recording-options">
                 <button 
                   className={`listen-btn ${isRecorded[idx] ? "" : "disabled"}`}

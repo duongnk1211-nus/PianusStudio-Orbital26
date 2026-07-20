@@ -1,6 +1,6 @@
 .get-ready-body {
   display: block;
-  min-height: 200vh;
+  min-height: 1262px;
   background-image: url('/LessonsBackGround.png');
   background-size: cover;
   background-position: top;
@@ -13,8 +13,8 @@
 
 .get-ready-body button {
   position:absolute;
-  height: 5vh;
-  width: 12vh;
+  height: 32px;
+  width: 76px;
   top: 20px;
   left: 20px;
   justify-content: center;
@@ -40,11 +40,11 @@
 }
 
 .get-ready-table {
-  height: 105vh;
+  height: 650px;
   width: 70%;
   position: relative;
   display: block;
-  top: 7vh;
+  top: 44px;
   margin: 0px auto;
   border: 15px solid;
   border-image: linear-gradient(45deg, #FFD700, #FFF8DC, #DAA520) 1;
@@ -181,7 +181,6 @@
 }
 
 .get-ready-buttons {
-  margin-top: 30px;
   padding-left: 10%;
   display: flex;
   gap: 30%;
@@ -189,6 +188,7 @@
 
 .get-ready-buttons button {
   position: static;
+  margin-top: 0px;
   background: linear-gradient(45deg, #FFD700, #FFF8DC, #DAA520);
   box-shadow: 0 0 10px #FFD700;
   color: #000000;

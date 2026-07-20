@@ -46,13 +46,13 @@
   position: absolute;
   top: 80px;
   left: 120px;
-  width: 28vh;
-  height: 28vh;
+  width: 177px;
+  height: 177px;
 }
 
 .avatar-profile img {
-  width: 25vh;
-  height: 25vh;
+  width: 158px;
+  height: 158px;
   border-radius: 50%;
   object-fit: cover;
   object-position: top;
@@ -108,7 +108,7 @@
 .bio-wrap {
   position: relative;
   background: #fefefe95;
-  height: 70vh;
+  height: 442px;
   width: 80%;
   top: 170px;
   left: 90px;
@@ -134,7 +134,7 @@
   margin-top: 0px;
   padding-left: 20px;
   padding-right:20px;
-  height: 20vh;
+  height: 127px;
   width: 90%;
   border-radius: 20px ;
   word-wrap: break-word;
@@ -205,7 +205,7 @@
 .profile-top-score {
   width: 90%;
   height: 125px;
-  margin: 41vh auto;
+  margin: 259px auto;
   border-collapse: collapse;
   font-family: 'Orbitron', sans-serif;
   font-size: 1.1rem;

@@ -410,7 +410,7 @@ export function ScoringDemo({ P }) {
             return { ...b, top: b.top + FALL_SPEED };
           }
         })
-        .filter(b => b.top < 420);
+        .filter(b => b.top < 390);
 
       setDisplayBars([...barsRef.current]);
 
@@ -418,7 +418,13 @@ export function ScoringDemo({ P }) {
         let changed = false;
         const next = prev.map(entry => {
           const bar = barsRef.current.find(b => b.note === entry.sym);
-          const shouldGrow = !!bar && bar.top + bar.height > 400;
+          const shouldGrow = !!bar && bar.top + bar.height > 370 && bar.top < 380;
+          if(!entry.item.keyActive && shouldGrow) {
+            entry.item.attackWithoutBars(synthRef, barsRef, sideEffect)();
+          }
+          if(entry.item.keyActive && !shouldGrow) {
+            entry.item.releaseWithoutBars(synthRef, barsRef, sideEffect)();
+          }
           const shouldApply = shouldGrow && entry.item.keyActive;
           if (shouldApply !== entry.correctScoring) {
             changed = true;
@@ -461,7 +467,7 @@ export function ScoringDemo({ P }) {
       setTimeout(() => setIsPoppedUp(false), 5500);
       setTimeout(() => {
         if (Tone.Transport.state == "stopped") {
-          P.displayForDemoScoring(synthRef, barsRef, sideEffect)();
+          P.displayForScoring(synthRef, barsRef, sideEffect)();
           isScoringActiveRef.current = true;
         }
         Tone.Transport.start();

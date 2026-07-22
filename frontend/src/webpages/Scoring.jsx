@@ -68,8 +68,12 @@ export default function Scoring({ P }) {
 
       barsRef.current = barsRef.current.map(bar => {
         const currentKey = notes.find(n => n.sym === bar.note);
-        const checkIfMissed = !currentKey?.item.keyActive && (bar.top + bar.height > 399) && (bar.top < 400);
+        const checkIfMissed = !currentKey?.item.keyActive && (bar.top + bar.height > 400) && (bar.top < 390);
         const isPastLine = bar.top > 400;
+
+        if(currentKey?.item.keyActive) {
+          return {... bar, checkMissed: false};
+        }
 
         if (checkIfMissed && !bar.checkScored) {
           scoreChange -= 50;
@@ -98,7 +102,7 @@ export default function Scoring({ P }) {
       setNotes(prev => {
         const next = prev.map(entry => {
           const bar = barsRef.current.find(b => b.note === entry.sym);
-          const shouldGrow = !!bar && bar.top + bar.height > 360;
+          const shouldGrow = !!bar && (bar.top + bar.height > 360);
           const shouldApply = shouldGrow && entry.item.keyActive;
           const checkWrongActive = !shouldGrow && entry.item.keyActive && isScoringActiveRef.current;
           if (shouldApply !== entry.correctScoring) {

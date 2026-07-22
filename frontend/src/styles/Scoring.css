@@ -109,7 +109,71 @@
   -webkit-text-fill-color: transparent;
 }
 
+.scoring-header.furelise h1 {
+  background: linear-gradient(180deg, #f5f5dc, #d2b48c, #a0522d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: eliseGlow 4s ease-in-out infinite;
+  text-shadow: 0 0 10px #f5f5dc, 0 0 20px #d2b48c, 0 0 30px #a0522d;
+}
+
+.scoring-header.canonind h1 {
+  background: linear-gradient(180deg, #fffacd, #ffe4b5, #ffd700);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: canonGlow 3s ease-in-out infinite;
+  text-shadow: 0 0 10px #fffacd, 0 0 20px #ffe4b5, 0 0 30px #ffd700;
+}
+
+.scoring-header.bachminuet h1 {
+  background: linear-gradient(180deg, #fff8dc, #e6e6fa, #b0c4de);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: minuetGlow 4s ease-in-out infinite;
+  text-shadow: 0 0 10px #fff8dc, 0 0 20px #e6e6fa, 0 0 30px #b0c4de;
+}
+
+@keyframes minuetGlow {
+
+  0%,
+  100% {
+    text-shadow: 0 0 10px #fff8dc, 0 0 20px #e6e6fa, 0 0 30px #b0c4de;
+  }
+
+  50% {
+    text-shadow: 0 0 15px #fafad2, 0 0 25px #d8bfd8, 0 0 35px #87ceeb;
+  }
+}
+
+@keyframes canonGlow {
+
+  0%,
+  100% {
+    text-shadow: 0 0 10px #fffacd, 0 0 20px #ffe4b5, 0 0 30px #ffd700;
+  }
+
+  50% {
+    text-shadow: 0 0 15px #fff8dc, 0 0 25px #ffebcd, 0 0 35px #daa520;
+  }
+}
+
+@keyframes eliseGlow {
+
+  0%,
+  100% {
+    text-shadow: 0 0 10px #f5f5dc, 0 0 20px #d2b48c, 0 0 30px #a0522d;
+  }
+
+  50% {
+    text-shadow: 0 0 15px #fff8dc, 0 0 25px #deb887, 0 0 35px #8b4513;
+  }
+}
+
 @keyframes confettiGlow {
+
   0%,
   100% {
     text-shadow: 0 0 10px #ffd700, 0 0 20px #ff69b4, 0 0 30px #87cefa;
@@ -121,6 +185,7 @@
 }
 
 @keyframes flamePulse {
+
   0%,
   100% {
     text-shadow: 0 0 12px #ff4500, 0 0 28px #ff0000, 0 0 45px #ff6347;
@@ -132,6 +197,7 @@
 }
 
 @keyframes glowPulse {
+
   0%,
   100% {
     text-shadow: 0 0 10px #fffacd, 0 0 25px #ffd700, 0 0 40px #ff8c00;
@@ -143,6 +209,7 @@
 }
 
 @keyframes leafGlow {
+
   0%,
   100% {
     text-shadow: 0 0 12px #98fb98, 0 0 25px #3cb371, 0 0 40px #2e8b57;
@@ -154,6 +221,7 @@
 }
 
 @keyframes blossomPulse {
+
   0%,
   100% {
     text-shadow: 0 0 12px #ffb6c1, 0 0 25px #ff69b4, 0 0 40px #ffa07a;
@@ -165,6 +233,7 @@
 }
 
 @keyframes starGlow {
+
   0%,
   100% {
     text-shadow: 0 0 10px #ffffff, 0 0 20px #dbe9ff, 0 0 30px #cce7ff;
@@ -237,6 +306,33 @@
   -webkit-text-fill-color: transparent;
 }
 
+.scoring-score.furelise {
+  background: linear-gradient(180deg, #f5f5dc, #d2b48c, #a0522d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: eliseGlow 4s ease-in-out infinite;
+  text-shadow: 0 0 10px #f5f5dc, 0 0 20px #d2b48c, 0 0 30px #a0522d;
+}
+
+.scoring-score.canonind {
+  background: linear-gradient(180deg, #fffacd, #ffe4b5, #ffd700);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: canonGlow 3s ease-in-out infinite;
+  text-shadow: 0 0 10px #fffacd, 0 0 20px #ffe4b5, 0 0 30px #ffd700;
+}
+
+.scoring-score.bachminuet {
+  background: linear-gradient(180deg, #fff8dc, #e6e6fa, #b0c4de);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: minuetGlow 4s ease-in-out infinite;
+  text-shadow: 0 0 10px #fff8dc, 0 0 20px #e6e6fa, 0 0 30px #b0c4de;
+}
+
 .scoring-piano {
   position: relative;
   display: block;
@@ -290,6 +386,31 @@
     0 0 35px rgba(255, 105, 180, 0.6),
     inset 0 0 15px rgba(132, 255, 253, 0.6);
   border-image: linear-gradient(135deg, #ffd700, #ff69b4, #87cefa, #ffa07a) 1;
+}
+
+.scoring-piano.furelise {
+  box-shadow: 0 0 20px rgba(210, 180, 140, 0.7),
+    0 0 35px rgba(160, 82, 45, 0.6),
+    inset 0 0 15px rgba(245, 245, 220, 0.5),
+    inset 0 0 25px rgba(210, 180, 140, 0.4);
+  border-image: linear-gradient(135deg, #f5f5dc, #d2b48c, #a0522d) 1;
+}
+
+.scoring-piano.canonind {
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7),
+    0 0 35px rgba(218, 165, 32, 0.6),
+    inset 0 0 15px rgba(255, 250, 205, 0.5),
+    inset 0 0 25px rgba(255, 228, 181, 0.4);
+  border-image: linear-gradient(135deg, #fffacd, #ffe4b5, #ffd700) 1;
+}
+
+.scoring-piano.bachminuet {
+  border-image: linear-gradient(135deg, #fff8dc, #e6e6fa, #b0c4de) 1;
+  box-shadow:
+    0 0 20px rgba(230, 230, 250, 0.7),
+    0 0 35px rgba(176, 196, 222, 0.6),
+    inset 0 0 15px rgba(255, 248, 220, 0.5),
+    inset 0 0 25px rgba(176, 196, 222, 0.4);
 }
 
 /* Top-left corner */
@@ -389,6 +510,31 @@
     inset 0 0 15px rgba(132, 255, 253, 0.6);
 }
 
+.scoring-piano.furelise .corner-bl {
+  background: linear-gradient(180deg, #fffaf0, #f5f5dc, #d2b48c);
+  box-shadow: 0 0 20px rgba(210, 180, 140, 0.7),
+    0 0 35px rgba(160, 82, 45, 0.6),
+    inset 0 0 15px rgba(245, 245, 220, 0.5),
+    inset 0 0 25px rgba(210, 180, 140, 0.4);
+}
+
+.scoring-piano.canonind .corner-bl {
+  background: linear-gradient(180deg, #fffaf0, #fffacd, #ffe4b5);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7),
+    0 0 35px rgba(218, 165, 32, 0.6),
+    inset 0 0 15px rgba(255, 250, 205, 0.5),
+    inset 0 0 25px rgba(255, 228, 181, 0.4);
+}
+
+.scoring-piano.bachminuet .corner-bl {
+  border-image: linear-gradient(135deg, #fff8dc, #e6e6fa, #b0c4de) 1;
+  box-shadow:
+    0 0 20px rgba(230, 230, 250, 0.7),
+    0 0 35px rgba(176, 196, 222, 0.6),
+    inset 0 0 15px rgba(255, 248, 220, 0.5),
+    inset 0 0 25px rgba(176, 196, 222, 0.4);
+}
+
 /* Bottom-right corner */
 
 .scoring-piano .corner-br {
@@ -442,6 +588,31 @@
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.7),
     0 0 35px rgba(255, 105, 180, 0.6),
     inset 0 0 15px rgba(132, 255, 253, 0.6);
+}
+
+.scoring-piano.furelise .corner-br {
+  background: linear-gradient(180deg, #fffaf0, #f5f5dc, #d2b48c);
+  box-shadow: 0 0 20px rgba(210, 180, 140, 0.7),
+    0 0 35px rgba(160, 82, 45, 0.6),
+    inset 0 0 15px rgba(245, 245, 220, 0.5),
+    inset 0 0 25px rgba(210, 180, 140, 0.4);
+}
+
+.scoring-piano.canonind .corner-br {
+  background: linear-gradient(180deg, #fffaf0, #fffacd, #ffe4b5);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.7),
+    0 0 35px rgba(218, 165, 32, 0.6),
+    inset 0 0 15px rgba(255, 250, 205, 0.5),
+    inset 0 0 25px rgba(255, 228, 181, 0.4);
+}
+
+.scoring-piano.bachminuet .corner-br {
+  border-image: linear-gradient(135deg, #fff8dc, #e6e6fa, #b0c4de) 1;
+  box-shadow:
+    0 0 20px rgba(230, 230, 250, 0.7),
+    0 0 35px rgba(176, 196, 222, 0.6),
+    inset 0 0 15px rgba(255, 248, 220, 0.5),
+    inset 0 0 25px rgba(176, 196, 222, 0.4);
 }
 
 .scoring-synthesia {
@@ -526,6 +697,32 @@
   -webkit-text-fill-color: transparent;
 }
 
+.scoring-synthesia-pop-up.furelise {
+  z-index: 1;
+  background: linear-gradient(180deg, #f5f5dc, #d2b48c, #a0522d);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px #f5f5dc, 0 0 20px #d2b48c, 0 0 30px #a0522d;
+}
+
+.scoring-synthesia-pop-up.canonind {
+  z-index: 1;
+  background: linear-gradient(180deg, #fffacd, #ffe4b5, #ffd700);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px #fffacd, 0 0 20px #ffe4b5, 0 0 30px #ffd700;
+}
+
+.scoring-synthesia-pop-up.bachminuet {
+  background: linear-gradient(180deg, #fff8dc, #e6e6fa, #b0c4de);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  text-shadow: 0 0 10px #fff8dc, 0 0 20px #e6e6fa, 0 0 30px #b0c4de;
+}
+
 .scoring-synthesia-bar {
   position: absolute;
   box-sizing: border-box;
@@ -570,6 +767,22 @@
   box-shadow: 0 0 20px rgba(255, 215, 0, 0.7);
 }
 
+.scoring-synthesia-bar.furelise.white {
+  background: linear-gradient(180deg, #fffaf0, #f5f5dc, #f0e68c);
+  box-shadow: 0 0 20px rgba(245, 245, 220, 0.7);
+}
+
+.scoring-synthesia-bar.canonind.white {
+  background: linear-gradient(180deg, #fffacd, #ffe4b5, #ffd700);
+  box-shadow: 0 0 20px rgba(255, 250, 205, 0.7);
+}
+
+.scoring-synthesia-bar.bachminuet.white {
+  background: linear-gradient(180deg, #fff8dc, #fafad2, #e6e6fa);
+  box-shadow: 0 0 20px rgba(255, 248, 220, 0.7);
+}
+
+
 .scoring-synthesia-bar.black {
   z-index: 2;
   background: linear-gradient(180deg, #1c1c2b, #525c6e, #9c9797);
@@ -606,6 +819,21 @@
 .scoring-synthesia-bar.happybirthdaytoyou.black {
   background: linear-gradient(180deg, #ff69b4, #ffa07a, #87cefa);
   box-shadow: 0 0 20px rgba(255, 105, 180, 0.7);
+}
+
+.scoring-synthesia-bar.furelise.black {
+  background: linear-gradient(180deg, #a0522d, #8b4513, #654321);
+  box-shadow: 0 0 20px rgba(139, 69, 19, 0.7);
+}
+
+.scoring-synthesia-bar.canonind.black {
+  background: linear-gradient(180deg, #daa520, #ffd700, #ffe4b5);
+  box-shadow: 0 0 20px rgba(218, 165, 32, 0.7);
+}
+
+.scoring-synthesia-bar.bachminuet.black {
+  background: linear-gradient(180deg, #b0c4de, #87ceeb, #4682b4);
+  box-shadow: 0 0 20px rgba(176, 196, 222, 0.7),
 }
 
 .scoring-missed {
@@ -665,6 +893,20 @@
   box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 215, 0, 0.6), 0 0 30px rgba(255, 182, 193, 0.5);
 }
 
+.white-key.scoring.furelise {
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.1), 0 0 20px rgba(245, 245, 220, 0.6), 0 0 30px rgba(210, 180, 140, 0.5);
+}
+
+.white-key.scoring.canonind {
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 250, 205, 0.6), 0 0 30px rgba(255, 228, 181, 0.5);
+}
+
+.white-key.scoring.bachminuet {
+  box-shadow: inset 0 -4px 0 rgba(0, 0, 0, 0.1), 0 0 20px rgba(255, 248, 220, 0.6),
+    0 0 30px rgba(230, 230, 250, 0.5),
+    inset 0 0 10px rgba(255, 248, 220, 0.4);
+}
+
 .white-key.correct {
   background-color: rgba(255, 199, 44, 0.35);
   box-shadow: inset 0 8px 14px rgba(212, 150, 5, 0.65),
@@ -710,6 +952,19 @@
 
 .black-key.scoring.happybirthdaytoyou {
   box-shadow: inset 0 -3px 0 rgba(255, 255, 255, 0.05), 0 0 20px rgba(255, 105, 180, 0.7);
+}
+
+.black-key.scoring.furelise {
+  box-shadow: inset 0 -3px 0 rgba(255, 255, 255, 0.05), 0 0 18px rgba(139, 69, 19, 0.6);
+}
+
+.black-key.scoring.canonind {
+  box-shadow: inset 0 -3px 0 rgba(255, 255, 255, 0.05), 0 0 18px rgba(218, 165, 32, 0.6);
+}
+
+.black-key.scoring.bachminuet {
+  box-shadow: inset 0 -3px 0 rgba(255, 255, 255, 0.05), 0 0 18px rgba(112, 128, 144, 0.6),
+    inset 0 0 10px rgba(176, 196, 222, 0.4);
 }
 
 .black-key.correct {

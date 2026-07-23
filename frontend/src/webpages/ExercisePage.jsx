@@ -9,9 +9,9 @@ import { useKeyboard } from "../hooks/useKeyboard.jsx";
 import { usePiano } from "../hooks/usePiano.jsx";
 import { PianoLayout } from "../components/PianoLayout.jsx";
 import { Record } from "../classes/Record.jsx";
-import { supabase } from "../components/supabaseClient";
+import { supabase } from "../components/supabaseClient.jsx";
 
-export default function PitchRecognition({ R }) {
+export default function ExercisePage({ R }) {
   const total = R.actions.length / 2;
   const ansList = useMemo(() => {
     let result = [];
@@ -142,8 +142,8 @@ export default function PitchRecognition({ R }) {
 
   return (
     <PianoLayout 
-      header={"Recording Studio"} 
-      backgroundImageURL={"BackGroundForPiano.jpg"} 
+      header={"Exercise Page"} 
+      backgroundImageURL={"/ExercisePage.png"} 
       displayBars={displayBars}
       synthRef={synthRef}
       barsRef={barsRef}

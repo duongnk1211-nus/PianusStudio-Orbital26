@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { apiFetch } from "../components/API";
 import { PieceList } from "../components/PieceList";
-import "../styles/Profile.css";
+import "../styles/ProfilePage.css";
 
 export default function ViewProfile() {
   const navigate = useNavigate();

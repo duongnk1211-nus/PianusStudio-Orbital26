@@ -2,7 +2,7 @@ import { useState, useEffect, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiFetch } from "../components/API";
 import { supabase } from "../components/supabaseClient";
-import "../styles/Settings.css";
+import "../styles/SettingsPage.css";
 
 export default function SettingsPage() {
   const navigate = useNavigate();

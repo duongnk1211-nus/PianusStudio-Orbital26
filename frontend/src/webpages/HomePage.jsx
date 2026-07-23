@@ -1,4 +1,4 @@
-import "../styles/Home.css";
+import "../styles/HomePage.css";
 import { Link } from "react-router-dom";
 import { useState, useEffect, useRef } from "react";
 import { supabase } from "../components/supabaseClient";
@@ -103,7 +103,8 @@ export default function HomePage() {
       <nav>
         <Link to="/about">About Us</Link>
         <Link to="/piano-simulator">Piano Simulator</Link>
-        <Link to="/lessons">Lessons</Link>
+        <Link to="/piano-recorder">Record Studio</Link>
+        <Link to="/challenges">Challenges</Link>
         <Link to="/library">Music Library</Link>
         <Link to="/practice-tools">Practice Tools</Link>
         <Link to="/community">Community</Link>
@@ -119,13 +120,13 @@ export default function HomePage() {
               <Link to="/piano-simulator">Try Now</Link>
             </div>
             <div className="feature-card">
-              <h3>Online Lessons</h3>
-                <p>Interactive tutorials to improve your piano skills.</p>
-                <Link to="/lessons">Go to Lessons</Link>
+              <h3>Compete & Win</h3>
+                <p>Crazy challenges to test your piano skills.</p>
+                <Link to="/challenges">Let's go</Link>
             </div>
             <div className="feature-card">
               <h3>Music Library</h3>
-              <p>Access classical and modern music pieces.</p>
+              <p>Learn & feel classical and modern music pieces.</p>
               <Link to="/library">Browse Library</Link>
             </div>
             <div className="feature-card">

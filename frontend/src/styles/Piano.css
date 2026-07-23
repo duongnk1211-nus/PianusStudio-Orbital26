@@ -114,7 +114,7 @@ body {
 .piano-page {
   display: flex;
   flex-direction: row;
-  min-height: 1073px;
+  min-height: 900px;
   background-image: url("/BackGroundForPiano.jpg");
   background-position: top;
   background-repeat: no-repeat;
@@ -154,7 +154,7 @@ body {
   object-position: center;
 }
 
-.piano-control button, .return-btn {
+.piano-control button, .piano-page .return-btn {
   display: inline-flex;
   justify-content: center;
   align-items: center;

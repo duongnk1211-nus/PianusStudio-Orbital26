@@ -170,7 +170,7 @@ export default function PianoRecorder() {
   return (
     <PianoLayout 
       header={"Recording Studio"} 
-      backgroundImageURL={"BackGroundForPiano.jpg"} 
+      backgroundImageURL={"/PianoRecorder.png"} 
       displayBars={displayBars}
       synthRef={synthRef}
       barsRef={barsRef}

@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { supabase } from "./supabaseClient";
 import { apiFetch } from "./API";
-import "../styles/Profile.css";
+import "../styles/ProfilePage.css";
 
 export function Username({ currentName, onChangeComplete }) {
   const [name, setName] = useState(currentName || '');

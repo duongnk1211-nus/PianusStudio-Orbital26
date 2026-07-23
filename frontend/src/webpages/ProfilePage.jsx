@@ -5,7 +5,7 @@ import { supabase } from "../components/supabaseClient";
 import AvatarUpload from "../components/AvatarUpload";
 import { Bio, Username } from "../components/BioUsernameUpload";
 import { PieceList } from "../components/PieceList";
-import "../styles/Profile.css";
+import "../styles/ProfilePage.css";
 
 export default function ProfilePage() {
   const navigate = useNavigate();

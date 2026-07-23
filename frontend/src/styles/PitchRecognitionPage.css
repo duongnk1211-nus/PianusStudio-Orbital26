@@ -1,0 +1,129 @@
+.pitch-recognition-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-image: url("/PitchRecognition.png");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+}
+
+.pitch-recognition-page .return-btn {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  padding-bottom: 3px;
+  border-radius: 8px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  background: #ebac0d;
+  cursor: pointer;
+}
+
+.pitch-recognition-page button:hover {
+  background-color: #c8c37ca7;
+}
+
+.pitch-recognition-page h1 {
+  margin-top: 0px;
+  font-family: "Amadeus", cursive;
+  font-weight: 500;
+  color: #00205B;
+}
+
+.pitch-recognition-page img {
+  position: relative;
+  height: 120px;
+  margin-bottom: 0px;
+}
+
+.pitch-recognition-self {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  width: 1100px;
+  margin: 50px auto;
+  margin-top: 50px;
+  padding: 20px 10px 40px 10px;
+  border-radius: 20px;
+  background: #fcfbfabd;
+  background-size: cover;
+}
+
+.pitch-recognition-self p {
+  font-family: "Amadeus", cursive;
+  font-weight: bold;
+  text-align: left;
+  color: #000000;
+}
+
+.difficulty-shelf {
+  display: flex;
+  flex-direction: column;
+  width: 92%;
+  margin-top: 30px;
+  margin-left: 30px;
+  padding-top: 10px;
+  padding-right: 20px;
+  padding-bottom: 20px;
+  border-radius: 20px;
+  background: #e3ad246e;
+}
+
+.difficulty-shelf h2 {
+  font-family: "Cormorant Garamond", serif;
+  font-style: italic;
+  font-weight: 600;
+}
+
+.five-exercises-shelf {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 20px;
+}
+
+.exercise-shelf {
+  display: flex;
+  flex-direction: column;
+  width: 150px;
+  padding: 15px;
+  margin-top: 20px;
+  gap: 10px;
+  border-radius: 20px;
+  background: #e3ad246e;
+}
+
+.exercise-shelf h3 {
+  font-family: "Amadeus", cursive;
+  font-weight: bold;
+  text-align: center;
+  margin: 0px;
+  color: #00205B;
+}
+
+.exercise-shelf p {
+  font-family: "Amadeus", cursive;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: center;
+  color: #000000;
+}
+
+.exercise-shelf button {
+  position: static;
+  justify-content: flex-start;
+  margin-top: 5px;
+  margin-bottom: 5px;
+
+  padding-bottom: 3px;
+  border-radius: 8px;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: bold;
+  background: #ebac0d;
+  cursor: pointer;
+}

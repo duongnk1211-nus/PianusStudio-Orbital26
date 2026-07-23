@@ -75,7 +75,7 @@ export default function GetReady({ P }) {
   }, [P]);
 
   const goBack = () => {
-    navigate('/lessons');
+    navigate('/challenges');
   }
 
   return (
@@ -110,7 +110,7 @@ export default function GetReady({ P }) {
                     </tr>)
                 })
                 : PieceList.map((piece) => (
-                  <tr style={{ display: 'flex' }} key={piece.id} onClick={() => navigate(`/lessons/${piece.navStr}/get-ready`)}>
+                  <tr style={{ display: 'flex' }} key={piece.id} onClick={() => navigate(`/challenges/${piece.navStr}/get-ready`)}>
                     <td style={{ flex: '0 0 120px' }}>{piece.id}</td>
                     <td style={{ flex: 1 }}>{piece.author}</td>
                     <td style={{ flex: '0 0 120px' }}>{piece.difficultyLevel}</td>
@@ -119,8 +119,8 @@ export default function GetReady({ P }) {
         </table>
         <div className="get-ready-buttons">
           <button onClick={goBack}>Return</button>
-          <button onClick={() => navigate(`/lessons/${P.navStr}/demo`)}>Watch</button>
-          <button onClick={() => navigate(`/lessons/${P.navStr}/play`)}>Start</button>
+          <button onClick={() => navigate(`/challenges/${P.navStr}/demo`)}>Watch</button>
+          <button onClick={() => navigate(`/challenges/${P.navStr}/play`)}>Start</button>
         </div>
       </div>
     </div>

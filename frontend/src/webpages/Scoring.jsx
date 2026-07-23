@@ -264,7 +264,7 @@ export default function Scoring({ P }) {
       setTimeout(() => setPoppedUp('SavingScore...'), 4000);
       setTimeout(() => setPoppedUp('Redirecting...'), 6000);
       setTimeout(() => {
-        navigate(`/lessons/${P.navStr}/get-ready`, { state: { finalScore: scoreRef.current } });
+        navigate(`/challenges/${P.navStr}/get-ready`, { state: { finalScore: scoreRef.current } });
       }, 8000)
     };
 
@@ -507,7 +507,7 @@ export function ScoringDemo({ P }) {
       setTimeout(() => setPoppedUp('YourTurn!'), 2000);
       setTimeout(() => setPoppedUp('Redirecting...'), 4000);
       setTimeout(() => {
-        navigate(`/lessons/${P.navStr}/get-ready`);
+        navigate(`/challenges/${P.navStr}/get-ready`);
       }, 6000)
     };
 

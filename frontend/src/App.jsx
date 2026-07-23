@@ -26,7 +26,7 @@ export default function App() {
   return (
     <Routes>
       <Route path="/user-profile/:username" element={<ViewProfile />} />
-      <Route path="/lessons"         element={<LessonsPage />} />
+      <Route path="/challenges"         element={<LessonsPage />} />
       <Route path="/profile"         element={<ProfilePage />} />
       <Route path="/settings"        element={<SettingsPage />} />
       <Route path="/library"         element={<Library />} />
@@ -43,9 +43,9 @@ export default function App() {
 
       {PieceList.map((P) => (
         <>
-          <Route key={`${P.navStr}-getReady`} path={`/lessons/${P.navStr}/get-ready`} element={<GetReady P={P} />} />
-          <Route key={`${P.navStr}-scoring`} path={`/lessons/${P.navStr}/play`} element={<Scoring P={P} />} />
-          <Route key={`${P.navStr}-scoringDemo`} path={`/lessons/${P.navStr}/demo`} element={<ScoringDemo P={P} />} />
+          <Route key={`${P.navStr}-getReady`} path={`/challenges/${P.navStr}/get-ready`} element={<GetReady P={P} />} />
+          <Route key={`${P.navStr}-scoring`} path={`/challenges/${P.navStr}/play`} element={<Scoring P={P} />} />
+          <Route key={`${P.navStr}-scoringDemo`} path={`/challenges/${P.navStr}/demo`} element={<ScoringDemo P={P} />} />
           <Route key={`${P.navStr}-display`} path={`/library/${P.navStr}/display`} element={<Display P={P} />} />
           <Route key={`${P.navStr}-learn`}   path={`/library/${P.navStr}/learn`}   element={<Learn P={P} />} />
         </>

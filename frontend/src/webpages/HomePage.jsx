@@ -103,10 +103,10 @@ export default function HomePage() {
       <nav>
         <Link to="/about">About Us</Link>
         <Link to="/piano-simulator">Piano Simulator</Link>
-        <Link to="/piano-recorder">Record Studio</Link>
-        <Link to="/challenges">Challenges</Link>
         <Link to="/library">Music Library</Link>
-        <Link to="/practice-tools">Practice Tools</Link>
+        <Link to="/challenges">Challenges</Link>
+        <Link to="/pitch-recognition">Pitch Recognition</Link>
+        <Link to="/piano-recorder">Record Studio</Link>
         <Link to="/community">Community</Link>
         <Link to="/contact">Contact Us</Link>
       </nav>
@@ -120,23 +120,23 @@ export default function HomePage() {
               <Link to="/piano-simulator">Try Now</Link>
             </div>
             <div className="feature-card">
-              <h3>Compete & Win</h3>
-                <p>Crazy challenges to test your piano skills.</p>
-                <Link to="/challenges">Let's go</Link>
-            </div>
-            <div className="feature-card">
               <h3>Music Library</h3>
               <p>Learn & feel classical and modern music pieces.</p>
               <Link to="/library">Browse Library</Link>
             </div>
             <div className="feature-card">
-              <h3>Practice Tools</h3>
-              <p>Metronome, chord finder, and more.</p>
-              <Link to="/practice-tools">Try Tools</Link>
+              <h3>Compete & Win</h3>
+                <p>Crazy challenges to test your piano skills.</p>
+                <Link to="/challenges">Let's go</Link>
+            </div>
+            <div className="feature-card">
+              <h3>Pitch Recognition</h3>
+              <p>Train your ear to identify notes and chords by sound.</p>
+              <Link to="/pitch-recognition">Start Training</Link>
             </div>
             <div className="feature-card">
               <h3>Piano Recorder</h3>
-              <p>Record your performances and track your progress over time.</p>
+              <p>Record your performances and listen back.</p>
               <Link to="/piano-recorder">Start Recording</Link>
             </div>
             <div className="feature-card">

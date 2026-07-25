@@ -10,8 +10,8 @@
 
 .profile-page .return-btn {
   position: absolute;
-  top: 0px;
-  left: 0px;
+  top: 10px;
+  left: 10px;
   align-items: center;
   padding: 4px 7px 6px;
   border: 2px solid rgb(110, 74, 20);

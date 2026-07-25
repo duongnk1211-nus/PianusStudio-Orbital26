@@ -39,7 +39,7 @@ export default function ProfilePage() {
       setMaxScore(listScores.reduce((max, obj) => obj.top_score > max.top_score ? obj : max));
     }
     load();
-  }, [scores]);
+  }, []);
 
   const [isRecorded, setIsRecorded] = useState([false, false, false]);
 

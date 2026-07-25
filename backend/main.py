@@ -191,6 +191,15 @@ def get_posts():
         raise HTTPException(status_code=502, detail=f"Error fetching forum posts: {str(e)}")
     return res.data
 
+@app.get("/comments/{post_id}")
+def get_comments(post_id: str):
+    try: 
+        res = supabase.table("forum_comments").select("*").eq("post_id", post_id).execute()
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Error fetching forum comments: {str(e)}")
+    return res.data
+
+
 @app.post("/post")
 def create_post(body: PostCreate, user=Depends(get_current_user)):
     try:

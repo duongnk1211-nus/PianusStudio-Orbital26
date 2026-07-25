@@ -7,10 +7,16 @@ import { supabase } from '../components/supabaseClient'
 
 
 export default function CommunityPage() {
-  const [user, setUser] = useState(null)
-  const [posts, setPosts] = useState([])
+  const [user, setUser] = useState(null);
+  const [posts, setPosts] = useState([]);
+  const [comments, setComments] = useState([]);
   const [loading, setLoading] = useState(true);
   const [profilesById, setProfilesById] = useState({});
+  const [commentsById, setCommentsById] = useState({});
+  const [openCommentSection, setOpenCommentSection] = useState(false);
+  const [activePostId, setActivePostId] = useState(null);
+  const [newComment, setNewComment] = useState('');
+  const [submittingComment, setSubmittingComment] = useState(false);
 
   const navigate = useNavigate()
 
@@ -22,7 +28,6 @@ export default function CommunityPage() {
         navigate('/login');
         return;
       }
-
       try {
         const [userData, listPosts] = await Promise.all([
           apiFetch('/user'),
@@ -45,8 +50,6 @@ export default function CommunityPage() {
       const result = await apiFetch(`/profile-by-id/${id}`)
         .catch(err => console.error(err))
         .finally(() => setLoading(false));
-
-      console.log(result)
       return result;
     } catch (err) {
       console.log(err.message);
@@ -64,8 +67,62 @@ export default function CommunityPage() {
     if (posts.length > 0) loadProfiles();
   }, [posts]);
 
+  async function OpenCommentSection(postId) {
+    setOpenCommentSection(true);
+    setActivePostId(postId);
+    setNewComment('');
+    try {
+      const fetchedComments = await apiFetch(`/comments/${postId}`);
+      if (!fetchedComments || fetchedComments.length === 0) {
+        setComments([]);
+        setCommentsById({});
+        return;
+      }
+      setComments(fetchedComments);
+      const uniqueUserIds = [...new Set(fetchedComments.map(c => c.user_id))];
+      const entries = await Promise.all(
+        uniqueUserIds.map(async userId => [userId, await get_user_by_id(userId)])
+      );
+      setCommentsById(Object.fromEntries(entries));
+    } catch (err) {
+      console.error(err);
+      setComments([]);
+    }
+  }
 
-  if(loading) {
+  async function handleSubmitComment(event) {
+    event.preventDefault();
+    if (!newComment.trim() || !activePostId) return;
+
+    setSubmittingComment(true);
+    try {
+      const createdComment = await apiFetch(`/post/comment?post_id=${activePostId}`, {
+        method: 'POST',
+        body: JSON.stringify({ content: newComment.trim() }),
+      });
+
+      const commentPayload = Array.isArray(createdComment)
+        ? createdComment[0]
+        : createdComment;
+
+      if (commentPayload) {
+        setComments(prev => [commentPayload, ...prev]);
+        if (user?.id) {
+          setCommentsById(prev => ({
+            ...prev,
+            [user.id]: user,
+          }));
+        }
+      }
+      setNewComment('');
+    } catch (err) {
+      console.error(err);
+    } finally {
+      setSubmittingComment(false);
+    }
+  }
+
+  if (loading) {
     return (
       <div>Server is waking up...</div>
     )
@@ -99,12 +156,65 @@ export default function CommunityPage() {
             <h2>{post.title}</h2>
             <h3>{post.description}</h3>
             <div className="community-page-post-footer">
-              <h5>Comment</h5>
+              <h5 onClick={() => OpenCommentSection(post.id)}>Comment</h5>
               <h4>{created_at}</h4>
             </div>
           </div>
         )
       })}
-    </div>
+      {openCommentSection && (
+        <div className="community-page-comment-overlay" onClick={() => setOpenCommentSection(false)}>
+          <div className="community-page-comment-section" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="community-page-comment-close"
+              onClick={() => {
+                setOpenCommentSection(false)
+                setComments([])
+                setCommentsById({})
+              }}
+              aria-label="Close comments"
+            >
+              ×
+            </button>
+            <div className="community-page-comment-list">
+              {comments?.length > 0 ? [...comments]
+                .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+                .map(comment => {
+                const profile = commentsById[comment.user_id];
+                const avatar_url = profile?.avatar_url || "/avatar.png";
+                const rawRole = profile?.role;
+                const role = (typeof rawRole === 'string' ? rawRole.trim() : rawRole);
+                const displayRole = role && role !== 'null' && role !== 'undefined' ? role : '';
+                const created_at = new Date(comment.created_at).toLocaleString();
+
+                return (
+                  <div className="community-page-comments" key={comment.id}>
+                    <img src={avatar_url} alt="avatar" />
+                    <div className="community-page-comments-body">
+                      <p>{profile?.username}{displayRole ? ` (${displayRole})` : ''}</p>
+                      <h1>{comment.content}</h1>
+                      <h2>{created_at}</h2>
+                    </div>
+                  </div>
+                );
+              }) : <p className="community-page-comment-empty">No comments yet.</p>}
+            </div>
+            <form className="community-page-comment-form" onSubmit={handleSubmitComment}>
+              <textarea
+                className="community-page-comment-input"
+                value={newComment}
+                onChange={(event) => setNewComment(event.target.value)}
+                placeholder="Write a comment..."
+                rows="3"
+              />
+              <button type="submit" className="community-page-comment-send" disabled={!newComment.trim() || submittingComment}>
+                {submittingComment ? 'Sending...' : 'Send'}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+      
+    </div >
   )
 }

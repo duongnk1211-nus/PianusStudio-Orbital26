@@ -2,7 +2,8 @@ from fastapi import FastAPI, Depends, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from database import supabase
-from schemas import UserResponse, UserScoreResponse, LeaderboardScoreResponse, UserScores, UserProfileResponse, RecordCreate
+from datetime import datetime
+from schemas import UserResponse, UserScoreResponse, LeaderboardScoreResponse, UserScores, UserProfileResponse, RecordCreate, PostCreate, CommentCreate
 
 app = FastAPI()
 bearer = HTTPBearer()
@@ -66,6 +67,14 @@ async def get_user_score(pieceNumber: int, user= Depends(get_current_user)):
 async def get_user_profile(username: str):
     try: 
         res = supabase.table("users_data").select("*").eq("username", username).single().execute()
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Error finding user's profile: {str(e)}")
+    return res.data
+
+@app.get("/profile-by-id/{user_id}", response_model = UserProfileResponse)
+async def get_user_profile_by_id(user_id: str):
+    try: 
+        res = supabase.table("users_data").select("*").eq("id", user_id).single().execute()
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"Error finding user's profile: {str(e)}")
     return res.data
@@ -172,4 +181,38 @@ def get_record(position: int, user=Depends(get_current_user)):
         raise
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"Error fetching record: {str(e)}")
+    return res.data
+
+@app.get("/posts")
+def get_posts():
+    try:
+        res = supabase.table("forum_posts").select("*").execute()
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Error fetching forum posts: {str(e)}")
+    return res.data
+
+@app.post("/post")
+def create_post(body: PostCreate, user=Depends(get_current_user)):
+    try:
+        res = supabase.table("forum_posts").insert({
+            "user_id": user.id,
+            "title": body.title,
+            "description": body.description,
+            "record1": body.record1,
+            "record2": body.record2,
+        }).execute()
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Error uploading forum: {str(e)}")
+    return res.data
+
+@app.post("/post/comment")
+def create_comment(body: CommentCreate, post_id: str, user=Depends(get_current_user)):
+    try:
+        res = supabase.table("forum_comments").insert({
+            "post_id": post_id,
+            "user_id": user.id,
+            "content": body.content,
+        }).execute()
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Error uploading comment: {str(e)}")
     return res.data

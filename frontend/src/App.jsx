@@ -21,6 +21,7 @@ import RecordingDisplayer from "./webpages/RecordingDisplayer.jsx";
 import PitchRecognition from "./webpages/PitchRecognition.jsx";
 import { PieceList } from "./components/PieceList.jsx";
 import { ExerciseList } from "./components/ExerciseList.jsx";
+import CommunityPage from "./webpages/Community.jsx";
 
 export default function App() {
   return (
@@ -40,6 +41,7 @@ export default function App() {
       <Route path="/piano-recorder"  element={<PianoRecorder />} />
       <Route path="/recording"       element={<RecordingDisplayer />} />
       <Route path="/pitch-recognition" element={<PitchRecognition />}/>
+      <Route path="/community"        element={<CommunityPage />}/>
 
       {PieceList.map((P) => (
         <>

@@ -1,0 +1,154 @@
+.community-page {
+  height: 300vh;
+  background-image: url("/BackGround.jpg");
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  z-index: 0;
+}
+
+.community-page-buttons {
+  display: flex;
+  z-index: 0;
+  gap: 40px;
+  padding: 30px 20px;
+}
+
+.community-page-buttons button{
+  height: 40px;
+  width: 160px;
+  z-index: 0;
+  font-family: "Amadeus", cursive;
+  font-size: 1rem;
+  border: 4px solid rgb(110, 74, 20);
+  border-radius: 20px;
+  background: linear-gradient(135deg, #f6a43a, #945702);
+  box-shadow: 5px 5px 5px rgba(0, 0, 0, 0.192);
+  cursor: pointer;
+}
+
+.community-page-buttons button:hover {
+  transform: scale(1.1);
+  box-shadow: inset 0 0 20px rgb(175, 231, 255); 
+  z-index: 0;
+}
+
+.community-page-buttons button:active {
+  transform: scale(1.2);
+  box-shadow: none;
+}
+
+.community-page-post {
+  z-index: 0;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.97), rgba(248, 240, 224, 0.95));
+  border: 8px solid rgba(110, 74, 20, 0.22);
+  border-radius: 22px;
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.14);
+  margin: 20px auto;
+  padding: 20px 24px;
+  width: min(900px, calc(100% - 40px));
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.community-page-post-header {
+  z-index: 0;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 12px;
+  width: fit-content;
+  border-radius: 999px;
+  background: rgba(255, 247, 172, 0.7);
+  border: 5px solid rgba(110, 74, 20, 0.18);
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+}
+
+.community-page-post-header:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+}
+
+.community-page-post-header:focus-visible {
+  outline: 2px solid #6e4a14;
+  outline-offset: 2px;
+}
+
+.community-page-post img {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  object-fit: cover;
+  object-position: top; 
+  border: 2px solid #6e4a14;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+.community-page-post p {
+  margin: 0;
+  font-weight: 700;
+  color: #4a2c0f;
+  font-size: 1rem;
+  font-family: "Amadeus", cursive;
+}
+
+.community-page-post h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #1f2a44;
+  line-height: 1.4;
+  letter-spacing: 0.07em;
+  font-weight: 700;
+  font-family: "Amadeus", cursive;
+}
+
+.community-page-post h3 {
+  align-self: flex-start;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #4f4f4f;
+  line-height: 1.6;
+  font-family: "Amadeus", cursive;
+}
+
+.community-page-post-footer {
+  z-index: 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 40px;
+  gap: 12px;
+}
+
+.community-page-post h4 {
+  margin: 0;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #7a7a7a;
+  letter-spacing: 0.02em;
+  font-family: "Amadeus", cursive;
+}
+
+.community-page-post h5 {
+  margin: 0;
+  padding: 8px 14px;
+  border-radius: 999px;
+  background: linear-gradient(135deg, #f6a43a, #945702);
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  cursor: pointer;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  font-family: "Amadeus", cursive;
+}
+
+.community-page-post h5:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.16);
+}

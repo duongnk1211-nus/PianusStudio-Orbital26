@@ -8,9 +8,9 @@ export default function SettingsPage() {
   const navigate = useNavigate();
   const goBack = () => { navigate(-1); };
 
-  const [profile, setProfile] = useState(null);
+  const [bindingOption, setBindingOption] = useState(null);
   useEffect(() => {
-    apiFetch('/user').then(setProfile);
+    apiFetch('/user/binding-option').then(setBindingOption);
   }, []);
 
   const optionLimit = 6;
@@ -35,9 +35,9 @@ export default function SettingsPage() {
   const [savedIndex, setSavedIndex] = useState(1);
 
   useEffect(() => {
-    setOptionIndex(profile ? profile.binding_option : 1);
-    setSavedIndex(profile ? profile.binding_option : 1);
-  }, [profile]);
+    setOptionIndex(bindingOption ? bindingOption.binding_option : 1);
+    setSavedIndex(bindingOption ? bindingOption.binding_option : 1);
+  }, [bindingOption]);
 
   const [isSaving, setIsSaving] = useState(false);
   const [isFetched, setIsFetched] = useState(false);
@@ -49,7 +49,7 @@ export default function SettingsPage() {
     try {
       const result = await supabase.auth.getSession();
       const session = result.data.session;
-      await apiFetch('/user', {
+      await apiFetch('/user/binding-option', {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
@@ -58,13 +58,12 @@ export default function SettingsPage() {
         body: JSON.stringify({ binding_option: id })
       });
       setSaveError(`Binding option ${id} was successfully saved!!!`);
+      setSavedIndex(id);
     } catch (err) {
       setSaveError(err.message || `Failed to save the binding option.`);
     } finally {
       setIsSaving(false);
     }
-    console.log("GOAT");
-    console.log(saveError);
 
     setIsFetched(true);
   }

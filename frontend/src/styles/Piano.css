@@ -132,11 +132,21 @@ body {
   position: relative;
 }
 
+.piano-container h1 {
+  position: relative;
+  top: -20px;
+  padding-bottom: 0px;
+  font-family: "Amadeus", cursive;
+  font-size: 2rem;
+  color: #ecb80c;
+}
+
 .piano-container h2 {
   position: relative;
   top: -20px;
   padding-bottom: 0px;
   font-family: "Amadeus", cursive;
+  font-size: 1rem;
   color: #ecb80c;
 }
 
@@ -197,21 +207,21 @@ body {
   
   & .play-btn, & .pause-btn {
     position: absolute;
-    top: 160px;
+    top: 215px;
     left: 40px;
     transform: translateY(-50%);
   }
   
   & .record-btn, & .stop-btn {
     position: absolute;
-    top: 200px;
+    top: 255px;
     left: 40px;
     transform: translateY(-50%);
   }
   
   & .save-btn, & .saving-btn {
     position: absolute;
-    top: 240px;
+    top: 295px;
     left: 40px;
     transform: translateY(-50%);
   }

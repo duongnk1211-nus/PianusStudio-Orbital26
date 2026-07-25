@@ -8,6 +8,8 @@ class UserResponse(BaseModel):
     avatar_url: str | None
     bio: str | None
     created_at: datetime
+
+class BindingOption(BaseModel):
     binding_option: int
 
 class UserScoreResponse(BaseModel):
@@ -41,3 +43,6 @@ class UserProfileResponse(BaseModel):
 class RecordCreate(BaseModel):
     position: int
     record: Any
+
+class ExerciseScore(BaseModel):
+    score: int

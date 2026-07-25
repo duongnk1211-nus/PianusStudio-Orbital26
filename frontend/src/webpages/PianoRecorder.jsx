@@ -11,6 +11,68 @@ import { PianoLayout } from "../components/PianoLayout.jsx";
 import { Record } from "../classes/Record.jsx";
 import { supabase } from "../components/supabaseClient";
 
+function SaveDialog({
+  showSaveDialog,
+  setShowSaveDialog,
+  saveRecord,
+  isSaving,
+  setIsSaving,
+}) {
+  return showSaveDialog && (
+    <div className="modal-overlay">
+      <div className="save-modal">
+        <h2>Save Recording</h2>
+        <p>Choose a save slot.</p>
+        <div className="save-slots">
+          <button onClick={saveRecord(1)}>
+            Recording 1
+          </button>
+          <button onClick={saveRecord(2)}>
+            Recording 2
+          </button>
+          <button onClick={saveRecord(3)}>
+            Recording 3
+          </button>
+        </div>
+        <button
+          className="cancel-btn"
+          onClick={() => setShowSaveDialog(false)}
+        >
+          Don't Save
+        </button>
+
+        {isSaving && (
+          <div className="saving-message">
+            Saving...
+          </div>
+        )}
+      </div>
+    </div>
+  );
+}
+
+function SaveDoneDialog({
+  isFetched,
+  setIsFetched,
+  saveError,
+}) {
+  return isFetched && (
+    <div className="modal-overlay">
+      <div className="fetched-modal">
+        <p>{saveError}</p>
+              
+        <button
+          className="ok-btn"
+          onClick={() => setIsFetched(false)}
+        >
+          OK
+        </button>
+
+      </div>
+    </div>
+  );
+}
+
 export default function PianoRecorder() {
   const navigate = useNavigate();
   const goBack = () => {
@@ -180,12 +242,20 @@ export default function PianoRecorder() {
       flipRecording={flipRecording}
       showSaveDialog={showSaveDialog}
       setShowSaveDialog={setShowSaveDialog}
-      saveRecord={saveRecord}
-      isSaving={isSaving}
-      setIsSaving={setIsSaving}
-      isFetched={isFetched}
-      setIsFetched={setIsFetched}
-      saveError={saveError}
-    />
+    >
+      <SaveDialog
+        showSaveDialog={showSaveDialog}
+        setShowSaveDialog={setShowSaveDialog}
+        saveRecord={saveRecord}
+        isSaving={isSaving}
+        setIsSaving={setIsSaving}
+      />
+
+      <SaveDoneDialog
+        isFetched={isFetched}
+        setIsFetched={setIsFetched}
+        saveError={saveError}
+      />
+    </PianoLayout>
   );
 }

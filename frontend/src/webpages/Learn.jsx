@@ -8,6 +8,29 @@ import { useKeyboard } from "../hooks/useKeyboard.jsx";
 import { usePiano } from "../hooks/usePiano.jsx";
 import { PianoLayout } from "../components/PianoLayout.jsx";
 
+function LessonCompletedDialog({
+  isCompleted,
+  setIsCompleted,
+  P,
+}) {
+  const navigate = useNavigate();
+  
+  return isCompleted && (
+    <div className="modal-overlay">
+      <div className="completed-modal">
+        <p>You have completed learning {P.title}!!!</p>
+
+        <button
+          className="ok-btn"
+          onClick={() => {setIsCompleted(false); navigate(-1)}}
+        >
+          OK
+        </button>
+      </div>
+    </div>
+  );
+}
+
 export default function Learn({ P }) {
   const navigate = useNavigate();
   const goBack = () => {
@@ -155,9 +178,12 @@ export default function Learn({ P }) {
       setIsAttackingRight={setIsAttackingRight}
       isAttackingLeft={isAttackingLeft}
       setIsAttackingLeft={setIsAttackingLeft}
-      isCompleted={isCompleted}
-      setIsCompleted={setIsCompleted}
-      P={P}
-    />
+    >
+      <LessonCompletedDialog
+        isCompleted={isCompleted}
+        setIsCompleted={setIsCompleted}
+        P={P}
+      />
+    </PianoLayout>
   );
 }

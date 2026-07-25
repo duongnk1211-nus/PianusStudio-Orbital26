@@ -11,6 +11,33 @@ import { PianoLayout } from "../components/PianoLayout.jsx";
 import { Record } from "../classes/Record.jsx";
 import { supabase } from "../components/supabaseClient.jsx";
 
+function PitchResultDialog({
+  correctNotes,
+  setCorrectNotes,
+  total,
+  handleSavingPitchResult,
+  isSaving,
+}) {
+  return setCorrectNotes && (correctNotes !== null) && (
+    <div className="modal-overlay">
+      <div className="pitch-result-modal">
+        <p>Number of correct notes: {correctNotes} out of {total}.</p>
+
+        <button
+          className="ok-btn"
+          onClick={handleSavingPitchResult(correctNotes)}
+        >
+          OK
+        </button>
+
+        {isSaving &&
+          <p>Saving...</p>
+        }
+      </div>
+    </div>
+  );
+}
+
 export default function ExercisePage({ R }) {
   const total = R.actions.length / 2;
   const ansList = useMemo(() => {
@@ -42,8 +69,30 @@ export default function ExercisePage({ R }) {
   const [profileLoading, setProfileLoading] = useState(true);
   
   useEffect(() => {
-    apiFetch('/user').then(setProfile);
-    setProfileLoading(false);
+    apiFetch('/user')
+      .then((data) => {
+        setProfile(data);
+        setProfileLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setProfileLoading(false);
+      });
+  }, []);
+
+  const [highScore, setHighScore] = useState(0);
+  const [scoresLoading, setScoresLoading] = useState(true);
+
+  useEffect(() => {
+    apiFetch('/exercise')
+      .then((data) => {
+        setHighScore(data?.pitch_recognition_data?.[R.id - 1] ?? 0);
+        setScoresLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setScoresLoading(false);
+      });
   }, []);
   
   const [status, setStatus] = useState("stopped");
@@ -117,6 +166,34 @@ export default function ExercisePage({ R }) {
     }
   }
 
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleSavingPitchResult = (num) => async() => {
+    setIsSaving(true);
+    if (num <= highScore) {
+      setIsSaving(false);
+    } else {
+      try {
+        const result = await supabase.auth.getSession();
+        const session = result.data.session;
+        await apiFetch(`/exercise/${R.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`
+          },
+          body: JSON.stringify({ score: num })
+        });
+        setHighScore(num);
+      } catch (err) {
+        console.error(err.message);
+      } finally {
+        setIsSaving(false);
+      }
+    }
+    setCorrectNotes(null);
+  }
+
   const { synthRef, barsRef, displayBars } = usePiano(sideEffect);
   useKeyboard(profile, symMap, synthRef, barsRef, sideEffect);
 
@@ -134,7 +211,7 @@ export default function ExercisePage({ R }) {
     };
   }, []);
 
-  if (profileLoading) {
+  if (profileLoading || scoresLoading) {
     return (
       <p>Loading...</p>
     );
@@ -142,7 +219,8 @@ export default function ExercisePage({ R }) {
 
   return (
     <PianoLayout 
-      header={"Exercise Page"} 
+      header={`Exercise #${R.id}`}
+      subHeader={`High score: ${highScore}/${total}`}
       backgroundImageURL={"/ExercisePage.png"} 
       displayBars={displayBars}
       synthRef={synthRef}
@@ -151,9 +229,14 @@ export default function ExercisePage({ R }) {
       status={status}
       flipPlaying={flipPlaying}
       flipRecording={flipRecording}
-      correctNotes={correctNotes}
-      setCorrectNotes={setCorrectNotes}
-      total={total}
-    />
+    >
+      <PitchResultDialog
+        correctNotes={correctNotes}
+        setCorrectNotes={setCorrectNotes}
+        total={total}
+        handleSavingPitchResult={handleSavingPitchResult}
+        isSaving={isSaving}
+      />
+    </PianoLayout>
   );
 }

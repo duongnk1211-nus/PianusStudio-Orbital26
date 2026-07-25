@@ -11,12 +11,15 @@ for (let i = 0; i < Notes.length; i++) {
 }
 
 export class AudioRecord extends Record {
+  #id;
+
   constructor() {
     super(DEFAULT_DURATION, []);
   }
 
-  static generate(symList) {
+  static generate(id, symList) {
     const result = new AudioRecord();
+    result.#id = id;
     const n = symList.length, d = DEFAULT_DURATION / n;
     let curr = 0.0;
     for (let i = 0; i < n; i++) {
@@ -25,6 +28,10 @@ export class AudioRecord extends Record {
       curr += d;
     }
     return result;
+  }
+
+  get id() {
+    return this.#id;
   }
 
   // @Override

@@ -1,4 +1,4 @@
-from typing import Any
+from typing import Any, Optional
 from pydantic import BaseModel
 from datetime import datetime
 
@@ -11,6 +11,8 @@ class UserResponse(BaseModel):
 
 class BindingOption(BaseModel):
     binding_option: int
+    max_posts: int
+    num_posts: int
 
 class UserScoreResponse(BaseModel):
     user_name: str
@@ -46,3 +48,14 @@ class RecordCreate(BaseModel):
 
 class ExerciseScore(BaseModel):
     score: int
+    
+class PostCreate(BaseModel):
+    title: str 
+    description: str
+    record1: Optional[str] = None
+    record2: Optional[str] = None
+    created_at: Optional[datetime] = None
+
+class CommentCreate(BaseModel):
+    content: str
+    created_at: Optional[datetime] = None

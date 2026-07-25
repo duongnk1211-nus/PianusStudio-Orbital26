@@ -22,6 +22,7 @@ import PitchRecognitionPage from "./webpages/PitchRecognitionPage.jsx";
 import ExercisePage from "./webpages/ExercisePage.jsx";
 import { PieceList } from "./components/PieceList.jsx";
 import { ExerciseList } from "./components/ExerciseList.jsx";
+import CommunityPage from "./webpages/Community.jsx";
 
 export default function App() {
   return (
@@ -40,7 +41,8 @@ export default function App() {
       <Route path="/"                element={<HomePage />} />
       <Route path="/piano-recorder"  element={<PianoRecorder />} />
       <Route path="/recording"       element={<RecordingDisplayer />} />
-      <Route path="/pitch-recognition" element={<PitchRecognitionPage />} />
+      <Route path="/pitch-recognition" element={<PitchRecognitionPage />}/>
+      <Route path="/community"        element={<CommunityPage />}/>
 
       {PieceList.map((P) => (
         <>

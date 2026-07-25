@@ -55,6 +55,11 @@ export default function LoginPage() {
           placeholder="Email"
           value={email}
           onChange={e => setEmail(e.target.value)}
+          onKeyDown={(e) => {
+            if(e.key === "Enter"){
+              handleAuth();
+            }
+          }}
           style={{ width: "95%", marginBottom: "1rem", marginTop: "10px" }}
         />
         <input
@@ -63,6 +68,11 @@ export default function LoginPage() {
           placeholder="Password"
           value={password}
           onChange={e => setPassword(e.target.value)}
+          onKeyDown={(e) => {
+            if(e.key === "Enter"){
+              handleAuth();
+            }
+          }}
           style={{ width: "95%", marginBottom: "10px" }}
         />
         <p style={{ marginLeft: "10px", marginBottom: "50px", color: "#1a1717", textAlign: 'left', fontSize: '14px' }}>Forgot Password ? Click <a href="#" onClick={handleForgotPassword} style={{cursor: "pointer", color: '#000000a5'}}>here</a> to reset!</p>

@@ -10,8 +10,11 @@ import { useKeyboard } from "../hooks/useKeyboard.jsx";
 import { usePiano } from "../hooks/usePiano.jsx";
 import { PianoLayout } from "../components/PianoLayout.jsx";
 import { Record } from "../classes/Record.jsx";
+import { useRequireAuth } from "../hooks/useRequireAuth.jsx";
 
 export default function RecordingDisplayer() {
+  const authChecked = useRequireAuth();
+
   const navigate = useNavigate();
   const location = useLocation();
   const position = location.state?.focus ?? 1;
@@ -115,7 +118,7 @@ export default function RecordingDisplayer() {
     };
   }, []);
 
-  if (recordLoading) {
+  if (!authChecked || recordLoading) {
     return (
       <p>Loading...</p>
     );

@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { apiFetch } from "../components/API.jsx";
 import "../styles/PitchRecognitionPage.css";
+import { useRequireAuth } from "../hooks/useRequireAuth.jsx";
 
 function ExerciseShelf({ y, score }) {
   const navigate = useNavigate();
@@ -34,6 +35,8 @@ function DifficultySelf({ x, scores }) {
 }
 
 export default function PitchRecognitionPage() {
+  const authChecked = useRequireAuth();
+
   const navigate = useNavigate();
   const goBack = () => { navigate(-1); }
 
@@ -56,7 +59,7 @@ export default function PitchRecognitionPage() {
   const totalScore = (scores ?? []).reduce((sum, s) => sum + (s ?? 0), 0);
   const maxTotalScore = Array.from({ length: 50 }, (_, i) => Math.ceil((i + 1) / 5)).reduce((sum, x) => sum + x, 0);  
 
-  if (scoresLoading) {
+  if (!authChecked || scoresLoading) {
     return (
       <p>Loading...</p>
     );

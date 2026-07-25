@@ -3,8 +3,11 @@ import { useNavigate } from "react-router-dom";
 import { apiFetch } from "../components/API";
 import { supabase } from "../components/supabaseClient";
 import "../styles/SettingsPage.css";
+import { useRequireAuth } from "../hooks/useRequireAuth.jsx";
 
 export default function SettingsPage() {
+  useRequireAuth();
+
   const navigate = useNavigate();
   const goBack = () => { navigate(-1); };
 

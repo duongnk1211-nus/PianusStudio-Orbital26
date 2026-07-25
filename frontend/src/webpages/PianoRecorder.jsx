@@ -10,6 +10,7 @@ import { usePiano } from "../hooks/usePiano.jsx";
 import { PianoLayout } from "../components/PianoLayout.jsx";
 import { Record } from "../classes/Record.jsx";
 import { supabase } from "../components/supabaseClient";
+import { useRequireAuth } from "../hooks/useRequireAuth.jsx";
 
 function SaveDialog({
   showSaveDialog,
@@ -74,6 +75,8 @@ function SaveDoneDialog({
 }
 
 export default function PianoRecorder() {
+  const authChecked = useRequireAuth();
+
   const navigate = useNavigate();
   const goBack = () => {
     Tone.Transport.stop();
@@ -223,7 +226,7 @@ export default function PianoRecorder() {
     };
   }, []);
 
-  if (profileLoading) {
+  if (!authChecked || profileLoading) {
     return (
       <p>Loading...</p>
     );

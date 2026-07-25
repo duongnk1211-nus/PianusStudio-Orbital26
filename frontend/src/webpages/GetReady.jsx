@@ -4,8 +4,11 @@ import { apiFetch } from "../components/API.jsx";
 import { supabase } from "../components/supabaseClient";
 import { useNavigate, useLocation } from 'react-router-dom';
 import { PieceList } from '../components/PieceList';
+import { useRequireAuth } from "../hooks/useRequireAuth.jsx";
 
 export default function GetReady({ P }) {
+  useRequireAuth();
+
   const navigate = useNavigate();
   const location = useLocation();
   const finalScore = location.state?.finalScore;

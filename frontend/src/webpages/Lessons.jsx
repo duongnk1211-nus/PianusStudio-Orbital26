@@ -3,8 +3,11 @@ import { useEffect, useState } from 'react';
 import { apiFetch } from "../components/API.jsx";
 import { useNavigate } from 'react-router-dom';
 import { PieceList } from "../components/PieceList.jsx";
+import { useRequireAuth } from "../hooks/useRequireAuth.jsx";
 
 export default function LessonsPage() {
+  useRequireAuth();
+
   const navigate = useNavigate();
   const [scores, setScores] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -39,7 +42,7 @@ export default function LessonsPage() {
         </thead>
         <tbody>
           {PieceList.slice().reverse().map((P) => (
-            <tr key={P.id} onClick={scores ? () => navigate(`/challenges/${P.navStr}/get-ready`) : () => navigate('/login')}>
+            <tr key={P.id} onClick={() => navigate(`/challenges/${P.navStr}/get-ready`)}>
               <td>{P.id}</td>
               <td>{P.title}</td>
               <td>{P.author}</td>

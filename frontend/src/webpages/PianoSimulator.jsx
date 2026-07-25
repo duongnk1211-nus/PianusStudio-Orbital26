@@ -6,8 +6,11 @@ import { Notes } from "../components/Notes.jsx";
 import { useKeyboard } from "../hooks/useKeyboard.jsx";
 import { usePiano } from "../hooks/usePiano.jsx";
 import { PianoLayout } from "../components/PianoLayout.jsx";
+import { useRequireAuth } from "../hooks/useRequireAuth.jsx";
 
 export default function PianoSimulator() {
+  const authChecked = useRequireAuth();
+
   const symMap = useMemo(() => {
     const map = new Map();
     for (let i = 0; i < Notes.length; i++) {
@@ -30,7 +33,7 @@ export default function PianoSimulator() {
   const { synthRef, barsRef, displayBars } = usePiano(sideEffect);
   useKeyboard(profile, symMap, synthRef, barsRef, sideEffect);
 
-  if (profileLoading) {
+  if (!authChecked || profileLoading) {
     return (
       <p>Loading...</p>
     );

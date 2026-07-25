@@ -5,8 +5,11 @@ import { apiFetch } from "../components/API";
 import { keyMaps } from "../components/keyMaps.jsx";
 import { Notes } from "../components/Notes.jsx";
 import * as Tone from "tone";
+import { useRequireAuth } from "../hooks/useRequireAuth.jsx";
 
 export default function Scoring({ P }) {
+  useRequireAuth();
+
   const [displayBars, setDisplayBars] = useState([]);
   const synthRef = useRef(null);
   const barsRef = useRef([]);

@@ -6,8 +6,11 @@ import AvatarUpload from "../components/AvatarUpload";
 import { Bio, Username } from "../components/BioUsernameUpload";
 import { PieceList } from "../components/PieceList";
 import "../styles/ProfilePage.css";
+import { useRequireAuth } from "../hooks/useRequireAuth.jsx";
 
 export default function ProfilePage() {
+  const authChecked = useRequireAuth();
+
   const navigate = useNavigate();
   const [profile, setProfile] = useState(null);
   const [user, setUser] = useState(null);
@@ -98,7 +101,7 @@ export default function ProfilePage() {
     }
   }
 
-  if (!profile || !user) {
+  if (!authChecked || !profile || !user) {
     return (
     <div>
       <p>Loading...</p>

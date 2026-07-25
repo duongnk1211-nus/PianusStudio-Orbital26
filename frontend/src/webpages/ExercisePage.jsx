@@ -10,6 +10,7 @@ import { usePiano } from "../hooks/usePiano.jsx";
 import { PianoLayout } from "../components/PianoLayout.jsx";
 import { Record } from "../classes/Record.jsx";
 import { supabase } from "../components/supabaseClient.jsx";
+import { useRequireAuth } from "../hooks/useRequireAuth.jsx";
 
 function PitchResultDialog({
   correctNotes,
@@ -39,6 +40,8 @@ function PitchResultDialog({
 }
 
 export default function ExercisePage({ R }) {
+  const authChecked = useRequireAuth();
+
   const total = R.actions.length / 2;
   const ansList = useMemo(() => {
     let result = [];
@@ -211,7 +214,7 @@ export default function ExercisePage({ R }) {
     };
   }, []);
 
-  if (profileLoading || scoresLoading) {
+  if (!authChecked || profileLoading || scoresLoading) {
     return (
       <p>Loading...</p>
     );

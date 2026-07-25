@@ -8,8 +8,11 @@ import { useNavigate } from "react-router-dom";
 import { useKeyboard } from "../hooks/useKeyboard.jsx";
 import { usePiano } from "../hooks/usePiano.jsx";
 import { PianoLayout } from "../components/PianoLayout.jsx";
+import { useRequireAuth } from "../hooks/useRequireAuth.jsx";
 
 export default function Display({ P }) {
+  const authChecked = useRequireAuth();
+
   const navigate = useNavigate();
   const goBack = () => {
     Tone.Transport.stop();
@@ -73,7 +76,7 @@ export default function Display({ P }) {
     };
   }, []);
 
-  if (profileLoading) {
+  if (!authChecked || profileLoading) {
     return (
       <p>Loading...</p>
     );

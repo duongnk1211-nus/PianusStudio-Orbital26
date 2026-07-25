@@ -103,6 +103,8 @@
   letter-spacing: 0.07em;
   font-weight: 700;
   font-family: "Amadeus", cursive;
+  word-break: break-word;
+  overflow-wrap: anywhere;
 }
 
 .community-page-post h3 {
@@ -113,6 +115,9 @@
   color: #4f4f4f;
   line-height: 1.6;
   font-family: "Amadeus", cursive;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+  white-space: normal;
 }
 
 .community-page-post-footer {

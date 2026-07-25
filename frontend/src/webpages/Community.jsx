@@ -127,7 +127,11 @@ export default function CommunityPage() {
 
   async function handleCreatePost(event) {
     event.preventDefault();
-    if (!postTitle.trim() || !postDescription.trim()) return;
+    const title = postTitle.trim();
+    const description = postDescription.trim();
+
+    if (!title || !description) return;
+    if (title.length > 100 || description.length > 1500) return;
 
     try {
       const result = await supabase.auth.getSession();
@@ -138,7 +142,7 @@ export default function CommunityPage() {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session.access_token}`,
         },
-        body: JSON.stringify({ title: postTitle.trim(), description: postDescription.trim() })
+        body: JSON.stringify({ title, description })
       });
       if (!res.ok) throw new Error('Create post failed!');
       const json = await res.json();
@@ -260,7 +264,7 @@ export default function CommunityPage() {
                   <input
                     type="text"
                     value={postTitle}
-                    onChange={(event) => setPostTitle(event.target.value)}
+                    onChange={(event) => setPostTitle(event.target.value.slice(0, 100))}
                     placeholder="Enter a title"
                   />
                 </label>
@@ -268,7 +272,7 @@ export default function CommunityPage() {
                   <span>Description</span>
                   <textarea
                     value={postDescription}
-                    onChange={(event) => setPostDescription(event.target.value)}
+                    onChange={(event) => setPostDescription(event.target.value.slice(0, 1500))}
                     placeholder="Write your post here..."
                     rows="6"
                   />

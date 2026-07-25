@@ -42,7 +42,7 @@ export default function LessonsPage() {
         </thead>
         <tbody>
           {PieceList.slice().reverse().map((P) => (
-            <tr key={P.id} onClick={() => navigate(`/challenges/${P.navStr}/get-ready`)}>
+            <tr key={P.id} onClick={scores ? () => navigate(`/challenges/${P.navStr}/get-ready`) : () => navigate('/login')}>
               <td>{P.id}</td>
               <td>{P.title}</td>
               <td>{P.author}</td>

@@ -41,7 +41,7 @@ export default function App() {
       <Route path="/"                element={<HomePage />} />
       <Route path="/piano-recorder"  element={<PianoRecorder />} />
       <Route path="/recording"       element={<RecordingDisplayer />} />
-      <Route path="/pitch-recognition" element={<PitchRecognition />}/>
+      <Route path="/pitch-recognition" element={<PitchRecognitionPage />}/>
       <Route path="/community"        element={<CommunityPage />}/>
 
       {PieceList.map((P) => (

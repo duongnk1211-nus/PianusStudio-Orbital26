@@ -86,6 +86,14 @@ async def get_user_profile(username: str):
         raise HTTPException(status_code=502, detail=f"Error finding user's profile: {str(e)}")
     return res.data
 
+@app.get("/profile-by-id/{user_id}", response_model = UserProfileResponse)
+async def get_user_profile_by_id(user_id: str):
+    try: 
+        res = supabase.table("users_data").select("*").eq("id", user_id).single().execute()
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Error finding user's profile: {str(e)}")
+    return res.data
+
 @app.get("/user/scores", response_model = list[UserScores])
 async def get_user_scores(user= Depends(get_current_user)):
     try:

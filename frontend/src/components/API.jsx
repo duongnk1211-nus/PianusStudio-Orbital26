@@ -11,7 +11,6 @@ export async function apiFetch(path, options = {}) {
       ...options.headers,
     },
   })
-  console.log(session.access_token)
   if (!res.ok) throw new Error(await res.text());
   return res.json();
 }

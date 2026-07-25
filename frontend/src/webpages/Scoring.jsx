@@ -32,10 +32,12 @@ export default function Scoring({ P }) {
     return map;
   }, []);
 
-  const [profile, setProfile] = useState(null);
+  const [bindingOption, setBindingOption] = useState(null);
 
   useEffect(() => {
-    apiFetch('/user').then(setProfile);
+    apiFetch('/user/binding-option')
+      .then((data) => setBindingOption(data?.binding_option ?? 1))
+      .catch((err) => console.error(err));
   }, []);
 
   const scoredBarsRef = useRef(new Set());
@@ -138,8 +140,8 @@ export default function Scoring({ P }) {
     for (const note of Notes) {
       note.key = " ";
     }
-    const bindingOption = profile ? profile.binding_option : 1;
-    const keyMap = new Map(Object.entries(keyMaps[bindingOption]));
+    const option = bindingOption ?? 1;
+    const keyMap = new Map(Object.entries(keyMaps[option]));
     const noteMap = new Map();
     for (const [sym, key] of keyMap) {
       if (key !== " ") {
@@ -176,7 +178,7 @@ export default function Scoring({ P }) {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     }
-  }, [profile]);
+  }, [bindingOption]);
 
   const [isPlaying, setIsPlaying] = useState(false);
 

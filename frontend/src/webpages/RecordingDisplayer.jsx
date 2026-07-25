@@ -33,9 +33,11 @@ export default function RecordingDisplayer() {
     return map;
   }, []);
 
-  const [profile, setProfile] = useState(null);
+  const [bindingOption, setBindingOption] = useState(null);
   useEffect(() => {
-    apiFetch('/user').then(setProfile);
+    apiFetch('/user/binding-option')
+      .then((data) => setBindingOption(data?.binding_option ?? 1))
+      .catch((err) => console.error(err));
   }, []);
 
   const sideEffect = useMemo(() => {
@@ -43,7 +45,7 @@ export default function RecordingDisplayer() {
   }, []);
 
   const { synthRef, barsRef, displayBars } = usePiano(sideEffect);
-  useKeyboard(profile, symMap, synthRef, barsRef, sideEffect);
+  useKeyboard(bindingOption, symMap, synthRef, barsRef, sideEffect);
 
   const [P, setP] = useState(null);
   const [recordLoading, setRecordLoading] = useState(true);

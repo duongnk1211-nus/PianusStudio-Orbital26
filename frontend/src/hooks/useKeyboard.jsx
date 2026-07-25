@@ -2,13 +2,13 @@ import { useEffect } from "react";
 import { Notes } from "../components/Notes.jsx";
 import { keyMaps } from "../components/keyMaps.jsx";
 
-export function useKeyboard(profile, symMap, synthRef, barsRef, sideEffect) {
+export function useKeyboard(bindingOption, symMap, synthRef, barsRef, sideEffect) {
   useEffect(() => {
     for (const note of Notes) {
       note.key = " ";
     }
-    const bindingOption = profile ? profile.binding_option : 1;
-    const keyMap = new Map(Object.entries(keyMaps[bindingOption]));
+    const option = bindingOption ?? 1;
+    const keyMap = new Map(Object.entries(keyMaps[option]));
     const noteMap = new Map();
     for (const [sym, key] of keyMap) {
       if (key !== " "){
@@ -42,5 +42,5 @@ export function useKeyboard(profile, symMap, synthRef, barsRef, sideEffect) {
       window.removeEventListener("keydown", handleKeyDown);
       window.removeEventListener("keyup", handleKeyUp);
     }
-  }, [profile]);
+  }, [bindingOption]);
 }

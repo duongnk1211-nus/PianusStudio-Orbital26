@@ -19,21 +19,28 @@ export default function PianoSimulator() {
     return map;
   }, []);
 
-  const [profile, setProfile] = useState(null);
-  const [profileLoading, setProfileLoading] = useState(true);
+  const [bindingOption, setBindingOption] = useState(null);
+  const [bindingOptionLoading, setBindingOptionLoading] = useState(true);
 
   useEffect(() => {
-    apiFetch('/user').then(setProfile);
-    setProfileLoading(false);
+    apiFetch('/user/binding-option')
+      .then((data) => {
+        setBindingOption(data?.binding_option ?? 1);
+        setBindingOptionLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setBindingOptionLoading(false);
+      });
   }, []);
 
   const sideEffect = useMemo(() => {
     return (sym, isAttack) => {};
   }, []);
   const { synthRef, barsRef, displayBars } = usePiano(sideEffect);
-  useKeyboard(profile, symMap, synthRef, barsRef, sideEffect);
+  useKeyboard(bindingOption, symMap, synthRef, barsRef, sideEffect);
 
-  if (!authChecked || profileLoading) {
+  if (!authChecked || bindingOptionLoading) {
     return (
       <p>Loading...</p>
     );

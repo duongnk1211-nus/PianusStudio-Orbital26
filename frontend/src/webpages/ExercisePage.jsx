@@ -68,18 +68,18 @@ export default function ExercisePage({ R }) {
     return map;
   }, []);
   
-  const [profile, setProfile] = useState(null);
-  const [profileLoading, setProfileLoading] = useState(true);
+  const [bindingOption, setBindingOption] = useState(null);
+  const [bindingOptionLoading, setBindingOptionLoading] = useState(true);
   
   useEffect(() => {
-    apiFetch('/user')
+    apiFetch('/user/binding-option')
       .then((data) => {
-        setProfile(data);
-        setProfileLoading(false);
+        setBindingOption(data?.binding_option ?? 1);
+        setBindingOptionLoading(false);
       })
       .catch((err) => {
         console.error(err);
-        setProfileLoading(false);
+        setBindingOptionLoading(false);
       });
   }, []);
 
@@ -198,7 +198,7 @@ export default function ExercisePage({ R }) {
   }
 
   const { synthRef, barsRef, displayBars } = usePiano(sideEffect);
-  useKeyboard(profile, symMap, synthRef, barsRef, sideEffect);
+  useKeyboard(bindingOption, symMap, synthRef, barsRef, sideEffect);
 
   useEffect(() => {
     Tone.Transport.stop();
@@ -214,7 +214,7 @@ export default function ExercisePage({ R }) {
     };
   }, []);
 
-  if (!authChecked || profileLoading || scoresLoading) {
+  if (!authChecked || bindingOptionLoading || scoresLoading) {
     return (
       <p>Loading...</p>
     );

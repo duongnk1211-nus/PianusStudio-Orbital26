@@ -48,12 +48,19 @@ export default function Learn({ P }) {
     return map;
   }, []);
   
-  const [profile, setProfile] = useState(null);
-  const [profileLoading, setProfileLoading] = useState(true);
+  const [bindingOption, setBindingOption] = useState(null);
+  const [bindingOptionLoading, setBindingOptionLoading] = useState(true);
   
   useEffect(() => {
-    apiFetch('/user').then(setProfile);
-    setProfileLoading(false);
+    apiFetch('/user/binding-option')
+      .then((data) => {
+        setBindingOption(data?.binding_option ?? 1);
+        setBindingOptionLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setBindingOptionLoading(false);
+      });
   }, []);
   
   const sideEffect = useMemo(() => {
@@ -66,7 +73,7 @@ export default function Learn({ P }) {
     };
   }, []);
   const { synthRef, barsRef, displayBars } = usePiano(sideEffect);
-  useKeyboard(profile, symMap, synthRef, barsRef, sideEffect);
+  useKeyboard(bindingOption, symMap, synthRef, barsRef, sideEffect);
 
   const [isStarted, setIsStarted] = useState(false);
   const result = useMemo(() => {
@@ -161,7 +168,7 @@ export default function Learn({ P }) {
     isStarted ? handleChangeIndex(-1) : handleChangeIndex(0);
   };
 
-  if (!authChecked || profileLoading) {
+  if (!authChecked || bindingOptionLoading) {
     return (
       <p>Loading...</p>
     );

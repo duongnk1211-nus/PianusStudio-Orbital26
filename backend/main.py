@@ -2,7 +2,7 @@ from fastapi import FastAPI, Depends, HTTPException, UploadFile, File
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
 from database import supabase
-from schemas import UserResponse, BindingOption, UserScoreResponse, LeaderboardScoreResponse, UserScores, UserProfileResponse, RecordCreate, ExerciseScore
+from schemas import UserResponse, UserScoreResponse, LeaderboardScoreResponse, UserScores, UserProfileResponse, RecordCreate, ExerciseScore, BindingOption
 
 app = FastAPI()
 bearer = HTTPBearer()

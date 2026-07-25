@@ -28,19 +28,26 @@ export default function Display({ P }) {
     return map;
   }, []);
   
-  const [profile, setProfile] = useState(null);
-  const [profileLoading, setProfileLoading] = useState(true);
+  const [bindingOption, setBindingOption] = useState(null);
+  const [bindingOptionLoading, setBindingOptionLoading] = useState(true);
   
   useEffect(() => {
-    apiFetch('/user').then(setProfile);
-    setProfileLoading(false);
+    apiFetch('/user/binding-option')
+      .then((data) => {
+        setBindingOption(data?.binding_option ?? 1);
+        setBindingOptionLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setBindingOptionLoading(false);
+      });
   }, []);
   
   const sideEffect = useMemo(() => {
     return (sym, isAttack) => {};
   }, []);
   const { synthRef, barsRef, displayBars } = usePiano(sideEffect);
-  useKeyboard(profile, symMap, synthRef, barsRef, sideEffect);
+  useKeyboard(bindingOption, symMap, synthRef, barsRef, sideEffect);
   
   const [isPlaying, setIsPlaying] = useState(false);
   const [isAttackingRight, setIsAttackingRight] = useState([false, false, false, false, false]);
@@ -76,7 +83,7 @@ export default function Display({ P }) {
     };
   }, []);
 
-  if (!authChecked || profileLoading) {
+  if (!authChecked || bindingOptionLoading) {
     return (
       <p>Loading...</p>
     );

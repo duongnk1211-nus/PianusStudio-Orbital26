@@ -318,6 +318,53 @@
   transform: none;
 }
 
+.community-page-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-top: 8px;
+}
+
+.community-page-post-form h3 {
+  margin: 0;
+  color: #4a2c0f;
+  font-family: "Amadeus", cursive;
+  font-size: 1.2rem;
+}
+
+.community-page-post-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-family: "Amadeus", cursive;
+  color: #4a2c0f;
+  font-weight: 700;
+}
+
+.community-page-post-field input,
+.community-page-post-field textarea {
+  width: 100%;
+  border: 1px solid rgba(110, 74, 20, 0.2);
+  border-radius: 12px;
+  padding: 10px 12px;
+  font-family: "Amadeus", cursive;
+  font-size: 0.95rem;
+  color: #3a2a10;
+  background: rgba(255, 255, 255, 0.95);
+  box-sizing: border-box;
+}
+
+.community-page-post-field textarea {
+  min-height: 120px;
+  resize: vertical;
+}
+
+.community-page-post-field input:focus,
+.community-page-post-field textarea:focus {
+  outline: 2px solid rgba(110, 74, 20, 0.25);
+  border-color: #6e4a14;
+}
+
 .community-page-comment-empty {
   margin: 8px 0 0;
   padding: 12px;

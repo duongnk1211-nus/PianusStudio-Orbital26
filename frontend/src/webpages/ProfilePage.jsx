@@ -143,14 +143,14 @@ export default function ProfilePage() {
         <p style={{ position: 'absolute', bottom: '40px', left: '30px', marginBottom: '0px' }}>Last signed in: {lastSignIn}</p>
       </div>
 
-      <h1>User's Personal Pieces</h1>
+      <h1>User's Personal Recordings</h1>
 
       <div className="recordings-container">
         {[1, 2, 3].map((num) => {
           const idx = num - 1;
           return (
             <div className="recording-item" key={num}>
-              <h2 className="recording-title">Piece {num}</h2>
+              <h2 className="recording-title">Recording #{num}</h2>
               <div className="recording-options">
                 <button 
                   className={`listen-btn ${isRecorded[idx] ? "" : "disabled"}`}

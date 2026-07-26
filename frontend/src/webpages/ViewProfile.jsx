@@ -32,6 +32,7 @@ export default function ViewProfile() {
   const rawRole = profile?.role;
   const role = (typeof rawRole === 'string' ? rawRole.trim() : rawRole);
   const displayRole = role && role !== 'null' && role !== 'undefined' ? role : '';
+  const avatar_url = profile?.avatar_url || '/avatar.png'
 
   return (
     <div className='profile-page' id="view-profile-page">
@@ -41,7 +42,7 @@ export default function ViewProfile() {
         {profile.role && <p>{profile?.role || ''}</p>}
         <div className='avatar-preview' style={{ cursor: 'pointer' }}>
           <div className='avatar-profile'>
-            <img src={profile.avatar_url || './avatar.png'} alt="Avatar" />
+            <img src={avatar_url} alt="Avatar" />
           </div>
         </div>
         <div className='profile-name-container'>

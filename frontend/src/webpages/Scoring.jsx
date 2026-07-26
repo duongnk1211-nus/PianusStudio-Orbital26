@@ -72,30 +72,31 @@ export default function Scoring({ P }) {
       let scoreChange = 0;
 
       barsRef.current = barsRef.current.map(bar => {
+        if (bar.checkScored) return bar;
+
         const currentKey = notes.find(n => n.sym === bar.note);
-        const checkIfMissed = !currentKey?.item.keyActive && (bar.top + bar.height > 400) && (bar.top < 390);
-        const isPastLine = bar.top > 400;
+        const leadingEdge = bar.top + bar.height;
+        const reachedLine = leadingEdge > 390;
+        const finalCutoff = bar.top > 410;
 
-        if(currentKey?.item.keyActive) {
-          return {... bar, checkMissed: false};
+        if (!reachedLine) {
+          return { ...bar, checkMissed: false };
         }
-
-        if (checkIfMissed && !bar.checkScored) {
-          scoreChange -= 50;
-          return { ...bar, checkMissed: true, checkScored: true };
-        }
-
-        if (!isPastLine) return bar;
 
         if (currentKey?.item.keyActive) {
-          // correctly hit
-          if (!scoredBarsRef.current.has(bar.id) && !bar.checkScored) {
+          if (!scoredBarsRef.current.has(bar.id)) {
             scoreChange += 300;
             scoredBarsRef.current.add(bar.id);
           }
+          return { ...bar, checkMissed: false, checkScored: true };
         }
 
-        return { ...bar, checkMissed: checkIfMissed, checkScored: true }; // resolved
+        if (!finalCutoff) {
+          return { ...bar, checkMissed: true };
+        }
+
+        scoreChange -= 50;
+        return { ...bar, checkMissed: true, checkScored: true };
       });
 
       if (scoreChange !== 0) {
@@ -288,12 +289,12 @@ export default function Scoring({ P }) {
       <div className={`scoring-header ${P.navStr}`}>
         <h1 className="energetic-title">{P.title}</h1>
       </div>
-      {isPlaying && <p className={`scoring-score ${P.navStr}`}>{`Score: ${score < 0 ? 0 : score}`}</p>}
+      {isPlaying && <p className={`scoring-score ${P.navStr}`}>{`Score: ${score > 0 ? score : 0}`}</p>}
       <div className={`scoring-piano ${P.navStr}`}>
         <div className="scoring-synthesia">
           {isPoppedUp && <div className={`scoring-synthesia-pop-up ${P.navStr}`}>{poppedUp}</div>}
           {displayBars.map(b => (
-            <div>
+            <div key={b.id}>
               <div
                 key={b.id}
                 className={`scoring-synthesia-bar ${P.navStr} ${b.type}`}
@@ -353,29 +354,29 @@ export default function Scoring({ P }) {
           }
           )}
         </div>
-        <span 
-          className="corner-tl" 
-          style={{ top: '-70px', left: '10px', backgroundImage: `url(${P.pianoDeco1})`}}
+        <span
+          className="corner-tl"
+          style={{ top: '-70px', left: '10px', backgroundImage: `url(${P.pianoDeco1})` }}
         />
-        <span 
-          className="corner-tl" 
-          style={{ top: '-60px', left: '-40px', backgroundImage: `url(${P.pianoDeco2})`}}
+        <span
+          className="corner-tl"
+          style={{ top: '-60px', left: '-40px', backgroundImage: `url(${P.pianoDeco2})` }}
         />
-        <span 
-          className="corner-tl" 
-          style={{ top: '-10px', left: '-50px', backgroundImage: `url(${P.pianoDeco3})`}}
+        <span
+          className="corner-tl"
+          style={{ top: '-10px', left: '-50px', backgroundImage: `url(${P.pianoDeco3})` }}
         />
-        <span 
-          className="corner-tr" 
-          style={{ top: '-70px', right: '80px', backgroundImage: `url(${P.pianoDeco4})`}}
+        <span
+          className="corner-tr"
+          style={{ top: '-70px', right: '80px', backgroundImage: `url(${P.pianoDeco4})` }}
         />
-        <span 
-          className="corner-tr" 
-          style={{ top: '-60px', right: '20px', backgroundImage: `url(${P.pianoDeco5})`}}
+        <span
+          className="corner-tr"
+          style={{ top: '-60px', right: '20px', backgroundImage: `url(${P.pianoDeco5})` }}
         />
-        <span 
-          className="corner-tr" 
-          style={{ top: '-45px', right: '-50px', backgroundImage: `url(${P.pianoDeco6})`}}
+        <span
+          className="corner-tr"
+          style={{ top: '-45px', right: '-50px', backgroundImage: `url(${P.pianoDeco6})` }}
         />
         <span className="corner-bl" />
         <span className="corner-br" />
@@ -428,10 +429,10 @@ export function ScoringDemo({ P }) {
         const next = prev.map(entry => {
           const bar = barsRef.current.find(b => b.note === entry.sym);
           const shouldGrow = !!bar && bar.top + bar.height > 370 && bar.top < 380;
-          if(!entry.item.keyActive && shouldGrow) {
+          if (!entry.item.keyActive && shouldGrow) {
             entry.item.attackWithoutBars(synthRef, barsRef, sideEffect)();
           }
-          if(entry.item.keyActive && !shouldGrow) {
+          if (entry.item.keyActive && !shouldGrow) {
             entry.item.releaseWithoutBars(synthRef, barsRef, sideEffect)();
           }
           const shouldApply = shouldGrow && entry.item.keyActive;

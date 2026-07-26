@@ -11,8 +11,6 @@ class UserResponse(BaseModel):
 
 class BindingOption(BaseModel):
     binding_option: int
-    max_posts: int
-    num_posts: int
 
 class UserScoreResponse(BaseModel):
     user_name: str

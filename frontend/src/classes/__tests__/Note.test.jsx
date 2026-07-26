@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from 'vitest';
-import { Note } from '../Note.jsx';
+import { describe, it, expect, vi } from "vitest";
+import { Note } from "../Note.jsx";
 
 function makeRefs() {
   return {

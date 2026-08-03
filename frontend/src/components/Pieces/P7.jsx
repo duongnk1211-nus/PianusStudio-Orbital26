@@ -5,7 +5,7 @@ const P7 = new Piece(
   "Silent Night",
   "Silent Night is one of the most peaceful and cherished Christmas carols ever written. Its gentle, lullaby-like melody flows softly from note to note, creating a warm and calming atmosphere that feels magical every time you play it. Perfect for the holiday season — or any time you need a moment of quiet beauty!",
   "silentnight",
-  "/Pieces/P7.jpg",
+  "/Pieces/P7.png",
   "Joseph Mohr",
   "2",
   "/AssetsForPiano/cloud.png",

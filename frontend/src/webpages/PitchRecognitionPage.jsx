@@ -71,10 +71,10 @@ export default function PitchRecognitionPage() {
       <img src="/PianusStudio.png" />
       <h1>Pitch Recognition Exercises</h1>
       <div className='pitch-recognition-self'>
-        <p style={{marginLeft: "20px"}}>Welcome to Pianus Studio's Pitch Recognition Exercises!</p>
-        <p style={{marginLeft: "20px"}}>A place you can train your ears to become a better listener and better pianist. 🎶</p>
-        <p style={{marginLeft: "20px"}}>The greater the difficulty of an exercise is, the more notes at a higher speed you need to listen to.</p>
-        <p style={{marginLeft: "20px"}}>Total score: {totalScore}/{maxTotalScore} 🎉</p>
+        <p style={{marginLeft: "1.1111rem"}}>Welcome to Pianus Studio's Pitch Recognition Exercises!</p>
+        <p style={{marginLeft: "1.1111rem"}}>A place you can train your ears to become a better listener and better pianist. 🎶</p>
+        <p style={{marginLeft: "1.1111rem"}}>The greater the difficulty of an exercise is, the more notes at a higher speed you need to listen to.</p>
+        <p style={{marginLeft: "1.1111rem"}}>Total score: {totalScore}/{maxTotalScore} 🎉</p>
 
         {([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]).map(i => (
           <DifficultySelf key={i} x={i} scores={scores} />

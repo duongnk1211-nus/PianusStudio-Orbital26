@@ -5,7 +5,7 @@ const P8 = new Piece(
   "Jingle Bell",
   "Jingle Bells is the ultimate feel-good holiday classic that never gets old! Its bouncy, upbeat rhythm is instantly recognizable and impossible not to sing along to. This is one of those pieces that puts a smile on everyone's face the moment you start playing — festive, fun, and endlessly joyful!",
   "jinglebell",
-  "/Pieces/P8.jpg",
+  "/Pieces/P8.png",
   "James Lord Pierpont",
   "2",
   "/AssetsForPiano/cloud.png",

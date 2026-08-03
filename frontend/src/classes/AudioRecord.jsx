@@ -2,13 +2,13 @@ import { Notes } from "../components/Notes.jsx";
 import { Record } from "../classes/Record.jsx";
 import * as Tone from "tone";
 
-const DEFAULT_DURATION = 2.0;
-
 const symMap = new Map();
 
 for (let i = 0; i < Notes.length; i++) {
   symMap.set(Notes[i].sym, Notes[i]);
 }
+
+const DEFAULT_DURATION = 2.0;
 
 export class AudioRecord extends Record {
   #id;

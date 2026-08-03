@@ -10,9 +10,9 @@ function PieceShelf( { P } ) {
   return (
     <div className="piece-shelf">
       <h2>{P.title}</h2>
-      <p style={{marginBottom: "30px"}}><span style={{fontWeight: "1000"}}>Description: </span>{P.description}</p>
-      <button onClick={goToDisplay} style={{marginBottom: '0px'}}>Listen & Feel</button>
-      <button onClick={goToLearn}>Play it yourself</button>
+      <p style={{marginBottom: "1.6667rem"}}><span style={{fontWeight: "1000"}}>Description: </span>{P.description}</p>
+      <button onClick={goToDisplay} style={{marginBottom: '0'}}>Listen & Feel</button>
+      <button onClick={goToLearn}>Learn it yourself</button>
     </div>
   );
 }

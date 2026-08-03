@@ -138,7 +138,7 @@ export default function RecordingDisplayer() {
   return (
     <PianoLayout
       header={"Recording Displayer"}
-      backgroundImageURL={"BackGroundForPiano.jpg"}
+      backgroundImageURL={"RecordingDisplayer.png"}
       displayBars={displayBars}
       synthRef={synthRef}
       barsRef={barsRef}

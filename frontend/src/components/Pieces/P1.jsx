@@ -5,7 +5,7 @@ const P1 = new Piece(
   "Twinkle, Twinkle, Little Star",
   "Playing Twinkle, Twinkle, Little Star on the piano is the ultimate beginner's rite of passage. Its memorable A-B-C-C-A-B song structure uses only six white keys in the C major scale—Middle C through A. The melody is highly repetitive, making it incredibly easy to memorize and play by ear!",
   "twinkletwinklelittlestar",
-  "/Pieces/P1.jpg",
+  "/Pieces/P1.png",
   "Jane Taylor",
   "1",
   "/AssetsForPiano/cartoonCloud.png",

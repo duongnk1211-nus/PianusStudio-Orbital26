@@ -49,7 +49,7 @@ export default function PianoSimulator() {
   return (
     <PianoLayout 
       header={"Piano Simulator"}
-      backgroundImageURL={"BackGroundForPiano.jpg"} 
+      backgroundImageURL={"PianoSimulator.png"} 
       displayBars={displayBars}
       synthRef={synthRef}
       barsRef={barsRef}

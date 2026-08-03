@@ -64,7 +64,7 @@ export default function AvatarUpload({ currentUrl, onUploadComplete }) {
       {/* Clicking the image triggers the hidden file input */}
       <div className='avatar-preview' style={{ cursor: 'pointer' }}>
         <div className='avatar-profile'>
-          <img src={displayUrl || './avatar.png'} alt="Avatar" onClick={() => inputRef.current.click()} />
+          <img src={displayUrl || '/avatar.png'} alt="Avatar" onClick={() => inputRef.current.click()} />
           <span className="overlay-text">Change Image</span>
           {uploading && <p style={{ width: '400px', top: '110px' }}>Uploading...</p>}
           {error ? (<p style={{ color: 'red', width: '400px', top: '110px' }}>{error}</p>) 

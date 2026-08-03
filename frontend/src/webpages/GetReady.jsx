@@ -99,26 +99,28 @@ export default function GetReady({ P }) {
               <th style={{ flex: '0 0 135px' }}>Score</th>
             </tr>
           </thead>
-          <tbody>
-            {loadingLeaderBoard
-              ? 'Getting LeaderBoard...'
-              : (leaderBoard !== undefined
-                ? leaderBoard.slice().reverse().map((row) => {
-                  ranking = ranking + 1;
-                  return (
-                    <tr style={{ display: 'flex' }} key={row.user_id} onClick={() => navigate(`/user-profile/${row.user_name}`)}>
-                      <td style={{ flex: '0 0 120px' }}>{ranking}</td>
-                      <td style={{ flex: 1 }}>{row.user_name}</td>
-                      <td style={{ flex: '0 0 120px' }}>{row.top_score}</td>
-                    </tr>)
-                })
-                : PieceList.map((piece) => (
-                  <tr style={{ display: 'flex' }} key={piece.id} onClick={() => navigate(`/challenges/${piece.navStr}/get-ready`)}>
-                    <td style={{ flex: '0 0 120px' }}>{piece.id}</td>
-                    <td style={{ flex: 1 }}>{piece.author}</td>
-                    <td style={{ flex: '0 0 120px' }}>{piece.difficultyLevel}</td>
-                  </tr>)))}
-          </tbody>
+          {loadingLeaderBoard
+            ? <tbody><tr><td>Loading...</td></tr></tbody>
+            : (leaderBoard === undefined)
+              ? (<tbody><tr><td>No leaderboard data available.</td></tr></tbody>)
+              : (
+                <tbody>
+                  {leaderBoard.slice().reverse().map((row) => {
+                    ranking = ranking + 1;
+                    return (
+                      <tr
+                        style={{ display: 'flex' }}
+                        key={row.user_id}
+                        onClick={() => navigate(`/user-profile/${row.user_name}`)}
+                      >
+                        <td style={{ flex: '0 0 120px' }}>{ranking}</td>
+                        <td style={{ flex: 1 }}>{row.user_name}</td>
+                        <td style={{ flex: '0 0 120px' }}>{row.top_score}</td>
+                      </tr>
+                    );
+                  })}
+                </tbody>
+              )}
         </table>
         <div className="get-ready-buttons">
           <button onClick={goBack}>Return</button>

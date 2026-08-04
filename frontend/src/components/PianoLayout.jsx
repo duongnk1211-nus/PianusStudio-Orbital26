@@ -70,6 +70,7 @@ function PianoControl({
 export function PianoLayout({
   header,
   subHeader,
+  colorCode,
   backgroundImageURL,
   displayBars,
   synthRef,
@@ -106,9 +107,9 @@ export function PianoLayout({
 
       <div className="piano-container">
         <img src="/PianusStudio.png" style={{scale: "0.5", background: '#517edfbc'}} />
-        <h1>{header}</h1>
+        <h1 style={{ color: `${colorCode}` }}>{header}</h1>
         {subHeader && 
-          <h2>{subHeader}</h2>
+          <h2 style={{ color: `${colorCode}` }}>{subHeader}</h2>
         }
         <PianoControl 
           isPlaying={isPlaying}

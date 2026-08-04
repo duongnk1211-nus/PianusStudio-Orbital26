@@ -138,6 +138,7 @@ export default function RecordingDisplayer() {
   return (
     <PianoLayout
       header={"Recording Displayer"}
+      colorCode={"#FF6B6B"}
       backgroundImageURL={"RecordingDisplayer.png"}
       displayBars={displayBars}
       synthRef={synthRef}

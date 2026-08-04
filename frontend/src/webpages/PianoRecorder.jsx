@@ -241,7 +241,8 @@ export default function PianoRecorder() {
 
   return (
     <PianoLayout 
-      header={"Recording Studio"} 
+      header={"Recording Studio"}
+      colorCode={"#F5B041"}
       backgroundImageURL={"/PianoRecorder.png"} 
       displayBars={displayBars}
       synthRef={synthRef}

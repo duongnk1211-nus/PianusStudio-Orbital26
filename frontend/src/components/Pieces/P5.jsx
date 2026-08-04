@@ -6,6 +6,7 @@ const P5 = new Piece(
   "Greensleeves is a timeless English folk melody that has been beloved for centuries. Its gentle, flowing rhythm gives it a wistful and romantic feel that's unlike anything else you'll play. The left hand keeps a steady, song-like accompaniment while the right hand sings out the iconic tune — hauntingly beautiful from the very first note!",
   "greensleeves",
   "/Pieces/P5.png",
+  "#1B3A2B",
   "King Henry VIII",
   "2",
   "/AssetsForPiano/cartoonCloud.png",

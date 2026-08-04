@@ -3,9 +3,10 @@ import { Piece } from "../../classes/Piece.jsx";
 const P11 = new Piece(
   "11",
   "Canon in D",
-  `The canon was originally scored for three violins and basso continuo and paired with a gigue, known as Canon and Gigue for 3 violins and basso continuo. Both movements are in the key of D major. The piece is constructed as a true canon at the unison in three parts, with a fourth part as a ground bass throughout. Neither the date nor the circumstances of its composition are known, and the oldest surviving manuscript copy of the piece dates from 1838 to 1842.`,
+  `The canon was originally scored for three violins and basso continuo, paired with a gigue, both in D major. It's a true canon at the unison in three parts, with a fourth part as ground bass. Neither its date nor circumstances of composition are known.`,
   "canonind",
   "/Pieces/P11.png",
+  "#B5651D",
   "Johann Pachelbel",
   "4",
   "/AssetsForPiano/cloud.png",

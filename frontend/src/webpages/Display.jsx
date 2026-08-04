@@ -91,7 +91,8 @@ export default function Display({ P }) {
 
   return (
     <PianoLayout 
-      header={P.title} 
+      header={P.title}
+      colorCode={P.colorCode}
       backgroundImageURL={P.backgroundImageURL} 
       displayBars={displayBars}
       synthRef={synthRef}

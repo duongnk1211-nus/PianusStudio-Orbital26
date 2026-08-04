@@ -3,9 +3,10 @@ import { Piece } from "../../classes/Piece.jsx";
 const P12 = new Piece(
   "12",
   "Bach's Minuet",
-  `The Minuets in G major and G minor, BWV Anh. 114 and 115, are a pair of movements from a suite for harpsichord by Christian Petzold in 1720, which, through their appearance in the 1725 Notebook for Anna Magdalena Bach, used to be attributed to Johann Sebastian Bach. These minuets, which are suitable for beginners on the piano, are among the best known pieces of music literature. The 1965 pop song "A Lover's Concerto", of which millions of copies were sold, is based on the first of these Minuets.`,
+  `The Minuets in G major and G minor, BWV Anh. 114/115, are from a 1720 harpsichord suite by Christian Petzold, once misattributed to Bach through their appearance in Anna Magdalena's notebook. Popular with beginner pianists, the first minuet inspired the hit 1965 song "A Lover's Concerto."`,
   "bachminuet",
   "/Pieces/P12.png",
+  "#8B4513",
   "Christian Petzold",
   "5",
   "/AssetsForPiano/cloud.png",

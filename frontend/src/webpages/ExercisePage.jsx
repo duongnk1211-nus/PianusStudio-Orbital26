@@ -224,6 +224,7 @@ export default function ExercisePage({ R }) {
     <PianoLayout 
       header={`Exercise #${R.id}`}
       subHeader={`High score: ${highScore}/${total}`}
+      colorCode={"#5DADE2"}
       backgroundImageURL={"/ExercisePage.png"} 
       displayBars={displayBars}
       synthRef={synthRef}

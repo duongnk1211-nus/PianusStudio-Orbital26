@@ -102,7 +102,7 @@
   transform: scale(1.05);
 }
 
-.settings-page .key-rebinding-box {
+.settings-page .key-binding-box {
   display: flex;
   flex-direction: row;
   justify-content: center;

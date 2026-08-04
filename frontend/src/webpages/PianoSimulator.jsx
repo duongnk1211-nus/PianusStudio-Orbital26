@@ -49,6 +49,7 @@ export default function PianoSimulator() {
   return (
     <PianoLayout 
       header={"Piano Simulator"}
+      colorCode={"#F5B041"}
       backgroundImageURL={"PianoSimulator.png"} 
       displayBars={displayBars}
       synthRef={synthRef}

@@ -83,7 +83,7 @@ export default function SettingsPage() {
       <h1>Settings</h1>
 
       <div className="settings-container">
-        <div className="key-rebinding-box">
+        <div className="key-binding-box">
           <div className="property-name">
             ⌨️ Key Binding:
           </div>

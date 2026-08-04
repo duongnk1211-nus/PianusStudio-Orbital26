@@ -13,6 +13,7 @@ export class Piece {
   #description;
   #navStr;
   #backgroundImageURL;
+  #colorCode;
   #author;
   #difficultyLevel;
   #pianoDeco1;
@@ -25,12 +26,13 @@ export class Piece {
   #LH;
   #duration;
 
-  constructor(id, title, description, navStr, backgroundImageURL, author, difficultyLevel, pianoDeco1, pianoDeco2, pianoDeco3, pianoDeco4, pianoDeco5, pianoDeco6, RH, LH) {
+  constructor(id, title, description, navStr, backgroundImageURL, colorCode, author, difficultyLevel, pianoDeco1, pianoDeco2, pianoDeco3, pianoDeco4, pianoDeco5, pianoDeco6, RH, LH) {
     this.#id = id;
     this.#title = title;
     this.#description = description;
     this.#navStr = navStr;
     this.#backgroundImageURL = backgroundImageURL;
+    this.#colorCode = colorCode;
     this.#author = author;
     this.#difficultyLevel = difficultyLevel;
     this.#pianoDeco1 = pianoDeco1;
@@ -71,6 +73,10 @@ export class Piece {
 
   get backgroundImageURL() {
     return this.#backgroundImageURL;
+  }
+  
+  get colorCode() {
+    return this.#colorCode;
   }
 
   get author() {
@@ -223,6 +229,11 @@ export class Piece {
     const RHMap = new Map(), LHMap = new Map();
     const timeSet = new Set();
 
+    function roundTo(num, decimals) {
+      const factor = 10 ** decimals;
+      return Math.round(num * factor) / factor;
+    }
+
     let currentTimeRight = 0;
     for (let i = 0; i < this.#RH.length; i++) {
       if (this.#RH[i].chord !== "") {
@@ -230,6 +241,7 @@ export class Piece {
         timeSet.add(currentTimeRight);
       }
       currentTimeRight += this.#RH[i].movingTime ? this.#RH[i].movingTime : this.#RH[i].duration;
+      currentTimeRight = roundTo(currentTimeRight, 3);;
     }
     let currentTimeLeft = 0;
     for (let i = 0; i < this.#LH.length; i++) {
@@ -238,6 +250,7 @@ export class Piece {
         timeSet.add(currentTimeLeft);
       }
       currentTimeLeft += this.#LH[i].movingTime ? this.#LH[i].movingTime : this.#LH[i].duration;
+      currentTimeLeft = roundTo(currentTimeLeft, 3);
     }
 
     const sortedTime = [...timeSet].sort((a, b) => a - b);

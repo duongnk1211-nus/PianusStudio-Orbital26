@@ -6,6 +6,7 @@ const P2 = new Piece(
   "The Entertainer is one of the most iconic and instantly recognizable piano pieces ever written. Composed by Scott Joplin, this lively ragtime classic has a bouncy, upbeat feel that makes it impossible not to smile while playing. Once you learn it, you'll find yourself coming back to it again and again!",
   "theentertainer",
   "/Pieces/P2.png",
+  "#5DADE2",
   "Scott Joplin",
   "2",
   "/AssetsForPiano/balloons.png",

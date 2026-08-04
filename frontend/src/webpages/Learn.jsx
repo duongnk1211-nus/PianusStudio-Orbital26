@@ -81,6 +81,7 @@ export default function Learn({ P }) {
   }, []);
   const [activeKeys, setActiveKeys] = useState(new Set());
   const currentIndexRef = useRef(-1);
+  const total = result.length;
   
   const isSubset = (setA, setB) => {
     if (setA.size > setB.size) return false;
@@ -177,6 +178,8 @@ export default function Learn({ P }) {
   return (
     <PianoLayout 
       header={P.title} 
+      subHeader={currentIndexRef.current === -1 ? "Press Start to Begin" : `Step(s) completed: ${currentIndexRef.current}/${total}`}
+      colorCode={P.colorCode}
       backgroundImageURL={P.backgroundImageURL} 
       displayBars={displayBars}
       synthRef={synthRef}

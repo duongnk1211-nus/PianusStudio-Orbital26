@@ -6,6 +6,7 @@ const P4 = new Piece(
   "Spring is the opening movement of Vivaldi's Four Seasons — one of the most cheerful and recognizable pieces in all of classical music. The melody dances along with a bright, energetic feel that perfectly captures the freshness of a new season blooming to life. It's a joy to play and even more of a joy to listen to!",
   "springfromthefourseasons",
   "/Pieces/P4.png",
+  "#8B1E3F",
   "Antonio Vivaldi",
   "2",
   "/AssetsForPiano/none.png",

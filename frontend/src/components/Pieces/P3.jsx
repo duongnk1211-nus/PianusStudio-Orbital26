@@ -6,6 +6,7 @@ const P3 = new Piece(
   "Ode to Joy is one of the most beloved melodies in all of classical music, taken from Beethoven's legendary Ninth Symphony. This uplifting piece has a steady, marching rhythm that feels both powerful and joyful — perfect for lifting your spirits while you play. Once you know it, you'll never forget it!",
   "odetojoy",
   "/Pieces/P3.png",
+  "#5DADE2",
   "Ludwig van Beethoven",
   "2",
   "/AssetsForPiano/cartoonCloud.png",

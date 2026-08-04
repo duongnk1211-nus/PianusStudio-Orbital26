@@ -6,6 +6,7 @@ const P6 = new Piece(
   "Happy Birthday to You is the most sung song in the world — and now you can play it on the piano! Its cheerful waltz rhythm makes it instantly feel festive and fun. Whether you're surprising someone at their party or just playing for the joy of it, this one is always a crowd-pleaser!",
   "happybirthdaytoyou",
   "/Pieces/P6.png",
+  "#C41E3A",
   "The Hill sisters",
   "2",
   "/AssetsForPiano/flyingGift.png",

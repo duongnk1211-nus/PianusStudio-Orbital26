@@ -42,8 +42,8 @@ export class Piece {
     this.#RH = RH;
     this.#LH = LH;
 
-    const totalRight = RH.reduce((sum, entry) => sum + entry.duration, 0);
-    const totalLeft = LH.reduce((sum, entry) => sum + entry.duration, 0);
+    const totalRight = RH.reduce((sum, entry) => sum + (entry.movingTime ? entry.movingTime : entry.duration), 0);
+    const totalLeft = LH.reduce((sum, entry) => sum + (entry.movingTime ? entry.movingTime : entry.duration), 0);
     const EPSILON = 1e-6;
     if (Math.abs(totalRight - totalLeft) > EPSILON) {
       throw new Error(
@@ -144,7 +144,7 @@ export class Piece {
           }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
         }
 
-        currentTime += arr[i].duration;
+        currentTime += arr[i].movingTime ? arr[i].movingTime : arr[i].duration;
       }
     }
     return timeline;
@@ -174,7 +174,7 @@ export class Piece {
             symMap.get(sym).releaseForScoring(synthRef, barsRef, sideEffect)(time);
           }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
         }
-        currentTime += arr[i].duration;
+        currentTime += arr[i].movingTime ? arr[i].movingTime : arr[i].duration;
       }
     }
     return timeline;
@@ -203,7 +203,7 @@ export class Piece {
             }, currentTime + arr[i].duration - 0.05); // release slightly before the next note
           } 
         }
-        currentTime += arr[i].duration;
+        currentTime += arr[i].movingTime ? arr[i].movingTime : arr[i].duration;
       }
     }
     return timeline;
@@ -229,7 +229,7 @@ export class Piece {
         RHMap.set(currentTimeRight, i);
         timeSet.add(currentTimeRight);
       }
-      currentTimeRight += this.#RH[i].duration;
+      currentTimeRight += this.#RH[i].movingTime ? this.#RH[i].movingTime : this.#RH[i].duration;
     }
     let currentTimeLeft = 0;
     for (let i = 0; i < this.#LH.length; i++) {
@@ -237,11 +237,14 @@ export class Piece {
         LHMap.set(currentTimeLeft, i);
         timeSet.add(currentTimeLeft);
       }
-      currentTimeLeft += this.#LH[i].duration;
+      currentTimeLeft += this.#LH[i].movingTime ? this.#LH[i].movingTime : this.#LH[i].duration;
     }
 
+    const sortedTime = [...timeSet].sort((a, b) => a - b);
+    const sortedTimeSet = new Set(sortedTime);
+
     let result = [];
-    for (const t of timeSet) {
+    for (const t of sortedTimeSet) {
       let s = new Set();
       if (RHMap.get(t) !== undefined) {
         const i = RHMap.get(t);

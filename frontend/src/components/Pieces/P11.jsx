@@ -14,188 +14,287 @@ const P11 = new Piece(
   "/AssetsForPiano/cloud.png",
   "/AssetsForPiano/flyingBird.png",
   "/AssetsForPiano/cloud.png",
-[
-// D major (D F# A)
-  { chord: 'D4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  // A major (A C# E)
-  { chord: 'A4', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'E5', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  // B minor (B D F#)
-  { chord: 'B4', duration: 0.25 }, { chord: 'D5', duration: 0.25 },
-  { chord: 'F#5', duration: 0.25 }, { chord: 'D5', duration: 0.25 },
-  // F# minor (F# A C#)
-  { chord: 'F#4', duration: 0.25 }, { chord: 'A4', duration: 0.25 },
-  { chord: 'C#5', duration: 0.25 }, { chord: 'A4', duration: 0.25 },
-  // G major (G B D)
-  { chord: 'G4', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'D5', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  // D major (D F# A)
-  { chord: 'D4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  // G major (G B D)
-  { chord: 'G4', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'D5', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  // A major (A C# E)
-  { chord: 'A4', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'E5', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
+  [
+    { chord: "", duration: 0.5 },
+    { chord: "F#4", fingers: "1", duration: 0.5 },
+    { chord: "A4", fingers: "2", duration: 0.5 },
+    { chord: "D5", fingers: "5", duration: 0.5 },
+    { chord: "", duration: 0.5 },
+    { chord: "E4", fingers: "1", duration: 0.5 },
+    { chord: "A4", fingers: "2", duration: 0.5 },
+    { chord: "C#5", fingers: "4", duration: 0.5 },
+    { chord: "", duration: 0.5 },
+    { chord: "D4", fingers: "1", duration: 0.5 },
+    { chord: "F#4", fingers: "2", duration: 0.5 },
+    { chord: "B4", fingers: "5", duration: 0.5 },
+    { chord: "", duration: 0.5 },
+    { chord: "C#4", fingers: "1", duration: 0.5 },
+    { chord: "F#4", fingers: "2", duration: 0.5 },
+    { chord: "A4", fingers: "4", duration: 0.5 },
+    { chord: "", duration: 0.5 },
+    { chord: "B3", fingers: "1", duration: 0.5 },
+    { chord: "D4", fingers: "2", duration: 0.5 },
+    { chord: "G4", fingers: "5", duration: 0.5 },
+    { chord: "", duration: 0.5 },
+    { chord: "A3", fingers: "1", duration: 0.5 },
+    { chord: "D4", fingers: "2", duration: 0.5 },
+    { chord: "F#4", fingers: "4", duration: 0.5 },
+    { chord: "", duration: 0.5 },
+    { chord: "B3", fingers: "1", duration: 0.5 },
+    { chord: "D4", fingers: "2", duration: 0.5 },
+    { chord: "G4", fingers: "5", duration: 0.5 },
+    { chord: "", duration: 0.5 },
+    { chord: "C#4", fingers: "1", duration: 0.5 },
+    { chord: "E4", fingers: "2", duration: 0.5 },
+    { chord: "A4", fingers: "5", duration: 0.5 },
 
-  { chord: 'A4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'D4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'E5', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'F#5', duration: 0.25 }, { chord: 'D5', duration: 0.25 },
-  { chord: 'B4', duration: 0.25 }, { chord: 'D5', duration: 0.25 },
-  { chord: 'C#5', duration: 0.25 }, { chord: 'A4', duration: 0.25 },
-  { chord: 'F#4', duration: 0.25 }, { chord: 'A4', duration: 0.25 },
-  { chord: 'D5', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'G4', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'D4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'D5', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'G4', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'E5', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
+    { chord: "F#5", fingers: "5", duration: 2.0 },
+    { chord: "E5", fingers: "4", duration: 2.0 },
+    { chord: "D5", fingers: "3", duration: 2.0 },
+    { chord: "C#5", fingers: "2", duration: 2.0 },
+    { chord: "B4", fingers: "1", duration: 2.0 },
+    { chord: "A4", fingers: "2", duration: 2.0 },
+    { chord: "B4", fingers: "1", duration: 2.0 },
+    { chord: "C#5", fingers: "2", duration: 2.0 },
 
-  // D major (D F# A)
-  { chord: 'D4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  // A major (A C# E)
-  { chord: 'A4', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'E5', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  // B minor (B D F#)
-  { chord: 'B4', duration: 0.25 }, { chord: 'D5', duration: 0.25 },
-  { chord: 'F#5', duration: 0.25 }, { chord: 'D5', duration: 0.25 },
-  // F# minor (F# A C#)
-  { chord: 'F#4', duration: 0.25 }, { chord: 'A4', duration: 0.25 },
-  { chord: 'C#5', duration: 0.25 }, { chord: 'A4', duration: 0.25 },
-  // G major (G B D)
-  { chord: 'G4', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'D5', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  // D major (D F# A)
-  { chord: 'D4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  // G major (G B D)
-  { chord: 'G4', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'D5', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  // A major (A C# E)
-  { chord: 'A4', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'E5', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
+    { chord: "D5", fingers: "5", duration: 0.5 },
+    { chord: "C#5", fingers: "4", duration: 0.5 },
+    { chord: "D5", fingers: "5", duration: 0.5 },
+    { chord: "D4", fingers: "1", duration: 0.5 },
+    { chord: "C#4", fingers: "2", duration: 0.5 },
+    { chord: "A4", fingers: "5", duration: 0.5 },
+    { chord: "E4", fingers: "2", duration: 0.5 },
+    { chord: "F#4", fingers: "3", duration: 0.5 },
+    { chord: "D4", fingers: "1", duration: 0.5 },
+    { chord: "D5", fingers: "5", duration: 0.5 },
+    { chord: "C#5", fingers: "4", duration: 0.5 },
+    { chord: "B4", fingers: "1", duration: 0.5 },
+    { chord: "C#5", fingers: "2", duration: 0.5 },
+    { chord: "F#5", fingers: "3", duration: 0.5 },
+    { chord: "A5", fingers: "4", duration: 0.5 },
+    { chord: "B5", fingers: "5", duration: 0.5 },
+    { chord: "G5", fingers: "3", duration: 0.5 },
+    { chord: "F#5", fingers: "2", duration: 0.5 },
+    { chord: "E5", fingers: "1", duration: 0.5 },
+    { chord: "G5", fingers: "4", duration: 0.5 },
+    { chord: "F#5", fingers: "3", duration: 0.5 },
+    { chord: "E5", fingers: "2", duration: 0.5 },
+    { chord: "D5", fingers: "1", duration: 0.5 },
+    { chord: "C#5", fingers: "4", duration: 0.5 },
+    { chord: "B4", fingers: "3", duration: 0.5 },
+    { chord: "A4", fingers: "2", duration: 0.5 },
+    { chord: "G4", fingers: "1", duration: 0.5 },
+    { chord: "F#4", fingers: "3", duration: 0.5 },
+    { chord: "E4", fingers: "2", duration: 0.5 },
+    { chord: "G4", fingers: "4", duration: 0.5 },
+    { chord: "F#4", fingers: "3", duration: 0.5 },
+    { chord: "E4", fingers: "2", duration: 0.5 },
 
-  { chord: 'A4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'D4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'E5', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'F#5', duration: 0.25 }, { chord: 'D5', duration: 0.25 },
-  { chord: 'B4', duration: 0.25 }, { chord: 'D5', duration: 0.25 },
-  { chord: 'C#5', duration: 0.25 }, { chord: 'A4', duration: 0.25 },
-  { chord: 'F#4', duration: 0.25 }, { chord: 'A4', duration: 0.25 },
-  { chord: 'D5', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'G4', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'D4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'D5', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'G4', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'E5', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
+    { chord: "D4", fingers: "1", duration: 0.5 },
+    { chord: "E4", fingers: "2", duration: 0.5 },
+    { chord: "F#4", fingers: "3", duration: 0.5 },
+    { chord: "G4", fingers: "4", duration: 0.5 },
+    { chord: "A4", fingers: "5", duration: 0.5 },
+    { chord: "E4", fingers: "2", duration: 0.5 },
+    { chord: "A4", fingers: "4", duration: 0.5 },
+    { chord: "G4", fingers: "3", duration: 0.5 },
+    { chord: "F#4", fingers: "2", duration: 0.5 },
+    { chord: "B4", fingers: "5", duration: 0.5 },
+    { chord: "A4", fingers: "4", duration: 0.5 },
+    { chord: "G4", fingers: "3", duration: 0.5 },
+    { chord: "A4", fingers: "4", duration: 0.5 },
+    { chord: "G4", fingers: "3", duration: 0.5 },
+    { chord: "F#4", fingers: "2", duration: 0.5 },
+    { chord: "E4", fingers: "1", duration: 0.5 },
+    { chord: "D4", fingers: "2", duration: 0.5 },
+    { chord: "B3", fingers: "1", duration: 0.5 },
+    { chord: "B4", fingers: "3", duration: 0.5 },
+    { chord: "C#5", fingers: "4", duration: 0.5 },
+    { chord: "D5", fingers: "5", duration: 0.5 },
+    { chord: "C#5", fingers: "4", duration: 0.5 },
+    { chord: "B4", fingers: "3", duration: 0.5 },
+    { chord: "A4", fingers: "2", duration: 0.5 },
+    { chord: "G4", fingers: "1", duration: 0.5 },
+    { chord: "F#4", fingers: "2", duration: 0.5 },
+    { chord: "E4", fingers: "1", duration: 0.5 },
+    { chord: "B4", fingers: "5", duration: 0.5 },
+    { chord: "A4", fingers: "4", duration: 0.5 },
+    { chord: "B4", fingers: "5", duration: 0.5 },
+    { chord: "A4", fingers: "4", duration: 1.0 },
 
-  // D major (D F# A)
-  { chord: 'D4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  // A major (A C# E)
-  { chord: 'A4', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'E5', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  // B minor (B D F#)
-  { chord: 'B4', duration: 0.25 }, { chord: 'D5', duration: 0.25 },
-  { chord: 'F#5', duration: 0.25 }, { chord: 'D5', duration: 0.25 },
-  // F# minor (F# A C#)
-  { chord: 'F#4', duration: 0.25 }, { chord: 'A4', duration: 0.25 },
-  { chord: 'C#5', duration: 0.25 }, { chord: 'A4', duration: 0.25 },
-  // G major (G B D)
-  { chord: 'G4', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'D5', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  // D major (D F# A)
-  { chord: 'D4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  // G major (G B D)
-  { chord: 'G4', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'D5', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  // A major (A C# E)
-  { chord: 'A4', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'E5', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
+    { chord: "A5", fingers: "5", duration: 0.5 },
+    { chord: "F#5", fingers: "3", duration: 0.25 },
+    { chord: "G5", fingers: "4", duration: 0.25 },
+    { chord: "A5", fingers: "5", duration: 0.5 },
+    { chord: "F#5", fingers: "3", duration: 0.25 },
+    { chord: "G5", fingers: "4", duration: 0.25 },
+    { chord: "A5", fingers: "5", duration: 0.25 },
+    { chord: "A4", fingers: "1", duration: 0.25 },
+    { chord: "B4", fingers: "2", duration: 0.25 },
+    { chord: "C#5", fingers: "3", duration: 0.25 },
+    { chord: "D5", fingers: "1", duration: 0.25 },
+    { chord: "E5", fingers: "2", duration: 0.25 },
+    { chord: "F#5", fingers: "3", duration: 0.25 },
+    { chord: "G5", fingers: "4", duration: 0.25 },
+    { chord: "F#5", fingers: "3", duration: 0.5 },
+    { chord: "D5", fingers: "1", duration: 0.25 },
+    { chord: "E5", fingers: "2", duration: 0.25 },
+    { chord: "F#5", fingers: "3", duration: 0.5 },
+    { chord: "F#4", fingers: "2", duration: 0.25 },
+    { chord: "G4", fingers: "1", duration: 0.25 },
+    { chord: "A4", fingers: "2", duration: 0.25 },
+    { chord: "B4", fingers: "3", duration: 0.25 },
+    { chord: "A4", fingers: "2", duration: 0.25 },
+    { chord: "G4", fingers: "1", duration: 0.25 },
+    { chord: "A4", fingers: "4", duration: 0.25 },
+    { chord: "F#4", fingers: "2", duration: 0.25 },
+    { chord: "G4", fingers: "3", duration: 0.25 },
+    { chord: "A4", fingers: "4", duration: 0.25 },
+    { chord: "G4", fingers: "3", duration: 0.5 },
+    { chord: "B4", fingers: "5", duration: 0.25 },
+    { chord: "A4", fingers: "4", duration: 0.25 },
+    { chord: "G4", fingers: "3", duration: 0.5 },
+    { chord: "F#4", fingers: "2", duration: 0.25 },
+    { chord: "E4", fingers: "1", duration: 0.25 },
+    { chord: "F#4", fingers: "3", duration: 0.25 },
+    { chord: "E4", fingers: "2", duration: 0.25 },
+    { chord: "D4", fingers: "1", duration: 0.25 },
+    { chord: "E4", fingers: "2", duration: 0.25 },
+    { chord: "F#4", fingers: "3", duration: 0.25 },
+    { chord: "G4", fingers: "1", duration: 0.25 },
+    { chord: "A4", fingers: "2", duration: 0.25 },
+    { chord: "B4", fingers: "3", duration: 0.25 },
+    { chord: "G4", fingers: "1", duration: 0.5 },
+    { chord: "B4", fingers: "3", duration: 0.25 },
+    { chord: "A4", fingers: "2", duration: 0.25 },
+    { chord: "B4", fingers: "3", duration: 0.5 },
+    { chord: "C#5", fingers: "4", duration: 0.25 },
+    { chord: "D5", fingers: "5", duration: 0.25 },
+    { chord: "A4", fingers: "1", duration: 0.25 },
+    { chord: "B4", fingers: "2", duration: 0.25 },
+    { chord: "C#5", fingers: "3", duration: 0.25 },
+    { chord: "D5", fingers: "1", duration: 0.25 },
+    { chord: "E5", fingers: "2", duration: 0.25 },
+    { chord: "F#5", fingers: "3", duration: 0.25 },
+    { chord: "G5", fingers: "4", duration: 0.25 },
+    { chord: "A5", fingers: "5", duration: 0.25 },
 
-  { chord: 'A4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'D4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'E5', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'F#5', duration: 0.25 }, { chord: 'D5', duration: 0.25 },
-  { chord: 'B4', duration: 0.25 }, { chord: 'D5', duration: 0.25 },
-  { chord: 'C#5', duration: 0.25 }, { chord: 'A4', duration: 0.25 },
-  { chord: 'F#4', duration: 0.25 }, { chord: 'A4', duration: 0.25 },
-  { chord: 'D5', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'G4', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'D4', duration: 0.25 }, { chord: 'F#4', duration: 0.25 },
-  { chord: 'D5', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'G4', duration: 0.25 }, { chord: 'B4', duration: 0.25 },
-  { chord: 'E5', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-  { chord: 'A4', duration: 0.25 }, { chord: 'C#5', duration: 0.25 },
-],
-[
-  { chord: 'D3',  duration: 1.0 }, // I
-  { chord: 'A3',  duration: 1.0 }, // V
-  { chord: 'B3',  duration: 1.0 }, // vi
-  { chord: 'F#3', duration: 1.0 }, // iii
-  { chord: 'G3',  duration: 1.0 }, // IV
-  { chord: 'D3',  duration: 1.0 }, // I
-  { chord: 'G3',  duration: 1.0 }, // IV
-  { chord: 'A3',  duration: 1.0 }, // V
+    { chord: "F#5", fingers: "3", duration: 2.0 },
+    { chord: "E5", fingers: "2", duration: 2.0 },
+    { chord: "D5", fingers: "1", duration: 2.0 },
+    { chord: "C#5", fingers: "3", duration: 2.0 },
+    { chord: "B4", fingers: "2", duration: 2.0 },
+    { chord: "A4", fingers: "1", duration: 2.0 },
+    { chord: "B4", fingers: "2", duration: 1.0 },
+    { chord: "E5", fingers: "5", duration: 1.0 },
+    { chord: "C#5", fingers: "2", duration: 1.0 },
+    { chord: "E5", fingers: "4", duration: 1.0 },
+    { chord: "A4 F#5", fingers: "1 5", duration: 4.0 },
+  ],
+  [
+    { chord: "D4", fingers: "1", duration: 2.0 },
+    { chord: "A3", fingers: "2", duration: 2.0 },
+    { chord: "B3", fingers: "1", duration: 2.0 },
+    { chord: "F#3", fingers: "3", duration: 2.0 },
+    { chord: "G3", fingers: "2", duration: 2.0 },
+    { chord: "D3", fingers: "5", duration: 2.0 },
+    { chord: "G3", fingers: "2", duration: 2.0 },
+    { chord: "A3", fingers: "1", duration: 2.0 },
 
-  { chord: 'D3',  duration: 1.0 }, // I
-  { chord: 'A3',  duration: 1.0 }, // V
-  { chord: 'B3',  duration: 1.0 }, // vi
-  { chord: 'F#3', duration: 1.0 }, // iii
-  { chord: 'G3',  duration: 1.0 }, // IV
-  { chord: 'D3',  duration: 1.0 }, // I
-  { chord: 'G3',  duration: 1.0 }, // IV
-  { chord: 'A3',  duration: 1.0 }, // V
+    { chord: "D4", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "F#4", fingers: "3", duration: 0.5 },
+    { chord: "A4", fingers: "2", duration: 0.5 },
+    { chord: "D5", fingers: "1", duration: 0.5 },
+    { chord: "A3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "C#4", fingers: "3", duration: 0.5 },
+    { chord: "E4", fingers: "2", duration: 0.5 },
+    { chord: "A4", fingers: "1", duration: 0.5 },
+    { chord: "B3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "D4", fingers: "4", duration: 0.5 },
+    { chord: "F#4", fingers: "2", duration: 0.5 },
+    { chord: "B4", fingers: "1", duration: 0.5 },
+    { chord: "F#3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "A3", fingers: "4", duration: 0.5 },
+    { chord: "C#4", fingers: "2", duration: 0.5 },
+    { chord: "F#4", fingers: "1", duration: 0.5 },
+    { chord: "G3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "B3", fingers: "3", duration: 0.5 },
+    { chord: "D4", fingers: "2", duration: 0.5 },
+    { chord: "G4", fingers: "1", duration: 0.5 },
+    { chord: "D3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "F#3", fingers: "3", duration: 0.5 },
+    { chord: "A3", fingers: "2", duration: 0.5 },
+    { chord: "D4", fingers: "1", duration: 0.5 },
+    { chord: "G3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "B3", fingers: "3", duration: 0.5 },
+    { chord: "D4", fingers: "2", duration: 0.5 },
+    { chord: "G4", fingers: "1", duration: 0.5 },
+    { chord: "A3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "C#4", fingers: "3", duration: 0.5 },
+    { chord: "E4", fingers: "2", duration: 0.5 },
+    { chord: "A4", fingers: "1", duration: 0.5 },
 
-  { chord: 'D3',  duration: 1.0 }, // I
-  { chord: 'A3',  duration: 1.0 }, // V
-  { chord: 'B3',  duration: 1.0 }, // vi
-  { chord: 'F#3', duration: 1.0 }, // iii
-  { chord: 'G3',  duration: 1.0 }, // IV
-  { chord: 'D3',  duration: 1.0 }, // I
-  { chord: 'G3',  duration: 1.0 }, // IV
-  { chord: 'A3',  duration: 1.0 }, // V
+    { chord: "D3", fingers: "5", duration: 2.0 },
+    { chord: "A3", fingers: "2", duration: 2.0 },
+    { chord: "B3", fingers: "1", duration: 2.0 },
+    { chord: "F#3", fingers: "3", duration: 2.0 },
+    { chord: "G3", fingers: "2", duration: 2.0 },
+    { chord: "D3", fingers: "5", duration: 2.0 },
+    { chord: "G3", fingers: "2", duration: 2.0 },
+    { chord: "A3", fingers: "1", duration: 2.0 },
 
-  { chord: 'D3',  duration: 1.0 }, // I
-  { chord: 'A3',  duration: 1.0 }, // V
-  { chord: 'B3',  duration: 1.0 }, // vi
-  { chord: 'F#3', duration: 1.0 }, // iii
-  { chord: 'G3',  duration: 1.0 }, // IV
-  { chord: 'D3',  duration: 1.0 }, // I
-  { chord: 'G3',  duration: 1.0 }, // IV
-  { chord: 'A3',  duration: 1.0 }, // V
+    { chord: "D3", fingers: "5", duration: 2.0 },
+    { chord: "A3", fingers: "2", duration: 2.0 },
+    { chord: "B3", fingers: "1", duration: 2.0 },
+    { chord: "F#3", fingers: "3", duration: 2.0 },
+    { chord: "G3", fingers: "2", duration: 2.0 },
+    { chord: "D3", fingers: "5", duration: 2.0 },
+    { chord: "G3", fingers: "2", duration: 2.0 },
+    { chord: "A3", fingers: "1", duration: 2.0 },
 
-  { chord: 'D3',  duration: 1.0 }, // I
-  { chord: 'A3',  duration: 1.0 }, // V
-  { chord: 'B3',  duration: 1.0 }, // vi
-  { chord: 'F#3', duration: 1.0 }, // iii
-  { chord: 'G3',  duration: 1.0 }, // IV
-  { chord: 'D3',  duration: 1.0 }, // I
-  { chord: 'G3',  duration: 1.0 }, // IV
-  { chord: 'A3',  duration: 1.0 }, // V
+    { chord: "D4 F#4", fingers: "2 1", duration: 2.0 },
+    { chord: "A3 E4", fingers: "4 1", duration: 2.0 },
+    { chord: "B3 D4", fingers: "3 1", duration: 2.0 },
+    { chord: "F#3 C#4", fingers: "5 2", duration: 2.0 },
+    { chord: "G3 B3", fingers: "3 1", duration: 2.0 },
+    { chord: "D3 A3", fingers: "5 2", duration: 2.0 },
+    { chord: "G3 B3", fingers: "3 1", duration: 2.0 },
+    { chord: "A3 C#4", fingers: "4 2", duration: 2.0 },
 
-  { chord: 'D3',  duration: 1.0 }, // I
-  { chord: 'A3',  duration: 1.0 }, // V
-  { chord: 'B3',  duration: 1.0 }, // vi
-  { chord: 'F#3', duration: 1.0 }, // iii
-  { chord: 'G3',  duration: 1.0 }, // IV
-  { chord: 'D3',  duration: 1.0 }, // I
-  { chord: 'G3',  duration: 1.0 }, // IV
-  { chord: 'A3',  duration: 1.0 }, // V
-]
+    { chord: "D4", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "F#4", fingers: "3", duration: 0.5 },
+    { chord: "A4", fingers: "2", duration: 0.5 },
+    { chord: "D5", fingers: "1", duration: 0.5 },
+    { chord: "A3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "C#4", fingers: "3", duration: 0.5 },
+    { chord: "E4", fingers: "2", duration: 0.5 },
+    { chord: "A4", fingers: "1", duration: 0.5 },
+    { chord: "B3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "D4", fingers: "4", duration: 0.5 },
+    { chord: "F#4", fingers: "2", duration: 0.5 },
+    { chord: "B4", fingers: "1", duration: 0.5 },
+    { chord: "F#3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "A3", fingers: "4", duration: 0.5 },
+    { chord: "C#4", fingers: "2", duration: 0.5 },
+    { chord: "F#4", fingers: "1", duration: 0.5 },
+    { chord: "G3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "B3", fingers: "3", duration: 0.5 },
+    { chord: "D4", fingers: "2", duration: 0.5 },
+    { chord: "G4", fingers: "1", duration: 0.5 },
+    { chord: "D3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "F#3", fingers: "3", duration: 0.5 },
+    { chord: "A3", fingers: "2", duration: 0.5 },
+    { chord: "D4", fingers: "1", duration: 0.5 },
+    { chord: "G3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "B3", fingers: "3", duration: 0.5 },
+    { chord: "D4", fingers: "2", duration: 0.5 },
+    { chord: "G4", fingers: "1", duration: 0.5 },
+    { chord: "A3", fingers: "5", duration: 2.0, movingTime: 0.5 },
+    { chord: "C#4", fingers: "3", duration: 0.5 },
+    { chord: "E4", fingers: "2", duration: 0.5 },
+    { chord: "A4", fingers: "1", duration: 0.5 },
+    { chord: "D3 D4", fingers: "5 1", duration: 4.0 },
+  ]
 );
 
 export default P11;

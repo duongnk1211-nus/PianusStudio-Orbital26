@@ -200,7 +200,7 @@ body {
   
   & .start-btn, & .restart-btn {
     position: absolute;
-    top: 160px;
+    top: 215px;
     left: 30px;
     transform: translateY(-50%);
   }

@@ -115,7 +115,7 @@ body {
   display: flex;
   flex-direction: row;
   min-height: 900px;
-  background-image: url("/BackGroundForPiano.jpg");
+  background-image: url("/PianoSimulator.png");
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;

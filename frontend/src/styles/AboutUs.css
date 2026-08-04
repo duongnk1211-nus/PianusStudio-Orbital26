@@ -10,7 +10,7 @@
   color: #0d0c0c;
   color: #3d1f1f45;
   background: #f4f4f4;
-  background-image: url("../src/assets/BackGround.jpg");
+  background-image: url("/Home.png");
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;
@@ -65,7 +65,7 @@
   align-items: center;
   padding: 100px;
   text-align: center;
-  background-image: url("/BackGround.jpg");
+  background-image: url("/Home.png");
   background-position: top;
   background-repeat: no-repeat;
   background-size: cover;

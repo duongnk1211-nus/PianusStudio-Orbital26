@@ -240,7 +240,7 @@ export default function CommunityPage() {
             {isRecordAvailable && (
               <div className="community-page-post-record">
                 <p>{recordTitle || 'Untitled'}</p>
-                <button onClick={() => navigate('/recording', { state: { focus: 1 } })}>Play</button>
+                <button onClick={() => navigate('/recording-for-posts', { state: { focus: recordUrl } })}>Play</button>
               </div>
             )}
             <div className="community-page-post-footer">

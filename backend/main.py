@@ -179,6 +179,14 @@ def get_record(position: int, user=Depends(get_current_user)):
         raise HTTPException(status_code=502, detail=f"Error fetching record: {str(e)}")
     return res.data
 
+@app.get("/record-by-id/{record_id}")
+def get_record_by_id(record_id: str):
+    try:
+        res = supabase.table("records").select("record").eq("id", record_id).single().execute()
+    except Exception as e:
+        raise HTTPException(status_code=502, detail=f"Error fetching record: {str(e)}")
+    return res.data
+
 @app.delete("/record/{position}")
 def delete_record(position: int, user=Depends(get_current_user)):
     try:

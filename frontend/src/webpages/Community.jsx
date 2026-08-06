@@ -20,6 +20,8 @@ export default function CommunityPage() {
   const [startPosting, setStartPosting] = useState(false);
   const [postTitle, setPostTitle] = useState('');
   const [postDescription, setPostDescription] = useState('');
+  const [pieceDescription, setPieceDescription] = useState('');
+  const [optionIndex, setOptionIndex] = useState(1);
 
   const navigate = useNavigate()
 
@@ -125,10 +127,49 @@ export default function CommunityPage() {
     }
   }
 
+  function incOptionIndex() {
+    setOptionIndex(prev => {
+      if(prev == 3) {
+        return 'None';
+      }
+      if(prev == 'None') {
+        return 1;
+      }
+      return prev + 1;
+    });
+  }
+
+  function decOptionIndex() {
+    setOptionIndex(prev => {
+      if(prev == 1) {
+        return 'None';
+      }
+      if(prev == 'None') {
+        return 3;
+      }
+      return prev - 1;
+    });
+  }
+
   async function handleCreatePost(event) {
     event.preventDefault();
     const title = postTitle.trim();
     const description = postDescription.trim();
+    let record1 = null;
+    let title_record1 = null;
+    if(optionIndex !== 'None') {
+      if(optionIndex === 1) {
+        record1 = user?.first_record;
+      }
+      if(optionIndex === 2) {
+        record1 = user?.second_record;
+      }
+      if(optionIndex === 3) {
+        record1 = user?.third_record;
+      }
+      title_record1 = pieceDescription.trim();
+      if(record1 === null) title_record1 = null;
+    }
 
     if (!title || !description) return;
     if (title.length > 100 || description.length > 1500) return;
@@ -142,7 +183,7 @@ export default function CommunityPage() {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${session.access_token}`,
         },
-        body: JSON.stringify({ title, description })
+        body: JSON.stringify({ title, description, record1, title_record1 })
       });
       if (!res.ok) throw new Error('Create post failed!');
       const json = await res.json();
@@ -156,134 +197,164 @@ export default function CommunityPage() {
   }
 
   if (loading) {
-      return (
-        <div>Server is waking up...</div>
-      )
-    }
-
     return (
-      <div className="community-page">
-        <div className="community-page-buttons">
-          <button style={{ width: '120px', fontWeight: 'bold', letterSpacing: '1px' }} onClick={() => navigate("/")}>Return</button>
-          <button onClick={() => setStartPosting(true)} style={{ background: 'linear-gradient(135deg, #31eaff, #2736de)', border: 'None', color: '#1a06f2' }} >+ Create Post</button>
-        </div>
-        {posts.map(post => {
-          const profile = profilesById[post.user_id];
-          const avatar_url = profile?.avatar_url || "/avatar.png";
-          const rawRole = profile?.role;
-          const role = (typeof rawRole === 'string' ? rawRole.trim() : rawRole);
-          const displayRole = role && role !== 'null' && role !== 'undefined' ? role : '';
-          const created_at = new Date(post.created_at).toLocaleString()
-
-          return (
-            <div className="community-page-post" key={post.id}>
-              <div
-                className="community-page-post-header"
-                onClick={() => navigate(`/user-profile/${profile?.username}`)}
-                role="button"
-                tabIndex={0}
-              >
-                <img src={avatar_url} alt="avatar" />
-                <p>{profile?.username}{displayRole ? ` (${displayRole})` : ''}</p>
-              </div>
-              <h2>{post.title}</h2>
-              <h3>{post.description}</h3>
-              <div className="community-page-post-footer">
-                <h5 onClick={() => OpenCommentSection(post.id)}>Comment</h5>
-                <h4>{created_at}</h4>
-              </div>
-            </div>
-          )
-        })}
-        {openCommentSection && (
-          <div className="community-page-comment-overlay" onClick={() => setOpenCommentSection(false)}>
-            <div className="community-page-comment-section" onClick={(e) => e.stopPropagation()}>
-              <button
-                className="community-page-comment-close"
-                onClick={() => {
-                  setOpenCommentSection(false)
-                  setComments([])
-                  setCommentsById({})
-                }}
-                aria-label="Close comments"
-              >
-                ×
-              </button>
-              <div className="community-page-comment-list">
-                {comments?.length > 0 ? [...comments]
-                  .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
-                  .map(comment => {
-                    const profile = commentsById[comment.user_id];
-                    const avatar_url = profile?.avatar_url || "/avatar.png";
-                    const rawRole = profile?.role;
-                    const role = (typeof rawRole === 'string' ? rawRole.trim() : rawRole);
-                    const displayRole = role && role !== 'null' && role !== 'undefined' ? role : '';
-                    const created_at = new Date(comment.created_at).toLocaleString();
-
-                    return (
-                      <div className="community-page-comments" key={comment.id}>
-                        <img src={avatar_url} alt="avatar" />
-                        <div className="community-page-comments-body">
-                          <p>{profile?.username}{displayRole ? ` (${displayRole})` : ''}</p>
-                          <h1>{comment.content}</h1>
-                          <h2>{created_at}</h2>
-                        </div>
-                      </div>
-                    );
-                  }) : <p className="community-page-comment-empty">No comments yet.</p>}
-              </div>
-              <form className="community-page-comment-form" onSubmit={handleSubmitComment}>
-                <textarea
-                  className="community-page-comment-input"
-                  value={newComment}
-                  onChange={(event) => setNewComment(event.target.value)}
-                  placeholder="Write a comment..."
-                  rows="3"
-                />
-                <button type="submit" className="community-page-comment-send" disabled={!newComment.trim() || submittingComment}>
-                  {submittingComment ? 'Sending...' : 'Send'}
-                </button>
-              </form>
-            </div>
-          </div>
-        )}
-        {startPosting && (
-          <div className="community-page-comment-overlay" onClick={() => setStartPosting(false)}>
-            <div className="community-page-comment-section" onClick={(e) => e.stopPropagation()}>
-              <button
-                className="community-page-comment-close"
-                onClick={() => setStartPosting(false)}
-                aria-label="Close create post"
-              >
-                ×
-              </button>
-              <form className="community-page-post-form" onSubmit={handleCreatePost}>
-                <h3>Create Post</h3>
-                <label className="community-page-post-field">
-                  <span>Title</span>
-                  <input
-                    type="text"
-                    value={postTitle}
-                    onChange={(event) => setPostTitle(event.target.value.slice(0, 100))}
-                    placeholder="Enter a title"
-                  />
-                </label>
-                <label className="community-page-post-field">
-                  <span>Description</span>
-                  <textarea
-                    value={postDescription}
-                    onChange={(event) => setPostDescription(event.target.value.slice(0, 1500))}
-                    placeholder="Write your post here..."
-                    rows="6"
-                  />
-                </label>
-                <button type="submit" className="community-page-comment-send">
-                  Upload
-                </button>
-              </form>
-            </div>
-          </div>
-        )}
-      </div >
+      <div>Server is waking up...</div>
     )
   }
+
+  return (
+    <div className="community-page">
+      <div className="community-page-buttons">
+        <button style={{ width: '120px', fontWeight: 'bold', letterSpacing: '1px' }} onClick={() => navigate("/")}>Return</button>
+        <button onClick={() => setStartPosting(true)} style={{ background: 'linear-gradient(135deg, #31eaff, #2736de)', border: 'None', color: '#1a06f2' }} >+ Create Post</button>
+      </div>
+      {posts.map(post => {
+        const profile = profilesById[post.user_id];
+        const avatar_url = profile?.avatar_url || "/avatar.png";
+        const rawRole = profile?.role;
+        const role = (typeof rawRole === 'string' ? rawRole.trim() : rawRole);
+        const displayRole = role && role !== 'null' && role !== 'undefined' ? role : '';
+        const created_at = new Date(post.created_at).toLocaleString()
+        let isRecordAvailable = false;
+        let recordTitle = null;
+        let recordUrl = null;
+        if(post.record1) {
+          isRecordAvailable = true;
+          recordTitle = post.title_record1 || 'Untitled';
+          recordUrl = post.record1;
+        }
+
+        return (
+          <div className="community-page-post" key={post.id}>
+            <div
+              className="community-page-post-header"
+              onClick={() => navigate(`/user-profile/${profile?.username}`)}
+              role="button"
+              tabIndex={0}
+            >
+              <img src={avatar_url} alt="avatar" />
+              <p>{profile?.username}{displayRole ? ` (${displayRole})` : ''}</p>
+            </div>
+            <h2>{post.title}</h2>
+            <h3>{post.description}</h3>
+            {isRecordAvailable && (
+              <div className="community-page-post-record">
+                <p>{recordTitle || 'Untitled'}</p>
+                <button onClick={() => navigate('/recording', { state: { focus: 1 } })}>Play</button>
+              </div>
+            )}
+            <div className="community-page-post-footer">
+              <h5 onClick={() => OpenCommentSection(post.id)}>Comment</h5>
+              <h4>{created_at}</h4>
+            </div>
+          </div>
+        )
+      })}
+      {openCommentSection && (
+        <div className="community-page-comment-overlay" onClick={() => setOpenCommentSection(false)}>
+          <div className="community-page-comment-section" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="community-page-comment-close"
+              onClick={() => {
+                setOpenCommentSection(false)
+                setComments([])
+                setCommentsById({})
+              }}
+              aria-label="Close comments"
+            >
+              ×
+            </button>
+            <div className="community-page-comment-list">
+              {comments?.length > 0 ? [...comments]
+                .sort((a, b) => new Date(a.created_at) - new Date(b.created_at))
+                .map(comment => {
+                  const profile = commentsById[comment.user_id];
+                  const avatar_url = profile?.avatar_url || "/avatar.png";
+                  const rawRole = profile?.role;
+                  const role = (typeof rawRole === 'string' ? rawRole.trim() : rawRole);
+                  const displayRole = role && role !== 'null' && role !== 'undefined' ? role : '';
+                  const created_at = new Date(comment.created_at).toLocaleString();
+
+                  return (
+                    <div className="community-page-comments" key={comment.id}>
+                      <img src={avatar_url} alt="avatar" />
+                      <div className="community-page-comments-body">
+                        <p>{profile?.username}{displayRole ? ` (${displayRole})` : ''}</p>
+                        <h1>{comment.content}</h1>
+                        <h2>{created_at}</h2>
+                      </div>
+                    </div>
+                  );
+                }) : <p className="community-page-comment-empty">No comments yet.</p>}
+            </div>
+            <form className="community-page-comment-form" onSubmit={handleSubmitComment}>
+              <textarea
+                className="community-page-comment-input"
+                value={newComment}
+                onChange={(event) => setNewComment(event.target.value)}
+                placeholder="Write a comment..."
+                rows="3"
+              />
+              <button type="submit" className="community-page-comment-send" disabled={!newComment.trim() || submittingComment}>
+                {submittingComment ? 'Sending...' : 'Send'}
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+      {startPosting && (
+        <div className="community-page-comment-overlay" onClick={() => setStartPosting(false)}>
+          <div className="community-page-comment-section" onClick={(e) => e.stopPropagation()}>
+            <button
+              className="community-page-comment-close"
+              onClick={() => setStartPosting(false)}
+              aria-label="Close create post"
+            >
+              ×
+            </button>
+            <form className="community-page-post-form" onSubmit={handleCreatePost}>
+              <h3>Create Post</h3>
+              <label className="community-page-post-field">
+                <span>Title</span>
+                <input
+                  type="text"
+                  value={postTitle}
+                  onChange={(event) => setPostTitle(event.target.value.slice(0, 100))}
+                  placeholder="Enter a title"
+                />
+              </label>
+              <label className="community-page-post-field">
+                <span>Description</span>
+                <textarea
+                  value={postDescription}
+                  onChange={(event) => setPostDescription(event.target.value.slice(0, 1500))}
+                  placeholder="Write your post here..."
+                  rows="6"
+                />
+              </label>
+              <label className="community-page-post-field">
+                <span>Choose your piece</span>
+                <input
+                  type="text"
+                  value={pieceDescription}
+                  onChange={(event) => setPieceDescription(event.target.value.slice(0, 1500))}
+                  placeholder={optionIndex === 'None' ? "Your piece will not appear if there is no selected piece" : "Your piece title"}
+                />
+                <div className="community-page-post-piece">
+                  <button onClick={decOptionIndex}>{"<<"}</button>
+                  <div className="property-current-option">
+                    {optionIndex === 'None' ? 'None' : 'Piece' + ' ' + optionIndex}
+                  </div>
+                  <button onClick={incOptionIndex}>{">>"}</button>
+                </div>
+              </label>
+              <button type="submit" className="community-page-comment-send">
+                Upload
+              </button>
+            </form>
+          </div>
+        </div>
+      )}
+    </div >
+  )
+}

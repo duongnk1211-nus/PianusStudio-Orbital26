@@ -8,6 +8,9 @@ class UserResponse(BaseModel):
     avatar_url: str | None
     bio: str | None
     created_at: datetime
+    first_record: Optional[str] = None
+    second_record: Optional[str] = None
+    third_record: Optional[str] = None
 
 class BindingOption(BaseModel):
     binding_option: int
@@ -52,6 +55,7 @@ class PostCreate(BaseModel):
     description: str
     record1: Optional[str] = None
     record2: Optional[str] = None
+    title_record1: Optional[str] = None
     created_at: Optional[datetime] = None
 
 class CommentCreate(BaseModel):

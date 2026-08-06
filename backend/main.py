@@ -242,6 +242,7 @@ def create_post(body: PostCreate, user=Depends(get_current_user)):
             "description": body.description,
             "record1": body.record1,
             "record2": body.record2,
+            "title_record1": body.title_record1,
         }).execute()
     except Exception as e:
         raise HTTPException(status_code=502, detail=f"Error uploading forum: {str(e)}")

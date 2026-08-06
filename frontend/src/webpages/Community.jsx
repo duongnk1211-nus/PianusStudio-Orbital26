@@ -221,6 +221,9 @@ export default function CommunityPage() {
         if(post.record1) {
           isRecordAvailable = true;
           recordTitle = post.title_record1 || 'Untitled';
+          if(recordTitle.length > 50) {
+            recordTitle = recordTitle.slice(0, 50) + '...';
+          }
           recordUrl = post.record1;
         }
 

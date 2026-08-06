@@ -95,7 +95,7 @@ export default function HomePage() {
     <div className="home-page" id="home-page">
       <div className="header">
         <IsLoggedIn />
-        <h1>Welcome to PianusStudio</h1>
+        <h1>Welcome to Pianus Studio</h1>
         <img src="/PianusStudio.png" alt="PianusStudio Logo" className="logo" />
         <p>Your gateway to piano music, lessons, and more...</p>
       </div>

@@ -134,8 +134,9 @@ html {
   min-width: 160px;
   padding: 8px;
   border-radius: 8px;
-  background: #dca553;
+  background: linear-gradient(0deg, #00205B 0%, #E87722 100%);
   box-shadow: 0 6px 20px rgba(0,0,0,0.12);
+  border: 3px solid #704706;
 }
 
 .avatar-menu a {
@@ -165,7 +166,7 @@ html {
 .auth-btn {
   padding: 8px 12px;
   border: none;
-  border-radius: 6px;
+  border-radius: 20px;
   cursor: pointer;
 }
 
@@ -177,6 +178,7 @@ html {
   font-family: "Amadeus", cursive;
   color: #f8f8f8;
   background: #e7a53c;
+  border-radius: 20px;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
 }
 
@@ -188,6 +190,7 @@ html {
   width: 72px;
   font-family: "Amadeus", cursive;
   color: #fff;
+  border-radius: 20px;
   background: #0f1558;
   box-shadow: 2px 2px 5px rgba(0,0,0,0.15);
 }
@@ -206,17 +209,24 @@ html {
   top: 40px;
   left: 150px;
   margin: 0;
-  font-family: "Dancing Script", cursive;
-  font-size: 3em;
+  font-family: "Amadeus", cursive;
+  font-size: 2.5em;
+  font-weight: bold;
+  line-height: 1;
+  background: linear-gradient(90deg, #00205B 0%, #E87722 100%);
+  background-clip: text;
+  /* animation: energyFlow 3s linear infinite; */
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 .header p {
   position: absolute;
-  top: 80px;
+  top: 90px;
   left: 160px;
   font-family: "Dancing Script", cursive;
-  font-size: 1.5em;
-  color: #e39f0b;
+  font-size: 1.3em;
+  color: #E87722;
 }
 
 .logo {
@@ -230,18 +240,21 @@ html {
 nav {
   display: flex;
   justify-content: center;
-  background: #ef8d05d6;
+  background: linear-gradient(90deg, #00205B 0%, #E87722 100%);
 }
 
 nav a {
   padding: 14px 20px;
   font-family: "Amadeus", cursive;
   text-decoration: none;
-  color: #000000;
+  color: #ffffff;
 }
 
 nav a:hover {
-  background: #e7a53c;
+  background: linear-gradient(90deg, #E87722 0%, #FFFFFF 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 main {
@@ -257,7 +270,8 @@ main {
 main h2 {
   display: inline-block;
   padding: 10px 20px;
-  border-radius: 4px;
+  border-radius: 20px;
+  border: 2px solid #000000;
   font-family: "Amadeus", cursive;
   color: #000000;
   background: #f6f1f1e1;
@@ -298,11 +312,16 @@ main p {
 .feature-card {
   width: 250px;
   margin-top: 8px;
-  padding: 20px;
-  border-radius: 8px;
+  padding: 18px;
+  border: 2px solid #000000;
+  border-radius: 15px;
   text-align: center;
   background: #f6f1f1e1;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.feature-card a {
+  border-radius: 10px;
 }
 
 footer {

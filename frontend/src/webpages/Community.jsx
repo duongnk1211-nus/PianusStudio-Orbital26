@@ -20,8 +20,8 @@ export default function CommunityPage() {
   const [startPosting, setStartPosting] = useState(false);
   const [postTitle, setPostTitle] = useState('');
   const [postDescription, setPostDescription] = useState('');
-  const [pieceDescription, setPieceDescription] = useState('');
-  const [optionIndex, setOptionIndex] = useState(1);
+  const [postingRecordDescription, setPostingRecordDescription] = useState('');
+  const [optionIndex, setOptionIndex] = useState('None');
 
   const navigate = useNavigate()
 
@@ -127,28 +127,47 @@ export default function CommunityPage() {
     }
   }
 
+  const [recordUploadMessage, setRecordUploadMessage] = useState(null); 
+
+  useEffect(() => {
+    if (optionIndex == 'None') {
+      setRecordUploadMessage(null);
+      return;
+    }
+
+    let cancelled = false;
+
+    const checkRecord = async () => {
+      try {
+        const result = await supabase.auth.getSession();
+        const session = result.data.session;
+        await apiFetch(`/record/${optionIndex}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${session.access_token}`,
+          },
+        });
+        if (cancelled) return;
+        setRecordUploadMessage(null);
+      } catch (err) {
+        setRecordUploadMessage(`Error: your recording ${optionIndex} is not available.`);
+      }
+    };
+
+    checkRecord();
+
+    return () => {
+      cancelled = true;
+    };
+  }, [optionIndex]);
+
   function incOptionIndex() {
-    setOptionIndex(prev => {
-      if(prev == 3) {
-        return 'None';
-      }
-      if(prev == 'None') {
-        return 1;
-      }
-      return prev + 1;
-    });
+    setOptionIndex(prev => (prev === 3 ? 'None' : prev === 'None' ? 1 : prev + 1));
   }
 
   function decOptionIndex() {
-    setOptionIndex(prev => {
-      if(prev == 1) {
-        return 'None';
-      }
-      if(prev == 'None') {
-        return 3;
-      }
-      return prev - 1;
-    });
+    setOptionIndex(prev => (prev === 1 ? 'None' : prev === 'None' ? 3 : prev - 1));
   }
 
   async function handleCreatePost(event) {
@@ -167,7 +186,7 @@ export default function CommunityPage() {
       if(optionIndex === 3) {
         record1 = user?.third_record;
       }
-      title_record1 = pieceDescription.trim();
+      title_record1 = postingRecordDescription.trim();
       if(record1 === null) title_record1 = null;
     }
 
@@ -177,7 +196,7 @@ export default function CommunityPage() {
     try {
       const result = await supabase.auth.getSession();
       const session = result.data.session;
-      const res = await fetch(`${import.meta.env.VITE_API_URL}/post`, {
+      const fetchResult = await apiFetch(`/post`, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -185,14 +204,13 @@ export default function CommunityPage() {
         },
         body: JSON.stringify({ title, description, record1, title_record1 })
       });
-      if (!res.ok) throw new Error('Create post failed!');
-      const json = await res.json();
+      const json = fetchResult;
       setPosts(prev => [json[0] ?? json, ...prev]);
       setPostTitle('');
       setPostDescription('');
       setStartPosting(false);
     } catch (err) {
-      console.log(err.message);
+      console.log(err.message || `Create post failed!`);
     }
   }
 
@@ -216,15 +234,15 @@ export default function CommunityPage() {
         const displayRole = role && role !== 'null' && role !== 'undefined' ? role : '';
         const created_at = new Date(post.created_at).toLocaleString()
         let isRecordAvailable = false;
-        let recordTitle = null;
-        let recordUrl = null;
+        let postedRecordTitle = null;
+        let postedRecordUrl = null;
         if(post.record1) {
           isRecordAvailable = true;
-          recordTitle = post.title_record1 || 'Untitled';
-          if(recordTitle.length > 50) {
+          postedRecordTitle = post.title_record1 || 'Untitled';
+          if(postedRecordTitle.length > 50) {
             recordTitle = recordTitle.slice(0, 50) + '...';
           }
-          recordUrl = post.record1;
+          postedRecordUrl = post.record1;
         }
 
         return (
@@ -241,9 +259,9 @@ export default function CommunityPage() {
             <h2>{post.title}</h2>
             <h3>{post.description}</h3>
             {isRecordAvailable && (
-              <div className="community-page-post-record">
-                <p>{recordTitle || 'Untitled'}</p>
-                <button onClick={() => navigate('/recording-for-posts', { state: { focus: recordUrl } })}>Play</button>
+              <div className="community-page-posted-record">
+                <p>{postedRecordTitle || 'Untitled'}</p>
+                <button onClick={() => navigate('/recording-for-posts', { state: { focus: postedRecordUrl } })}>Play</button>
               </div>
             )}
             <div className="community-page-post-footer">
@@ -306,10 +324,10 @@ export default function CommunityPage() {
         </div>
       )}
       {startPosting && (
-        <div className="community-page-comment-overlay" onClick={() => setStartPosting(false)}>
-          <div className="community-page-comment-section" onClick={(e) => e.stopPropagation()}>
+        <div className="community-page-post-overlay" onClick={() => setStartPosting(false)}>
+          <div className="community-page-post-section" onClick={(e) => e.stopPropagation()}>
             <button
-              className="community-page-comment-close"
+              className="community-page-post-close"
               onClick={() => setStartPosting(false)}
               aria-label="Close create post"
             >
@@ -336,22 +354,24 @@ export default function CommunityPage() {
                 />
               </label>
               <label className="community-page-post-field">
-                <span>Choose your piece</span>
+                <span>Choose your recording</span>
                 <input
                   type="text"
-                  value={pieceDescription}
-                  onChange={(event) => setPieceDescription(event.target.value.slice(0, 1500))}
-                  placeholder={optionIndex === 'None' ? "Your piece will not appear if there is no selected piece" : "Your piece title"}
+                  value={postingRecordDescription}
+                  onChange={(event) => setPostingRecordDescription(event.target.value.slice(0, 1500))}
+                  placeholder={optionIndex === 'None' ? "Your recording will not appear if there is no selected recording" : "Your recording title"}
                 />
-                <div className="community-page-post-piece">
-                  <button onClick={decOptionIndex}>{"<<"}</button>
+                <div className="community-page-posting-record">
+                  <button type="button" onClick={decOptionIndex}>{"<<"}</button>
                   <div className="property-current-option">
-                    {optionIndex === 'None' ? 'None' : 'Piece' + ' ' + optionIndex}
+                    {optionIndex === 'None' ? 'None' : 'Recording' + ' ' + optionIndex}
                   </div>
-                  <button onClick={incOptionIndex}>{">>"}</button>
+                  <button type="button" onClick={incOptionIndex}>{">>"}</button>
                 </div>
+                {recordUploadMessage && 
+                  <p className="record-upload-message">{recordUploadMessage}</p>}
               </label>
-              <button type="submit" className="community-page-comment-send">
+              <button type="submit" className="community-page-post-send" disabled={recordUploadMessage}>
                 Upload
               </button>
             </form>
